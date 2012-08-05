@@ -19,6 +19,7 @@
  */
 
 goog.provide('ydn.object');
+goog.require('ydn.json');
 
 
 /**
