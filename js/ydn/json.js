@@ -19,11 +19,13 @@
 goog.provide('ydn.json');
 goog.require('goog.debug.Logger');
 
+
 /**
  *
- * @define {boolean}
+ * @define {boolean} enable debug to log erronous object.
  */
 ydn.json.DEBUG = false;
+
 
 /**
  * @final
@@ -31,26 +33,27 @@ ydn.json.DEBUG = false;
  */
 ydn.json.logger = goog.debug.Logger.getLogger('ydn');
 
+
 /**
  * Parse JSON using native method if available.
  * This is necessary since closure-library do not use native method.
  *
- * @param {string} json_str
- * @return {!Object}
+ * @param {string} json_str string to parse.
+ * @return {!Object} parse return object.
  */
 ydn.json.parse = function(json_str) {
   if (!goog.isString(json_str) || goog.string.isEmpty(json_str)) {
     return {};
   }
-    try {
-      return /** @type {!Object} */ (JSON.parse(json_str));
-    } catch (e) {
-      ydn.json.logger.warning('parse failed: ' + e);
-      if (ydn.json.DEBUG) {
-        window.console.log(json_str);
-      }
-      throw Error(e);
+  try {
+    return /** @type {!Object} */ (JSON.parse(json_str));
+  } catch (e) {
+    ydn.json.logger.warning('parse failed: ' + e);
+    if (ydn.json.DEBUG) {
+      window.console.log(json_str);
     }
+    throw Error(e);
+  }
 };
 
 
@@ -58,10 +61,10 @@ ydn.json.parse = function(json_str) {
  * Parse JSON using native method if available.
  * This is necessary since closure-library do not use native method.
  *
- * @param {Object} json_str
- * @return {string}
+ * @param {Object} json_str object to stringify.
+ * @return {string} result.
  */
-ydn.json.stringify = function (json_str) {
+ydn.json.stringify = function(json_str) {
 
   try {
     return JSON.stringify(json_str);

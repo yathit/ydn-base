@@ -15,8 +15,7 @@
 /**
  * @fileoverview Utilities useful in testing.
  *
- * User: kyawtun
- * Date: 5/8/12
+ * @author kyawtun@yathit.com (Kyaw Tun)
  */
 
 goog.provide('ydn.testing');
@@ -25,8 +24,8 @@ goog.require('goog.math');
 
 /**
  * Normal deviate function.
- *
- * @return {number} return a normally distributed pseudorandom numbers
+ * @see #randomNormal
+ * @return {number} return a normally distributed pseudorandom numbers.
  */
 ydn.testing.randn = function() {
   // base on jstat library
@@ -34,11 +33,11 @@ ydn.testing.randn = function() {
 
   do {
     u = Math.random();
-    v = 1.7156 * ( Math.random() - 0.5 );
+    v = 1.7156 * (Math.random() - 0.5);
     x = u - 0.449871;
-    y = Math.abs( v ) + 0.386595;
-    q = x*x + y * ( 0.19600 * y - 0.25472 * x );
-  } while( q > 0.27597 && ( q > 0.27846 || v*v > -4 * Math.log( u ) * u*u ));
+    y = Math.abs(v) + 0.386595;
+    q = x * x + y * (0.19600 * y - 0.25472 * x);
+  } while (q > 0.27597 && (q > 0.27846 || v * v > -4 * Math.log(u) * u * u));
   return v / u;
 };
 
@@ -46,20 +45,21 @@ ydn.testing.randn = function() {
 /**
  * Generate normally distributed random around given std and mean
  *
- * @param {number=} stdev default to 1
- * @param {number=} mean default to 0
- * @return {number}
+ * @param {number=} opt_mean mean value, default to 0.
+ * @param {number=} opt_stdev standard deviation, default to 1.
+ * @return {number} return a normally distributed pseudorandom numbers of given
+ * standard deviation and mean.
  */
-ydn.testing.randomNormal = function (mean, stdev) {
+ydn.testing.randomNormal = function(opt_mean, opt_stdev) {
   var x = ydn.testing.randn();
-  if (goog.isDef(mean) || goog.isDef(stdev)) {
-    if (!goog.isDef(mean)) {
-      mean = 0;
+  if (goog.isDef(opt_mean) || goog.isDef(opt_stdev)) {
+    if (!goog.isDef(opt_mean)) {
+      opt_mean = 0;
     }
-    if (!goog.isDef(stdev)) {
-      stdev = 1;
+    if (!goog.isDef(opt_stdev)) {
+      opt_stdev = 1;
     }
-    x = x * stdev + mean;
+    x = x * opt_stdev + opt_mean;
   }
   return x;
 };
@@ -68,71 +68,77 @@ ydn.testing.randomNormal = function (mean, stdev) {
 /**
  * Generate random string
  *
- * @param {number} len
- * @param {string=} charSet
+ * @param {number} len require length.
+ * @param {string=} opt_charSet character set to be used.
+ * @return {string} return random string.
  */
-ydn.testing.randString = function(len, charSet) {
-  charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+ydn.testing.randString = function(len, opt_charSet) {
+  opt_charSet = opt_charSet ||
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var randomString = '';
   for (var i = 0; i < len; i++) {
-    var randomPoz = Math.floor(Math.random() * charSet.length);
-    randomString += charSet.substring(randomPoz,randomPoz+1);
+    var randomPoz = Math.floor(Math.random() * opt_charSet.length);
+    randomString += opt_charSet.substring(randomPoz, randomPoz + 1);
   }
   return randomString;
 };
 
 
 /**
- * Generate random string
+ * Generate random id
  *
- * @param {number=} len
+ * @param {number=} opt_len require length.
+ * @return {string} return random id.
  */
-ydn.testing.randId = function(len) {
-  len = len || 17;
-  return ydn.testing.randString(len, 'abcde0123456789');
+ydn.testing.randId = function(opt_len) {
+  opt_len = opt_len || 17;
+  return ydn.testing.randString(opt_len, 'abcde0123456789');
 };
+
 
 /**
  * Generate random digit string
  *
- * @param {number=} len
+ * @param {number=} opt_len require length.
+ * @return {string} return a random digit string.
  */
-ydn.testing.randDigits = function(len) {
-  len = len || 8;
-  return ydn.testing.randString(len, '0123456789');
+ydn.testing.randDigits = function(opt_len) {
+  opt_len = opt_len || 8;
+  return ydn.testing.randString(opt_len, '0123456789');
 };
 
 
 /**
  * Generate random word with all small letter
  *
- * @param {number=} mean
- * @param {number=} max
- * @return {string}
+ * @param {number=} opt_mean word length mean.
+ * @param {number=} opt_max word length maximun.
+ * @return {string} random word.
  */
-ydn.testing.randWord = function(mean, max) {
-  mean = mean || 5;
-  max = max || mean*3;
-  var len = goog.math.clamp(ydn.testing.randomNormal(mean, mean-1), 1, max);
+ydn.testing.randWord = function(opt_mean, opt_max) {
+  opt_mean = opt_mean || 5;
+  opt_max = opt_max || opt_mean * 3;
+  var len = goog.math.clamp(ydn.testing.randomNormal(opt_mean, opt_mean - 1), 1,
+      opt_max);
   return ydn.testing.randString(len, 'abcdefghijklmnopqrstuvwxyz');
 };
-
 
 
 /**
  * Generate random name
  *
- * @return {string}
+ * @return {string} return a random name.
  */
 ydn.testing.randName = function() {
-  return ydn.testing.randString(1, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') + ydn.testing.randWord(3);
+  return ydn.testing.randString(1, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') +
+      ydn.testing.randWord(3);
 };
 
 
 /**
  * Generate a random email
  *
- * @return {string}
+ * @return {string} return a random email.
  */
 ydn.testing.randEmail = function() {
   var id = ydn.testing.randWord();

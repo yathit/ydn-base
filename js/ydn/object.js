@@ -24,25 +24,24 @@ goog.provide('ydn.object');
 /**
  * Deep object cloning by JSON stringify/parse
  *
- * @param {Object|Array} obj
- * @return {Object|Array}
+ * @param {Object|Array} obj object to be cloned.
+ * @return {Object|Array} cloned object.
  */
 ydn.object.clone = function(obj) {
   return ydn.json.parse(ydn.json.stringify(obj));
 };
 
 
-
 /**
- * compare two objects
+ * Compare two objects or array.
  *
- * @param {*} obj1
- * @param {*} obj2
- * @param {Object=} ignore_fields
- * @return {boolean}
+ * @param {*} obj1 object 1 to be compare with.
+ * @param {*} obj2 object 2 to be compare with.
+ * @param {Object=} opt_ignore_fields optional field to be ignore in comparing.
+ * @return {boolean} true if same.
  */
-ydn.object.isSame = function (obj1, obj2, ignore_fields) {
-  ignore_fields = ignore_fields || {};
+ydn.object.isSame = function(obj1, obj2, opt_ignore_fields) {
+  opt_ignore_fields = opt_ignore_fields || {};
   if (!goog.isDefAndNotNull(obj1) || !goog.isDefAndNotNull(obj2)) {
     return false;
   } else if (goog.isArray(obj1) && goog.isArray(obj2)) {
@@ -65,7 +64,7 @@ ydn.object.isSame = function (obj1, obj2, ignore_fields) {
     return obj2.length == 1 && ydn.object.isSame(obj2[0], obj1);
   } else if (goog.isObject(obj1) && goog.isObject(obj1)) {
     for (var key in obj1) {
-      if (obj1.hasOwnProperty(key) && !ignore_fields[key]) {
+      if (obj1.hasOwnProperty(key) && !opt_ignore_fields[key]) {
         var same = ydn.object.isSame(obj1[key], obj2[key]);
         if (!same) {
           return false;
@@ -73,7 +72,7 @@ ydn.object.isSame = function (obj1, obj2, ignore_fields) {
       }
     }
     for (var key in obj2) {
-      if (obj2.hasOwnProperty(key) && !ignore_fields[key]) {
+      if (obj2.hasOwnProperty(key) && !opt_ignore_fields[key]) {
         var same = ydn.object.isSame(obj1[key], obj2[key]);
         if (!same) {
           return false;
@@ -87,12 +86,12 @@ ydn.object.isSame = function (obj1, obj2, ignore_fields) {
 };
 
 
-
 /**
- * Length of array-like object. If it define {@code length} number field, it return that value.
+ * Length of array-like object. If it define {@code length} number field, it
+ * return that value.
  *
- * @param {Object} obj
- * @return {number}
+ * @param {Object} obj object of concern.
+ * @return {number} return number of hasOwnProperty fields.
  */
 ydn.object.length = function(obj) {
   if (obj && obj['length'] && goog.isNumber(obj['length'])) {
@@ -100,7 +99,9 @@ ydn.object.length = function(obj) {
   }
   var count = 0;
   for (var id in obj) {
-    count++;
+    if (obj.hasOwnProperty(id)) {
+      count++;
+    }
   }
   return count;
 };
@@ -110,7 +111,7 @@ ydn.object.length = function(obj) {
  * @see {@link goog.object.extend}
  * @param {Object} target  The source object.
  * @param {...Object} var_args The objects from which values will be copied.
- * @return {Object} extended object
+ * @return {Object} extended object.
  */
 ydn.object.extend = function(target, var_args) {
   var out = ydn.object.clone(target);
