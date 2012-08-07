@@ -124,3 +124,12 @@ ydn.object.extend = function(target, var_args) {
   return out;
 };
 
+
+ydn.object.reparr = function(v, n) {
+	var arr = [];
+	for (var i = 0; i < n; i++) {
+		arr.push(v);
+	}
+	return arr;
+};
+
