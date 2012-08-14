@@ -8,6 +8,10 @@
                          input="${ydn-base.dir}/js/main.js"
                          input.dir="${ydn-base.dir}/js"
                          output.fn="${ydn-base.dir}/jsc/ydn-base.js">
+            <options>
+                <arg line='-f "--externs=${work.dir}/ydn/externs/misc.js"'/>
+                <arg line='-f "--externs=${work.dir}/ydn/externs/ydn-server.js"'/>
+            </options>
 
         </closure-compile>
     </target>
