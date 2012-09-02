@@ -45,3 +45,29 @@ ydn.async.reduceAllTrue = function(dfl) {
   });
   return df;
 };
+
+
+
+/**
+ * This is external use only.
+ * @export
+ * @param {!Array.<!{success: Function, error: Function}>} df_arr An array of
+ * deferred objects to wait for.
+ * @return {!goog.async.DeferredList} DeferredList instance.
+ */
+ydn.async.dfl = function(df_arr) {
+  var df_list = [];
+  for (var idf, i = 0; idf = df_arr[i]; i++) {
+    var df = new goog.async.Deferred();
+    idf['success'](goog.partial(function(df, x) {
+      //window.console.log([df, x]);
+      df.callback(x);
+    }, df));
+    idf['error'](goog.partial(function(df, x) {
+      //window.console.log([df, x]);
+      df.errback(x);
+    }, df));
+    df_list[i] = df;
+  }
+  return new goog.async.DeferredList(df_list);
+};
