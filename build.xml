@@ -269,7 +269,7 @@
                 <map from="@{base.dir}/test/" to=""/>
             </pathconvert>
             <exec executable="python" failonerror="true" logError="true">
-                <arg value="${ydn.dir}/tools/jstd.py"/>
+                <arg value="${ydn-base.dir}/tools/jstd.py"/>
                 <arg line='"${deps-list.fn}"'/>
                 <arg line='"@{output.fn}"'/>
                 <arg line='"${work.dir}"'/>
