@@ -9,6 +9,7 @@ goog.provide('ydn.error');
 goog.provide('ydn.error.ArgumentException');
 goog.provide('ydn.error.NotImplementedException');
 goog.provide('ydn.error.ConstrainError');
+goog.provide('ydn.error.NotSupportedException');
 
 
 
@@ -37,6 +38,31 @@ goog.inherits(ydn.error.ArgumentException, Error);
 /** @override */
 ydn.error.ArgumentException.prototype.name = 'ydn.ArgumentException';
 
+
+
+/**
+ * Base class for custom error objects.
+ * @param {*=} opt_msg The message associated with the error.
+ * @constructor
+ * @extends {Error}
+ */
+ydn.error.NotSupportedException = function(opt_msg) {
+
+  // Ensure there is a stack trace.
+  if (Error.captureStackTrace) {
+    Error.captureStackTrace(this, ydn.error.NotSupportedException);
+  } else {
+    this.stack = new Error().stack || '';
+  }
+
+  if (opt_msg) {
+    this.message = String(opt_msg);
+  }
+};
+goog.inherits(ydn.error.ArgumentException, Error);
+
+/** @override */
+ydn.error.NotSupportedException.prototype.name = 'ydn.NotSupportedException';
 
 
 /**
