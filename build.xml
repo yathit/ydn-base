@@ -1,7 +1,284 @@
 <project name="ydn-base" basedir="." default="compile-debug">
     <dirname property="ydn-base.dir" file="${ant.file.ydn-base}"/>
     <property name="work.dir" location="${ydn-base.dir}/.." />
-    <import file="${work.dir}/ydn/build.xml"/>
+    <property name="lib.dir" location="${work.dir}/../lib"/>
+    <property name="home.dir" location="${user.home}"/>
+
+    <property name="closure-library.dir" value="${work.dir}/closure-library"/>
+    <property name="closure-compiler.dir" value="${lib.dir}/closure-compiler"/>
+    <property name="closure-compiler.jar" value="${closure-compiler.dir}/build/compiler.jar"/>
+    <property name="closure-templates.dir" value="${lib.dir}/closure-templates"/>
+    <property name="closure-stylesheets.dir" value="${lib.dir}/closure-stylesheets"/>
+    <property name="js-test-driver.jar" value="${lib.dir}/js-test-driver/JsTestDriver.jar"/>
+    <condition property="jsdoc.dir" value="${lib.dir}/jsdoc-toolkit"><os family="windows"/></condition>
+    <condition property="jsdoc.dir" value="${user.home}/opt/jsdoc-toolkit"><os family="unix"/></condition>
+
+    <property name="outputwrapper.norun" value="(function(){%output%})();"/>
+
+    <taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
+             classpath="${closure-compiler.jar}"/>
+    <macrodef name="closure-jscomp" description="compile closure">
+        <attribute name="compilationlevel" default="advanced"/>
+        <attribute name="generate-exports" default="false"/>
+        <attribute name="debug" default="false"/>
+        <attribute name="input.dir"/>
+        <attribute name="input.fn"/>
+        <element name="input" optional="true"/>
+        <element name="path-dir" optional="true"/>
+        <attribute name="output.fn"/>
+        <sequential>
+            <jscomp compilationlevel="@{compilationlevel}" warning="VERBOSE"
+                    debug="@{debug}"
+                    output="@{output.fn}"
+                    generateexports="true"
+                    managedependencies="true">
+                <externs dir="${closure-compiler.dir}/externs">
+                    <file name="browser.js"/>
+                </externs>
+                <path>
+                    <fileset dir="${closure-library.dir}/closure/goog">
+                        <include name="*.js"/>
+                        <depth max="7" min="1"/>
+                    </fileset>
+                </path>
+                <sources dir="@{input.dir}">
+                    <file name="@{input.fn}"/>
+                </sources>
+
+
+                <warning level="ERROR" group="accessControls"/>
+
+            </jscomp>
+            <echo>"@{output.fn}" generated.</echo>
+        </sequential>
+    </macrodef>
+    <macrodef name="calcdeps">
+        <attribute name="input"/>
+        <attribute name="input.dir"/>
+        <attribute name="output.fn" default="std"/>
+        <sequential>
+            <exec executable="python" failonerror="true" logerror="true">
+                <arg value="${closure-library.dir}/closure/bin/calcdeps.py"/>
+                <arg line='-i "@{input}"'/>
+                <arg line='-p "${closure-library.dir}"'/>
+                <arg line='-p "@{input.dir}"'/>
+                <arg line="-o list"/>
+            </exec>
+        </sequential>
+    </macrodef>
+    <macrodef name="closure-compile">
+        <element name="cssmap" optional="yes"/>
+        <element name="options" optional="yes"/>
+        <element name="extrapaths" optional="yes"/>
+        <attribute name="input.dir"/>
+        <attribute name="base.dir" default="@{input.dir}" />
+        <attribute name="compilerjarfile" default="${closure-compiler.jar}"/>
+        <attribute name="compilationlevel" default="ADVANCED_OPTIMIZATIONS"/>
+        <attribute name="outputmode" default="compiled"/>
+        <attribute name="input"/>
+        <attribute name="output.fn"/>
+        <sequential>
+            <exec executable="python" failonerror="true" logError="true" dir="@{base.dir}">
+                <arg value="${closure-library.dir}/closure/bin/calcdeps.py"/>
+                <arg line='-i "@{input}"'/>
+                <arg line='--output_file "@{output.fn}"'/>
+                <arg line='-p "${closure-library.dir}"'/>
+                <arg line='-p "@{input.dir}"'/>
+                <arg line="-o @{outputmode}"/>
+                <arg line='-c "@{compilerjarfile}"'/>
+                <arg line='-f "--compilation_level=@{compilationlevel}"'/>
+                <arg line='-f "--js=${closure-library.dir}/closure/goog/deps.js"'/>
+                <arg line='-f "--externs=${ydn.dir}/externs/browser.js"'/>
+                <arg line='-f "--language_in=ECMASCRIPT5"'/>
+                <arg line='-f "--use_types_for_optimization"'/>
+
+                <arg line='-f "--jscomp_warning=uselessCode"'/>
+                <arg line='-f "--jscomp_error=accessControls"'/>
+                <arg line='-f "--jscomp_error=ambiguousFunctionDecl"'/>
+                <arg line='-f "--jscomp_error=checkRegExp"'/>
+                <arg line='-f "--jscomp_error=checkTypes"'/>
+                <arg line='-f "--jscomp_error=checkVars"'/>
+                <arg line='-f "--jscomp_error=constantProperty"'/>
+                <arg line='-f "--jscomp_warning=deprecated"'/>
+                <arg line='-f "--jscomp_error=es5Strict"'/>
+                <arg line='-f "--jscomp_error=externsValidation"'/>
+                <arg line='-f "--jscomp_error=globalThis"'/>
+                <arg line='-f "--jscomp_error=internetExplorerChecks"'/>
+                <arg line='-f "--jscomp_error=invalidCasts"'/>
+                <arg line='-f "--jscomp_error=internetExplorerChecks"'/>
+                <arg line='-f "--jscomp_error=missingProperties"'/>
+                <arg line='-f "--jscomp_error=nonStandardJsDocs"'/>
+                <arg line='-f "--jscomp_error=strictModuleDepCheck"'/>
+                <arg line='-f "--jscomp_error=typeInvalidation"'/>
+                <arg line='-f "--jscomp_error=undefinedVars"'/>
+                <arg line='-f "--jscomp_error=unknownDefines"'/>
+                <arg line='-f "--jscomp_error=visibility"'/>
+                <arg line='-f "--warning_level=VERBOSE"'/>
+                <extrapaths/>
+                <options/>
+            </exec>
+            <echo>"@{output.fn}" generated.</echo>
+        </sequential>
+    </macrodef>
+    <macrodef name="closure-jscomp" description="compile closure">
+        <attribute name="compilationlevel" default="advanced"/>
+        <attribute name="generate-exports" default="false"/>
+        <attribute name="debug" default="false"/>
+        <attribute name="input.dir"/>
+        <attribute name="input.fn"/>
+        <element name="input" optional="true"/>
+        <element name="path-dir" optional="true"/>
+        <attribute name="output.fn"/>
+        <sequential>
+            <jscomp compilationlevel="@{compilationlevel}" warning="VERBOSE"
+                    debug="@{debug}"
+                    output="@{output.fn}"
+                    generateexports="true"
+                    managedependencies="true">
+                <externs dir="${closure-compiler.dir}/externs">
+                    <file name="browser.js"/>
+                </externs>
+                <path>
+                    <fileset dir="${closure-library.dir}/closure/goog">
+                        <include name="*.js"/>
+                        <depth max="7" min="1"/>
+                    </fileset>
+                </path>
+                <sources dir="@{input.dir}">
+                    <file name="@{input.fn}"/>
+                </sources>
+
+                <path-dir/>
+
+                <warning level="ERROR" group="accessControls"/>
+
+            </jscomp>
+            <echo>"@{output.fn}" generated.</echo>
+        </sequential>
+    </macrodef>
+    <macrodef name="calcdeps">
+        <attribute name="input"/>
+        <attribute name="input.dir"/>
+        <attribute name="output.fn" default="std"/>
+        <sequential>
+            <exec executable="python" failonerror="true" logerror="true">
+                <arg value="${closure-library.dir}/closure/bin/calcdeps.py"/>
+                <arg line='-i "@{input}"'/>
+                <arg line='-p "${closure-library.dir}"'/>
+                <arg line='-p "@{input.dir}"'/>
+                <arg line="-o list"/>
+            </exec>
+        </sequential>
+    </macrodef>
+    <macrodef name="closure-compile">
+        <element name="cssmap" optional="yes"/>
+        <element name="options" optional="yes"/>
+        <element name="extrapaths" optional="yes"/>
+        <attribute name="input.dir"/>
+        <attribute name="base.dir" default="@{input.dir}" />
+        <attribute name="compilerjarfile" default="${closure-compiler.jar}"/>
+        <attribute name="compilationlevel" default="ADVANCED_OPTIMIZATIONS"/>
+        <attribute name="outputmode" default="compiled"/>
+        <attribute name="input"/>
+        <attribute name="output.fn"/>
+        <sequential>
+            <exec executable="python" failonerror="true" logError="true" dir="@{base.dir}">
+                <arg value="${closure-library.dir}/closure/bin/calcdeps.py"/>
+                <cssmap/>
+                <arg line='-i "@{input}"'/>
+                <arg line='--output_file "@{output.fn}"'/>
+                <arg line='-p "${closure-library.dir}"'/>
+                <arg line='-p "@{input.dir}"'/>
+                <arg line="-o @{outputmode}"/>
+                <arg line='-c "@{compilerjarfile}"'/>
+                <arg line='-f "--compilation_level=@{compilationlevel}"'/>
+                <arg line='-f "--js=${closure-library.dir}/closure/goog/deps.js"'/>
+                <arg line='-f "--externs=${ydn-base.dir}/externs/browser.js"'/>
+                <arg line='-f "--language_in=ECMASCRIPT5"'/>
+                <arg line='-f "--use_types_for_optimization"'/>
+
+                <arg line='-f "--jscomp_warning=uselessCode"'/>
+                <arg line='-f "--jscomp_error=accessControls"'/>
+                <arg line='-f "--jscomp_error=ambiguousFunctionDecl"'/>
+                <arg line='-f "--jscomp_error=checkRegExp"'/>
+                <arg line='-f "--jscomp_error=checkTypes"'/>
+                <arg line='-f "--jscomp_error=checkVars"'/>
+                <arg line='-f "--jscomp_error=constantProperty"'/>
+                <arg line='-f "--jscomp_warning=deprecated"'/>
+                <arg line='-f "--jscomp_error=es5Strict"'/>
+                <arg line='-f "--jscomp_error=externsValidation"'/>
+                <arg line='-f "--jscomp_error=globalThis"'/>
+                <arg line='-f "--jscomp_error=internetExplorerChecks"'/>
+                <arg line='-f "--jscomp_error=invalidCasts"'/>
+                <arg line='-f "--jscomp_error=internetExplorerChecks"'/>
+                <arg line='-f "--jscomp_error=missingProperties"'/>
+                <arg line='-f "--jscomp_error=nonStandardJsDocs"'/>
+                <arg line='-f "--jscomp_error=strictModuleDepCheck"'/>
+                <arg line='-f "--jscomp_error=typeInvalidation"'/>
+                <arg line='-f "--jscomp_error=undefinedVars"'/>
+                <arg line='-f "--jscomp_error=unknownDefines"'/>
+                <arg line='-f "--jscomp_error=visibility"'/>
+                <arg line='-f "--warning_level=VERBOSE"'/>
+                <extrapaths/>
+                <options/>
+            </exec>
+            <echo>"@{output.fn}" generated.</echo>
+        </sequential>
+    </macrodef>
+    <macrodef name="calc-deps" description="calcualte dependency for testing">
+        <attribute name="output.fn"/>
+        <attribute name="input.dir" />
+        <attribute name="output-mode" default="deps"/>
+        <element name="calc-options" optional="yes"/>
+        <sequential>
+            <exec executable="python" failonerror="true" logError="true">
+                <arg value="${closure-library.dir}/closure/bin/calcdeps.py"/>
+                <arg line='--dep "${closure-library.dir}"'/>
+                <arg line='--path "@{input.dir}"'/>
+                <arg line='--output_mode "@{output-mode}"'/>
+                <arg line='--output_file "@{output.fn}"'/>
+                <calc-options/>
+            </exec>
+        </sequential>
+    </macrodef>
+    <macrodef name="jstd-gen" description="generate JSTD file">
+        <attribute name="base.dir"/>
+        <attribute name="input.fn" default="@{base.dir}/js/main.js"/>
+        <attribute name="test.dir" default="@{base.dir}/test"/>
+        <attribute name="output.fn" default="@{base.dir}/jsTestDriver.conf"/>
+        <element name="deps-options" optional="yes"/>
+        <element name="jsload-fns" optional="yes"/>
+        <sequential>
+            <property name="deps-list.fn" value="@{base.dir}/deps-list.txt"/>
+            <calc-deps
+                    output-mode="list"
+                    input.dir="@{base.dir}/js/"
+                    output.fn="${deps-list.fn}">
+                <calc-options>
+                    <arg line='--path "${closure-library.dir}"'/>
+                    <arg line='--path "@{base.dir}/js"'/>
+                    <arg line='--path "@{base.dir}/test"'/>
+                    <arg line='--input "@{input.fn}"'/>
+                    <deps-options/>
+                </calc-options>
+            </calc-deps>
+            <fileset dir="@{test.dir}" id="jstest.files">
+                <include name="**/*Jstest.js"/>
+            </fileset>
+            <pathconvert pathsep="," property="jstestfiles" refid="jstest.files" dirsep="/">
+                <map from="@{base.dir}/test/" to=""/>
+            </pathconvert>
+            <exec executable="python" failonerror="true" logError="true">
+                <arg value="${ydn.dir}/tools/jstd.py"/>
+                <arg line='"${deps-list.fn}"'/>
+                <arg line='"@{output.fn}"'/>
+                <arg line='"${work.dir}"'/>
+                <arg line='"${jstestfiles}"'/>
+                <jsload-fns/>
+            </exec>
+            <echo>JSTD save to: "@{output.fn}"</echo>
+        </sequential>
+    </macrodef>
     <target name="compile-debug" description="compile JS">
         <mkdir dir="${ydn-base.dir}/jsc"/>
         <closure-compile compilationlevel="ADVANCED_OPTIMIZATIONS"
