@@ -279,6 +279,18 @@
             <echo>JSTD save to: "@{output.fn}"</echo>
         </sequential>
     </macrodef>
+    <macrodef name="gen-js-test" description="Generate alltests.js">
+        <attribute name="base.dir" default="${basedir}"/>
+        <attribute name="input.dir" default="@{base.dir}"/>
+        <attribute name="output.fn" default="@{input.dir}/alltests.js"/>
+        <sequential>
+            <exec executable="python" failonerror="true" dir="@{base.dir}">
+                <arg value="${ydn-base.dir}/tools/alltests.py"/>
+                <arg value="@{output.fn}"/>
+                <arg value="@{input.dir}"/>
+            </exec>
+        </sequential>
+    </macrodef>
     <target name="compile-debug" description="compile JS">
         <mkdir dir="${ydn-base.dir}/jsc"/>
         <closure-compile compilationlevel="ADVANCED_OPTIMIZATIONS"
