@@ -243,7 +243,7 @@
     </macrodef>
     <macrodef name="jstd-gen" description="generate JSTD file">
         <attribute name="base.dir"/>
-        <attribute name="input.fn" default="@{base.dir}/js/main.js"/>
+        <attribute name="input.fn" default="@{base.dir}/js/test.js"/>
         <attribute name="test.dir" default="@{base.dir}/test"/>
         <attribute name="output.fn" default="@{base.dir}/jsTestDriver.conf"/>
         <element name="deps-options" optional="yes"/>
