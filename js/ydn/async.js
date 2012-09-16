@@ -55,7 +55,7 @@ ydn.async.reduceAllTrue = function(dfl) {
  * deferred objects to wait for.
  * @return {!goog.async.DeferredList} DeferredList instance.
  */
-ydn.async.dfl = function(df_arr) {
+ydn.async.all = function(df_arr) {
   var df_list = [];
   for (var idf, i = 0; idf = df_arr[i]; i++) {
     var df = new goog.async.Deferred();
