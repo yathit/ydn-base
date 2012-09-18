@@ -48,7 +48,7 @@ ydn.json.parse = function(json_str) {
   try {
     return /** @type {!Object} */ (JSON.parse(json_str));
   } catch (e) {
-    ydn.json.logger.warning('parse failed: ' + e);
+    ydn.json.logger.warning('parse failed: ' + e.message);
     if (ydn.json.DEBUG) {
       window.console.log(json_str);
     }
@@ -59,20 +59,21 @@ ydn.json.parse = function(json_str) {
 
 /**
  * Parse JSON using native method if available.
+ *
  * This is necessary since closure-library do not use native method.
  *
- * @param {Object} json_str object to stringify.
+ * @param {Object} json object to stringify.
  * @return {string} result.
  */
-ydn.json.stringify = function(json_str) {
+ydn.json.stringify = function(json) {
 
-  try {
-    return JSON.stringify(json_str);
-  } catch (e) {
-    ydn.json.logger.warning('stringify failed: ' + e);
-    if (ydn.json.DEBUG) {
-      window.console.log(json_str);
-    }
-    return '';
-  }
+  //try {
+  return JSON.stringify(json);
+//  } catch (e) {
+//    ydn.json.logger.warning('stringify failed: ' + e);
+//    if (ydn.json.DEBUG) {
+//      window.console.log(json);
+//    }
+//    return '';
+//  }
 };
