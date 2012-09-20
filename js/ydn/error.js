@@ -10,6 +10,7 @@ goog.provide('ydn.error.ArgumentException');
 goog.provide('ydn.error.NotImplementedException');
 goog.provide('ydn.error.ConstrainError');
 goog.provide('ydn.error.NotSupportedException');
+goog.provide('ydn.error.InternalError');
 
 
 
