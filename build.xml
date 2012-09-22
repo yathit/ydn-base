@@ -243,6 +243,7 @@
     </macrodef>
     <macrodef name="jstd-gen" description="generate JSTD file">
         <attribute name="base.dir"/>
+        <attribute name="js.dir" default="@{base.dir}/js"/>
         <attribute name="input.fn" default="@{base.dir}/js/test.js"/>
         <attribute name="test.dir" default="@{base.dir}/test"/>
         <attribute name="output.fn" default="@{base.dir}/jsTestDriver.conf"/>
@@ -256,8 +257,8 @@
                     output.fn="${deps-list.fn}">
                 <calc-options>
                     <arg line='--path "${closure-library.dir}"'/>
-                    <arg line='--path "@{base.dir}/js"'/>
-                    <arg line='--path "@{base.dir}/test"'/>
+                    <arg line='--path "@{js.dir}"'/>
+                    <arg line='--path "@{test.dir}"'/>
                     <arg line='--input "@{input.fn}"'/>
                     <deps-options/>
                 </calc-options>
