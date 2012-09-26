@@ -11,6 +11,7 @@ goog.provide('ydn.error.NotImplementedException');
 goog.provide('ydn.error.ConstrainError');
 goog.provide('ydn.error.NotSupportedException');
 goog.provide('ydn.error.InternalError');
+goog.provide('ydn.error.InvalidOperationException');
 
 
 
@@ -138,3 +139,29 @@ ydn.error.ConstrainError = function(opt_msg) {
 goog.inherits(ydn.error.ConstrainError, Error);
 
 ydn.error.ConstrainError.prototype.name = 'ydn.ConstrainError';
+
+
+
+/**
+ * Base class for custom error objects.
+ * @param {*=} opt_msg The message associated with the error.
+ * @constructor
+ * @extends {Error}
+ */
+ydn.error.InvalidOperationException = function(opt_msg) {
+
+  // Ensure there is a stack trace.
+  if (Error.captureStackTrace) {
+    Error.captureStackTrace(this, ydn.error.InvalidOperationException);
+  } else {
+    this.stack = new Error().stack || '';
+  }
+
+  if (opt_msg) {
+    this.message = String(opt_msg);
+  }
+};
+goog.inherits(ydn.error.ArgumentException, Error);
+
+/** @override */
+ydn.error.InvalidOperationException.prototype.name = 'ydn.InvalidOperationException';
