@@ -81,3 +81,26 @@ IDBOpenDBRequest.prototype.onblocked = function(ev) {};
  * @param ev
  */
 IDBOpenDBRequest.prototype.onupgradeneeded = function(ev) {};
+
+
+/**
+ * @final
+ * @type {boolean}
+ */
+IDBIndex.prototype.multiEntry;
+
+
+
+/**
+ * @final
+ * @type {boolean}
+ */
+IDBObjectStore.prototype.autoIncremenent;
+//
+//
+///**
+// * Closure compiler incorrectly define as Array.<string>
+//* @final
+//* @type {DOMStringList}
+//*/
+//IDBDatabase.prototype.objectStoreNames;
