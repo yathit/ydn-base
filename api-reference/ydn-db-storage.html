@@ -56,19 +56,19 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
       <b><a href="#clear">clear</a></b>(store_name, id)
     </div>
     <div class="fixedFont">
-      <b><a href="#clear">clear</a></b>(store_name, ids)
+      <b><a href="#clear1">clear</a></b>(store_name, ids)
     </div>
     <div class="fixedFont">
-      <b><a href="#clear">clear</a></b>(key)
+      <b><a href="#clear2">clear</a></b>(key)
     </div>
     <div class="fixedFont">
-      <b><a href="#clear">clear</a></b>(keys)
+      <b><a href="#clear3">clear</a></b>(keys)
     </div>
     <div class="fixedFont">
-      <b><a href="#clear">clear</a></b>(store_name)
+      <b><a href="#clear4">clear</a></b>(store_name)
     </div>
     <div class="fixedFont">
-      <b><a href="#clear">clear</a></b>()
+      <b><a href="#clear5">clear</a></b>()
     </div>
 
 
@@ -112,19 +112,19 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
       <b><a href="#get">get</a></b>(store_name, id)
     </div>
     <div class="fixedFont">
-      <b><a href="#get">get</a></b>(store_name, ids)
+      <b><a href="#get1">get</a></b>(store_name, ids)
     </div>
     <div class="fixedFont">
-      <b><a href="#get">get</a></b>(store_name)
+      <b><a href="#get2">get</a></b>(store_name)
     </div>
     <div class="fixedFont">
-      <b><a href="#get">get</a></b>(key)
+      <b><a href="#get3">get</a></b>(key)
     </div>
     <div class="fixedFont">
-      <b><a href="#get">get</a></b>(keys)
+      <b><a href="#get4">get</a></b>(keys)
     </div>
     <div class="fixedFont">
-      <b><a href="#get">get</a></b>()
+      <b><a href="#get5">get</a></b>()
     </div>
     <div class="description">
       Retrieve an object or objects.
@@ -249,7 +249,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
   <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return <code>true</code> in the deferred function.</dd>
 </dl>
 
-
+<a name="clear1"></a>
 <div class="fixedFont">
   <span class="light">{!goog.async.Deferred}</span> <b>clear</b>(store_name, ids)
 </div>
@@ -265,7 +265,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
 
   <dd>store name.</dd>
 
-  <dt><span class="light fixedFont">{string}</span> <b>ids</b></dt>
+  <dt><span class="light fixedFont">{Array}</span> <b>ids</b></dt>
 
   <dd>List of object keys to clear.</dd>
 </dl>
@@ -276,7 +276,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
   <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return <code>true</code> in the deferred function.</dd>
 </dl>
 
-
+<a name="clear2"></a>
 <div class="fixedFont">
   <span class="light">{!goog.async.Deferred}</span> <b>clear</b>(key)
 </div>
@@ -299,6 +299,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
   <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return <code>true</code> in the deferred function.</dd>
 </dl>
 
+<a name="clear3"></a>
 <div class="fixedFont">
   <span class="light">{!goog.async.Deferred}</span> <b>clear</b>(keys)
 </div>
@@ -310,7 +311,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
 <dl class="detailList">
   <dt class="heading">Parameters:</dt>
 
-  <dt><span class="light fixedFont">{Array.<ydn.db.Key>}</span> <b>keys</b></dt>
+  <dt><span class="light fixedFont">{Array.&lt;ydn.db.Key&gt;}</span> <b>keys</b></dt>
 
   <dd>keys to clear associated objects.</dd>
 </dl>
@@ -321,7 +322,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
   <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return <code>true</code> in the deferred function.</dd>
 </dl>
 
-
+<a name="clear4"></a>
 <div class="fixedFont">
   <span class="light">{!goog.async.Deferred}</span> <b>clear</b>(store_name)
 </div>
@@ -333,7 +334,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
 <dl class="detailList">
   <dt class="heading">Parameters:</dt>
 
-  <dt><span class="light fixedFont">{Array.<ydn.db.Key>}</span> <b>store_name</b></dt>
+  <dt><span class="light fixedFont">{string}</span> <b>store_name</b></dt>
 
   <dd>store name.</dd>
 </dl>
@@ -344,7 +345,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
   <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return <code>true</code> in the deferred function.</dd>
 </dl>
 
-
+<a name="clear5"></a>
 <div class="fixedFont">
   <span class="light">{!goog.async.Deferred}</span> <b>clear</b>()
 </div>
@@ -393,8 +394,6 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
 <hr>
 
 <a name="get"></a>
-
-
 <div class="fixedFont">
   <span class="light">{!goog.async.Deferred}</span> <b>get</b>(store_name, id)
 </div>
@@ -424,8 +423,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
 </dl>
 
 
-
-
+<a name="get1"></a>
 <div class="fixedFont">
   <span class="light">{!goog.async.Deferred}</span> <b>get</b>(store_name, ids)
 </div>
@@ -443,7 +441,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
 
   <dd>The name of store to retrive object from.</dd>
 
-  <dt><span class="light fixedFont">{Array.<string>}</span> <b>ids</b></dt>
+  <dt><span class="light fixedFont">{Array}</span> <b>ids</b></dt>
 
   <dd>Retrieve list of object from given ids.</dd>
 </dl>
@@ -454,7 +452,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
   <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return resulting objects as array list in deferred function. If not found, <code>undefined</code> is return.</dd>
 </dl>
 
-
+<a name="get2"></a>
 <div class="fixedFont">
   <span class="light">{!goog.async.Deferred}</span> <b>get</b>(store_name)
 </div>
@@ -481,7 +479,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
 </dl>
 
 
-
+<a name="get3"></a>
 <div class="fixedFont">
   <span class="light">{!goog.async.Deferred}</span> <b>get</b>()
 </div>
@@ -498,7 +496,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
   <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return resulting objects array list in deferred function.</dd>
 </dl>
 
-
+<a name="get4"></a>
 <div class="fixedFont">
   <span class="light">{!goog.async.Deferred}</span> <b>get</b>(key)
 </div>
@@ -524,7 +522,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
   <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return resulting object in deferred function.</dd>
 </dl>
 
-
+<a name="get5"></a>
 <div class="fixedFont">
   <span class="light">{!goog.async.Deferred}</span> <b>get</b>(keys)
 </div>
@@ -538,7 +536,7 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
 <dl class="detailList">
   <dt class="heading">Parameters:</dt>
 
-  <dt><span class="light fixedFont">{!Array.<!ydn.db.Key>}</span> <b>keys</b></dt>
+  <dt><span class="light fixedFont">{!Array.&lt;!ydn.db.Key&gt;}</span> <b>keys</b></dt>
 
   <dd>The key of the object to retrieve.</dd>
 
