@@ -277,46 +277,6 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
 </tr>
 
 
-<tr>
-
-
-
-  <td class="attributes">&nbsp;</td>
-
-
-
-
-  <td class="nameDescription">
-
-
-
-    <div class="fixedFont">
-      <b><a href="#setItem">setItem</a></b>(key, value)
-    </div>
-
-
-
-
-    <div class="description">
-      Store a value to default key-value store.
-    </div>
-  </td>
-</tr>
-
-
-<tr>
-  <td class="attributes">&nbsp;</td>
-  <td class="nameDescription">
-    <div class="fixedFont">
-      <b><a href="#encrypt">encrypt</a></b>(passphase, opt_expiration)
-    </div>
-
-
-    <div class="description">
-      Encrypt the database using a passphase.
-    </div>
-  </td>
-</tr>
 
 <tr>
   <td class="attributes">&nbsp;</td>
@@ -849,41 +809,6 @@ Extends <a href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn
   <dd><span class="light fixedFont">{string}</span> normalized database name.</dd>
 </dl>
 
-<hr>
-
-<a name="setItem"></a>
-
-
-<div class="fixedFont">
-  <span class="light">{!goog.async.Deferred}</span> <b>setItem</b>(key, value)
-</div>
-
-
-<div class="description">
-  Store a value to default key-value store. This will decrypt the value with the passphase provided.
-</div>
-
-
-<dl class="detailList">
-  <dt class="heading">Parameters:</dt>
-
-  <dt><span class="light fixedFont">{string}</span> <b>key</b></dt>
-
-  <dd>The key to set.</dd>
-
-  <dt><span class="light fixedFont">{string}</span> <b>value</b></dt>
-
-  <dd>The value to save.</dd>
-</dl>
-
-
-<dl class="detailList">
-  <dt class="heading">Returns:</dt>
-
-  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> true on success. undefined on fail.</dd>
-</dl>
-
-<hr>
 
 <a name="setSchema"></a>
 
