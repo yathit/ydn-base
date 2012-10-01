@@ -150,24 +150,22 @@ stores: [{
 
     <dd>Additional options.
     </dd>
-      <ul>
-        <li>
-          <span class="fixedFont">
-            <span class="light">{!Array.&lt;string&gt;}</span> <b>preference
-          </b></span>: preferential ordering of store mechanisms.
-        </li>
-        <li>
-          <span class="fixedFont">
-            <span class="light">{number}</span> <b>size
-          </b></span>: estimated database size in bytes(only used in WebSQL).
-        </li>
-        <li>
-          <span class="fixedFont">
-            <span class="light">{boolean}</span> <b>use_text_store
-          </b></span>: use default key-value text store.
-        </li>
-      </ul>
-<pre>options = {preference: ["indexeddb", "websql", "localstorage", "sessionstorage", "memory"]}
+
+    <dl class="detailList">
+      <dt class="heading">Option keys:</dt>
+      <dt><span class="light fixedFont">{!Array.&lt;string&gt;}</span> <b>preference</b></dt>
+      <dd>preferential ordering of store mechanisms.</dd>
+      <dt><span class="light fixedFont">{number}</span> <b>size</b></dt>
+      <dd>estimated database size in bytes(only used in WebSQL).</dd>
+      <dt><span class="light fixedFont">{boolean}</span> <b>use_text_store</b></dt>
+      <dd>use default key-value text store.</dd>
+    </dl>
+
+
+<pre>options = {
+  preference: ["indexeddb", "websql", "localstorage", "sessionstorage", "memory"], // default ordering
+  size: 2 * 1024 * 1024, // 2 MB
+};
     </pre>
   </dl>
 </div>
