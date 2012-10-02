@@ -19,6 +19,7 @@
  */
 
 goog.provide('ydn.object');
+goog.provide('ydn.string');
 goog.require('ydn.json');
 
 
@@ -131,5 +132,25 @@ ydn.object.reparr = function(v, n) {
 		arr.push(v);
 	}
 	return arr;
+};
+
+
+/**
+ *
+ * @param {string} str
+ * @return {Array.<string>}
+ */
+ydn.string.split_comma_seperated = function(str) {
+  return str.match(/(?:"[^"]*"|[^,])+/g);
+};
+
+
+/**
+ *
+ * @param {string} str
+ * @return {Array.<string>}
+ */
+ydn.string.split_space_seperated = function(str) {
+  return str.match(/\w+|"[^"]+"/g);
 };
 
