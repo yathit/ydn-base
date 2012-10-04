@@ -298,7 +298,10 @@
                          input="${ydn-base.dir}/js/main.js"
                          input.dir="${ydn-base.dir}/js"
                          output.fn="${ydn-base.dir}/jsc/ydn-base.js">
-
+            <options>
+             <arg line='-f "--externs=${ydn-base.dir}/externs/opensocial.js"'/>
+             <arg line='-f "--externs=${ydn-base.dir}/externs/shindig.js"'/>
+            </options>
         </closure-compile>
     </target>
     <target name="deps" description="list dependency files">

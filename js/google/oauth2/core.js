@@ -14,38 +14,40 @@
 
 
 /** OAuth 2 core utilities. */
+goog.provide('google.oauth2');
 goog.provide('google.oauth2.core');
+goog.require('google.oauth2.core.config');
 
-(function() {
+google.oauth2.applicationUri = null;
+google.oauth2.clientId = null;
+/**
+ *
+ * @type {?string}
+ */
+google.oauth2.scopes = null;
+google.oauth2.oauth2userHint = null;
+/**
+ *
+ * @type {?string}
+ */
+google.oauth2.overrideSessionIndex = null;
+/**
+ *
+ * @type {?string}
+ */
+google.oauth2.overrideHostedDomain = null;
 
-  var config = {
-    AUTH_STATE: oauth2.core.config.AUTH_STATE,
-    AUTH_URL: oauth2.core.config.AUTH_URL,
-    CLIENT_ID_PARAM: oauth2.core.config.CLIENT_ID_PARAM,
-    HOSTED_DOMAIN_PARAM: oauth2.core.config.HOSTED_DOMAIN_PARAM,
-    IMMEDIATE_PARAM: oauth2.core.config.IMMEDIATE_PARAM,
-    IMMEDIATE_PARAM_VALUE: oauth2.core.config.IMMEDIATE_PARAM_VALUE,
-    ORIGIN: oauth2.core.config.ORIGIN,
-    ORIGIN_PARAM: oauth2.core.config.ORIGIN_PARAM,
-    POSTMESSAGE_PARAM: oauth2.core.config.POSTMESSAGE_PARAM,
-    POSTMESSAGE_PARAM_VALUE: oauth2.core.config.POSTMESSAGE_PARAM_VALUE,
-    PROXY_ID: oauth2.core.config.PROXY_ID,
-    PROXY_PARAM: oauth2.core.config.PROXY_PARAM,
-    RESPONSE_TYPE_ACCESS_TOKEN_PARAM_VALUE:
-      oauth2.core.config.RESPONSE_TYPE_ACCESS_TOKEN_PARAM_VALUE,
-    RESPONSE_TYPE_PARAM: oauth2.core.config.RESPONSE_TYPE_PARAM,
-    SCOPE_PARAM: oauth2.core.config.SCOPE_PARAM,
-    SESSION_INDEX_PARAM: oauth2.core.config.SESSION_INDEX_PARAM,
-    STATE_PARAM: oauth2.core.config.STATE_PARAM,
-    USER_ID_PARAM: oauth2.core.config.USER_ID_PARAM
-  };
+goog.scope(function() {
 
-  var applicationUri = null;
-  var clientId = null;
-  var scopes = null;
-  var oauth2userHint = null;
-  var overrideSessionIndex = null;
-  var overrideHostedDomain = null;
+  var oauth2 = google.oauth2;
+  var config = oauth2.core.config;
+
+  var applicationUri = google.oauth2.applicationUri;
+  var clientId = google.oauth2.clientId;
+  var scopes = google.oauth2.scopes;
+  var oauth2userHint = google.oauth2.oauth2userHint;
+  var overrideSessionIndex = google.oauth2.overrideSessionIndex;
+  var overrideHostedDomain = google.oauth2.overrideHostedDomain;
 
   /**
    * Configure OAuth 2 client ID.
@@ -65,13 +67,14 @@ goog.provide('google.oauth2.core');
    *     from an authorization URL.
    */
   oauth2.core.setScopes = function(value) {
-    scopes = value;
-    if (typeof(scopes) != 'string') {
-      if (scopes == null) {
+    if (typeof(value) != 'string') {
+      if (value == null) {
         scopes = '';
-      } else if (scopes.length >= 0) {
-        scopes = scopes.join(' ');
+      } else if (value.length >= 0) {
+        scopes = value.join(' ');
       }
+    } else {
+      scopes = value;
     }
     scopes = String(scopes);
   };
@@ -145,7 +148,7 @@ goog.provide('google.oauth2.core');
 
   /**
    * Generates the URL for an OAuth 2 end-user authorization flow.
-   * @param {boolean} If true, the authorization flow will use the
+   * @param {boolean} isImmediate If true, the authorization flow will use the
    *     "immediate" mode which is IFRAME-able and skips all user
    *     interface and either immediately succeeds (due to prior
    *     approval) or fails; otherwise user interface may be
@@ -228,4 +231,4 @@ goog.provide('google.oauth2.core');
     return urlParts.join('&');
   };
 
-})();
+});
