@@ -95,7 +95,7 @@ IDBIndex.prototype.multiEntry;
  * @final
  * @type {boolean}
  */
-IDBObjectStore.prototype.autoIncremenent;
+IDBObjectStore.prototype.autoIncrement;
 //
 //
 ///**
