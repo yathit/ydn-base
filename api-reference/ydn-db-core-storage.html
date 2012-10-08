@@ -609,6 +609,44 @@ Extends <a
   <dd>object to put.</dd>
 </dl>
 
+<a name="put1"></a>
+
+
+<div class="fixedFont">
+    <span class="light">{!goog.async.Deferred}</span> <b>put</b>(store_name, value, id)
+</div>
+
+
+<div class="description">
+    Put an object to the store with given external key.
+</div>
+
+
+<dl class="detailList">
+    <dt class="heading">Parameters:</dt>
+
+    <dt><span class="light fixedFont">{string}</span> <b>store_name</b></dt>
+
+    <dd>the name of store to use.</dd>
+
+    <dt><span class="light fixedFont">{!Object}</span> <b>value</b></dt>
+
+    <dd>object to put.</dd>
+
+    <dt><span class="light fixedFont">{!Object}</span> <b>id</b></dt>
+
+    <dd>object to put.</dd>
+</dl>
+
+
+<dl class="detailList">
+    <dt class="heading">Throws:</dt>
+
+    <dt><span class="light fixedFont">{ydn.error.ArgumentException}</span> <b>:</b></dt>
+
+    <dd>The object store uses in-line keys or has a key generator, and a key parameter was provided.</dd>
+
+</dl>
 
 <dl class="detailList">
   <dt class="heading">Returns:</dt>
