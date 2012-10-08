@@ -19,10 +19,11 @@
     <td class="attributes">&nbsp;</td>
     <td class="nameDescription">
       <div class="fixedFont">
-        <b><a href="#constructor">ydn.db.Core</a></b>(name, schema, options)
+        <b><a href="#constructor">ydn.db.con.Storage</a></b>(name, schema, options)
       </div>
       <div class="description">
-        Create a suitable storage mechanism.
+        Create a connection to suitable storage mechanism and initialize the 
+        database with given schema and options.
       </div>
     </td>
   </tr>
@@ -56,10 +57,10 @@
     <td class="attributes">&nbsp;</td>
     <td class="nameDescription">
       <div class="fixedFont">
-        <b><a href="#getConfig">getConfig</a></b>()
+        <b><a href="#getSchema">getSchema</a></b>()
       </div>
       <div class="description">
-        Get configuration of this storage.
+        Get schema of this storage.
       </div>
     </td>
   </tr>
@@ -107,12 +108,15 @@
     Class Detail
   </div>
   <div class="fixedFont">
-    <b>ydn.db.Core</b>(dbname, schema, options)
+    <b>ydn.db.con.Storage</b>(dbname, schema, options)
   </div>
   <div class="description">
-    Create a suitable storage mechanism depending on preference setting and
-    runtime environment. Provide undefined value to database name to lazy
-    initialization. Database will&nbsp;initialize when the database name is set.&nbsp;</div>
+    Create a connection to suitable storage mechanism and initialize the
+    database. The created storage mechanism depending on preference setting and
+    runtime environment. The connection can be create later, by providing
+    <code>undefined</code> value to database name. 
+    Connection will be created when when the database name is set and perform
+    pending database operation.</div>
 
   <dl class="detailList">
     <dt class="heading">Parameters:</dt>
@@ -122,27 +126,52 @@
     <dd>Database name.</dd>
 
     <dt><span
-        class="light fixedFont optional">{!ydn.db.DatabaseSchema=}</span>
+        class="light fixedFont optional">{!ydn.db.DatabaseSchema|!DatabaseSchema=}</span>
       <b>schema</b></dt>
 
-    <dd>Optional database schema JSON format. Default schema is {}. Schema is&nbsp;up-gradable
-      by increasing version numeric value. Schema defines list of store names,
-      its keyPath and index fields as follow:
+    <dd>Optional database schema JSON format. The default schema is {}. Schema
+      is&nbsp;up-gradable by increasing version numeric value.
+      If version is not provided, database schema can be changed during the
+      life time of the connection. Internally database connection will be 
+      recreated depending on the storage mechanism and version.
+      <br/>
+      Schema defines a list of store schemas. All are optional unless noted.
 
 <pre>schema = {
 version: 1,
-stores: [{
-    name: 'customer',
-    keyPath: 'email'
+Stores: [{
+    name: 'customer',    // required. object store name or TABLE name
+    keyPath: 'email',    // keyPath.
+    type: 'TEXT',        // data type of the key.
+    autoIncrement: true, // if true, key will be automatically created if
+  not provided. If true, data type must be INTEGER.
 }, {
     name: 'product',
-    keyPath: 'sku',
-    indexes: [{
-         name: 'name'
+    keyPath: 'id.sku',
+    Indexes: [{
+       keyPath: 'origin', // required.
+       name: 'name',      // usually omitted. generally same as keyPath.
+       unique: true,      // unique constrain
+       multiEntry: true   //
     }]
 }]
 }
       </pre>
+      The data type is required for creating Sqlite  TABLE for COLUMN
+      definition. The data type is also used in
+      input argument check.Possible value of data types are: <code>TEXT</code> (default), <code
+          >NUMERIC</code>, <code>INTEGER</code>, <code>DATE</code> and
+      <code>ARRAY</code>.
+      <br/>
+      If <code>keyPath</code> is provided, it is called in-line key, otherwise
+      out-of-line key. If out-of-line key is used, key must be separately
+      provided unless <code>autoIncrement</code> is set true.
+      <code>keyPath</code> is field name of the record object. Nested inner
+      field can be defined by javascript doted notation.
+      <br/>
+      If <code>multiEntry</code> is set true, the value of the index as
+      specified by its keyPath can be array and its array elements are indexed
+      separately.
     </dd>
 
     <dt><span class="light fixedFont optional">{!Object=}</span>
@@ -153,11 +182,12 @@ stores: [{
 
     <dl class="detailList">
       <dt class="heading">Option keys:</dt>
-      <dt><span class="light fixedFont">{!Array.&lt;string&gt;}</span> <b>preference</b></dt>
+      <dt><span class="light fixedFont">{!Array.&lt;string&gt;}</span> <b>
+        Mechanisms</b></dt>
       <dd>preferential ordering of store mechanisms.</dd>
       <dt><span class="light fixedFont">{number}</span> <b>size</b></dt>
       <dd>estimated database size in bytes(only used in WebSQL).</dd>
-      <dt><span class="light fixedFont">{boolean}</span> <b>use_text_store</b></dt>
+      <dt><span class="light fixedFont">{boolean}</span> <b>used_text_store</b></dt>
       <dd>use default key-value text store.</dd>
     </dl>
 
@@ -186,42 +216,31 @@ stores: [{
   Close the database connection.
 </div>
 
-
-<dl class="detailList">
-  <dt class="heading">Returns:</dt>
-
-  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> true on
-    deferred function.
-  </dd>
-</dl>
-
 <hr>
 
-<a name="getConfig"></a>
+<a name="getSchema"></a>
 <div class="fixedFont">
-  <span class="light">{{name: string, schema: !Object}}</span>
-  <b>getConfig</b>()
+  <span class="light">{!DatabaseSchema}</span>
+  <b>getSchema</b> (callback)
 </div>
 <div class="description">
-  Get configuration of this storage. This is useful from getting storage from
+  Get schema of this storage. This is useful from getting storage from
   main thread to worker thread.
-<pre>  var db = new ydn.db.Core(...);
-  ... initialize ...
-  var config = db.getConfig();
-
-  ... in worker thread ...
-  var worker_db = new ydn.db.Core(config.name, config.schema);
-</pre>
-  In this way, data can be share between the two threads.
 </div>
 
 
 <dl class="detailList">
+  <dt class="heading">Parameters:</dt>
+  <dt><span class="light fixedFont">{function(!DatabaseSchema)=}</span> <b>
+    callback</b></dt>
+  <dd><i>Optional.</i> Extract database schema from the database
+    connection. </dd>
+
   <dt class="heading">Returns:</dt>
 
   <dd><span
-      class="light fixedFont">{{db_name: string, schema: !Object}}</span>
-    configuration containing database and list of schema in JSON format.
+      class="light fixedFont">{!DatabaseSchema}</span>
+    Schema used to create and validate the input configuration.
   </dd>
 </dl>
 
