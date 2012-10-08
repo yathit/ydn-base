@@ -119,19 +119,36 @@ Extends <a href="ydn-db-storage.html">ydn.db.Storage</a>
 </tr>
 
 <tr>
-  <td class="attributes">&nbsp;</td>
 
-  <td class="nameDescription">
+    <td class="attributes">&nbsp;</td>
 
-    <div class="fixedFont">
-      <b><a href="#run">run</a></b>(transaction_callback, store_names,
-      mode, completed_event_handler)
-    </div>
+    <td class="nameDescription">
 
-    <div class="description">
-      Create isolated database transaction.
-    </div>
-  </td>
+        <div class="fixedFont">
+            <b><a href="#query">query</a></b>(store_name)
+        </div>
+        <div class="description">
+            Create a query to an object store.
+        </div>
+        <div class="fixedFont">
+            <b><a href="#query1">query</a></b>(store_name, index_name)
+        </div>
+        <div class="description">
+            Create a query to an object store sorting in an index field.
+        </div>
+        <div class="fixedFont">
+            <b><a href="#query2">query</a></b>(store_name, index_name, key_range)
+        </div>
+        <div class="description">
+            Create a query to an object store within specific  key_range.
+        </div>
+        <div class="fixedFont">
+            <b><a href="#query3">query</a></b>(store_name, index_name, lower, upper, lowerOpen, upperOpen)
+        </div>
+        <div class="description">
+            Create a query to an object store within specific given key range.
+        </div>
+    </td>
 </tr>
 
 <tr>
@@ -268,3 +285,84 @@ Extends <a href="ydn-db-storage.html">ydn.db.Storage</a>
 </dl>
 
 <hr>
+
+
+<a name="query"></a>
+<div class="fixedFont">
+    <span class="light">{!goog.async.Deferred}</span> <b>query</b>(store_name)
+</div>
+<div class="description">
+    Create a query on an object store.
+</div>
+<dl class="detailList">
+    <dt class="heading">Parameters:</dt>
+    <dt><span class="light fixedFont">{string}</span> <b>store_name</b></dt>
+    <dd>The object store name.</dd>
+</dl>
+<dl class="detailList">
+    <dt class="heading">Returns:</dt>
+    <dd><span class="light fixedFont">{!ydn.db.Query}</span> The query object.</dd>
+</dl>
+
+<a name="query1"></a>
+<div class="fixedFont">
+    <span class="light">{!goog.async.Deferred}</span> <b>query</b>(store_name, index_name)
+</div>
+<div class="description">
+    Create a query on an object store by given index field descending order.
+</div>
+<dl class="detailList">
+    <dt class="heading">Parameters:</dt>
+    <dt><span class="light fixedFont">{string}</span> <b>store_name</b></dt>
+    <dd>The object store name.</dd>
+    <dt><span class="light fixedFont">{string}</span> <b>index_name</b></dt>
+    <dd>The index field name.</dd>
+</dl>
+<dl class="detailList">
+    <dt class="heading">Returns:</dt>
+    <dd><span class="light fixedFont">{!ydn.db.Query}</span> The query object.</dd>
+</dl>
+
+
+<a name="query2"></a>
+<div class="fixedFont">
+    <span class="light">{!goog.async.Deferred}</span> <b>query</b>(store_name, index_name, key_range)
+</div>
+<div class="description">
+    Create a query on an object store within specific key range.
+</div>
+<dl class="detailList">
+    <dt class="heading">Parameters:</dt>
+    <dt><span class="light fixedFont">{string}</span> <b>store_name</b></dt>
+    <dd>The object store name.</dd>
+    <dt><span class="light fixedFont">{string}</span> <b>index_name</b></dt>
+    <dd>The index field name.</dd>
+    <dt><span class="light fixedFont">{!KeyRange|!IDBKeyrange}</span> <b>key_range</b></dt>
+    <dd>The key range.</dd>
+</dl>
+<dl class="detailList">
+    <dt class="heading">Returns:</dt>
+    <dd><span class="light fixedFont">{!ydn.db.Query}</span> The query object.</dd>
+</dl>
+
+
+<a name="query3"></a>
+<div class="fixedFont">
+    <span class="light">{!goog.async.Deferred}</span> <b>query</b>(store_name, index_name, lower, upper, lowerBound, upperBound)
+</div>
+<div class="description">
+    Create a query on an object store within specific key range.
+</div>
+<dl class="detailList">
+    <dt class="heading">Parameters:</dt>
+    <dt><span class="light fixedFont">{string}</span> <b>store_name</b></dt>
+    <dd>The object store name.</dd>
+    <dt><span class="light fixedFont">{string}</span> <b>index_name</b></dt>
+    <dd>The index field name.</dd>
+    <dt><span class="light fixedFont">{!KeyRange|!IDBKeyrange}</span> <b>lower</b></dt>
+    <dd>The key range.</dd>
+</dl>
+<dl class="detailList">
+    <dt class="heading">Returns:</dt>
+    <dd><span class="light fixedFont">{!ydn.db.Query}</span> The query object.</dd>
+</dl>

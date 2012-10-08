@@ -633,7 +633,7 @@ Extends <a
 
     <dd>object to put.</dd>
 
-    <dt><span class="light fixedFont">{!Object}</span> <b>id</b></dt>
+    <dt><span class="light fixedFont">{IDbKey}</span> <b>id</b></dt>
 
     <dd>object to put.</dd>
 </dl>
@@ -644,14 +644,14 @@ Extends <a
 
     <dt><span class="light fixedFont">{ydn.error.ArgumentException}</span> <b>:</b></dt>
 
-    <dd>The object store uses in-line keys or has a key generator, and a key parameter was provided.</dd>
+    <dd>The object store uses in-line keys or &lt;autoIncrement&gt; is true.</dd>
 
 </dl>
 
 <dl class="detailList">
   <dt class="heading">Returns:</dt>
 
-  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return key in deferred function. On error, an {@code Error} object is return as received from the mechanism.</dd>
+  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return key in deferred function. </dd>
 </dl>
 
 
@@ -684,28 +684,38 @@ Extends <a
   <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return list of keys in deferred function. On error, an {@code Error} object is return as received from the mechanism.</dd>
 </dl>
 
-<hr>
-
-
-<a name="query"></a>
-
-
 <div class="fixedFont">
-  <span class="light">{!ydn.db.Query}</span> <b>query</b>()
+    <span class="light">{!goog.async.Deferred}</span> <b>put</b>(store_name, values, ids)
 </div>
 
 
 <div class="description">
-  Factory method for creating a query. See detail on Query class.
+    Put list of object to the store.
 </div>
 
 
 <dl class="detailList">
-  <dt class="heading">Returns:</dt>
+    <dt class="heading">Parameters:</dt>
 
-  <dd><span class="light fixedFont">{!ydn.db.Query}</span> return a <code>Query</code>.</dd>
+    <dt><span class="light fixedFont">{string}</span> <b>store_name</b></dt>
+
+    <dd>the name of store to use.</dd>
+
+    <dt><span class="light fixedFont">{!Array}</span> <b>values</b></dt>
+
+    <dd>list of objects to put.</dd>
+
+    <dt><span class="light fixedFont">{!Array.&lt;IDbKey&gt;}</span> <b>ids</b></dt>
+
+    <dd>list of ids corresponding to objects.</dd>
 </dl>
 
+
+<dl class="detailList">
+    <dt class="heading">Returns:</dt>
+
+    <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return list of keys in deferred function. </dd>
+</dl>
 
 <hr>
 <a name="run"></a>
