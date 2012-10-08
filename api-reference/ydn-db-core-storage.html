@@ -240,7 +240,8 @@ Extends <a
   <dl class="detailList">
     <dt class="heading">See:</dt>
 
-    <dd>Super class constructor: ydn.db.Core.</dd>
+    <dd>Super class constructor:  <a
+            href="https://sites.google.com/a/yathit.com/ydn-dev/api-reference/ydn-db-con-storage.html">ydn.db.con.Storage</a></dd>
   </dl>
 </div>
 
@@ -276,7 +277,7 @@ Extends <a
 <dl class="detailList">
   <dt class="heading">Returns:</dt>
 
-  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return <code>true</code> in the deferred function.</dd>
+  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> if successfully clear, return <code>true</code> in the deferred function.</dd>
 </dl>
 
 <a name="clear1"></a>
@@ -303,7 +304,7 @@ Extends <a
 <dl class="detailList">
   <dt class="heading">Returns:</dt>
 
-  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return <code>true</code> in the deferred function.</dd>
+  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> if successfully clear, return <code>true</code> in the deferred function.</dd>
 </dl>
 
 <a name="clear2"></a>
@@ -326,7 +327,7 @@ Extends <a
 <dl class="detailList">
   <dt class="heading">Returns:</dt>
 
-  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return <code>true</code> in the deferred function.</dd>
+  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> if successfully clear, return <code>true</code> in the deferred function.</dd>
 </dl>
 
 <a name="clear3"></a>
@@ -341,7 +342,7 @@ Extends <a
 <dl class="detailList">
   <dt class="heading">Parameters:</dt>
 
-  <dt><span class="light fixedFont">{Array.&lt;ydn.db.Key&gt;}</span> <b>keys</b></dt>
+  <dt><span class="light fixedFont">{!Array.&lt;!ydn.db.Key&gt;}</span> <b>keys</b></dt>
 
   <dd>keys to clear associated objects.</dd>
 </dl>
@@ -349,7 +350,7 @@ Extends <a
 <dl class="detailList">
   <dt class="heading">Returns:</dt>
 
-  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return <code>true</code> in the deferred function.</dd>
+  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> if successfully clear, return <code>true</code> in the deferred function.</dd>
 </dl>
 
 <a name="clear4"></a>
@@ -372,7 +373,7 @@ Extends <a
 <dl class="detailList">
   <dt class="heading">Returns:</dt>
 
-  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return <code>true</code> in the deferred function.</dd>
+  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> if successfully clear, return <code>true</code> in the deferred function.</dd>
 </dl>
 
 <a name="clear5"></a>
@@ -387,7 +388,7 @@ Extends <a
 <dl class="detailList">
   <dt class="heading">Returns:</dt>
 
-  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return <code>true</code> in the deferred function.</dd>
+  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> if successfully clear, return <code>true</code> in the deferred function.</dd>
 </dl>
 
 
@@ -418,7 +419,7 @@ Extends <a
 <dl class="detailList">
   <dt class="heading">Returns:</dt>
 
-  <dd><span class="light fixedFont">{!goog.async.Deferred}</span> return number of items in deferred function.</dd>
+  <dd><span class="light fixedFont">{!goog.async.Deferred.&lt;number&gt;}</span> return number of entries in deferred function.</dd>
 </dl>
 
 <hr>
@@ -441,9 +442,11 @@ Extends <a
 
   <dd>The name of store to retrive object from.</dd>
 
-  <dt><span class="light fixedFont">{string}</span> <b>id</b></dt>
+  <dt><span class="light fixedFont">{IDbKey}</span> <b>id</b></dt>
 
-  <dd>Key of an object to be retrieved. It is the value of the object in <code>keyPath</code> or auto-generated</dd>
+  <dd>Key of an object to be retrieved. It is the value of the object in <code>keyPath</code> or auto-generated
+  <code>IDbKey</code> is either of <code>string</code>, <code>number</code>, <code>Date</code> or <code>Array.&lt;string&gt;</code>
+  </dd>
 </dl>
 
     <dl class="detailList">
