@@ -44,14 +44,6 @@ ydn.string.split_space_seperated = function(str) {
 };
 
 
-/**
- * Take a space separated token possibly quoted.
- * @param str
- */
-ydn.string.token = function(str) {
-  var i = 0;
-  var token = '';
-};
 
 
 
