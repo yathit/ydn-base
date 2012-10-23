@@ -104,3 +104,15 @@ IDBObjectStore.prototype.autoIncrement;
 //* @type {DOMStringList}
 //*/
 //IDBDatabase.prototype.objectStoreNames;
+
+
+/**
+ * @constructor
+ */
+var IDBVersionChangeEvent = function() {};
+
+/**
+ * @final
+ * @type {string}
+ */
+IDBVersionChangeEvent.prototype.version;
