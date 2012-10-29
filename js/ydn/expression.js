@@ -60,6 +60,8 @@ ydn.math.Expression.prototype.evaluate = function (with_object, var_args) {
         stack.push(stack.pop() * stack.pop());
       } else if (tok === '/') {
         stack.push(stack.pop() / stack.pop());
+      } else if (tok === '%') {
+        stack.push(stack.pop() % stack.pop());
       } else if (tok === 'abs') {
         stack[stack.length - 1] = Math.abs(stack[stack.length - 1]);
       } else if (tok[0] == '$' && /^\$\d$/.test(tok)) {
