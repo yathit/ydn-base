@@ -43,6 +43,15 @@ ydn.string.split_space_seperated = function(str) {
   return str.match(/\w+|"[^"]+"/g);
 };
 
+/**
+ * Split space but not in quoted (single or double).
+ * @param {string} str
+ * @return {Array.<string>} quote preserved tokens.
+ */
+ydn.string.split_space = function(str) {
+  return str.match(/[^\s"']+|"[^"]*"|'[^']*'/g);
+};
+
 
 
 

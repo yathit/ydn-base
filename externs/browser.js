@@ -116,3 +116,16 @@ var IDBVersionChangeEvent = function() {};
  * @type {string}
  */
 IDBVersionChangeEvent.prototype.version;
+
+
+/**
+ * @extends {IDBCursor}
+ * @constructor
+ */
+var IDBCursorWithValue = function() {};
+
+
+/**
+ * @type {*}
+ */
+IDBCursorWithValue.prototype.value;

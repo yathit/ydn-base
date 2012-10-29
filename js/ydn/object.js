@@ -140,7 +140,7 @@ ydn.object.reparr = function(v, n) {
 /**
  * Take the first field of an object
  * @final
- * @param {!Object} row row.
+ * @param {*} row row.
  * @return {*} the first field of object in row value.
  */
 ydn.object.takeFirst = function (row) {

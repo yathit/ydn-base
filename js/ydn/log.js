@@ -41,18 +41,19 @@ ydn.debug.log = function (scope, level, ele) {
           goog.debug.Logger.Level.FINE;
 
   goog.debug.Logger.getLogger(scope).setLevel(log_level);
-  goog.debug.LogManager.getRoot().setLevel(goog.debug.Logger.Level.WARNING);
+
 
   if (goog.isDef(ele)) {
     if (!ydn.debug.logger_div) {
       ydn.debug.logger_div = new goog.debug.DivConsole(ele);
       ydn.debug.logger_div.setCapturing(true);
-      ydn.debug.logger_div.setEnabled(true);
+      goog.debug.LogManager.getRoot().setLevel(goog.debug.Logger.Level.WARNING);
     }
   } else {
     if (!ydn.debug.logger_console || ydn.debug.logger_div) {
       ydn.debug.logger_console = new goog.debug.Console();
       ydn.debug.logger_console.setCapturing(true);
+      goog.debug.LogManager.getRoot().setLevel(goog.debug.Logger.Level.WARNING);
     }
   }
 };
