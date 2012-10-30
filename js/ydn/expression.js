@@ -10,6 +10,7 @@ goog.provide('ydn.math.Expression');
 goog.require('ydn.string');
 goog.require('goog.string');
 goog.require('ydn.object');
+goog.require('ydn.error');
 
 
 /**
@@ -102,10 +103,10 @@ ydn.math.Expression.prototype.evaluate = function (with_object, var_args) {
  */
 ydn.math.Expression.prototype.compile = function() {
   var tokens = this.tokens;
-  return function(obj) {
+  return function() {
     var args = arguments.length > 2 ?
       Array.prototype.slice(arguments, 2) : undefined;
-    return ydn.math.Expression.prototype.evaluate.apply(null, obj, args);
+    return ydn.math.Expression.prototype.evaluate.apply(null, args);
   }
 };
 
@@ -122,8 +123,17 @@ ydn.math.Expression.prototype.toJSON = function() {
 /**
  * Parse reverse polish notation statement into expression.
  * @param {string} expression
- * @return {!ydn.math.Expression.parseRpn}
+ * @return {!ydn.math.Expression}
  */
 ydn.math.Expression.parseRpn = function(expression) {
   return new ydn.math.Expression(ydn.string.split_space(expression));
+};
+
+/**
+ * Infix notation statement into expression.
+ * @param {string} expression
+ * @return {!ydn.math.Expression}
+ */
+ydn.math.Expression.parseInfix = function(expression) {
+  throw new ydn.error.NotImplementedException();
 };
