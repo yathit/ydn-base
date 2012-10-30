@@ -71,6 +71,15 @@ ydn.math.Expression.prototype.evaluate = function (with_object, var_args) {
         stack.push(stack.pop() >= stack.pop());
       } else if (tok === '>') {
         stack.push(stack.pop() > stack.pop());
+      } else if (tok === '&') {
+        stack.push(stack.pop() & stack.pop());
+      } else if (tok === '|') {
+        stack.push(stack.pop() | stack.pop());
+      } else if (tok === 'if') {
+        var ok = !!stack.pop();
+        var a = stack.pop();
+        var b = stack.pop();
+        stack.push(ok ? a : b);
       } else if (tok === '+') {
         stack.push(stack.pop() + stack.pop());
       } else if (tok === '-') {
