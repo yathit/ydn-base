@@ -53,7 +53,15 @@ ydn.math.Expression.prototype.evaluate = function (with_object, var_args) {
     } else if (is_string_literal) {
       stack.push(goog.string.stripQuotes(tok, "'"));
     } else if (goog.isString(tok)) {
-      if (tok === '!') {
+      if (tok === 'true') {
+        stack.push(true);
+      } else if (tok === 'false') {
+        stack.push(false);
+      } else if (tok === 'Date') {
+        stack.push(new Date(parseInt(stack.pop(), 10)));
+      } else if (tok === 'now') {
+        stack.push(new Date());
+      } else if (tok === '!') {
         stack[stack.length - 1] = !stack[stack.length - 1];
       } else if (tok === '==') {
         stack.push(stack.pop() == stack.pop());
@@ -79,7 +87,9 @@ ydn.math.Expression.prototype.evaluate = function (with_object, var_args) {
         var ok = !!stack.pop();
         var a = stack.pop();
         var b = stack.pop();
-        stack.push(ok ? a : b);
+        var v = ok ? a : b;
+        //console.log([this.tokens.join(','), ok, a, b, v]);
+        stack.push(v);
       } else if (tok === '+') {
         stack.push(stack.pop() + stack.pop());
       } else if (tok === '-') {

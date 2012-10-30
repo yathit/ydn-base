@@ -32,6 +32,11 @@ var exp_test = function(exp, x, obj, p1) {
   assertEquals(exp, x, e.evaluate(obj, p1));
 };
 
+var test_20_expression_rpn_predefined = function() {
+  exp_test('true', true);
+  exp_test('false', false);
+};
+
 var test_21_expression_rpn_logic = function() {
   exp_test('1 1 ==', true);
   exp_test('1 2 ==', false);
@@ -42,6 +47,7 @@ var test_21_expression_rpn_logic = function() {
   exp_test('1 \'1\' !=', false);
 
   exp_test('1 2 >', true);
+  exp_test('1 2 <', false);
   exp_test('1 2 >=', true);
   exp_test('1 1 >=', true);
 
@@ -60,6 +66,12 @@ var test_22_expression_rpn_math = function() {
   exp_test('1 4 -', 3);
   exp_test('4 2 *', 8);
   exp_test('2 4 /', 2);
+};
+
+var test_23_expression_rpn_condition = function() {
+  exp_test('4 2 true ?', 2);
+  exp_test('4 2 false ?', 4);
+  exp_test('1 4 2 2 == ?', 4);
 };
 
 var test_23_expression_rpn_arguments = function() {
