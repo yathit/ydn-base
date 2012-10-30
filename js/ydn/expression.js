@@ -52,7 +52,25 @@ ydn.math.Expression.prototype.evaluate = function (with_object, var_args) {
     } else if (is_string_literal) {
       stack.push(goog.string.stripQuotes(tok, "'"));
     } else if (goog.isString(tok)) {
-      if (tok === '+') {
+      if (tok === '!') {
+        stack[stack.length - 1] = !stack[stack.length - 1];
+      } else if (tok === '==') {
+        stack.push(stack.pop() == stack.pop());
+      } else if (tok === '===') {
+        stack.push(stack.pop() === stack.pop());
+      } else if (tok === '!=') {
+        stack.push(stack.pop() != stack.pop());
+      } else if (tok === '!==') {
+        stack.push(stack.pop() !== stack.pop());
+      } else if (tok === '<=') {
+        stack.push(stack.pop() <= stack.pop());
+      } else if (tok === '<') {
+        stack.push(stack.pop() < stack.pop());
+      } else if (tok === '>=') {
+        stack.push(stack.pop() >= stack.pop());
+      } else if (tok === '>') {
+        stack.push(stack.pop() > stack.pop());
+      } else if (tok === '+') {
         stack.push(stack.pop() + stack.pop());
       } else if (tok === '-') {
         stack.push(stack.pop() - stack.pop());
