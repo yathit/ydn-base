@@ -129,3 +129,9 @@ var IDBCursorWithValue = function() {};
  * @type {*}
  */
 IDBCursorWithValue.prototype.value;
+
+
+/**
+ * @type {*}
+ */
+IDBCursorWithValue.prototype.primaryKey;

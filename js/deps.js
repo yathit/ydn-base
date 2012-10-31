@@ -3,7 +3,7 @@ goog.addDependency("../../../ydn-base/js/main.js", [], ['ydn.json', 'ydn.object'
 goog.addDependency("../../../ydn-base/js/ydn/async.js", ['ydn.async'], ['goog.async.Deferred', 'goog.async.DeferredList']);
 goog.addDependency("../../../ydn-base/js/ydn/debug.js", ['ydn.debug'], ['goog.debug.Console', 'goog.debug.Logger', 'goog.debug.LogManager', 'goog.debug.DivConsole']);
 goog.addDependency("../../../ydn-base/js/ydn/error.js", ['ydn.error', 'ydn.error.ArgumentException', 'ydn.error.NotImplementedException', 'ydn.error.ConstrainError', 'ydn.error.NotSupportedException', 'ydn.error.InternalError', 'ydn.error.InvalidOperationException'], []);
-goog.addDependency("../../../ydn-base/js/ydn/expression.js", ['ydn.math.Expression'], ['ydn.string', 'goog.string', 'ydn.object']);
+goog.addDependency("../../../ydn-base/js/ydn/expression.js", ['ydn.math.Expression'], ['ydn.string', 'goog.string', 'ydn.object', 'ydn.error']);
 goog.addDependency("../../../ydn-base/js/ydn/json.js", ['ydn.json'], ['goog.debug.Logger']);
 goog.addDependency("../../../ydn-base/js/ydn/object.js", ['ydn.object'], ['ydn.json']);
 goog.addDependency("../../../ydn-base/js/ydn/string.js", ['ydn.string'], []);
