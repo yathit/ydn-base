@@ -45,14 +45,14 @@ ydn.json.parse = function(json_str) {
   if (!goog.isString(json_str) || goog.string.isEmpty(json_str)) {
     return {};
   }
+  // compiler should remove try block in non-debug compilation.
   try {
     return /** @type {!Object} */ (JSON.parse(json_str));
   } catch (e) {
-    ydn.json.logger.warning('parse failed: ' + e.message);
     if (ydn.json.DEBUG) {
       window.console.log(json_str);
     }
-    throw Error(e);
+    throw e;
   }
 };
 

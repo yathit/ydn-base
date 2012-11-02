@@ -57,30 +57,30 @@ function io() {}
 */
 io.prototype.connect = function(server) {};
 
-
-/**
- * New IndexedDB interface not in closure externs.
- * This must be remove when they updated.
- * @constructor
- */
-
-/**
- * @extends {IDBRequest}
- * @constructor
- */
-var IDBOpenDBRequest = function() {};
-
-/**
- *
- * @param ev
- */
-IDBOpenDBRequest.prototype.onblocked = function(ev) {};
-
-/**
- *
- * @param ev
- */
-IDBOpenDBRequest.prototype.onupgradeneeded = function(ev) {};
+//
+///**
+// * New IndexedDB interface not in closure externs.
+// * This must be remove when they updated.
+// * @constructor
+// */
+//
+///**
+// * @extends {IDBRequest}
+// * @constructor
+// */
+//var IDBOpenDBRequest = function() {};
+//
+///**
+// *
+// * @param ev
+// */
+//IDBOpenDBRequest.prototype.onblocked = function(ev) {};
+//
+///**
+// *
+// * @param ev
+// */
+//IDBOpenDBRequest.prototype.onupgradeneeded = function(ev) {};
 
 
 /**
@@ -104,18 +104,18 @@ IDBObjectStore.prototype.autoIncrement;
 //* @type {DOMStringList}
 //*/
 //IDBDatabase.prototype.objectStoreNames;
-
-
-/**
- * @constructor
- */
-var IDBVersionChangeEvent = function() {};
-
-/**
- * @final
- * @type {string}
- */
-IDBVersionChangeEvent.prototype.version;
+//
+//
+///**
+// * @constructor
+// */
+//var IDBVersionChangeEvent = function() {};
+//
+///**
+// * @final
+// * @type {string}
+// */
+//IDBVersionChangeEvent.prototype.version;
 
 
 /**

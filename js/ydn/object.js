@@ -34,14 +34,14 @@ ydn.object.clone = function(obj) {
 
 
 /**
- * Compare two objects or array.
+ * Deeply compare two objects or arrays.
  *
  * @param {*} obj1 object 1 to be compare with.
  * @param {*} obj2 object 2 to be compare with.
  * @param {Object=} opt_ignore_fields optional field to be ignore in comparing.
- * @return {boolean} true if same.
+ * @return {boolean} true if same contents.
  */
-ydn.object.isSame = function(obj1, obj2, opt_ignore_fields) {
+ydn.object.equals = function(obj1, obj2, opt_ignore_fields) {
   opt_ignore_fields = opt_ignore_fields || {};
   if (!goog.isDefAndNotNull(obj1) || !goog.isDefAndNotNull(obj2)) {
     return false;
@@ -51,7 +51,7 @@ ydn.object.isSame = function(obj1, obj2, opt_ignore_fields) {
     }
     for (var i = 0; i < obj1.length; i++) {
       var idx = goog.array.find(obj2, function(ele) {
-        return ydn.object.isSame(ele, obj1[i]);
+        return ydn.object.equals(ele, obj1[i]);
       });
       if (idx == -1) {
         //console.log('obj2 do not have ' + obj1[i]);
@@ -60,13 +60,13 @@ ydn.object.isSame = function(obj1, obj2, opt_ignore_fields) {
     }
     return true;
   } else if (goog.isArray(obj1)) {
-    return obj1.length == 1 && ydn.object.isSame(obj1[0], obj2);
+    return obj1.length == 1 && ydn.object.equals(obj1[0], obj2);
   } else if (goog.isArray(obj2)) {
-    return obj2.length == 1 && ydn.object.isSame(obj2[0], obj1);
+    return obj2.length == 1 && ydn.object.equals(obj2[0], obj1);
   } else if (goog.isObject(obj1) && goog.isObject(obj1)) {
     for (var key in obj1) {
       if (obj1.hasOwnProperty(key) && !opt_ignore_fields[key]) {
-        var same = ydn.object.isSame(obj1[key], obj2[key]);
+        var same = ydn.object.equals(obj1[key], obj2[key]);
         if (!same) {
           return false;
         }
@@ -74,7 +74,7 @@ ydn.object.isSame = function(obj1, obj2, opt_ignore_fields) {
     }
     for (var key in obj2) {
       if (obj2.hasOwnProperty(key) && !opt_ignore_fields[key]) {
-        var same = ydn.object.isSame(obj1[key], obj2[key]);
+        var same = ydn.object.equals(obj1[key], obj2[key]);
         if (!same) {
           return false;
         }
@@ -125,10 +125,18 @@ ydn.object.extend = function(target, var_args) {
 };
 
 
+/**
+ * Construct array of having value v.
+ * @param {*} v element value.
+ * @param n number of items.
+ * @return {!Array}
+ */
 ydn.object.reparr = function(v, n) {
-	var arr = [];
+  // this is the most efficient way in chrome.
+  // IE10 can be more efficient by preallocating.
+	var arr = []; // new Array(n); // preallocating.
 	for (var i = 0; i < n; i++) {
-		arr.push(v);
+		arr[i] = v;
 	}
 	return arr;
 };
