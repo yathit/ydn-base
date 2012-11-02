@@ -135,3 +135,17 @@ IDBCursorWithValue.prototype.value;
  * @type {*}
  */
 IDBCursorWithValue.prototype.primaryKey;
+
+//
+///**
+//* Closure compiler incorrectly define as Array.<string>
+//* @final
+//* @type {DOMStringList}
+//*/
+//IDBObjectStore.prototype.indexNames;
+
+/**
+ * @param {*=} key Key identifying the record to be retrieved.
+ * @return {!IDBRequest} The IDBRequest object.
+ */
+IDBObjectStore.prototype.count = function(key) {};
