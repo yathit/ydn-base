@@ -38,7 +38,7 @@ ydn.json.logger = goog.debug.Logger.getLogger('ydn');
  * Parse JSON using native method if available.
  * This is necessary since closure-library do not use native method.
  *
- * @param {string} json_str string to parse.
+ * @param {*} json_str string to parse.
  * @return {!Object} parse return object.
  */
 ydn.json.parse = function(json_str) {
