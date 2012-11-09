@@ -49,7 +49,10 @@ ydn.math.Expression.prototype.evaluate = function (with_object, var_args) {
     var is_string_literal = tok[0] === "'" && tok[tok.length - 1] === "'";
 
     if (is_field_name) {
-      stack.push(with_object[goog.string.stripQuotes(tok, '"')]);
+      var keys = goog.string.stripQuotes(tok, '"').split('.');
+      goog.asserts.assertObject(with_object);
+      var value = goog.object.getValueByKeys(with_object, keys);
+      stack.push(value);
     } else if (is_string_literal) {
       stack.push(goog.string.stripQuotes(tok, "'"));
     } else if (goog.isString(tok)) {
@@ -100,6 +103,20 @@ ydn.math.Expression.prototype.evaluate = function (with_object, var_args) {
         stack.push(stack.pop() / stack.pop());
       } else if (tok === '%') {
         stack.push(stack.pop() % stack.pop());
+      } else if (tok === 'at') {
+        var at = stack.pop();
+        var arr = stack.pop();
+        stack.push(arr[at]);
+      } else if (tok === 'of') {
+        var ele = stack.pop();
+        var arr = stack.pop();
+        var v = goog.isArray(arr) ? arr.indexOf(ele) : -1;
+        stack.push(v);
+      } else if (tok === 'in') {
+        var ele = stack.pop();
+        var arr = stack.pop();
+        var v = goog.isArray(arr) ? arr.indexOf(ele) >= 0 : false;
+        stack.push(v);
       } else if (tok === 'abs') {
         stack[stack.length - 1] = Math.abs(stack[stack.length - 1]);
       } else if (tok[0] == '$' && /^\$\d$/.test(tok)) {
@@ -154,5 +171,7 @@ ydn.math.Expression.parseRpn = function(expression) {
  * @return {!ydn.math.Expression}
  */
 ydn.math.Expression.parseInfix = function(expression) {
-  throw new ydn.error.NotImplementedException();
+  throw new ydn.error.NotImplementedException(
+    'Too lazy to learn Dutch in Shunting Yard station, ' +
+      'we speak Polish here.');
 };
