@@ -149,3 +149,10 @@ IDBCursorWithValue.prototype.primaryKey;
  * @return {!IDBRequest} The IDBRequest object.
  */
 IDBObjectStore.prototype.count = function(key) {};
+
+
+/**
+ * @param {*=} key Key identifying the record to be retrieved.
+ * @return {!IDBRequest} The IDBRequest object.
+ */
+IDBIndex.prototype.count = function(key) {};

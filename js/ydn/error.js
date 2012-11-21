@@ -35,11 +35,15 @@ ydn.error.ArgumentException = function(opt_msg) {
   if (opt_msg) {
     this.message = String(opt_msg);
   }
+  this.name = 'ydn.ArgumentException';
 };
 goog.inherits(ydn.error.ArgumentException, Error);
 
-/** @override */
-ydn.error.ArgumentException.prototype.name = 'ydn.ArgumentException';
+/// FIXME: how come compiler strip out prototype name ?
+
+//
+///** @override */
+//ydn.error.ArgumentException.prototype.name = 'ydn.ArgumentException';
 
 
 
@@ -86,11 +90,12 @@ ydn.error.NotImplementedException = function(opt_msg) {
   if (opt_msg) {
     this.message = String(opt_msg);
   }
+  this.name = 'ydn.NotImplementedException';
 };
 goog.inherits(ydn.error.NotImplementedException, Error);
 
-/** @override */
-ydn.error.NotImplementedException.prototype.name = 'ydn.NotImplementedException';
+///** @override */
+//ydn.error.NotImplementedException.prototype.name = 'ydn.NotImplementedException';
 
 
 
@@ -136,10 +141,11 @@ ydn.error.ConstrainError = function(opt_msg) {
   if (opt_msg) {
     this.message = String(opt_msg);
   }
+  this.name = 'ydn.ConstrainError';
 };
 goog.inherits(ydn.error.ConstrainError, Error);
 
-ydn.error.ConstrainError.prototype.name = 'ydn.ConstrainError';
+//ydn.error.ConstrainError.prototype.name = 'ydn.ConstrainError';
 
 
 
@@ -161,11 +167,12 @@ ydn.error.InvalidOperationException = function(opt_msg) {
   if (opt_msg) {
     this.message = String(opt_msg);
   }
+  this.name = 'ydn.InvalidOperationException';
 };
 goog.inherits(ydn.error.ArgumentException, Error);
 
-/** @override */
-ydn.error.InvalidOperationException.prototype.name = 'ydn.InvalidOperationException';
+///** @override */
+//ydn.error.InvalidOperationException.prototype.name = 'ydn.InvalidOperationException';
 
 
 
@@ -187,8 +194,10 @@ ydn.error.InvalidOperationError = function(opt_msg) {
   if (opt_msg) {
     this.message = String(opt_msg);
   }
+  this.name = 'ydn.InvalidOperationError';
 };
 goog.inherits(ydn.error.InvalidOperationError, Error);
 
-/** @override */
-ydn.error.InvalidOperationError.prototype.name = 'ydn.InvalidOperationError';
+//
+///** @override */
+//ydn.error.InvalidOperationError.prototype.name = 'ydn.InvalidOperationError';
