@@ -173,6 +173,64 @@ ydn.testing.randWord = function(opt_mean, opt_max) {
   return ydn.testing.randString(len, 'abcdefghijklmnopqrstuvwxyz');
 };
 
+/**
+ * Returns a random integer greater than or equal to 0 and less than {@code a}.
+ * @param {number} a  The upper bound for the random integer (exclusive).
+ * @return {number} A random integer N such that 0 <= N < a.
+ */
+ydn.testing.randomInt = function(a) {
+  return (Math.random() * a) | 0;
+};
+
+
+/**
+ * Generate random sentence without full stop.
+ * @param {Array.<string>=} keywords optional keywords to include.
+ */
+ydn.testing.randSentence = function(keywords) {
+
+  var s = [];
+  var char_set1 = 'zanatpungigorbagt  rnemnedek   mcdeefghijkllnpqrsuvz';
+  var char_set2 = 'anotiuniieoneae hIAe   oa d nfneoiarioiroiei iueonoi';
+  var n = char_set1.length;
+  for (var i = 0; i < n; i++) {
+    var idx = ydn.testing.randomNormal(n/2, n/4);
+    s[i] = char_set1.charAt(idx) + char_set2.charAt(idx);
+  }
+  s[0] = s[0].charAt(0).toUpperCase() + s[0].charAt(1);
+  var st = s.join('').trim();
+  if (keywords) {
+    var pos = st.lastIndexOf(' ');
+    while (pos > 0) {
+      var ky = keywords[ydn.testing.randomInt(keywords.length)];
+      st = st.substr(0, pos) + ' ' + ky + st.substr(pos);
+    }
+  }
+  return st;
+};
+
+
+/**
+ * Generate random paragraph.
+ * @param {Array.<string>=} keywords optional keywords to include.
+ * @return {string}
+ */
+ydn.testing.randParagraph = function(keywords) {
+  var out = [];
+  var ns = ydn.testing.randomNormal(22,20) + ydn.testing.randomNormal(22,20);
+  for (var i = 0; i < ns; i++) {
+    var w = [];
+    var wn = ydn.testing.randomNormal(100,40);
+    for (var j = 0; j < wn; j++) {
+      w[i] = ydn.testing.randSentence(keywords);
+    }
+    var r = Math.random();
+    var tr = r < 0.01 ? '!' : r < 0.05 ? '?' : '.';
+    out[i] = w.join('').trim() + tr;
+  }
+  return out.join(' ');
+};
+
 
 /**
  * Generate random name
