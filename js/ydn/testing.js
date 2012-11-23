@@ -194,10 +194,10 @@ ydn.testing.randSentence = function(keywords) {
   var s = [];
   var char_set1 = 'zanatpungigorbagt  rnemnedek   mcdeefghijkllnpqrsuvz';
   var char_set2 = 'anotiuniieoneae hIAe   oa d nfneoiarioiroiei iueonoi';
-  var nw = ydn.testing.randomNormal(10, 4) + 2;
+  var nw = (Math.random() * 20) + 1;
   var n = char_set1.length;
   for (var i = 0; i < nw; i++) {
-    var idx = ydn.testing.randomNormal(n/2, n/4) | 0;
+    var idx = (Math.random() * n) | 0;
     s[i] = char_set1.charAt(idx) + char_set2.charAt(idx);
   }
   if (s[0]) {
@@ -226,10 +226,10 @@ ydn.testing.randSentence = function(keywords) {
  */
 ydn.testing.randParagraph = function(keywords) {
   var out = [];
-  var ns = ydn.testing.randomNormal(22,10);
+  var ns = Math.random() * 15 + 1;
   for (var i = 0; i < ns; i++) {
     var w = [];
-    var wn = ydn.testing.randomNormal(100,40);
+    var wn = Math.random() * 20 + 1;
     for (var j = 0; j < wn; j++) {
       w[j] = ydn.testing.randSentence(keywords);
     }
@@ -259,7 +259,8 @@ ydn.testing.randName = function() {
  */
 ydn.testing.randEmail = function() {
   var id = ydn.testing.randWord();
-  return ydn.testing.randWord() + '@gmail.com';
+  var dn = ydn.testing.randString((Math.random() * 7 + 1) | 0, 'gmail');
+  return ydn.testing.randWord() + '@' + dn + '.com';
 };
 
 
