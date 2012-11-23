@@ -194,18 +194,25 @@ ydn.testing.randSentence = function(keywords) {
   var s = [];
   var char_set1 = 'zanatpungigorbagt  rnemnedek   mcdeefghijkllnpqrsuvz';
   var char_set2 = 'anotiuniieoneae hIAe   oa d nfneoiarioiroiei iueonoi';
+  var nw = ydn.testing.randomNormal(10, 4) + 2;
   var n = char_set1.length;
-  for (var i = 0; i < n; i++) {
-    var idx = ydn.testing.randomNormal(n/2, n/4);
+  for (var i = 0; i < nw; i++) {
+    var idx = ydn.testing.randomNormal(n/2, n/4) | 0;
     s[i] = char_set1.charAt(idx) + char_set2.charAt(idx);
   }
-  s[0] = s[0].charAt(0).toUpperCase() + s[0].charAt(1);
+  if (s[0]) {
+    s[0] = s[0].charAt(0).toUpperCase() + s[0].charAt(1);
+  }
+
   var st = s.join('').trim();
   if (keywords) {
     var pos = st.lastIndexOf(' ');
-    while (pos > 0) {
+    var cnt = 0;
+    while (pos > 0 && cnt < 2) {
       var ky = keywords[ydn.testing.randomInt(keywords.length)];
       st = st.substr(0, pos) + ' ' + ky + st.substr(pos);
+      pos = st.lastIndexOf(' ', pos - 1);
+      cnt++;
     }
   }
   return st;
@@ -219,12 +226,12 @@ ydn.testing.randSentence = function(keywords) {
  */
 ydn.testing.randParagraph = function(keywords) {
   var out = [];
-  var ns = ydn.testing.randomNormal(22,20) + ydn.testing.randomNormal(22,20);
+  var ns = ydn.testing.randomNormal(22,10);
   for (var i = 0; i < ns; i++) {
     var w = [];
     var wn = ydn.testing.randomNormal(100,40);
     for (var j = 0; j < wn; j++) {
-      w[i] = ydn.testing.randSentence(keywords);
+      w[j] = ydn.testing.randSentence(keywords);
     }
     var r = Math.random();
     var tr = r < 0.01 ? '!' : r < 0.05 ? '?' : '.';
