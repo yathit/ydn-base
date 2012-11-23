@@ -127,7 +127,9 @@ ydn.testing.randString = function(len, opt_charSet) {
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var randomString = '';
   for (var i = 0; i < len; i++) {
-    var randomPoz = Math.floor(Math.random() * opt_charSet.length);
+    //var randomPoz = Math.floor(Math.random() * opt_charSet.length);
+    // same as above, but much faster.
+    var randomPoz = (Math.random() * opt_charSet.length) | 0;
     randomString += opt_charSet.substring(randomPoz, randomPoz + 1);
   }
   return randomString;
