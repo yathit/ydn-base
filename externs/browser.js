@@ -156,3 +156,12 @@ IDBCursorWithValue.prototype.primaryKey;
  * @return {!IDBRequest} The IDBRequest object.
  */
 IDBIndex.prototype.count = function(key) {};
+
+
+/**
+ *
+ * @param {*} first
+ * @param {*} second
+ * @return {number}
+ */
+IDBFactory.prototype.cmp = function(first, second) {};
