@@ -9,5 +9,5 @@ goog.addDependency("../../../ydn-base/js/ydn/object.js", ['ydn.object'], ['ydn.j
 goog.addDependency("../../../ydn-base/js/ydn/string.js", ['ydn.string'], []);
 goog.addDependency("../../../ydn-base/js/ydn/testing.js", ['ydn.testing'], ['goog.math', 'goog.debug.Logger', 'goog.debug.Console', 'goog.debug.FancyWindow', 'goog.debug.DebugWindow', 'goog.debug.DivConsole', 'goog.debug.Logger', 'goog.debug.Logger.Level']);
 goog.addDependency("../../../ydn-base/js/ydn/display/api/account_activity_display.js", ['ydn.display.api.AccountActivityDisplay'], []);
-goog.addDependency("../../../ydn-base/js/ydn/display/api/token_display.js", ['ydn.display.api.TokenDisplay'], []);
-goog.addDependency("../../../ydn-base/js/ydn/display/api/user_display.js", ['ydn.display.api.UserDisplay'], []);
+goog.addDependency("../../../ydn-base/js/ydn/display/api/token_display.js", ['ydn.api.display.TokenDisplay'], []);
+goog.addDependency("../../../ydn-base/js/ydn/display/api/user_display.js", ['ydn.api.display.UserDisplay'], []);

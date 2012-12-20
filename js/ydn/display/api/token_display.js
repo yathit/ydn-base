@@ -1,24 +1,24 @@
-goog.provide('ydn.display.api.TokenDisplay');
+goog.provide('ydn.api.display.TokenDisplay');
 
 
 
 /**
  * @interface
  */
-ydn.display.api.TokenDisplay = function() {};
+ydn.api.display.TokenDisplay = function() {};
 
 
 /**
  * Set authorize url and show it. If null, hide it.
  * @param {string?} url
  */
-ydn.display.api.TokenDisplay.prototype.setAuthorizeUrl = function (url) {};
+ydn.api.display.TokenDisplay.prototype.setAuthorizeUrl = function (url) {};
 
 
 /**
  * @return {EventTarget}
  */
-ydn.display.api.TokenDisplay.prototype.getAuthorizeUrlClick = function() {};
+ydn.api.display.TokenDisplay.prototype.getAuthorizeUrlClick = function() {};
 
 
 
