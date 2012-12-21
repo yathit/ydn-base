@@ -27,8 +27,9 @@ ydn.debug.logger_div = null;
 
 
 /**
- *
- * @param {string=} scope
+ * Predefined level are: 'ALL' (0) 'FINEST' (300), 'FINER' (ALL), 'FINE' (500),
+ * 'CONFIG' (700), 'INFO' (800), 'WARNING', (900)
+ * @param {string=} scope eg: 'ydn.db'.
  * @param {string|number=} level
  * @param {Element=} ele display target DIV. If not provided, it log to console.
  */
@@ -37,7 +38,7 @@ ydn.debug.log = function (scope, level, ele) {
   var key = 'qunit-logger-level';
   scope = scope || 'ydn';
   var log_level = goog.isNumber(level) ? new goog.debug.Logger.Level('log', level) :
-      goog.isString(level) ? goog.debug.Logger.Level.getPredefinedLevel(level) :
+      goog.isString(level) ? goog.debug.Logger.Level.getPredefinedLevel(level.toUpperCase()) :
           goog.debug.Logger.Level.FINE;
 
   goog.debug.Logger.getLogger(scope).setLevel(log_level);
