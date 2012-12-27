@@ -1,6 +1,7 @@
 
-goog.provide('ydn.main');
+goog.provide('ydn.base');
 goog.require('goog.async.Deferred');
+goog.require('goog.events.EventTarget');
 
 goog.exportProperty(goog.async.Deferred.prototype, 'done',
   goog.async.Deferred.prototype.addCallback);
