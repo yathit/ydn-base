@@ -51,7 +51,7 @@ ydn.debug.log = function (scope, level, ele) {
       goog.debug.LogManager.getRoot().setLevel(goog.debug.Logger.Level.WARNING);
     }
   } else {
-    if (!ydn.debug.logger_console || !ydn.debug.logger_div) {
+    if (!ydn.debug.logger_console && !ydn.debug.logger_div) {
       ydn.debug.logger_console = new goog.debug.Console();
       ydn.debug.logger_console.setCapturing(true);
       goog.debug.LogManager.getRoot().setLevel(goog.debug.Logger.Level.WARNING);
