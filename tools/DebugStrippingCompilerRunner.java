@@ -1,11 +1,14 @@
 package com.google.javascript.jscomp;
 
+import com.google.javascript.rhino.Node;
 import org.kohsuke.args4j.CmdLineException;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.javascript.jscomp.CommandLineRunner;
 import com.google.javascript.jscomp.CompilerOptions;
 import com.google.javascript.jscomp.VariableRenamingPolicy;
+
+import java.util.Map;
 
 /**
  * DebugStrippingCompilerRunner is an extension of the Closure Compiler that
@@ -29,17 +32,28 @@ public class DebugStrippingCompilerRunner extends CommandLineRunner {
         boolean isAdvancedOptionsEnabled =
                 options.variableRenaming == VariableRenamingPolicy.ALL;
 
-        // Only enable additional options when ADVANCED_OPTIMIZATIONS is specified.
-        if (isAdvancedOptionsEnabled) {
+        boolean isDebug = false;
+        Map<String, Node> defines = options.getDefineReplacements();
+        if (defines.containsKey("goog.DEBUG")) {
+            Node b = defines.get("goog.DEBUG");
+            isDebug = b.getBooleanProp(0);
+        }
+
+        // Only enable additional options when ADVANCED_OPTIMIZATIONS is specified
+        // and goog.DEBUG is true
+        System.out.print("to stripping");
+        if (isAdvancedOptionsEnabled && !isDebug) {
+            System.out.print("stripping apply");
             applyDebugStrippingOptions(options);
         }
+
         return options;
     }
 
     static void applyDebugStrippingOptions(CompilerOptions options) {
         options.stripNameSuffixes = ImmutableSet.of("logger", "logger_");
-        options.stripTypePrefixes = ImmutableSet.of("goog.asserts"); // goog.debug
-        options.setDefineToBooleanLiteral("goog.DEBUG", false);
+        options.stripTypePrefixes = ImmutableSet.of("goog.asserts"); // "goog.debug"
+        //options.setDefineToBooleanLiteral("goog.DEBUG", false);
         options.setIdGenerators(ImmutableSet.of("goog.events.getUniqueId"));
     }
 
