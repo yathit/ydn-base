@@ -71,7 +71,7 @@ ydn.debug.log = function (scope, level, ele) {
 ydn.debug.error.ArgumentException = function (opt_msg) {
   // Ensure there is a stack trace.
   if (Error.captureStackTrace) {
-    Error.captureStackTrace(this, ydn.error.ArgumentException);
+    Error.captureStackTrace(this, ydn.debug.error.ArgumentException);
   } else {
     this.stack = new Error().stack || '';
   }
