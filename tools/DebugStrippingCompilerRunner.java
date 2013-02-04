@@ -18,13 +18,28 @@ import java.util.Map;
  */
 public class DebugStrippingCompilerRunner extends CommandLineRunner {
 
+    private boolean is_debug = true;
+
     public DebugStrippingCompilerRunner(String[] args) throws CmdLineException {
+
         super(args);
+        for (int i = 0; i < args.length; i++) {
+
+            if (args[i].equals("--define=goog.DEBUG=false")) {
+                //System.out.println("--define=goog.DEBUG=false");
+                is_debug = false;
+            }
+
+        }
     }
 
     @Override
     protected CompilerOptions createOptions() {
         CompilerOptions options = super.createOptions();
+
+        CommandLineConfig config = super.getCommandLineConfig();
+
+
 
         // Use this as a heuristic to determine whether ADVANCED_OPTIMIZATIONS is
         // being used -- cannot access FLAG_compilation_level because it is private
@@ -32,18 +47,22 @@ public class DebugStrippingCompilerRunner extends CommandLineRunner {
         boolean isAdvancedOptionsEnabled =
                 options.variableRenaming == VariableRenamingPolicy.ALL;
 
-        boolean isDebug = false;
+        boolean isDebug = true;
+
+        /*
         Map<String, Node> defines = options.getDefineReplacements();
         if (defines.containsKey("goog.DEBUG")) {
+            System.out.println("containsKey goog.DEBUG");
             Node b = defines.get("goog.DEBUG");
             isDebug = b.getBooleanProp(0);
         }
+        */
+        // Above code to get goog.DEBUG doesn't work, so we are using heuristic again.
+        isDebug = is_debug;
 
         // Only enable additional options when ADVANCED_OPTIMIZATIONS is specified
         // and goog.DEBUG is true
-        System.out.print("to stripping");
         if (isAdvancedOptionsEnabled && !isDebug) {
-            System.out.print("stripping apply");
             applyDebugStrippingOptions(options);
         }
 
@@ -53,7 +72,6 @@ public class DebugStrippingCompilerRunner extends CommandLineRunner {
     static void applyDebugStrippingOptions(CompilerOptions options) {
         options.stripNameSuffixes = ImmutableSet.of("logger", "logger_");
         options.stripTypePrefixes = ImmutableSet.of("goog.asserts"); // "goog.debug"
-        //options.setDefineToBooleanLiteral("goog.DEBUG", false);
         options.setIdGenerators(ImmutableSet.of("goog.events.getUniqueId"));
     }
 
