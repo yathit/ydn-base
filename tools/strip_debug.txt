@@ -1,9 +1,0 @@
-# stripping debug message in closure compiler.
-
-put DebugStrippingCompilerRunner.java into the folder closure-library/src/com/google/javascript/jscomp/
-
-change com.google.javascript.jscomp.CommandLineRunner in build.xml to com.google.javascript.jscomp.DebugStrippingCompilerRunner
-
-clean and rebuild
-
-this reduce 8 KB of code side.

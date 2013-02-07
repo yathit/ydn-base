@@ -5,11 +5,13 @@
  * Date: 21/10/12
  */
 
+goog.provide('ydn.debug');
+goog.provide('ydn.debug.error.ArgumentException');
+
 goog.require('goog.debug.Console');
 goog.require('goog.debug.Logger');
 goog.require('goog.debug.LogManager');
 goog.require('goog.debug.DivConsole');
-goog.provide('ydn.debug');
 
 
 /**
@@ -58,3 +60,25 @@ ydn.debug.log = function (scope, level, ele) {
     }
   }
 };
+
+
+/**
+ * Base class for custom error objects.
+ * @param {*=} opt_msg The message associated with the error.
+ * @constructor
+ * @extends {Error}
+ */
+ydn.debug.error.ArgumentException = function (opt_msg) {
+  // Ensure there is a stack trace.
+  if (Error.captureStackTrace) {
+    Error.captureStackTrace(this, ydn.debug.error.ArgumentException);
+  } else {
+    this.stack = new Error().stack || '';
+  }
+
+  if (opt_msg) {
+    this.message = String(opt_msg);
+  }
+  this.name = 'ydn.ArgumentException';
+};
+goog.inherits(ydn.debug.error.ArgumentException, Error);
