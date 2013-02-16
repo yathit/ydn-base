@@ -23,7 +23,7 @@ ydn.http.CallbackResult = function (content_type, text, uri, status, json) {
   /** @final */
   this.content_type = content_type;
   /** @final */
-  this.text = text;
+  this.text = text || '';
   /** @final */
   this.uri = uri;
   /* final */

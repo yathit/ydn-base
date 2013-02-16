@@ -81,10 +81,19 @@ ydn.atom.Atom.prototype.getTitle = function() {
 
 /**
  *
- * @return {number}
+ * @return {string}
  */
 ydn.atom.Atom.prototype.getUpdated = function() {
-  return +(this.getUpdatedDate());
+  return this.data.updated.$t;
+};
+
+
+/**
+ *
+ * @return {number}
+ */
+ydn.atom.Atom.prototype.getUpdatedDate = function() {
+  return +(new Date(this.getUpdated()));
 };
 
 
