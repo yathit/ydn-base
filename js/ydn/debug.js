@@ -16,7 +16,7 @@ goog.require('goog.debug.DivConsole');
 
 
 /**
- * General console
+ * General debug console
  * @type {goog.debug.Console}
  */
 ydn.debug.logger_console = null;
