@@ -13,11 +13,11 @@ goog.provide('ydn.http.CallbackResult');
  * @constructor
  * @param {string} content_type
  * @param {string} text
- * @param {string} uri
+ * @param {string} url
  * @param {number} status
  * @param {Object=} json
  */
-ydn.http.CallbackResult = function (content_type, text, uri, status, json) {
+ydn.http.CallbackResult = function (content_type, text, url, status, json) {
   /** @final */
   this.status = status;
   /** @final */
@@ -25,7 +25,7 @@ ydn.http.CallbackResult = function (content_type, text, uri, status, json) {
   /** @final */
   this.text = text || '';
   /** @final */
-  this.uri = uri;
+  this.url = url;
   /* final */
   this.json = json || null;
 };
@@ -33,6 +33,7 @@ ydn.http.CallbackResult = function (content_type, text, uri, status, json) {
 
 /**
  * @type {number}
+ * @expose
  */
 ydn.http.CallbackResult.prototype.status;
 
@@ -43,16 +44,19 @@ ydn.http.CallbackResult.prototype.content_type;
 
 /**
  * @type {string}
+ * @expose
  */
 ydn.http.CallbackResult.prototype.text;
 
 /**
  * @type {string}
+ * @expose
  */
-ydn.http.CallbackResult.prototype.uri;
+ydn.http.CallbackResult.prototype.url;
 
 /**
  * @type {Object}
+ * @expose
  */
 ydn.http.CallbackResult.prototype.json;
 
@@ -89,7 +93,7 @@ ydn.http.CallbackResult.prototype.getStatus = function() {
  * @return {string}
  */
 ydn.http.CallbackResult.prototype.getUrl = function() {
-  return this.uri;
+  return this.url;
 };
 
 /**
@@ -135,7 +139,7 @@ ydn.http.CallbackResult.prototype.isContentJavascript = function() {
 ydn.http.CallbackResult.prototype.toString = function() {
   if (goog.DEBUG) {
     var msg = this.message ? this.message : this.text;
-    return this.status + ' ' + this.uri + ' ' + msg;
+    return this.status + ' ' + this.url + ' ' + msg;
   } else {
     return goog.base(this, 'toString');
   }
