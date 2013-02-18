@@ -23,7 +23,7 @@ ydn.http.CallbackResult = function (content_type, text, url, status, json) {
   /** @final */
   this.content_type = content_type;
   /** @final */
-  this.responseText = text || '';
+  this.text = text || '';
   /** @final */
   this.url = url;
   /* final */
@@ -46,10 +46,11 @@ ydn.http.CallbackResult.prototype.content_type;
  * @type {string}
  * @expose
  */
-ydn.http.CallbackResult.prototype.responseText;
+ydn.http.CallbackResult.prototype.text;
 
 /**
  * @type {string}
+ * @expose
  */
 ydn.http.CallbackResult.prototype.url;
 
@@ -63,7 +64,7 @@ ydn.http.CallbackResult.prototype.json;
  * @return {string}
  */
 ydn.http.CallbackResult.prototype.getResponse = function() {
-  return this.responseText;
+  return this.text;
 };
 
 
@@ -73,7 +74,7 @@ ydn.http.CallbackResult.prototype.getResponse = function() {
  */
 ydn.http.CallbackResult.prototype.getResponseJson = function() {
   if (!this.json) {
-    this.json = ydn.json.parse(this.responseText);
+    this.json = ydn.json.parse(this.text);
   }
   return this.json;
 };
@@ -91,7 +92,7 @@ ydn.http.CallbackResult.prototype.getStatus = function() {
  * @return {string}
  */
 ydn.http.CallbackResult.prototype.getUrl = function() {
-  return this.url;
+  return this.uri;
 };
 
 /**
@@ -108,7 +109,7 @@ ydn.http.CallbackResult.prototype.isSuccessStatusCode = function() {
  * @return {string}
  */
 ydn.http.CallbackResult.prototype.getMessage = function() {
-  var txt = goog.isString(this.responseText) ? this.responseText.substring(0, 200) : '';
+  var txt = goog.isString(this.text) ? this.text.substring(0, 200) : '';
   return this.status + ': ' + txt;
 };
 
@@ -136,8 +137,8 @@ ydn.http.CallbackResult.prototype.isContentJavascript = function() {
  */
 ydn.http.CallbackResult.prototype.toString = function() {
   if (goog.DEBUG) {
-    var msg = this.message ? this.message : this.responseText;
-    return this.status + ' ' + this.url + ' ' + msg;
+    var msg = this.message ? this.message : this.text;
+    return this.status + ' ' + this.uri + ' ' + msg;
   } else {
     return goog.base(this, 'toString');
   }
