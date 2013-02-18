@@ -25,6 +25,41 @@ var assertException = function (msg, callback, error) { // in Closure test, it i
 var jstestdriver = {};
 
 
+/**
+ * http://code.google.com/p/google-api-javascript-client/wiki/ReferenceDocs
+ * @constructor
+ */
+var GapiRequest = function() {};
+
+
+/**
+ * @type {string} The URL to handle the request.
+ */
+GapiRequest.prototype.path;
+
+/**
+ * @type {string} The HTTP request method to use. Default is 'GET'.
+ */
+GapiRequest.prototype.method;
+
+/**
+ * @type {Object} URL params in key-value pair form.
+ */
+GapiRequest.prototype.params;
+
+/**
+ * @type {Object}  Additional HTTP request headers.
+ */
+GapiRequest.prototype.headers;
+
+/**
+ * @type {string} The HTTP request body (applies to PUT or POST).
+ */
+GapiRequest.prototype.body;
+
+
+
+
 
 
 
