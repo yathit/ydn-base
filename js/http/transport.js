@@ -13,19 +13,19 @@ goog.provide('ydn.http.CallbackResult');
  * @constructor
  * @param {string} content_type
  * @param {string} text
- * @param {string} uri
+ * @param {string} url
  * @param {number} status
  * @param {Object=} json
  */
-ydn.http.CallbackResult = function (content_type, text, uri, status, json) {
+ydn.http.CallbackResult = function (content_type, text, url, status, json) {
   /** @final */
   this.status = status;
   /** @final */
   this.content_type = content_type;
   /** @final */
-  this.text = text || '';
+  this.responseText = text || '';
   /** @final */
-  this.uri = uri;
+  this.url = url;
   /* final */
   this.json = json || null;
 };
@@ -33,6 +33,7 @@ ydn.http.CallbackResult = function (content_type, text, uri, status, json) {
 
 /**
  * @type {number}
+ * @expose
  */
 ydn.http.CallbackResult.prototype.status;
 
@@ -43,13 +44,14 @@ ydn.http.CallbackResult.prototype.content_type;
 
 /**
  * @type {string}
+ * @expose
  */
-ydn.http.CallbackResult.prototype.text;
+ydn.http.CallbackResult.prototype.responseText;
 
 /**
  * @type {string}
  */
-ydn.http.CallbackResult.prototype.uri;
+ydn.http.CallbackResult.prototype.url;
 
 /**
  * @type {Object}
@@ -61,7 +63,7 @@ ydn.http.CallbackResult.prototype.json;
  * @return {string}
  */
 ydn.http.CallbackResult.prototype.getResponse = function() {
-  return this.text;
+  return this.responseText;
 };
 
 
@@ -71,7 +73,7 @@ ydn.http.CallbackResult.prototype.getResponse = function() {
  */
 ydn.http.CallbackResult.prototype.getResponseJson = function() {
   if (!this.json) {
-    this.json = ydn.json.parse(this.text);
+    this.json = ydn.json.parse(this.responseText);
   }
   return this.json;
 };
@@ -89,7 +91,7 @@ ydn.http.CallbackResult.prototype.getStatus = function() {
  * @return {string}
  */
 ydn.http.CallbackResult.prototype.getUrl = function() {
-  return this.uri;
+  return this.url;
 };
 
 /**
@@ -106,7 +108,7 @@ ydn.http.CallbackResult.prototype.isSuccessStatusCode = function() {
  * @return {string}
  */
 ydn.http.CallbackResult.prototype.getMessage = function() {
-  var txt = goog.isString(this.text) ? this.text.substring(0, 200) : '';
+  var txt = goog.isString(this.responseText) ? this.responseText.substring(0, 200) : '';
   return this.status + ': ' + txt;
 };
 
@@ -134,8 +136,8 @@ ydn.http.CallbackResult.prototype.isContentJavascript = function() {
  */
 ydn.http.CallbackResult.prototype.toString = function() {
   if (goog.DEBUG) {
-    var msg = this.message ? this.message : this.text;
-    return this.status + ' ' + this.uri + ' ' + msg;
+    var msg = this.message ? this.message : this.responseText;
+    return this.status + ' ' + this.url + ' ' + msg;
   } else {
     return goog.base(this, 'toString');
   }

@@ -204,7 +204,7 @@ ydn.http.XMLHttpRequestTransport.prototype.send = function(url, callback, option
         var data = new ydn.http.CallbackResult(httpRequest.responseType,
           httpRequest.responseText, url, httpRequest.status);
         callback(data);
-        callback = null; // release reference
+        callback = undefined; // release reference
         httpRequest.onreadystatechange = null;
       }
     };
