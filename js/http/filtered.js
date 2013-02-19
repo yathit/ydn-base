@@ -6,6 +6,7 @@
 
 
 goog.provide('ydn.http.FilteredTransport');
+goog.provide('ydn.http.TransportFilter');
 goog.require('ydn.http.Transport');
 goog.require('goog.Uri');
 
