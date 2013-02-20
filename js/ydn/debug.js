@@ -30,50 +30,6 @@ ydn.debug.logger_div = null;
 
 
 /**
- * Show debug information, OFF = 0, INFO = 1, FINE = 2, FINEST = 3, ALL = 4
- * @param {number=} level default to INFO
- * @param {number=} output_type 0) console 1) div 3) funcy window
- * @deprecated use ydn.debug.log instead.
- */
-ydn.debug.showDebug = function(level, output_type) {
-  output_type = output_type || 0;
-
-  var c;
-  if (output_type == 3) {
-    c = new goog.debug.FancyWindow();
-    c.setEnabled(true);
-  } else if (output_type == 2) {
-    c = new goog.debug.DebugWindow();
-    c.setEnabled(true);
-  } else if (output_type == 1) {
-    var div = document.createElement("div");
-    div.id = 'div_console';
-    div.setAttribute('style', 'clear: both');
-    document.body.appendChild(div);
-    c = new goog.debug.DivConsole(div);
-  } else {
-    c = new goog.debug.Console();
-  }
-  c.setCapturing(true);
-
-  var debug_level = goog.debug.Logger.Level.INFO;
-  if (level === 0) {
-    debug_level = goog.debug.Logger.Level.OFF;
-  } else if (level == 1) {
-    debug_level = goog.debug.Logger.Level.INFO;
-  } else if (level == 2) {
-    debug_level = goog.debug.Logger.Level.FINE;
-  } else if (level == 3) {
-    debug_level = goog.debug.Logger.Level.FINEST;
-  } else if (level == 4) {
-    debug_level = goog.debug.Logger.Level.ALL;
-  }
-  goog.debug.LogManager.getRoot().setLevel(debug_level);
-};
-
-
-
-/**
  * Predefined level are: 'ALL' (0) 'FINEST' (300), 'FINER' (ALL), 'FINE' (500),
  * 'CONFIG' (700), 'INFO' (800), 'WARNING', (900)
  * @param {string=} scope eg: 'ydn.db'.
