@@ -77,11 +77,10 @@ ydn.http.StaticMockServer.prototype.load = function(url, html) {
  * @param {function(ydn.http.CallbackResult)=} callback
  */
 ydn.http.StaticMockServer.prototype.response = function(url, status, content, callback) {
-  var response = new ydn.http.CallbackResult();
-  response.status = status;
-  response.text = content;
-  response.content_type = 'text/plain';
-  response.uri = url;
+
+  var content_type = 'text/plain';
+
+  var response = new ydn.http.CallbackResult(content_type, content, url, status);
   this.logger.finest('Responding ' + status + ' to ' + url);
   if (callback) {
     callback(response);
