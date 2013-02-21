@@ -3,7 +3,7 @@
  */
 
 
-goog.provide('ydn.http.XMLHttpRequestTransport');
+goog.provide('ydn.http.XMLHttpRequest');
 goog.require('ydn.http.Transport');
 goog.require('ydn.http');
 goog.require('goog.object');
@@ -12,6 +12,7 @@ goog.require('ydn.debug.error.ArgumentException');
 
 
 /**
+ * proxy_url must end with '/'
  * @typedef {{
  *    sync: (boolean|undefined),
  *    withCredentials: (boolean|undefined),
@@ -31,7 +32,7 @@ ydn.http.XMLHttpRequestTransportOptions;
  * @constructor
  * @implements {ydn.http.Transport}
  */
-ydn.http.XMLHttpRequestTransport = function(options) {
+ydn.http.XMLHttpRequest = function(options) {
 
   options = options || {};
 
@@ -46,7 +47,7 @@ ydn.http.XMLHttpRequestTransport = function(options) {
   this.withCredentials = !!options.withCredentials;
   /** @final  */
   this.default_origin = goog.isString(options.origin) ?
-      ydn.http.XMLHttpRequestTransport.parseOrigin_(options.origin) : null;
+      ydn.http.XMLHttpRequest.parseOrigin_(options.origin) : null;
   /** @final  */
   this.default_headers = options.headers || {};
   /** @final  */
@@ -62,53 +63,53 @@ ydn.http.XMLHttpRequestTransport = function(options) {
  * @protected
  * @type {boolean}
  */
-ydn.http.XMLHttpRequestTransport.prototype.sync = false;
+ydn.http.XMLHttpRequest.prototype.sync = false;
 
 
 /**
  * @protected
  * @type {boolean}
  */
-ydn.http.XMLHttpRequestTransport.prototype.withCredentials = false;
+ydn.http.XMLHttpRequest.prototype.withCredentials = false;
 
 
 /**
  * @type {string|undefined}
  * @protected
  */
-ydn.http.XMLHttpRequestTransport.prototype.proxy_url;
+ydn.http.XMLHttpRequest.prototype.proxy_url;
 
 
 /**
  * @protected
  * @type {Object}
  */
-ydn.http.XMLHttpRequestTransport.prototype.default_origin = null;
+ydn.http.XMLHttpRequest.prototype.default_origin = null;
 
 
 /**
  * @protected
  * @type {Object.<string>}
  */
-ydn.http.XMLHttpRequestTransport.prototype.default_headers = null;
+ydn.http.XMLHttpRequest.prototype.default_headers = null;
 
 /**
  * @protected
  * @type {Object.<string>}
  */
-ydn.http.XMLHttpRequestTransport.prototype.default_params = null;
+ydn.http.XMLHttpRequest.prototype.default_params = null;
 
 /**
  * @protected
  * @type {boolean}
  */
-ydn.http.XMLHttpRequestTransport.prototype.http_method_override = false;
+ydn.http.XMLHttpRequest.prototype.http_method_override = false;
 
 /**
  * @protected
  * @type {boolean}
  */
-ydn.http.XMLHttpRequestTransport.prototype.content_length = false;
+ydn.http.XMLHttpRequest.prototype.content_length = false;
 
 
 /**
@@ -117,7 +118,7 @@ ydn.http.XMLHttpRequestTransport.prototype.content_length = false;
  * @return {{scheme: string, domain: string, port: ?number}}
  * @private
  */
-ydn.http.XMLHttpRequestTransport.parseOrigin_ = function(url) {
+ydn.http.XMLHttpRequest.parseOrigin_ = function(url) {
   var guri = new goog.Uri(url);
   return {
     scheme: guri.getScheme(),
@@ -129,7 +130,7 @@ ydn.http.XMLHttpRequestTransport.parseOrigin_ = function(url) {
 /**
  * @inheritDoc
  */
-ydn.http.XMLHttpRequestTransport.prototype.send = function(url, callback, options) {
+ydn.http.XMLHttpRequest.prototype.send = function(url, callback, options) {
 
   options = ydn.http.getDefaultOptions(options);
   var method = options.method;
