@@ -3,18 +3,29 @@
  */
 
 goog.provide('ydn.http.GapiRequestAdapter');
-goog.require('ydn.http.Transport');
+goog.require('ydn.http.ITransport');
 
 
 /**
  *
- * @param {Function} wrapper
+ * @param {gapi.client} gapi_client GAPI client object.
  * @constructor
- * @implements {ydn.http.Transport}
+ * @implements {ydn.http.ITransport}
  */
-ydn.http.GapiRequestAdapter = function(wrapper) {
-  this.wrapper = wrapper;
+ydn.http.GapiRequestAdapter = function(gapi_client) {
+  this.gapi_client = gapi_client;
 };
+
+
+/**
+ * @type {gapi.client}
+ */
+ydn.http.GapiRequestAdapter.prototype.gapi_client;
+
+
+ydn.http.GapiRequestAdapter.wrap = function(gapi_client) {
+
+}
 
 
 
@@ -23,14 +34,14 @@ ydn.http.GapiRequestAdapter = function(wrapper) {
  *
  * @param {string} url
  * @param {function(ydn.http.CallbackResult)=} opt_callback
- * @param {ydn.http.Transport.Options=} options
+ * @param {ydn.http.ITransport.Options=} options
  * @return {goog.async.Deferred|undefined} if not provided, callback result
  * is return in the deferred function.
  * @override
  */
 ydn.http.GapiRequestAdapter.prototype.send =  function(url, opt_callback, options) {
   options = ydn.http.getDefaultOptions(options);
-  this.wrapper({
+  this.gapi_client.request({
     'path': url,
     'method': options.method,
     'params': options.params,

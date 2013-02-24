@@ -13,7 +13,7 @@ goog.require('goog.net.Jsonp');
 
 /**
  * Cross domain request by JSONP.
- * @implements {ydn.http.Transport}
+ * @implements {ydn.http.ITransport}
  * @constructor
  */
 ydn.http.JsonpTransport = function() {

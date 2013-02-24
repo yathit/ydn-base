@@ -6,7 +6,7 @@
 
 
 goog.provide('ydn.http.DryrunTransport');
-goog.require('ydn.http.Transport');
+goog.require('ydn.http.ITransport');
 goog.require('ydn.http.MockHttpTransport');
 goog.require('goog.Uri');
 goog.require('ydn.http.TransportFilter');
@@ -16,7 +16,7 @@ goog.require('ydn.http.TransportFilter');
 /**
  * Other than GET request are print to console without sending to the server.
  * @extends {ydn.http.TransportFilter}
- * @param {ydn.http.Transport}  transport
+ * @param {ydn.http.ITransport}  transport
  * @constructor
  */
 ydn.http.DryrunTransport = function(transport) {
@@ -25,7 +25,7 @@ ydn.http.DryrunTransport = function(transport) {
    *
    * @param {string} url
    * @param {string} method
-   * @param {ydn.http.Transport.Options=} options
+   * @param {ydn.http.ITransport.Options=} options
    * @return {boolean}
    */
   var filter = function (url, method, options) {

@@ -4,7 +4,7 @@
 
 
 goog.provide('ydn.http.XMLHttpRequest');
-goog.require('ydn.http.Transport');
+goog.require('ydn.http.ITransport');
 goog.require('ydn.http');
 goog.require('goog.object');
 goog.require('goog.Uri');
@@ -30,7 +30,7 @@ ydn.http.XMLHttpRequestTransportOptions;
  * content_length: include 'Content-Length' header
  * @param {ydn.http.XMLHttpRequestTransportOptions} options
  * @constructor
- * @implements {ydn.http.Transport}
+ * @implements {ydn.http.ITransport}
  */
 ydn.http.XMLHttpRequest = function(options) {
 
@@ -192,7 +192,10 @@ ydn.http.XMLHttpRequest.prototype.send = function(url, callback, options) {
   var httpRequest = new XMLHttpRequest();
   httpRequest.open(method, url, !this.sync);
   for (var h in header) {
-    if ( header.hasOwnProperty(h) && goog.isDefAndNotNull(header[h])) {
+    if (header.hasOwnProperty(h) && goog.isDefAndNotNull(header[h])) {
+      if (/content-type/i.test(h)) {
+        httpRequest.contentType = header[h];
+      }
       httpRequest.setRequestHeader(h, header[h]);
     }
   }
@@ -202,8 +205,10 @@ ydn.http.XMLHttpRequest.prototype.send = function(url, callback, options) {
   if (callback) {
     httpRequest.onreadystatechange = function (e) {
       if (httpRequest.readyState === 4) {
-        var data = new ydn.http.CallbackResult(httpRequest.responseType,
-          httpRequest.responseText, url, httpRequest.status);
+        // httpRequest.responseType ? should we be reading from header?
+        var content_type = httpRequest.getResponseHeader('Content-Type');
+        var data = new ydn.http.CallbackResult(content_type,
+          httpRequest.responseText, url, httpRequest.status, httpRequest.response);
         callback(data);
         callback = undefined; // release reference
         httpRequest.onreadystatechange = null;

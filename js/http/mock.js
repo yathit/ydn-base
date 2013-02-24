@@ -3,14 +3,14 @@
  */
 
 goog.provide('ydn.http.MockHttpTransport');
-goog.require('ydn.http.Transport');
+goog.require('ydn.http.ITransport');
 
 
 
 /**
  *
  * @constructor
- * @implements {ydn.http.Transport}
+ * @implements {ydn.http.ITransport}
  */
 ydn.http.MockHttpTransport = function() {
   this.sent_uris = [];

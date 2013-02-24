@@ -4,14 +4,14 @@
 
 
 goog.provide('ydn.http.StaticMockServer');
-goog.require('ydn.http.Transport');
+goog.require('ydn.http.ITransport');
 goog.require('ydn.http.CallbackResult');
 goog.require('goog.debug.Logger');
 goog.require('ydn.utils');
 goog.require('ydn.json');
 
 /**
- * @implements {ydn.http.Transport}
+ * @implements {ydn.http.ITransport}
  * @constructor
  * @param {(string|Array.<string>)=} opt_domains
  * @param {boolean=} opt_sync

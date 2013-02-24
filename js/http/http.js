@@ -2,7 +2,7 @@ goog.provide('ydn.http');
 goog.require('goog.Uri');
 goog.require('goog.debug.Logger');
 goog.require('ydn.json');
-goog.require('ydn.http.Transport');
+goog.require('ydn.http.ITransport');
 
 /**
  * @fileoverview Provide server services.
@@ -118,7 +118,7 @@ ydn.http.canCrossPostWithCredential = function () {
 
 /**
  * @private
- * @type {Object.<ydn.http.Transport>}
+ * @type {Object.<ydn.http.ITransport>}
  */
 ydn.http.transports = {};
 
@@ -155,7 +155,7 @@ ydn.http.addScopeResolver = function(resolver) {
 /**
  * Set whatever proxy
  *
- * @param {ydn.http.Transport} transport
+ * @param {ydn.http.ITransport} transport
  * @param {string=} scope
  */
 ydn.http.setTransport = function(transport, scope) {
@@ -169,7 +169,7 @@ ydn.http.setTransport = function(transport, scope) {
  * If given proxy is not available, a default transport will be return instead of null.
  * @see {@link ydn.http.Scopes}
  * @param {string=} uri
- * @return {ydn.http.Transport} transport
+ * @return {ydn.http.ITransport} transport
  */
 ydn.http.getTransport = function(uri) {
   if (!goog.isDef(uri)) {

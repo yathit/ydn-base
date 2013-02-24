@@ -7,17 +7,17 @@
 
 goog.provide('ydn.http.FilteredTransport');
 goog.provide('ydn.http.TransportFilter');
-goog.require('ydn.http.Transport');
+goog.require('ydn.http.ITransport');
 goog.require('goog.Uri');
 
 
 /**
  * Filter transport. By default only allow GET request
- * @param {function(string, string, ydn.http.Transport.Options=): boolean} filter Return
+ * @param {function(string, string, ydn.http.ITransport.Options=): boolean} filter Return
  * true to use {@code pass_transport}, otherwise {@code fail_transport} will be used, if provided.
- * @implements {ydn.http.Transport}
- * @param {ydn.http.Transport}  pass_transport
- * @param {ydn.http.Transport=}  fail_transport
+ * @implements {ydn.http.ITransport}
+ * @param {ydn.http.ITransport}  pass_transport
+ * @param {ydn.http.ITransport=}  fail_transport
  * .each argument represent uri, method, body, header, uri_params
  * @constructor
  */
@@ -61,7 +61,7 @@ ydn.http.TransportFilter.prototype.send = function(uri, callback, options) {
 /**
  * Simple filtered transport, allowing only GET request. Set {@code allow_request} as necessary.
  * @extends {ydn.http.TransportFilter}
- * @param {ydn.http.Transport}  transport
+ * @param {ydn.http.ITransport}  transport
  * @param {Array.<string>=}  allow_request default to {@code ['GET']}
  * @constructor
  */
@@ -72,7 +72,7 @@ ydn.http.FilteredTransport = function(transport, allow_request) {
    *
    * @param {string} url
    * @param {string} method
-   * @param {ydn.http.Transport.Options=} options
+   * @param {ydn.http.ITransport.Options=} options
    * @return {boolean}
    */
   var filter = function (url, method, options) {

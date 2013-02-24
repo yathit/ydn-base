@@ -18,8 +18,8 @@ goog.require('ydn.http.FilteredTransport');
  * it allow cross origin request from any host. Very strange.
  *
  * @extends {ydn.http.TransportFilter}
- * @param {ydn.http.Transport} direct_transport
- * @param {ydn.http.Transport} proxy_transport use when pre-flight request is required
+ * @param {ydn.http.ITransport} direct_transport
+ * @param {ydn.http.ITransport} proxy_transport use when pre-flight request is required
  * @constructor
  */
 ydn.http.NoPreflightTransport = function (direct_transport, proxy_transport) {
@@ -27,7 +27,7 @@ ydn.http.NoPreflightTransport = function (direct_transport, proxy_transport) {
    *
    * @param {string} url
    * @param {string} method
-   * @param {ydn.http.Transport.Options=} options
+   * @param {ydn.http.ITransport.Options=} options
    * @return {boolean}
    */
   var filter = function (url, method, options) {
@@ -66,8 +66,8 @@ goog.inherits(ydn.http.NoPreflightTransport, ydn.http.TransportFilter);
  * This is use for send request to GSE server. GSE server response from cross origin for non ATOM format.
  *
  * @extends {ydn.http.TransportFilter}
- * @param {ydn.http.Transport} direct_transport
- * @param {ydn.http.Transport} proxy_transport use when pre-flight request is required
+ * @param {ydn.http.ITransport} direct_transport
+ * @param {ydn.http.ITransport} proxy_transport use when pre-flight request is required
  * @constructor
  */
 ydn.http.GseTransport = function (direct_transport, proxy_transport) {
@@ -75,7 +75,7 @@ ydn.http.GseTransport = function (direct_transport, proxy_transport) {
    *
    * @param {string} url
    * @param {string} method
-   * @param {ydn.http.Transport.Options=} options
+   * @param {ydn.http.ITransport.Options=} options
    * @return {boolean}
    */
   var filter = function (url, method, options) {
