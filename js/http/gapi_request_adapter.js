@@ -3,18 +3,20 @@
  */
 
 goog.provide('ydn.http.GapiRequestAdapter');
-goog.require('ydn.http.ITransport');
+goog.require('ydn.http.Transport');
 
 
 /**
  *
  * @param {gapi.client} gapi_client GAPI client object.
  * @constructor
- * @implements {ydn.http.ITransport}
+ * @extends {ydn.http.Transport}
  */
 ydn.http.GapiRequestAdapter = function(gapi_client) {
+  goog.base(this);
   this.gapi_client = gapi_client;
 };
+goog.inherits(ydn.http.GapiRequestAdapter, ydn.http.Transport);
 
 
 /**
@@ -23,9 +25,19 @@ ydn.http.GapiRequestAdapter = function(gapi_client) {
 ydn.http.GapiRequestAdapter.prototype.gapi_client;
 
 
+/**
+ *
+ * @param {!Object} gapi_client
+ * @return {ydn.http.Transport}
+ */
 ydn.http.GapiRequestAdapter.wrap = function(gapi_client) {
-
-}
+  if (gapi_client instanceof ydn.http.Transport) {
+    return gapi_client;
+  } else if ('send' in gapi_client) {
+    return new ydn.http.GapiRequestAdapter(
+        /** @type {gapi.client} */ (gapi_client));
+  }
+};
 
 
 
@@ -41,12 +53,23 @@ ydn.http.GapiRequestAdapter.wrap = function(gapi_client) {
  */
 ydn.http.GapiRequestAdapter.prototype.send =  function(url, opt_callback, options) {
   options = ydn.http.getDefaultOptions(options);
+  opt_callback = opt_callback || goog.Function.TRUE;
+  var callback_adapter = function(json, raw) {
+    opt_callback = null;
+    if (json) {
+      return new ydn.http.CallbackResult('application/json', '', url, 200, json);
+    } else {
+      var content_type = raw.headers['Content-Type'];
+      return new ydn.http.CallbackResult(content_type, raw['body'], url,
+          raw['status']);
+    }
+  };
   this.gapi_client.request({
     'path': url,
     'method': options.method,
     'params': options.params,
     'headers': options.headers,
     'body': options.body,
-    'callback': opt_callback
+    'callback': callback_adapter
   })
 };
