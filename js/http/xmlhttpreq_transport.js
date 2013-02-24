@@ -5,6 +5,7 @@
 
 goog.provide('ydn.http.XMLHttpRequest');
 goog.require('ydn.http.ITransport');
+goog.require('ydn.http.Transport');
 goog.require('ydn.http');
 goog.require('goog.object');
 goog.require('goog.Uri');
@@ -30,10 +31,10 @@ ydn.http.XMLHttpRequestTransportOptions;
  * content_length: include 'Content-Length' header
  * @param {ydn.http.XMLHttpRequestTransportOptions} options
  * @constructor
- * @implements {ydn.http.ITransport}
+ * @extends {ydn.http.Transport}
  */
 ydn.http.XMLHttpRequest = function(options) {
-
+  goog.base(this);
   options = options || {};
 
   this.proxy_url = options.proxy_url;
@@ -57,6 +58,7 @@ ydn.http.XMLHttpRequest = function(options) {
   /** @final  */
   this.content_length = !!options.content_length;
 };
+goog.inherits(ydn.http.XMLHttpRequest, ydn.http.Transport);
 
 
 /**

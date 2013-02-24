@@ -5,6 +5,7 @@
  */
 
 goog.provide('ydn.http.ITransport');
+goog.provide('ydn.http.Transport');
 goog.provide('ydn.http.CallbackResult');
 
 
@@ -216,6 +217,19 @@ ydn.http.ITransport.prototype.send =  function(url, opt_callback, opt_options) {
 
 };
 
+
+/**
+ *
+ * @constructor
+ * @implements {ydn.http.ITransport}
+ */
+ydn.http.Transport = function() {};
+
+
+/**
+ * @inheritDoc
+ */
+ydn.http.Transport.prototype.send = goog.abstractMethod;
 
 
 
