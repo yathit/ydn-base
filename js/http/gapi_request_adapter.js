@@ -4,11 +4,12 @@
 
 goog.provide('ydn.http.GapiRequestAdapter');
 goog.require('ydn.http.Transport');
+goog.require('goog.functions');
 
 
 /**
  *
- * @param {gapi.client} gapi_client GAPI client object.
+ * @param {{request: Function}} gapi_client GAPI client object.
  * @constructor
  * @extends {ydn.http.Transport}
  */
@@ -20,7 +21,7 @@ goog.inherits(ydn.http.GapiRequestAdapter, ydn.http.Transport);
 
 
 /**
- * @type {gapi.client}
+ * @type {{request: Function}}
  */
 ydn.http.GapiRequestAdapter.prototype.gapi_client;
 
@@ -35,7 +36,9 @@ ydn.http.GapiRequestAdapter.wrap = function(gapi_client) {
     return gapi_client;
   } else if ('send' in gapi_client) {
     return new ydn.http.GapiRequestAdapter(
-        /** @type {gapi.client} */ (gapi_client));
+      /** @type {{request: Function}} */ (gapi_client));
+  } else {
+    throw new ydn.debug.error.ArgumentException('transport required');
   }
 };
 
@@ -53,9 +56,9 @@ ydn.http.GapiRequestAdapter.wrap = function(gapi_client) {
  */
 ydn.http.GapiRequestAdapter.prototype.send =  function(url, opt_callback, options) {
   options = ydn.http.getDefaultOptions(options);
-  opt_callback = opt_callback || goog.Function.TRUE;
+  opt_callback = opt_callback || goog.functions.TRUE;
   var callback_adapter = function(json, raw) {
-    opt_callback = null;
+    opt_callback = undefined;
     if (json) {
       return new ydn.http.CallbackResult('application/json', '', url, 200, json);
     } else {
