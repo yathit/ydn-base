@@ -8,6 +8,7 @@
 goog.provide('ydn.debug');
 goog.provide('ydn.debug.error.ArgumentException');
 goog.provide('ydn.debug.error.NotSupportedException');
+goog.provide('ydn.debug.error.NotImplementedException');
 
 goog.require('goog.debug.Console');
 goog.require('goog.debug.Logger');
@@ -104,3 +105,26 @@ ydn.debug.error.NotSupportedException = function (opt_msg) {
   this.name = 'ydn.NotSupportedException';
 };
 goog.inherits(ydn.debug.error.NotSupportedException, Error);
+
+
+/**
+ * Base class for custom error objects.
+ * @param {*=} opt_msg The message associated with the error.
+ * @constructor
+ * @extends {Error}
+ */
+ydn.debug.error.NotImplementedException = function(opt_msg) {
+
+  // Ensure there is a stack trace.
+  if (Error.captureStackTrace) {
+    Error.captureStackTrace(this, ydn.debug.error.NotImplementedException);
+  } else {
+    this.stack = new Error().stack || '';
+  }
+
+  if (opt_msg) {
+    this.message = String(opt_msg);
+  }
+  this.name = 'ydn.NotImplementedException';
+};
+goog.inherits(ydn.debug.error.NotImplementedException, Error);
