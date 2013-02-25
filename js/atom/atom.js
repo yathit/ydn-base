@@ -90,10 +90,10 @@ ydn.atom.Atom.prototype.getUpdated = function() {
 
 /**
  *
- * @return {number}
+ * @return {!Date}
  */
 ydn.atom.Atom.prototype.getUpdatedDate = function() {
-  return +(new Date(this.getUpdated()));
+  return new Date(this.getUpdated());
 };
 
 
