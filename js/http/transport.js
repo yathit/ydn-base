@@ -63,7 +63,7 @@ ydn.http.CallbackResult.prototype.response;
  * @param {!Object} result_json
  * @return {ydn.http.CallbackResult}
  */
-ydn.http.CallbackResult.fromJson = function (result_json) {
+ydn.http.CallbackResult.wrap = function (result_json) {
   if (result_json instanceof ydn.http.CallbackResult) {
     return result_json;
   } else {

@@ -195,9 +195,6 @@ ydn.http.XMLHttpRequest.prototype.send = function(url, callback, options) {
   httpRequest.open(method, url, !this.sync);
   for (var h in header) {
     if (header.hasOwnProperty(h) && goog.isDefAndNotNull(header[h])) {
-      if (/content-type/i.test(h)) {
-        httpRequest.contentType = header[h];
-      }
       httpRequest.setRequestHeader(h, header[h]);
     }
   }
