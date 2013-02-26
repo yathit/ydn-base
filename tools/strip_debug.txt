@@ -1,0 +1,36 @@
+# stripping debug message in closure compiler.
+
+put DebugStrippingCompilerRunner.java into the folder closure-library/src/com/google/javascript/jscomp/
+
+change com.google.javascript.jscomp.CommandLineRunner in build.xml to com.google.javascript.jscomp.DebugStrippingCompilerRunner
+
+clean and rebuild
+
+additionally, the following changes require in closure-library
+instread of extending goog.debug.Error to goog.async.Error
+ closure-library/third_party/closure/goog/mochikit/async/deferred.js:667:
+ closure-library/third_party/closure/goog/mochikit/async/deferred.js:697:
+
+/**
+ * Base class for custom error objects.
+ * @param {*=} opt_msg The message associated with the error.
+ * @constructor
+ * @extends {Error}
+ */
+goog.async.Error = function(opt_msg) {
+
+  // Ensure there is a stack trace.
+  if (Error.captureStackTrace) {
+    Error.captureStackTrace(this, goog.async.Error);
+  } else {
+    this.stack = new Error().stack || '';
+  }
+
+  if (opt_msg) {
+    this.message = String(opt_msg);
+  }
+};
+goog.inherits(goog.async.Error, Error);
+
+
+this reduce 8 KB of debug code.

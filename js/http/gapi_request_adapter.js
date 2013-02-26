@@ -15,6 +15,7 @@ goog.require('goog.functions');
  */
 ydn.http.GapiRequestAdapter = function(gapi_client) {
   goog.base(this);
+  goog.asserts.assertFunction(gapi_client['request']);
   this.gapi_client = gapi_client;
 };
 goog.inherits(ydn.http.GapiRequestAdapter, ydn.http.Transport);
@@ -34,7 +35,7 @@ ydn.http.GapiRequestAdapter.prototype.gapi_client;
 ydn.http.GapiRequestAdapter.wrap = function(gapi_client) {
   if (gapi_client instanceof ydn.http.Transport) {
     return gapi_client;
-  } else if ('send' in gapi_client) {
+  } else if ('request' in gapi_client) {
     return new ydn.http.GapiRequestAdapter(
       /** @type {{request: Function}} */ (gapi_client));
   } else {
@@ -67,7 +68,7 @@ ydn.http.GapiRequestAdapter.prototype.send =  function(url, opt_callback, option
           raw['status']);
     }
   };
-  this.gapi_client.request({
+  this.gapi_client['request']({
     'path': url,
     'method': options.method,
     'params': options.params,
