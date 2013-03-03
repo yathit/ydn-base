@@ -17,8 +17,9 @@ goog.provide('ydn.http.CallbackResult');
  * @param {string} url
  * @param {number} status
  * @param {*=} response
+ * @param {Object.<string>=} headers response headers
  */
-ydn.http.CallbackResult = function (content_type, text, url, status, response) {
+ydn.http.CallbackResult = function (content_type, text, url, status, response, headers) {
   /** @final */
   this.status = status;
   /** @final */
@@ -29,6 +30,8 @@ ydn.http.CallbackResult = function (content_type, text, url, status, response) {
   this.url = url;
   /* final */
   this.response = response || null;
+  /* final */
+  this.headers = headers || {};
 };
 
 
@@ -59,6 +62,12 @@ ydn.http.CallbackResult.prototype.response;
 
 
 /**
+ * @type {Object.<string>}
+ */
+ydn.http.CallbackResult.prototype.headers;
+
+
+/**
  *
  * @param {!Object} result_json
  * @return {ydn.http.CallbackResult}
@@ -72,8 +81,19 @@ ydn.http.CallbackResult.wrap = function (result_json) {
         result_json['responseText'],
         result_json['url'],
         result_json['status'],
-        result_json['response']);
+        result_json['response'],
+        result_json['headers']);
   }
+};
+
+
+/**
+ *
+ * @param {string} header the header
+ * @return {string|undefined} header value
+ */
+ydn.http.CallbackResult.prototype.getHeader = function(header) {
+  return this.headers[header];
 };
 
 
