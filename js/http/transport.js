@@ -103,7 +103,8 @@ ydn.http.CallbackResult.prototype.getHeader = function(header) {
  */
 ydn.http.CallbackResult.prototype.getResponseJson = function() {
   var is_content_json = this.contentType == 'json' ||
-      goog.string.startsWith(this.contentType, 'application/json');
+    (goog.isString(this.contentType) &&
+      goog.string.startsWith(this.contentType, 'application/json'));
   if (is_content_json &&
       this.response != null && typeof this.response == 'object') {
     return /** @type {!Object} */ (this.response);
