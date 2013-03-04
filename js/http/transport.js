@@ -142,7 +142,8 @@ ydn.http.CallbackResult.prototype.isSuccessStatusCode = function() {
  * @return {string}
  */
 ydn.http.CallbackResult.prototype.getMessage = function() {
-  var txt = goog.isString(this.responseText) ? this.responseText.substring(0, 200) : '';
+  var txt = goog.isString(this.responseText) ?
+    this.responseText.substring(0, 200) : '';
   return this.status + ': ' + txt;
 };
 
