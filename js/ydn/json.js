@@ -58,6 +58,21 @@ ydn.json.parse = function(json_str) {
 
 
 /**
+ *
+ * @param obj
+ * @return {string}
+ */
+ydn.json.toShortString = function(obj) {
+  var json = ydn.json.stringify(obj);
+  if (json) {
+    return json.substr(0, 70);
+  } else {
+    return '';
+  }
+};
+
+
+/**
  * Parse JSON using native method if available.
  *
  * This is necessary since closure-library do not use native method.
