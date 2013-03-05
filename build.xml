@@ -173,11 +173,13 @@
         <attribute name="base.dir" default="${basedir}"/>
         <attribute name="input.dir" default="@{base.dir}"/>
         <attribute name="output.fn" default="@{input.dir}/alltests.js"/>
+        <attribute name="ext" default=""/>
         <sequential>
             <exec executable="python" failonerror="true" dir="@{base.dir}">
                 <arg value="${ydn-base.dir}/tools/alltests.py"/>
                 <arg value="@{output.fn}"/>
                 <arg value="@{input.dir}"/>
+                <arg value="@{ext}"/>
             </exec>
         </sequential>
     </macrodef>
