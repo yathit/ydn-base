@@ -17,10 +17,10 @@ goog.require('ydn.http.ITransport');
  */
 ydn.http.Scopes = {
   DEFAULT: 'default',
-  APP: 'app', // to API server with specific to this app
-  YDN_API: 'ydnapi', // to API server
+  AUTH: 'auth', // to API server with specific to this app
+  LOGIN: 'login', // to API server
   GSE: 'gse', // for google gdata server
-  GOOGLE_CLIENT: 'g_c', // gapi
+  GOOGLE_CLIENT: 'gc', // gapi
   PROXY: 'proxy',
   BUG_REPORT: 'bug'
 };

@@ -93,7 +93,17 @@ ydn.http.CallbackResult.wrap = function (result_json) {
  * @return {string|undefined} header value
  */
 ydn.http.CallbackResult.prototype.getHeader = function(header) {
-  return this.headers[header];
+  var v = this.headers[header];
+  if (v) {
+    return v;
+  }
+  header = header.toLowerCase();
+  for (var key in this.headers) {
+    if (key.toLowerCase() == header) {
+      return this.headers[key];
+    }
+  }
+  return undefined;
 };
 
 
