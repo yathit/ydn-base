@@ -35,7 +35,7 @@ ydn.error.ArgumentException = function(opt_msg) {
   if (opt_msg) {
     this.message = String(opt_msg);
   }
-  this.name = 'ydn.ArgumentException';
+  this.name = 'ydn.error.ArgumentException';
 };
 goog.inherits(ydn.error.ArgumentException, Error);
 
@@ -65,6 +65,7 @@ ydn.error.NotSupportedException = function(opt_msg) {
   if (opt_msg) {
     this.message = String(opt_msg);
   }
+  this.name = 'ydn.error.NotSupportedException';
 };
 goog.inherits(ydn.error.ArgumentException, Error);
 
@@ -90,7 +91,7 @@ ydn.error.NotImplementedException = function(opt_msg) {
   if (opt_msg) {
     this.message = String(opt_msg);
   }
-  this.name = 'ydn.NotImplementedException';
+  this.name = 'ydn.error.NotImplementedException';
 };
 goog.inherits(ydn.error.NotImplementedException, Error);
 
@@ -117,6 +118,7 @@ ydn.error.InternalError = function(opt_msg) {
   if (opt_msg) {
     this.message = String(opt_msg);
   }
+  this.name = 'ydn.error.InternalError';
 };
 goog.inherits(ydn.error.InternalError, Error);
 
@@ -141,7 +143,7 @@ ydn.error.ConstrainError = function(opt_msg) {
   if (opt_msg) {
     this.message = String(opt_msg);
   }
-  this.name = 'ydn.ConstrainError';
+  this.name = 'ydn.error.ConstrainError';
 };
 goog.inherits(ydn.error.ConstrainError, Error);
 
@@ -167,7 +169,7 @@ ydn.error.InvalidOperationException = function(opt_msg) {
   if (opt_msg) {
     this.message = String(opt_msg);
   }
-  this.name = 'ydn.InvalidOperationException';
+  this.name = 'ydn.error.InvalidOperationException';
 };
 goog.inherits(ydn.error.ArgumentException, Error);
 
@@ -194,7 +196,7 @@ ydn.error.InvalidOperationError = function(opt_msg) {
   if (opt_msg) {
     this.message = String(opt_msg);
   }
-  this.name = 'ydn.InvalidOperationError';
+  this.name = 'ydn.error.InvalidOperationError';
 };
 goog.inherits(ydn.error.InvalidOperationError, Error);
 
