@@ -12,6 +12,7 @@ goog.provide('ydn.debug.error.ArgumentException');
 goog.provide('ydn.debug.error.NotSupportedException');
 goog.provide('ydn.debug.error.NotImplementedException');
 goog.provide('ydn.debug.error.InvalidOperationException');
+goog.provide('ydn.debug.error.InternalError');
 
 goog.require('goog.debug.Error');
 
@@ -68,3 +69,26 @@ ydn.debug.error.InvalidOperationException = function(opt_msg) {
 goog.inherits(ydn.debug.error.ArgumentException, goog.debug.Error);
 
 
+/**
+ * Base class for custom error objects.
+ * @param {*=} opt_msg The message associated with the error.
+ * @constructor
+ * @extends {Error}
+ */
+ydn.debug.error.InternalError = function(opt_msg) {
+
+  // Ensure there is a stack trace.
+  if (Error.captureStackTrace) {
+    Error.captureStackTrace(this, ydn.debug.error.InternalError);
+  } else {
+    this.stack = new Error().stack || '';
+  }
+
+  if (opt_msg) {
+    this.message = String(opt_msg);
+  }
+  this.name = 'ydn.error.InternalError';
+};
+goog.inherits(ydn.debug.error.InternalError, Error);
+
+ydn.debug.error.InternalError.prototype.name = 'ydn.error.InternalError';
