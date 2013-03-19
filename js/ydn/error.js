@@ -70,7 +70,7 @@ ydn.error.NotSupportedException = function(opt_msg) {
 goog.inherits(ydn.error.ArgumentException, Error);
 
 /** @override */
-ydn.error.NotSupportedException.prototype.name = 'ydn.NotSupportedException';
+ydn.error.NotSupportedException.prototype.name = 'ydn.error.NotSupportedException';
 
 
 /**

@@ -58,17 +58,24 @@ ydn.json.parse = function(json_str) {
 
 
 /**
- *
+ * Note: This is mainly used in debugging.
  * @param obj
  * @return {string}
  */
 ydn.json.toShortString = function(obj) {
-  var json = ydn.json.stringify(obj);
+  var json;
+  /** @preserveTry */
+  try {
+    json = ydn.json.stringify(obj);
+  } catch (e) {
+    json = '';
+  }
   if (json) {
     return json.substr(0, 70);
   } else {
     return '';
   }
+
 };
 
 
