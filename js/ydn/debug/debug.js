@@ -8,15 +8,12 @@
  */
 
 goog.provide('ydn.debug');
-goog.provide('ydn.debug.error.ArgumentException');
-goog.provide('ydn.debug.error.NotSupportedException');
-goog.provide('ydn.debug.error.NotImplementedException');
 
 goog.require('goog.debug.Console');
 goog.require('goog.debug.Logger');
 goog.require('goog.debug.LogManager');
 goog.require('goog.debug.DivConsole');
-goog.require('goog.debug.Error');
+
 
 
 /**
@@ -66,44 +63,4 @@ ydn.debug.log = function (scope, level, ele) {
     }
   }
 };
-
-
-/**
- * Base class for custom error objects.
- * @param {*=} opt_msg The message associated with the error.
- * @constructor
- * @extends {goog.debug.Error}
- */
-ydn.debug.error.ArgumentException = function (opt_msg) {
-  goog.base(this, opt_msg);
-  this.name = 'ydn.ArgumentException';
-};
-goog.inherits(ydn.debug.error.ArgumentException, goog.debug.Error);
-
-
-/**
- * Base class for custom error objects.
- * @param {*=} opt_msg The message associated with the error.
- * @constructor
- * @extends {goog.debug.Error}
- */
-ydn.debug.error.NotSupportedException = function (opt_msg) {
-  goog.base(this, opt_msg);
-  this.name = 'ydn.NotSupportedException';
-};
-goog.inherits(ydn.debug.error.NotSupportedException, goog.debug.Error);
-
-
-/**
- * Base class for custom error objects.
- * @param {*=} opt_msg The message associated with the error.
- * @constructor
- * @extends {goog.debug.Error}
- */
-ydn.debug.error.NotImplementedException = function(opt_msg) {
-  goog.base(this, opt_msg);
-  this.name = 'ydn.NotImplementedException';
-};
-goog.inherits(ydn.debug.error.NotImplementedException, goog.debug.Error);
-
 

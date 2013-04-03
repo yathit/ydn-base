@@ -19,7 +19,8 @@ goog.provide('ydn.http.CallbackResult');
  * @param {*=} response
  * @param {Object.<string>=} headers response headers
  */
-ydn.http.CallbackResult = function (content_type, text, url, status, response, headers) {
+ydn.http.CallbackResult = function (content_type, text, url, status, response,
+                                    headers) {
   /** @final */
   this.status = status;
   /** @final */
