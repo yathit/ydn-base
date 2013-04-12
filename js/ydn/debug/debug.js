@@ -31,6 +31,12 @@ ydn.debug.logger_div = null;
 
 
 /**
+ * @type {goog.debug.Logger} logger.
+ */
+ydn.debug.logger = goog.debug.Logger.getLogger('ydn.debug');
+
+
+/**
  * Predefined level are: 'ALL' (0) 'FINEST' (300), 'FINER' (ALL), 'FINE' (500),
  * 'CONFIG' (700), 'INFO' (800), 'WARNING', (900)
  * @param {string=} scope eg: 'ydn.db'.
