@@ -71,7 +71,7 @@ ydn.json.toShortString = function(obj) {
     json = '';
   }
   if (json) {
-    return json.substr(0, 70);
+    return json.substr(0, 70) + (json.length > 70 ? '...' : '');
   } else {
     return '';
   }
