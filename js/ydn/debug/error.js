@@ -66,7 +66,7 @@ ydn.debug.error.InvalidOperationException = function(opt_msg) {
   goog.base(this, opt_msg);
   this.name = 'ydn.error.InvalidOperationException';
 };
-goog.inherits(ydn.debug.error.ArgumentException, goog.debug.Error);
+goog.inherits(ydn.debug.error.InvalidOperationException, goog.debug.Error);
 
 
 /**
