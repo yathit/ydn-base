@@ -144,3 +144,10 @@ IDBIndex.prototype.count = function(key) {};
  * @return {number}
  */
 IDBFactory.prototype.cmp = function(first, second) {};
+
+
+/**
+ * @type {!DOMError}
+ * @const
+ */
+IDBRequest.prototype.error;
