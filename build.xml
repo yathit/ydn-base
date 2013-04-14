@@ -83,7 +83,6 @@
                 <arg line='-f "--use_types_for_optimization"'/>
                 <arg line='-f "--jscomp_error=accessControls"'/>
                 <arg line='-f "--jscomp_error=ambiguousFunctionDecl"'/>
-                <arg line='-f "--jscomp_error=cast"'/>
                 <arg line='-f "--jscomp_error=checkRegExp"'/>
                 <arg line='-f "--jscomp_error=checkTypes"'/>
                 <arg line='-f "--jscomp_error=checkVars"'/>

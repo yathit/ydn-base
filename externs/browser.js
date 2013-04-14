@@ -5,27 +5,6 @@
  * @externs
  */
 
-/**
- *
- * @type {Object}
- */
-var JSON = {};
-
-
-/**
- *
- * @param {string} str
- * @return {Object}
- */
-JSON.parse = function (str) {};
-
-/**
- *
- * @param {Object} obj
- * @return {string}
- */
-JSON.stringify = function (obj) {};
-
 
 /**
 * Socket IO
