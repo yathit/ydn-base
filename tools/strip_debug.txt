@@ -1,6 +1,7 @@
 # stripping debug message in closure compiler.
 
-put DebugStrippingCompilerRunner.java into the folder closure-library/src/com/google/javascript/jscomp/
+put DebugStrippingCompilerRunner.java into the folder closure-compiler/src/com/google/javascript/jscomp/
+cp ../ydn-base/tools/DebugStrippingCompilerRunner.java ../../lib/closure-compiler/src/com/google/javascript/jscomp/
 
 change com.google.javascript.jscomp.CommandLineRunner in build.xml to com.google.javascript.jscomp.DebugStrippingCompilerRunner
 
