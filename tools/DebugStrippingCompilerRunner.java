@@ -76,6 +76,7 @@ public class DebugStrippingCompilerRunner extends CommandLineRunner {
         options.stripTypePrefixes = ImmutableSet.of("goog.asserts",
                 "goog.debug", "ydn.debug"); //
         options.setIdGenerators(ImmutableSet.of("goog.events.getUniqueId"));
+        System.out.println("stripping applied");
     }
 
     public static void main(String[] args) {
