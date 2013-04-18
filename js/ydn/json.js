@@ -18,6 +18,7 @@
 
 goog.provide('ydn.json');
 goog.require('goog.debug.Logger');
+goog.require('goog.json');
 
 
 /**
@@ -35,6 +36,13 @@ ydn.json.logger = goog.debug.Logger.getLogger('ydn');
 
 
 /**
+ * @const
+ * @type {boolean} indicate native JSON paraser is available.
+ */
+ydn.json.native = !(typeof goog.global['JSON'] == 'undefined');
+
+
+/**
  * Parse JSON using native method if available.
  * This is necessary since closure-library do not use native method.
  *
@@ -45,14 +53,10 @@ ydn.json.parse = function(json_str) {
   if (!goog.isString(json_str) || goog.string.isEmpty(json_str)) {
     return {};
   }
-  // compiler should remove try block in non-debug compilation.
-  try {
+  if (ydn.json.native) {
     return /** @type {!Object} */ (JSON.parse(json_str));
-  } catch (e) {
-    if (ydn.json.DEBUG) {
-      window.console.log(json_str);
-    }
-    throw e;
+  } else {
+    return /** @type {!Object} */ (goog.json.parse(json_str));
   }
 };
 
@@ -89,13 +93,9 @@ ydn.json.toShortString = function(obj) {
  */
 ydn.json.stringify = function(json) {
 
-  //try {
-  return JSON.stringify(json);
-//  } catch (e) {
-//    ydn.json.logger.warning('stringify failed: ' + e);
-//    if (ydn.json.DEBUG) {
-//      window.console.log(json);
-//    }
-//    return '';
-//  }
+  if (ydn.json.native) {
+    return JSON.stringify(json);
+  } else {
+    return goog.json.serialize(json);
+  }
 };
