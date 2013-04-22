@@ -29,6 +29,12 @@ ydn.json.DEBUG = false;
 
 
 /**
+ * @define {boolean} Use JSON polyfill.
+ */
+ydn.json.POLY_FILL = false;
+
+
+/**
  * @final
  * @type {goog.debug.Logger}
  */
@@ -39,7 +45,8 @@ ydn.json.logger = goog.debug.Logger.getLogger('ydn');
  * @const
  * @type {boolean} indicate native JSON paraser is available.
  */
-ydn.json.native = !(typeof goog.global['JSON'] == 'undefined');
+ydn.json.native = !ydn.json.POLY_FILL ? true :
+    !(typeof goog.global['JSON'] == 'undefined');
 
 
 /**
