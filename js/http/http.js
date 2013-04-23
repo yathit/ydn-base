@@ -87,7 +87,7 @@ ydn.http.canCrossPost = function() {
   if (goog.userAgent.WEBKIT || goog.userAgent.GECKO) {
     return true;
   }
-  if (goog.userAgent.IE && goog.userAgent.isVersion('9')) {
+  if (goog.userAgent.IE && goog.userAgent.isVersionOrHigher('9')) {
     return true;
   }
   return false;
