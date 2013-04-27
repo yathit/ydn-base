@@ -1,6 +1,8 @@
 /**
  * @fileoverview Atom entry.
  *
+ * @suppress {invalidCasts}
+ *
  * http://tools.ietf.org/html/rfc5023
  * http://www.atomenabled.org/developers/syndication/
  *
