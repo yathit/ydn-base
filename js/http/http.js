@@ -133,7 +133,7 @@ ydn.http.scope_resolvers = [];
 
 /**
  *
- * @param {function(string=): string} resolver
+ * @param {function(string=): string?} resolver
  */
 ydn.http.setScopeResolver = function(resolver) {
   ydn.http.scope_resolvers = [resolver];
