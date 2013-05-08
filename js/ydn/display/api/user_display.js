@@ -24,6 +24,7 @@ ydn.api.display.UserDisplay.prototype.setNickname = function (email, un_confirme
 
 
 /**
+ * Click login or logout link.
  * @return {EventTarget}
  */
 ydn.api.display.UserDisplay.prototype.getLoginClick = function() {};
