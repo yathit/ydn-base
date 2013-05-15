@@ -25,9 +25,9 @@ goog.provide('ydn.string');
 
 
 /**
- *
- * @param {string} str
- * @return {Array.<string>}
+ * Split comma sperated tokens. Token can be possibly double quoted token.
+ * @param {string} str string to split.
+ * @return {Array.<string>} list of tokens.
  */
 ydn.string.split_comma_seperated = function(str) {
   return str.match(/(?:"[^"]*"|[^,])+/g);
