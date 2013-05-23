@@ -12,11 +12,13 @@ var gapi = {};
 gapi.auth = {};
 
 
+
 /**
  *
  * @constructor
  */
 var GapiClientDetails = function () {};
+
 
 /**
  * @type {string}
@@ -35,10 +37,12 @@ GapiClientDetails.prototype.scope;
  */
 GapiClientDetails.prototype.immediate;
 
+
 /**
  * @type {string}
  */
 GapiClientDetails.prototype.response_type;
+
 
 
 /**
@@ -53,20 +57,24 @@ var GapiAuthResult = function() {};
  */
 GapiAuthResult.prototype.access_token;
 
+
 /**
  * @type {string}
  */
 GapiAuthResult.prototype.error;
+
 
 /**
  * @type {string}
  */
 GapiAuthResult.prototype.expires_in;
 
+
 /**
  * @type {string}
  */
 GapiAuthResult.prototype.state;
+
 
 
 /**
@@ -75,20 +83,24 @@ GapiAuthResult.prototype.state;
  */
 var GapiToken = function() {};
 
+
 /**
  * @type {string}
  */
 GapiToken.prototype.state;
+
 
 /**
  * @type {string}
  */
 GapiToken.prototype.access_token;
 
+
 /**
  * @type {string}
  */
 GapiToken.prototype.token_type;
+
 
 /**
  * @type {string}
@@ -109,10 +121,12 @@ gapi.auth.authorize = function(options, callback) {};
  */
 gapi.auth.getToken = function() {};
 
+
 /**
  * @const
  */
 gapi.client = {};
+
 
 /**
  *
@@ -133,3 +147,44 @@ gapi.client.setApiKey = function(key) {};
  *  } args
  */
 gapi.client.request = function(args) {};
+
+
+
+/**
+ *
+ * @constructor
+ */
+gapi.client.HttpRequest = function() {};
+
+
+/**
+ * Executes the request and runs the supplied callback on response.
+ * @param {function(Object, string)} callback
+ */
+gapi.client.HttpRequest.prototype.execute = function(callback) {};
+
+
+
+/**
+ * https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiclientHttpBatch
+ * @constructor
+ * @extends {gapi.client.HttpRequest}
+ */
+gapi.client.HttpBatch = function() {};
+
+
+/**
+ *
+ * @param {gapi.client.HttpRequest} httpRequest
+ * @param {{
+ *   id: string,
+ *   callback: function(*, *)
+ * }=} opt_params
+ */
+gapi.client.HttpBatch.prototype.add = function(httpRequest, opt_params) {};
+
+
+/**
+ * @return {!gapi.client.HttpBatch}
+ */
+gapi.client.newHttpBatch = function() {};
