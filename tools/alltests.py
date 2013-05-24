@@ -68,6 +68,7 @@ def main():
 			write_test_files(f, base_dir, '_idb_test.html', '_idb_allTests')
 			write_test_files(f, base_dir, '_websql_test.html', '_websql_allTests')
 			write_test_files(f, base_dir, '_ls_test.html', '_ls_allTests')
+			write_test_files(f, base_dir, '_ud_test.html', '_ud_allTests')
 		write_test_files(f, base_dir, '_test.html', '_allTests')
 		f.close()
 		print "All test file saved to %s" % sys.argv[1]
