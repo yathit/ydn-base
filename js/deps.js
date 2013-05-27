@@ -9,7 +9,7 @@ goog.addDependency("../../../ydn-base/js/http/dryrun.js", ['ydn.http.DryrunTrans
 goog.addDependency("../../../ydn-base/js/http/filtered.js", ['ydn.http.FilteredTransport', 'ydn.http.TransportFilter'], ['ydn.http.ITransport', 'goog.Uri']);
 goog.addDependency("../../../ydn-base/js/http/gapi_request_adapter.js", ['ydn.http.GapiRequestAdapter'], ['ydn.http.Transport', 'goog.functions']);
 goog.addDependency("../../../ydn-base/js/http/gse.js", ['ydn.http.NoPreflightTransport', 'ydn.http.GseTransport'], ['ydn.http.FilteredTransport']);
-goog.addDependency("../../../ydn-base/js/http/http.js", ['ydn.http'], ['goog.Uri', 'goog.debug.Logger', 'ydn.json', 'ydn.http.ITransport']);
+goog.addDependency("../../../ydn-base/js/http/http.js", ['ydn.http'], ['goog.Uri', 'goog.debug.Logger', 'goog.net.XhrManager', 'ydn.http.ITransport', 'ydn.json']);
 goog.addDependency("../../../ydn-base/js/http/jsonp.js", ['ydn.http.JsonpTransport'], ['goog.Uri', 'goog.net.Jsonp']);
 goog.addDependency("../../../ydn-base/js/http/mock.js", ['ydn.http.MockHttpTransport'], ['ydn.http.ITransport']);
 goog.addDependency("../../../ydn-base/js/http/simple_query_mock_server.js", ['ydn.http.SimpleQueryMockServer'], ['ydn.http.StaticMockServer']);
