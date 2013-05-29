@@ -37,14 +37,13 @@ ydn.http.GapiRequestAdapter.wrap = function(gapi_client) {
     return gapi_client;
   } else if (gapi_client && 'request' in gapi_client) {
     return new ydn.http.GapiRequestAdapter(
-      /** @type {{request: Function}} */ (gapi_client));
+        /** @type {{request: Function}} */ (gapi_client));
   } else {
     throw new ydn.debug.error.ArgumentException('GapiRequestAdapter require ' +
-      'a valid transport, but, ' +
-      gapi_client + ' of ' + typeof gapi_client + ' found.');
+        'a valid transport, but, ' +
+        gapi_client + ' of ' + typeof gapi_client + ' found.');
   }
 };
-
 
 
 /**
