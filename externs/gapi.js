@@ -12,36 +12,15 @@ var gapi = {};
 gapi.auth = {};
 
 
-
 /**
- *
- * @constructor
+ * @typedef{{
+ *   client_id: string,
+ *   scope: (Array.<string>|string),
+ *   immediate: boolean,
+ *   response_type: (string|undefined)
+ * }}
  */
-var GapiClientDetails = function () {};
-
-
-/**
- * @type {string}
- */
-GapiClientDetails.prototype.client_id;
-
-
-/**
- * @type {Array.<string>}
- */
-GapiClientDetails.prototype.scope;
-
-
-/**
- * @type {boolean}
- */
-GapiClientDetails.prototype.immediate;
-
-
-/**
- * @type {string}
- */
-GapiClientDetails.prototype.response_type;
+var GapiClientDetails;
 
 
 
@@ -76,36 +55,16 @@ GapiAuthResult.prototype.expires_in;
 GapiAuthResult.prototype.state;
 
 
-
 /**
  *
- * @constructor
+ * @typedef {{
+ *   state: string,
+ *   access_token: string,
+ *   token_type: string,
+ *   expires_in: string
+ * }}
  */
-var GapiToken = function() {};
-
-
-/**
- * @type {string}
- */
-GapiToken.prototype.state;
-
-
-/**
- * @type {string}
- */
-GapiToken.prototype.access_token;
-
-
-/**
- * @type {string}
- */
-GapiToken.prototype.token_type;
-
-
-/**
- * @type {string}
- */
-GapiToken.prototype.expires_in;
+var GapiToken;
 
 
 /**
