@@ -27,6 +27,7 @@ goog.require('goog.async.DeferredList');
  * Reduce deferred list that return true result.
  * @param {goog.async.DeferredList} dfl input deferred list.
  * @return {!goog.async.Deferred} reduced deferred.
+ * @deprecated
  */
 ydn.async.reduceAllTrue = function(dfl) {
   var df = new goog.async.Deferred();
@@ -54,6 +55,7 @@ ydn.async.reduceAllTrue = function(dfl) {
  * @param {!Array.<!{success: Function, error: Function}>} df_arr An array of
  * deferred objects to wait for.
  * @return {!goog.async.DeferredList} DeferredList instance.
+ * @deprecated
  */
 ydn.async.all = function(df_arr) {
   var df_list = [];
