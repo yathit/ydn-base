@@ -241,7 +241,7 @@ ydn.http.getDefaultOptions = function(options) {
  * Submit HTTP request.
  *
  * @param {string} url
- * @param {function(ydn.http.CallbackResult)=} opt_callback
+ * @param {function(!ydn.http.CallbackResult)=} opt_callback
  * @param {ydn.http.ITransport.Options=} opt_options
  * @return {goog.async.Deferred|undefined} if not provided, callback result
  * is return in the deferred function.
