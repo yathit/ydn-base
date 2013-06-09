@@ -56,18 +56,22 @@ ydn.http.GapiRequestAdapter.wrap = function(gapi_client) {
  * is return in the deferred function.
  * @override
  */
-ydn.http.GapiRequestAdapter.prototype.send =  function(url, opt_callback, options) {
+ydn.http.GapiRequestAdapter.prototype.send =  function(url, opt_callback,
+                                                       options) {
   options = ydn.http.getDefaultOptions(options);
-  opt_callback = opt_callback || goog.functions.TRUE;
+  var callback = opt_callback || goog.functions.TRUE;
   var callback_adapter = function(json, raw) {
     opt_callback = undefined;
+    var result;
     if (json) {
-      return new ydn.http.CallbackResult('application/json', '', url, 200, json);
+      result = new ydn.http.CallbackResult('application/json', '',
+          url, 200, json);
     } else {
-      var content_type = raw.headers['Content-Type'];
-      return new ydn.http.CallbackResult(content_type, raw['body'], url,
+      var content_type = raw.headers['content-type'];
+      result = new ydn.http.CallbackResult(content_type, raw['body'], url,
           raw['status']);
     }
+    callback(result);
   };
   this.gapi_client['request']({
     'path': url,
@@ -76,7 +80,7 @@ ydn.http.GapiRequestAdapter.prototype.send =  function(url, opt_callback, option
     'headers': options.headers,
     'body': options.body,
     'callback': callback_adapter
-  })
+  });
 };
 
 
