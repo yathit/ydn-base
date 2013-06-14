@@ -13,4 +13,4 @@ goog.exportProperty(goog.async.Deferred.prototype, 'always',
     goog.async.Deferred.prototype.addBoth);
 
 goog.exportProperty(goog.events.EventTarget.prototype, 'addEventListener',
-   goog.events.EventTarget.prototype.addEventListener);
+    goog.events.EventTarget.prototype.addEventListener);
