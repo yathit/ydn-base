@@ -230,7 +230,7 @@ ydn.http.getDefaultOptions = function(options) {
       body: options.body,
       headers: options.headers || {},
       params: options.params || {}
-    }
+    };
   } else {
     return default_options;
   }
@@ -246,13 +246,14 @@ ydn.http.getDefaultOptions = function(options) {
  * @return {goog.async.Deferred|undefined} if not provided, callback result
  * is return in the deferred function.
  */
-ydn.http.ITransport.prototype.send =  function(url, opt_callback, opt_options) {
+ydn.http.ITransport.prototype.send = function(url, opt_callback, opt_options) {
 
 };
 
 
+
 /**
- *
+ * Define HTTP transport object.
  * @constructor
  * @implements {ydn.http.ITransport}
  */
