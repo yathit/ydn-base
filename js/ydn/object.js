@@ -45,7 +45,7 @@ ydn.object.equals = function(obj1, obj2, opt_ignore_fields) {
   opt_ignore_fields = opt_ignore_fields || {};
   if (!goog.isDefAndNotNull(obj1) || !goog.isDefAndNotNull(obj2)) {
     return false;
-  } else if (goog.isArray(obj1) && goog.isArray(obj2)) {
+  } else if (goog.isArrayLike(obj1) && goog.isArrayLike(obj2)) {
     if (obj1.length != obj2.length) {
       return false;
     }
@@ -54,14 +54,14 @@ ydn.object.equals = function(obj1, obj2, opt_ignore_fields) {
         return ydn.object.equals(ele, obj1[i]);
       });
       if (idx == -1) {
-        //console.log('obj2 do not have ' + obj1[i]);
+        // console.log('obj2 do not have ' + obj1[i]);
         return false;
       }
     }
     return true;
-  } else if (goog.isArray(obj1)) {
+  } else if (goog.isArrayLike(obj1)) {
     return obj1.length == 1 && ydn.object.equals(obj1[0], obj2);
-  } else if (goog.isArray(obj2)) {
+  } else if (goog.isArrayLike(obj2)) {
     return obj2.length == 1 && ydn.object.equals(obj2[0], obj1);
   } else if (goog.isObject(obj1) && goog.isObject(obj1)) {
     for (var key in obj1) {
