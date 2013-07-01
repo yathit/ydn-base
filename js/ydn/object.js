@@ -46,12 +46,14 @@ ydn.object.equals = function(obj1, obj2, opt_ignore_fields) {
   if (!goog.isDefAndNotNull(obj1) || !goog.isDefAndNotNull(obj2)) {
     return false;
   } else if (goog.isArrayLike(obj1) && goog.isArrayLike(obj2)) {
+    var arr1 = obj1;
+    var arr2 = /** @type {Array} */ (obj2);
     if (obj1.length != obj2.length) {
       return false;
     }
     for (var i = 0; i < obj1.length; i++) {
-      var idx = goog.array.find(obj2, function(ele) {
-        return ydn.object.equals(ele, obj1[i]);
+      var idx = goog.array.find(arr2, function(ele) {
+        return ydn.object.equals(ele, arr1[i]);
       });
       if (idx == -1) {
         // console.log('obj2 do not have ' + obj1[i]);
