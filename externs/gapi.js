@@ -95,15 +95,76 @@ gapi.client.setApiKey = function(key) {};
 
 
 /**
+ * @const
+ * @type {Object}
+ */
+var RawResp = {};
+
+
+/**
+ * @type {*}
+ */
+RawResp.body;
+
+
+/**
+ * @type {Object.<string>}
+ */
+RawResp.headers;
+
+
+/**
+ * @type {number}
+ */
+RawResp.status;
+
+
+/**
+ * @type {string|undefined}
+ */
+RawResp.statusText;
+
+
+/**
+ * @const
+ * @type {Object}
+ */
+gapi.client.RequestData = {};
+
+
+/**
+ * @type {string}
+ */
+gapi.client.RequestData.path;
+
+
+/**
+ * @type {Object.<string>|undefined}
+ */
+gapi.client.RequestData.params;
+
+
+/**
+ * @type {Object.<string>|undefined}
+ */
+gapi.client.RequestData.headers;
+
+
+/**
+ * @type {string|undefined}
+ */
+gapi.client.RequestData.body;
+
+
+/**
+ * @type {function(Object, RawResp) |undefined}
+ */
+gapi.client.RequestData.callback;
+
+
+/**
  *
- * @param {{
- *    path: string,
- *    method: (string|undefined),
- *    params: (Object|undefined),
- *    headers: (Object|undefined),
- *    body: (string|undefined),
- *    callback: (Function|undefined)}
- *  } args
+ * @param {gapi.client.RequestData} args
  */
 gapi.client.request = function(args) {};
 

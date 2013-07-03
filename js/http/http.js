@@ -1,16 +1,17 @@
-goog.provide('ydn.http');
-goog.require('goog.Uri');
-goog.require('goog.debug.Logger');
-goog.require('goog.net.XhrManager');
-goog.require('ydn.http.ITransport');
-goog.require('ydn.json');
-
 /**
  * @fileoverview Provide server services.
  *
  * Object using this interface, allow easy exchanging for proxy-base submission,
  * argumenting authentication and mocking.
  */
+
+
+goog.provide('ydn.http');
+goog.require('goog.Uri');
+goog.require('goog.debug.Logger');
+goog.require('goog.net.XhrManager');
+goog.require('ydn.http.ITransport');
+goog.require('ydn.json');
 
 
 /**
