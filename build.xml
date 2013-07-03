@@ -1,24 +1,32 @@
 <project name="ydn-base" basedir="." default="compile-debug">
     <dirname property="ydn-base.dir" file="${ant.file.ydn-base}"/>
-    <property name="work.dir" location="${ydn-base.dir}/.." />
-    <property name="lib.dir" location="${work.dir}/../lib"/>
+    <property name="work.dir" location="${ydn-base.dir}/.."
+              description="all repository root are in this working directory" />
+    <property name="lib.dir" location="${work.dir}/../lib"
+              description="library files, mostly non-javascript."/>
     <property name="home.dir" location="${user.home}"/>
 
-    <property name="closure-library.dir" value="${work.dir}/closure-library"/>
-    <property name="closure-compiler.dir" value="${lib.dir}/closure-compiler"/>
+    <property name="closure-library.dir" value="${work.dir}/closure-library"
+            description="Closure Library repository root directory"/>
+    <property name="closure-compiler.dir" value="${lib.dir}/closure-compiler"
+            description="Closure compiler repository root directory"/>
     <property name="closure-compiler.jar" value="${closure-compiler.dir}/build/compiler.jar"/>
-    <property name="closure-templates.dir" value="${lib.dir}/closure-templates"/>
-    <property name="closure-stylesheets.dir" value="${lib.dir}/closure-stylesheets"/>
-    <property name="js-test-driver.jar" value="${lib.dir}/js-test-driver/JsTestDriver.jar"/>
+    <property name="closure-templates.dir" value="${lib.dir}/closure-templates"
+              description="Closure Template repository root directory"/>
+    <property name="closure-stylesheets.dir" value="${lib.dir}/closure-stylesheets"
+              description="Closure Stylesheet repository root directory"/>
+    <property name="js-test-driver.jar" value="${lib.dir}/js-test-driver/JsTestDriver.jar"
+            description="binary for https://code.google.com/p/js-test-driver/"/>
     <condition property="jsdoc.dir" value="${lib.dir}/jsdoc-toolkit"><os family="windows"/></condition>
     <condition property="jsdoc.dir" value="${user.home}/opt/jsdoc-toolkit"><os family="unix"/></condition>
 
-    <property name="outputwrapper.norun" value="(function(){%output%})();"/>
+    <property name="outputwrapper.norun" value="(function(){%output%})();"
+            description="Closure compiler output wrapper"/>
 
     <taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
              classpath="${closure-compiler.jar}"/>
 
-    <macrodef name="closure-jscomp" description="compile closure">
+    <macrodef name="closure-jscomp" description="compile js files using closure compiler ant task">
         <attribute name="compilationlevel" default="advanced"/>
         <attribute name="generate-exports" default="false"/>
         <attribute name="debug" default="false"/>
@@ -53,7 +61,8 @@
         </sequential>
     </macrodef>
 
-    <macrodef name="closure-compile">
+    <macrodef name="closure-compile"  description="compile js files using
+     closure compiler with strict compilation setting">
         <element name="cssmap" optional="yes"/>
         <element name="options" optional="yes"/>
         <element name="extrapaths" optional="yes"/>
@@ -112,7 +121,7 @@
             <echo>"@{output.fn}" generated.</echo>
         </sequential>
     </macrodef>
-    <macrodef name="calc-deps" description="calcualte dependency for testing">
+    <macrodef name="calc-deps" description="calculate closure dependency for running raw js">
         <attribute name="output.fn"/>
         <attribute name="input.dir" />
         <attribute name="output-mode" default="deps"/>
