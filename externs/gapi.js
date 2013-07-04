@@ -95,76 +95,32 @@ gapi.client.setApiKey = function(key) {};
 
 
 /**
- * @const
- * @type {Object}
+ * @typedef {{
+ *    path: string,
+ *    method: (string|undefined),
+ *    params: (Object.<string>|undefined),
+ *    headers: (Object|undefined),
+ *    body: (string|undefined),
+ *    callback: (Function|undefined)
+ *  }} HTTP request argument data.
  */
-var RawResp = {};
+gapi.client.ReqData;
 
 
 /**
- * @type {*}
+ * @typedef {{
+ *    body: *,
+ *    headers: (Object.<string>|undefined),
+ *    status: number,
+ *    statusText: (string|undefined)
+ *  }} HTTP raw respond data.
  */
-RawResp.body;
-
-
-/**
- * @type {Object.<string>}
- */
-RawResp.headers;
-
-
-/**
- * @type {number}
- */
-RawResp.status;
-
-
-/**
- * @type {string|undefined}
- */
-RawResp.statusText;
-
-
-/**
- * @const
- * @type {Object}
- */
-gapi.client.RequestData = {};
-
-
-/**
- * @type {string}
- */
-gapi.client.RequestData.path;
-
-
-/**
- * @type {Object.<string>|undefined}
- */
-gapi.client.RequestData.params;
-
-
-/**
- * @type {Object.<string>|undefined}
- */
-gapi.client.RequestData.headers;
-
-
-/**
- * @type {string|undefined}
- */
-gapi.client.RequestData.body;
-
-
-/**
- * @type {function(Object, RawResp) |undefined}
- */
-gapi.client.RequestData.callback;
+gapi.client.RawResp;
 
 
 /**
  *
- * @param {gapi.client.RequestData} args
+ * @param {gapi.client.ReqData} args
  */
 gapi.client.request = function(args) {};
 
@@ -179,7 +135,7 @@ gapi.client.HttpRequest = function() {};
 
 /**
  * Executes the request and runs the supplied callback on response.
- * @param {function(Object, string)} callback
+ * @param {function(Object, gapi.client.RawResp)} callback
  */
 gapi.client.HttpRequest.prototype.execute = function(callback) {};
 

@@ -4,17 +4,18 @@
  * NOTE: these code are stripped using compiler prefix feature.
  * See more detail in tools/strip_debug.txt file.
  *
- * @author kyawtun@yathit.com <Kyaw Tun>
+ * @author kyawtun@yathit.com (Kyaw Tun)
  */
 
 
 goog.provide('ydn.debug.error.ArgumentException');
-goog.provide('ydn.debug.error.NotSupportedException');
-goog.provide('ydn.debug.error.NotImplementedException');
-goog.provide('ydn.debug.error.InvalidOperationException');
 goog.provide('ydn.debug.error.InternalError');
+goog.provide('ydn.debug.error.InvalidOperationException');
+goog.provide('ydn.debug.error.NotImplementedException');
+goog.provide('ydn.debug.error.NotSupportedException');
 
 goog.require('goog.debug.Error');
+
 
 
 /**
@@ -23,7 +24,7 @@ goog.require('goog.debug.Error');
  * @constructor
  * @extends {goog.debug.Error}
  */
-ydn.debug.error.ArgumentException = function (opt_msg) {
+ydn.debug.error.ArgumentException = function(opt_msg) {
   goog.base(this, opt_msg);
   this.name = 'ydn.error.ArgumentException';
 };
@@ -36,7 +37,7 @@ goog.inherits(ydn.debug.error.ArgumentException, goog.debug.Error);
  * @constructor
  * @extends {goog.debug.Error}
  */
-ydn.debug.error.NotSupportedException = function (opt_msg) {
+ydn.debug.error.NotSupportedException = function(opt_msg) {
   goog.base(this, opt_msg);
   this.name = 'ydn.error.NotSupportedException';
 };
