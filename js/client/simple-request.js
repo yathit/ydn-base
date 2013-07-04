@@ -78,9 +78,8 @@ ydn.client.SimpleHttpRequest.prototype.xm_;
  */
 ydn.client.SimpleHttpRequest.prototype.execute = function(cb) {
   goog.asserts.assert(this.xm_, this + ' already executed.');
-  var url = new goog.Uri();
   var data = this.req_data_;
-  url.setPath(data.path);
+  var url = new goog.Uri(data.path);
   for (var key in data.params) {
     url.setParameterValue(key, data.params[key]);
   }
