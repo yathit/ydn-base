@@ -59,7 +59,7 @@ ydn.client.HttpRespondData.prototype.body;
 
 
 /**
- * @type {Object.<string>}
+ * @type {!Object.<string>}
  */
 ydn.client.HttpRespondData.prototype.headers;
 
@@ -93,18 +93,16 @@ ydn.client.HttpRespondData.wrap = function(args) {
  * This class exists so that it is easier to interpolate with GAPI library and
  * provide strong type, when use internally.
  * @param {string} path
- * @param {function(Object, ydn.client.HttpRespondData)=} opt_callback
  * @param {string=} opt_method
  * @param {Object.<string>=} opt_params
  * @param {Object.<string>=} opt_headers
- * @param {*=} opt_body
+ * @param {ArrayBuffer|Blob|Document|FormData|string=} opt_body
  * @constructor
  * @struct
  */
-ydn.client.HttpRequestData = function(path, opt_callback, opt_method,
+ydn.client.HttpRequestData = function(path, opt_method,
                                       opt_params, opt_headers, opt_body) {
   this.path = path;
-  this.callback = opt_callback || null;
   this.method = opt_method ? opt_method.toUpperCase() : 'GET';
   this.params = opt_params || {};
   this.headers = opt_headers || {};
@@ -125,38 +123,40 @@ ydn.client.HttpRequestData.prototype.method;
 
 
 /**
- * @type {Object.<string>}
+ * @type {!Object.<string>}
  */
 ydn.client.HttpRequestData.prototype.params;
 
 
 /**
- * @type {Object.<string>}
+ * @type {!Object.<string>}
  */
 ydn.client.HttpRequestData.prototype.headers;
 
 
 /**
- * @type {*}
+ * @type {ArrayBuffer|Blob|Document|FormData|string|undefined}
  */
 ydn.client.HttpRequestData.prototype.body;
 
 
-/**
- * Respond callback to invoke when HTTP request is finished. This function
- * must be set to null by the HTTP client.
- * @type {function(Object, ydn.client.HttpRespondData)?}
+/**]
+ * @return {string}
  */
-ydn.client.HttpRequestData.prototype.callback;
+ydn.client.HttpRequestData.prototype.getUri = function() {
+  return this.path;
+};
 
 
 /**
+ * Wrap request data.
+ * Note: callback is not used in ydn.client.HttpRequestData.
  * @param {gapi.client.ReqData|ydn.client.HttpRequestData} args
  * @return {!ydn.client.HttpRequestData}
  */
 ydn.client.HttpRequestData.wrap = function(args) {
   return args instanceof ydn.client.HttpRequestData ? args :
-      new ydn.client.HttpRequestData(args['path'], args['callback'],
+      new ydn.client.HttpRequestData(args['path'],
           args['method'], args['params'], args['headers'], args['body']);
 };
 
@@ -171,7 +171,7 @@ ydn.client.HttpRequest = function() {};
 
 /**
  * Execute the request.
- * @param {function(Object, ydn.client.HttpRespondData)} cb
+ * @param {function(Object, ydn.client.HttpRespondData)?} cb
  */
 ydn.client.HttpRequest.prototype.execute = function(cb) {};
 
@@ -188,7 +188,7 @@ ydn.client.Client = function() {};
  * Create a new HTTP request.
  * If callback is provided in the argument, the request is execute immediately.
  * @param {ydn.client.HttpRequestData} args
- * @return {ydn.client.HttpRequest} Return request object if callback is not
+ * @return {!ydn.client.HttpRequest} Return request object if callback is not
  * provided in the argument.
  */
 ydn.client.Client.prototype.request = function(args) {};

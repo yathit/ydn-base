@@ -5,6 +5,7 @@
 
 goog.provide('ydn.client.SimpleClient');
 goog.require('ydn.client');
+goog.require('ydn.client.SimpleHttpRequest');
 
 
 
@@ -28,21 +29,10 @@ ydn.client.SimpleClient.prototype.xm_;
 
 
 /**
- * Create a new HTTP request.
- * If callback is provided in the argument, the request is execute immediately.
- * @param {ydn.client.HttpRequestData|gapi.client.ReqData} args
- * @return {ydn.client.HttpRequest} Return request object if callback is not
- * provided in the argument.
+ * @inheritDoc
  */
 ydn.client.SimpleClient.prototype.request = function(args) {
-  args = ydn.client.HttpRequestData.wrap(args);
-  var req = new ydn.client.SimpleHttpRequest(args, this.xm_);
-  if (args.callback) {
-    req.execute(args.callback);
-    return null;
-  } else {
-    return req;
-  }
+  return new ydn.client.SimpleHttpRequest(args, this.xm_);
 };
 
 
