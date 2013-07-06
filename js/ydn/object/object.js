@@ -162,23 +162,3 @@ ydn.object.takeFirst = function(row) {
   }
   return undefined;
 };
-
-
-/**
- * Merge two object by using three-way merge.
- * This function does not modify input objects.
- * @param {Object} ver2 modified object of most recent version.
- * @param {Object} ver1 modified object.
- * @param {Object} orginal original object.
- * @return {Object} merged object.
- */
-ydn.object.merge = function(ver2, ver1, orginal) {
-  if (!ver1) {
-    return ver2;
-  }
-  if (!ver2) {
-    return ver1;
-  }
-
-  return ver1;
-};

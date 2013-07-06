@@ -31,6 +31,8 @@ goog.addDependency("../../../ydn-base/js/ydn/debug/error.js", ['ydn.debug.error.
 goog.addDependency("../../../ydn-base/js/ydn/display/api/account_activity_display.js", ['ydn.display.api.AccountActivityDisplay'], []);
 goog.addDependency("../../../ydn-base/js/ydn/display/api/token_display.js", ['ydn.api.display.TokenDisplay'], []);
 goog.addDependency("../../../ydn-base/js/ydn/display/api/user_display.js", ['ydn.api.display.UserDisplay'], []);
+goog.addDependency("../../../ydn-base/js/ydn/object/merge.js", ['ydn.object.merge'], []);
 goog.addDependency("../../../ydn-base/js/ydn/object/object.js", ['ydn.object'], ['ydn.json']);
 goog.addDependency("../../../ydn-base/js/ydn/string/diff.js", ['ydn.string.diff'], []);
+goog.addDependency("../../../ydn-base/js/ydn/string/diffdemo.js", [], []);
 goog.addDependency("../../../ydn-base/js/ydn/string/string.js", ['ydn.string'], []);
