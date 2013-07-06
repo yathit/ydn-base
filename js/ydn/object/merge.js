@@ -20,6 +20,7 @@
  */
 
 goog.provide('ydn.object.merge');
+goog.require('ydn.string.diff');
 
 
 /**
@@ -90,15 +91,16 @@ ydn.object.merge_att_ = function(ver2, ver1, original) {
           var str_merge_result = ydn.string.diff.diff3_merge(
               ver2[key].split(' '), original[key].split(' '),
               ver1[key].split(' '));
-          var s = '';
+          var s = [];
           for (var j = 0; j < str_merge_result.length; j++) {
             var result = str_merge_result[j];
             if (result.ok) {
-              s += result.ok.join(' ');
+              Array.prototype.push.apply(s, result.ok);
             } else {
-              s += result.conflict.a.join(' ');
+              Array.prototype.push.apply(s, result.conflict.a);
             }
           }
+          out[key] = s.join(' ');
         } else {
           out[key] = ydn.object.merge_att_(ver2[key], ver1[key], original[key]);
         }

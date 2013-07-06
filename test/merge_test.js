@@ -73,3 +73,25 @@ var test_conflict = function() {
   var result2 = ydn.object.merge(ver1, ver2, org);
   assertObjectEquals('2', {a: 2}, result2);
 };
+
+
+var test_string_merge = function() {
+  var org = {a: 'A BB C D'};
+  var ver1 = {a: 'A b C'};
+  var ver2 = {a: 'A BB C'};
+  assertObjectEquals('ver1 edit', {a: 'A b C'},
+      ydn.object.merge(ver2, ver1, org));
+  assertObjectEquals('ver2 edit', {a: 'A b C'},
+      ydn.object.merge(ver1, ver2, org));
+};
+
+
+var test_string_merge2 = function() {
+  var org = {a: 'A BB C D'};
+  var ver1 = {a: 'A b C D'};
+  var ver2 = {a: 'A BB C'};
+  assertObjectEquals('ver1 edit', {a: 'A b C'},
+      ydn.object.merge(ver2, ver1, org));
+  assertObjectEquals('ver2 edit', {a: 'A b C'},
+      ydn.object.merge(ver1, ver2, org));
+};
