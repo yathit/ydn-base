@@ -130,21 +130,19 @@ ydn.object.extend = function(target, var_args) {
 /**
  * Construct array of having value v.
  * @param {*} v element value.
- * @param n number of items.
- * @return {!Array}
+ * @param {number} n number of items.
+ * @return {!Array} array preallocated with value v.
  */
 ydn.object.reparr = function(v, n) {
   // this is the most efficient way in chrome.
   // IE10 can be more efficient by preallocating.
-	var arr = []; // new Array(n); // preallocating.
-	for (var i = 0; i < n; i++) {
-		arr[i] = v;
-	}
-	return arr;
+  // new Array(n); // preallocating.
+  var arr = [];
+  for (var i = 0; i < n; i++) {
+    arr[i] = v;
+  }
+  return arr;
 };
-
-
-
 
 
 /**
@@ -153,7 +151,10 @@ ydn.object.reparr = function(v, n) {
  * @param {*} row row.
  * @return {*} the first field of object in row value.
  */
-ydn.object.takeFirst = function (row) {
+ydn.object.takeFirst = function(row) {
+  if (!row) {
+    return;
+  }
   for (var key in row) {
     if (row.hasOwnProperty(key)) {
       return row[key];
@@ -163,3 +164,21 @@ ydn.object.takeFirst = function (row) {
 };
 
 
+/**
+ * Merge two object by using three-way merge.
+ * This function does not modify input objects.
+ * @param {Object} ver2 modified object of most recent version.
+ * @param {Object} ver1 modified object.
+ * @param {Object} orginal original object.
+ * @return {Object} merged object.
+ */
+ydn.object.merge = function(ver2, ver1, orginal) {
+  if (!ver1) {
+    return ver2;
+  }
+  if (!ver2) {
+    return ver1;
+  }
+
+  return ver1;
+};

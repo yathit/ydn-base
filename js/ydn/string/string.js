@@ -21,9 +21,6 @@
 goog.provide('ydn.string');
 
 
-
-
-
 /**
  * Split comma sperated tokens. Token can be possibly double quoted token.
  * @param {string} str string to split.
@@ -35,17 +32,18 @@ ydn.string.split_comma_seperated = function(str) {
 
 
 /**
- *
- * @param {string} str
- * @return {Array.<string>}
+ * Split string by space separated, possibly double quoted, string.
+ * @param {string} str string to be split.
+ * @return {Array.<string>} resulting split string.
  */
 ydn.string.split_space_seperated = function(str) {
   return str.match(/\w+|"[^"]+"/g);
 };
 
+
 /**
- * Split space but not in quoted (single or double).
- * @param {string} str
+ * Split string by space separated, possibly single or double quoted, string.
+ * @param {string} str string to be split.
  * @return {Array.<string>} quote preserved tokens.
  */
 ydn.string.split_space = function(str) {
