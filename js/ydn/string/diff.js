@@ -336,7 +336,7 @@ ydn.string.diff.diff_indices = function(file1, file2) {
 
 
 /**
- *  Given three files, A, O, and B, where both A and B are
+ * Given three files, A, O, and B, where both A and B are
  * independently derived from O, returns a fairly complicated
  * internal representation of merge decisions it's taken. The
  * interested reader may wish to consult.
@@ -444,27 +444,89 @@ ydn.string.diff.diff3_merge_indices = function (a, o, b) {
 };
 
 
+
+/**
+ * Conflict result.
+ * @param {Array.<string>} a conflicting string from version 1.
+ * @param {number} a_index index of a.
+ * @param {Array.<string>} o original.
+ * @param {number} o_index index of original.
+ * @param {Array.<string>} b conflicting string from version 2.
+ * @param {number} b_index index of b.
+ * @constructor
+ */
+ydn.string.diff.ConflictResult = function(a, a_index, o, o_index, b, b_index) {
+  /**
+   * @type {Array.<string>|undefined}
+   */
+  this.a = a;
+  /**
+   * @type {number|undefined}
+   */
+  this.a_index = a_index;
+  /**
+   * @type {Array.<string>|undefined}
+   */
+  this.o = o;
+  /**
+   * @type {number|undefined}
+   */
+  this.o_index = o_index;
+  /**
+   * @type {Array.<string>|undefined}
+   */
+  this.b = b;
+  /**
+   * @type {number|undefined}
+   */
+  this.b_index = b_index;
+};
+
+
+
+/**
+ * Merge result.
+ * @param {Array.<string>|undefined} ok merge result if resolved successfully.
+ * @param {ydn.string.diff.ConflictResult=} opt_conflict if conflict not result.
+ * @constructor
+ */
+ydn.string.diff.MergeResult = function(ok, opt_conflict) {
+  /**
+   * @type {Array.<string>|undefined}
+   */
+  this.ok = ok;
+  /**
+   * @type {ydn.string.diff.ConflictResult}
+   */
+  this.conflict = opt_conflict || null;
+};
+
+
 /**
  * Applies the output of Diff.diff3_merge_indices to actually
  * construct the merged file; the returned result alternates
  * between "ok" and "conflict" blocks.
- * @param {Array.<string>} a
- * @param {Array.<string>} o
- * @param {Array.<string>} b
- * @param {boolean} excludeFalseConflicts
- * @return {Array}
+ * @param {Array.<string>} a version 1.
+ * @param {Array.<string>} o original.
+ * @param {Array.<string>} b version 2.
+ * @param {boolean=} opt_excludeFalseConflicts if true, conflict with same value
+ * are treat as resolved result.
+ * @return {Array.<!ydn.string.diff.MergeResult>}
  */
-ydn.string.diff.diff3_merge = function(a, o, b, excludeFalseConflicts) {
+ydn.string.diff.diff3_merge = function(a, o, b, opt_excludeFalseConflicts) {
 
   var result = [];
   var files = [a, o, b];
   var indices = ydn.string.diff.diff3_merge_indices(a, o, b);
 
+  /**
+   * @type {Array.<string>}
+   */
   var okLines = [];
 
   function flushOk() {
     if (okLines.length) {
-      result.push({ok: okLines});
+      result.push(new ydn.string.diff.MergeResult(okLines));
     }
     okLines = [];
   }
@@ -489,18 +551,17 @@ ydn.string.diff.diff3_merge = function(a, o, b, excludeFalseConflicts) {
     var x = indices[i];
     var side = x[0];
     if (side == -1) {
-      if (excludeFalseConflicts && !isTrueConflict(x)) {
+      if (opt_excludeFalseConflicts && !isTrueConflict(x)) {
         pushOk(files[0].slice(x[1], x[1] + x[2]));
       } else {
         flushOk();
-        result.push({
-          conflict: {
-            a: a.slice(x[1], x[1] + x[2]),
-            aIndex: x[1],
-            o: o.slice(x[3], x[3] + x[4]),
-            oIndex: x[3],
-            b: b.slice(x[5], x[5] + x[6]),
-            bIndex: x[5]}});
+        result.push(new ydn.string.diff.MergeResult(null,
+            new ydn.string.diff.ConflictResult(a.slice(x[1], x[1] + x[2]),
+            x[1],
+            o.slice(x[3], x[3] + x[4]),
+            x[3],
+            b.slice(x[5], x[5] + x[6]),
+            x[5])));
       }
     } else {
       pushOk(files[side].slice(x[1], x[1] + x[2]));
