@@ -149,6 +149,15 @@ ydn.client.HttpRespondData.prototype.getHeader = function(header) {
 
 
 /**
+ * @return {!Object} Get all headers.
+ */
+ydn.client.HttpRespondData.prototype.getHeaders = function(header) {
+  this.ensureParse();
+  return this.headers;
+};
+
+
+/**
  * @param {gapi.client.RawResp|ydn.client.HttpRespondData|string} args
  * @return {!ydn.client.HttpRespondData}
  */
