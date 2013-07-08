@@ -149,11 +149,11 @@ ydn.client.HttpRespondData.prototype.getHeader = function(header) {
 
 
 /**
- * @return {!Object} Get all headers.
+ * @return {!Object} Get all headers. Treat as read-only object.
  */
-ydn.client.HttpRespondData.prototype.getHeaders = function(header) {
+ydn.client.HttpRespondData.prototype.getHeaders = function() {
   this.ensureParse();
-  return this.headers;
+  return this.headers; // should we clone?
 };
 
 
@@ -253,9 +253,11 @@ ydn.client.HttpRequest = function() {};
 
 /**
  * Execute the request.
- * @param {function(Object, ydn.client.HttpRespondData)?} cb
+ * @param {function(this: T, Object, ydn.client.HttpRespondData)?} cb
+ * @param {T=} opt_obj scope.
+ *  @template T
  */
-ydn.client.HttpRequest.prototype.execute = function(cb) {};
+ydn.client.HttpRequest.prototype.execute = function(cb, opt_obj) {};
 
 
 

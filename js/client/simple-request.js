@@ -74,9 +74,11 @@ ydn.client.SimpleHttpRequest.prototype.xm_;
 
 /**
  * Execute the request.
- * @param {function(Object, ydn.client.HttpRespondData)?} cb
+ * @param {function(this: T, Object, ydn.client.HttpRespondData)?} cb
+ * @param {T=} opt_obj scope.
+ * @template T
  */
-ydn.client.SimpleHttpRequest.prototype.execute = function(cb) {
+ydn.client.SimpleHttpRequest.prototype.execute = function(cb, opt_obj) {
   goog.asserts.assert(this.xm_, this + ' already executed.');
   var data = this.req_data_;
   var url = new goog.Uri(data.path);
@@ -99,8 +101,10 @@ ydn.client.SimpleHttpRequest.prototype.execute = function(cb) {
     }
     var resp = new ydn.client.HttpRespondData(xhr.getStatus(), body, headers,
         xhr.getStatusText());
-    cb(json, resp);
-    cb = null;
+    if (cb) {
+      cb.call(opt_obj, json, resp);
+      cb = null;
+    }
   };
   this.xm_.send(this.id_, url.toString(),
       data.method, data.body, data.headers, undefined, callback);
