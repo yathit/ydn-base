@@ -49,8 +49,6 @@ public class DebugStrippingCompilerRunner extends CommandLineRunner {
         boolean isAdvancedOptionsEnabled =
                 options.variableRenaming == VariableRenamingPolicy.ALL;
 
-        boolean isDebug = true;
-
         /*
         Map<String, Node> defines = options.getDefineReplacements();
         if (defines.containsKey("goog.DEBUG")) {
@@ -60,11 +58,11 @@ public class DebugStrippingCompilerRunner extends CommandLineRunner {
         }
         */
         // Above code to get goog.DEBUG doesn't work, so we are using heuristic again.
-        isDebug = is_debug;
 
         // Only enable additional options when ADVANCED_OPTIMIZATIONS is specified
         // and goog.DEBUG is true
-        if (isAdvancedOptionsEnabled && !isDebug) {
+        if (isAdvancedOptionsEnabled && !is_debug) {
+            System.out.println("stripping debug message apply");
             applyDebugStrippingOptions(options);
         }
 
@@ -76,7 +74,6 @@ public class DebugStrippingCompilerRunner extends CommandLineRunner {
         options.stripTypePrefixes = ImmutableSet.of("goog.asserts",
                 "goog.debug", "ydn.debug"); //
         options.setIdGenerators(ImmutableSet.of("goog.events.getUniqueId"));
-        System.out.println("stripping applied");
     }
 
     public static void main(String[] args) {
