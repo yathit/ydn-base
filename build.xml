@@ -92,6 +92,7 @@
                 <arg line='-f "--jscomp_error=ambiguousFunctionDecl"'/>
                 <arg line='-f "--jscomp_error=checkDebuggerStatement"'/>
                 <arg line='-f "--jscomp_error=checkRegExp"'/>
+                <arg line='-f "--jscomp_error=checkStructDictInheritance"'/>
                 <arg line='-f "--jscomp_error=checkTypes"'/>
                 <arg line='-f "--jscomp_error=checkVars"'/>
                 <arg line='-f "--jscomp_error=const"'/>
