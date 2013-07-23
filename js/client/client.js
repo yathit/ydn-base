@@ -158,6 +158,21 @@ ydn.client.HttpRespondData.prototype.getHeaders = function() {
 
 
 /**
+ * @return {Object}
+ */
+ydn.client.HttpRespondData.prototype.getJson = function() {
+
+  this.ensureParse();
+  var s = this.body;
+  if (goog.isString(s)) {
+    return /** @type {Object} */ (JSON.parse(s));
+  } else {
+    return /** @type {Object} */ (this.body);
+  }
+};
+
+
+/**
  * @param {gapi.client.RawResp|ydn.client.HttpRespondData|string} args
  * @return {!ydn.client.HttpRespondData}
  */
