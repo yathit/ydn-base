@@ -199,42 +199,27 @@ ydn.client.HttpRespondData.wrap = function(args) {
  */
 ydn.client.HttpRequestData = function(path, opt_method,
                                       opt_params, opt_headers, opt_body) {
+  /**
+   * @type {string}
+   */
   this.path = path;
+  /**
+   * @type {string}
+   */
   this.method = opt_method ? opt_method.toUpperCase() : 'GET';
+  /**
+   * @type {!Object}
+   */
   this.params = opt_params || {};
+  /**
+   * @type {!Object}
+   */
   this.headers = opt_headers || {};
+  /**
+   * @type {ArrayBuffer|Blob|Document|FormData|string|undefined}
+   */
   this.body = opt_body;
 };
-
-
-/**
- * @type {string}
- */
-ydn.client.HttpRequestData.prototype.path;
-
-
-/**
- * @type {string}
- */
-ydn.client.HttpRequestData.prototype.method;
-
-
-/**
- * @type {!Object.<string>}
- */
-ydn.client.HttpRequestData.prototype.params;
-
-
-/**
- * @type {!Object.<string>}
- */
-ydn.client.HttpRequestData.prototype.headers;
-
-
-/**
- * @type {ArrayBuffer|Blob|Document|FormData|string|undefined}
- */
-ydn.client.HttpRequestData.prototype.body;
 
 
 /**]
@@ -242,6 +227,16 @@ ydn.client.HttpRequestData.prototype.body;
  */
 ydn.client.HttpRequestData.prototype.getUri = function() {
   return this.path;
+};
+
+
+/**
+ * Return true if the request is write request.
+ * @return {boolean}
+ */
+ydn.client.HttpRequestData.prototype.isWriteRequest = function() {
+  return this.method == 'POST' || this.method == 'PUT' ||
+      this.method == 'DELETE';
 };
 
 
