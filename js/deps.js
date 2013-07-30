@@ -21,6 +21,7 @@ goog.addDependency("../../../ydn-base/js/http/static_mock_server.js", ['ydn.http
 goog.addDependency("../../../ydn-base/js/http/transport.js", ['ydn.http.ITransport', 'ydn.http.Transport', 'ydn.http.CallbackResult'], []);
 goog.addDependency("../../../ydn-base/js/http/xmlhttpreq_transport.js", ['ydn.http.XMLHttpRequest'], ['ydn.http.ITransport', 'ydn.http.Transport', 'ydn.http', 'goog.object', 'goog.Uri', 'ydn.debug.error.ArgumentException']);
 goog.addDependency("../../../ydn-base/js/ydn/async.js", ['ydn.async'], ['goog.async.Deferred', 'goog.async.DeferredList']);
+goog.addDependency("../../../ydn-base/js/ydn/buffer.js", ['ydn.structs.Buffer', 'ydn.structs.Buffer.Iterator'], ['goog.structs.AvlTree', 'ydn.db.KeyRange']);
 goog.addDependency("../../../ydn-base/js/ydn/error.js", ['ydn.error', 'ydn.error.ArgumentException', 'ydn.error.NotImplementedException', 'ydn.error.ConstraintError', 'ydn.error.NotSupportedException', 'ydn.error.InternalError', 'ydn.error.InvalidOperationException', 'ydn.error.InvalidOperationError'], []);
 goog.addDependency("../../../ydn-base/js/ydn/expression.js", ['ydn.math.Expression'], ['ydn.string', 'goog.string', 'ydn.object', 'ydn.error']);
 goog.addDependency("../../../ydn-base/js/ydn/json.js", ['ydn.json'], ['goog.debug.Logger', 'goog.json']);
@@ -31,7 +32,7 @@ goog.addDependency("../../../ydn-base/js/ydn/debug/error.js", ['ydn.debug.error.
 goog.addDependency("../../../ydn-base/js/ydn/display/api/account_activity_display.js", ['ydn.display.api.AccountActivityDisplay'], []);
 goog.addDependency("../../../ydn-base/js/ydn/display/api/token_display.js", ['ydn.api.display.TokenDisplay'], []);
 goog.addDependency("../../../ydn-base/js/ydn/display/api/user_display.js", ['ydn.api.display.UserDisplay'], []);
-goog.addDependency("../../../ydn-base/js/ydn/object/merge.js", ['ydn.object.merge'], []);
+goog.addDependency("../../../ydn-base/js/ydn/object/merge.js", ['ydn.object.merge'], ['ydn.string.diff']);
 goog.addDependency("../../../ydn-base/js/ydn/object/object.js", ['ydn.object'], ['ydn.json']);
 goog.addDependency("../../../ydn-base/js/ydn/string/diff.js", ['ydn.string.diff'], []);
 goog.addDependency("../../../ydn-base/js/ydn/string/diffdemo.js", [], []);
