@@ -191,6 +191,40 @@
             </exec>
         </sequential>
     </macrodef>
+    <macrodef name="comp-gss" description="compile closure stylesheets">
+        <attribute name="platform"/>
+        <attribute name="rename.style" default="DEBUG"/>
+        <attribute name="module.dir"/>
+        <element name="opt-include" optional="yes" />
+        <attribute name="output.fn" default="@{module.dir}/css/@{platform}.css"/>
+        <attribute name="css-rename-map.fn" default="@{output.fn}.js"/>
+        <attribute name="pretty" default=""/>
+        <attribute name="rename-format" default="CLOSURE_COMPILED"/>
+        <sequential>
+            <local name="gss-input"/>
+            <fileset dir="@{module.dir}/gss" id="gss-files">
+                <opt-include/>
+                <include name="modules/**/*.gss"/>
+                <include name="@{platform}/*.css"/>
+                <include name="@{platform}/*.gss"/>
+            </fileset>
+            <pathconvert property="gss-input" refid="gss-files" pathsep=" "/>
+            <echo>"compiling gss files: ${gss-input}"</echo>
+            <java description="compile closure stylesheets" fork="true"
+                  jar="${closure-stylesheets.dir}/build/closure-stylesheets.jar"
+                  failonerror="true">
+                <!-- <arg value="-pretty-print"/> -->
+                <arg line="@{pretty}"/>
+                <arg line="--rename @{rename.style}" description="options are DEBUG or CLOSURE"/>
+                <arg line="--output-renaming-map @{css-rename-map.fn}"/>
+                <arg line="--output-renaming-map-format @{rename-format}"/>
+                <arg line='--output-file "@{output.fn}"'/>
+                <arg line="--allowed-non-standard-function color-stop"/>
+                <arg line="${gss-input}"/>
+            </java>
+            <echo>"save css file: @{output.fn}"</echo>
+        </sequential>
+    </macrodef>
     <target name="compile-debug" description="compile JS">
         <mkdir dir="${ydn-base.dir}/jsc"/>
         <closure-compile compilationlevel="ADVANCED_OPTIMIZATIONS"
