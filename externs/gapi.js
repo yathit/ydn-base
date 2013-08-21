@@ -125,6 +125,16 @@ gapi.client.RawResp;
 gapi.client.request = function(args) {};
 
 
+/**
+ * @param {string} method The method to be executed. For example,
+ * plus.people.search from the G+ API.
+ * @param {string} version The version of the API which defines the method
+ * to be executed. Defaults to v1.
+ * @param {Object} rpcParams
+ */
+gapi.client.rpcRequest = function(method, version, rpcParams) {};
+
+
 
 /**
  *
@@ -164,3 +174,12 @@ gapi.client.HttpBatch.prototype.add = function(httpRequest, opt_params) {};
  * @return {!gapi.client.HttpBatch}
  */
 gapi.client.newHttpBatch = function() {};
+
+
+/**
+ * Loads the client library interface to a particular API.
+ * @param {string} lib
+ * @param {string} ver
+ * @param {Function} cb
+ */
+gapi.client.load = function(lib, ver, cb) {};
