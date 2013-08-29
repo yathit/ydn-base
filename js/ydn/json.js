@@ -42,10 +42,11 @@ ydn.json.logger = goog.debug.Logger.getLogger('ydn');
 
 
 /**
+ * @private
  * @const
  * @type {boolean} indicate native JSON paraser is available.
  */
-ydn.json.native = !ydn.json.POLY_FILL ? true :
+ydn.json.native_ = !ydn.json.POLY_FILL ? true :
     !(typeof goog.global['JSON'] == 'undefined');
 
 
@@ -60,7 +61,7 @@ ydn.json.parse = function(json_str) {
   if (!goog.isString(json_str) || goog.string.isEmpty(json_str)) {
     return {};
   }
-  if (ydn.json.native) {
+  if (ydn.json.native_) {
     return /** @type {!Object} */ (JSON.parse(json_str));
   } else {
     return /** @type {!Object} */ (goog.json.parse(json_str));
@@ -100,7 +101,7 @@ ydn.json.toShortString = function(obj) {
  */
 ydn.json.stringify = function(json) {
 
-  if (ydn.json.native) {
+  if (ydn.json.native_) {
     return JSON.stringify(json);
   } else {
     return goog.json.serialize(json);
