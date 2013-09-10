@@ -196,6 +196,7 @@ ydn.client.HttpRespondData.wrap = function(args) {
  * @param {ArrayBuffer|Blob|Document|FormData|string=} opt_body
  * @constructor
  * @struct
+ * @implements {ydn.client.HttpRequest}
  */
 ydn.client.HttpRequestData = function(path, opt_method,
                                       opt_params, opt_headers, opt_body) {
@@ -222,7 +223,7 @@ ydn.client.HttpRequestData = function(path, opt_method,
 };
 
 
-/**]
+/**
  * @return {string}
  */
 ydn.client.HttpRequestData.prototype.getUri = function() {
@@ -238,6 +239,12 @@ ydn.client.HttpRequestData.prototype.isWriteRequest = function() {
   return this.method == 'POST' || this.method == 'PUT' ||
       this.method == 'DELETE';
 };
+
+
+/**
+ * @inheritDoc
+ */
+ydn.client.HttpRequestData.prototype.execute = goog.abstractMethod;
 
 
 /**

@@ -59,13 +59,6 @@ ydn.client.SimpleHttpRequest.prototype.getId = function() {
 
 
 /**
- * @type {ydn.client.HttpRequestData}
- * @private
- */
-ydn.client.SimpleHttpRequest.prototype.req_data_;
-
-
-/**
  * @type {goog.net.XhrManager}
  * @private
  */

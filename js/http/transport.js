@@ -125,6 +125,7 @@ ydn.http.CallbackResult.prototype.getResponseJson = function() {
   }
 };
 
+
 /**
  *
  * @return {number}
@@ -132,6 +133,7 @@ ydn.http.CallbackResult.prototype.getResponseJson = function() {
 ydn.http.CallbackResult.prototype.getStatus = function() {
   return this.status;
 };
+
 
 /**
  *
