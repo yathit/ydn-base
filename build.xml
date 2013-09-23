@@ -141,8 +141,8 @@
     </macrodef>
     <macrodef name="jstd-gen" description="generate JSTD file">
         <attribute name="base.dir"/>
-        <attribute name="js.dir" default="@{base.dir}/js"/>
-        <attribute name="input.fn" default="@{base.dir}/js/test.js"/>
+        <attribute name="js.dir" default="@{base.dir}/src"/>
+        <attribute name="input.fn" default="@{base.dir}/src/test.js"/>
         <attribute name="test.dir" default="@{base.dir}/test"/>
         <attribute name="output.fn" default="@{base.dir}/jsTestDriver.conf"/>
         <element name="deps-options" optional="yes"/>
@@ -151,7 +151,7 @@
             <property name="deps-list.fn" value="@{base.dir}/deps-list.txt"/>
             <calc-deps
                     output-mode="list"
-                    input.dir="@{base.dir}/js/"
+                    input.dir="@{base.dir}/src/"
                     output.fn="${deps-list.fn}">
                 <calc-options>
                     <arg line='--path "${closure-library.dir}"'/>
@@ -229,8 +229,8 @@
     <target name="compile-debug" description="compile JS">
         <mkdir dir="${ydn-base.dir}/jsc"/>
         <closure-compile compilationlevel="ADVANCED_OPTIMIZATIONS"
-                         input="${ydn-base.dir}/js/main.js"
-                         input.dir="${ydn-base.dir}/js"
+                         input="${ydn-base.dir}/src/main.js"
+                         input.dir="${ydn-base.dir}/src"
                          output.fn="${ydn-base.dir}/jsc/ydn-base.js">
             <options>
              <arg line='-f "--externs=${ydn-base.dir}/externs/opensocial.js"'/>
@@ -239,10 +239,10 @@
         </closure-compile>
     </target>
     <target name="deps" description="list dependency files">
-        <delete file="${ydn-base.dir}/js/deps.js"/>
+        <delete file="${ydn-base.dir}/src/deps.js"/>
         <calc-deps
-                input.dir="${ydn-base.dir}/js"
-                output.fn="${ydn-base.dir}/js/deps.js">
+                input.dir="${ydn-base.dir}/src"
+                output.fn="${ydn-base.dir}/src/deps.js">
         </calc-deps>
     </target>
     <target name="jstd" description="print out jstd file for JS test driver">
