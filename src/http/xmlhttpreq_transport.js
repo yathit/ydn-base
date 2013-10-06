@@ -4,12 +4,12 @@
 
 
 goog.provide('ydn.http.XMLHttpRequest');
+goog.require('goog.Uri');
+goog.require('goog.object');
+goog.require('ydn.debug.error.ArgumentException');
+goog.require('ydn.http');
 goog.require('ydn.http.ITransport');
 goog.require('ydn.http.Transport');
-goog.require('ydn.http');
-goog.require('goog.object');
-goog.require('goog.Uri');
-goog.require('ydn.debug.error.ArgumentException');
 
 
 /**
@@ -26,6 +26,8 @@ goog.require('ydn.debug.error.ArgumentException');
  * }}
  */
 ydn.http.XMLHttpRequestTransportOptions;
+
+
 
 /**
  * content_length: include 'Content-Length' header
@@ -126,7 +128,7 @@ ydn.http.XMLHttpRequest.parseOrigin_ = function(url) {
     scheme: guri.getScheme(),
     domain: guri.getDomain(),
     port: guri.getPort()
-  }
+  };
 };
 
 /**
@@ -202,7 +204,7 @@ ydn.http.XMLHttpRequest.prototype.send = function(url, callback, options) {
     httpRequest.withCredentials = true;
   }
   if (callback) {
-    httpRequest.onreadystatechange = function (e) {
+    httpRequest.onreadystatechange = function(e) {
       if (httpRequest.readyState === 4) {
         // httpRequest.responseType ? should we be reading from header?
         var content_type = httpRequest.getResponseHeader('Content-Type');

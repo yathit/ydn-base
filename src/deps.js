@@ -21,7 +21,7 @@ goog.addDependency("../../../ydn-base/src/http/mock.js", ['ydn.http.MockHttpTran
 goog.addDependency("../../../ydn-base/src/http/simple_query_mock_server.js", ['ydn.http.SimpleQueryMockServer'], ['ydn.http.StaticMockServer']);
 goog.addDependency("../../../ydn-base/src/http/static_mock_server.js", ['ydn.http.StaticMockServer'], ['ydn.http.ITransport', 'ydn.http.CallbackResult', 'goog.debug.Logger', 'ydn.utils', 'ydn.json']);
 goog.addDependency("../../../ydn-base/src/http/transport.js", ['ydn.http.ITransport', 'ydn.http.Transport', 'ydn.http.CallbackResult'], []);
-goog.addDependency("../../../ydn-base/src/http/xmlhttpreq_transport.js", ['ydn.http.XMLHttpRequest'], ['ydn.http.ITransport', 'ydn.http.Transport', 'ydn.http', 'goog.object', 'goog.Uri', 'ydn.debug.error.ArgumentException']);
+goog.addDependency("../../../ydn-base/src/http/xmlhttpreq_transport.js", ['ydn.http.XMLHttpRequest'], ['goog.Uri', 'goog.object', 'ydn.debug.error.ArgumentException', 'ydn.http', 'ydn.http.ITransport', 'ydn.http.Transport']);
 goog.addDependency("../../../ydn-base/src/ydn/async.js", ['ydn.async'], ['goog.async.Deferred', 'goog.async.DeferredList']);
 goog.addDependency("../../../ydn-base/src/ydn/buffer.js", ['ydn.structs.Buffer', 'ydn.structs.Buffer.Iterator'], ['goog.structs.AvlTree', 'ydn.db.KeyRange']);
 goog.addDependency("../../../ydn-base/src/ydn/error.js", ['ydn.error', 'ydn.error.ArgumentException', 'ydn.error.NotImplementedException', 'ydn.error.ConstraintError', 'ydn.error.NotSupportedException', 'ydn.error.InternalError', 'ydn.error.InvalidOperationException', 'ydn.error.InvalidOperationError'], []);
@@ -30,7 +30,7 @@ goog.addDependency("../../../ydn-base/src/ydn/json.js", ['ydn.json'], ['goog.deb
 goog.addDependency("../../../ydn-base/src/ydn/testing.js", ['ydn.testing'], ['goog.math', 'goog.debug.Logger', 'goog.debug.Console', 'goog.debug.FancyWindow', 'goog.debug.DebugWindow', 'goog.debug.DivConsole', 'goog.debug.Logger', 'goog.debug.Logger.Level']);
 goog.addDependency("../../../ydn-base/src/ydn/async/Deferred.js", ['ydn.async.Deferred'], ['goog.async.Deferred']);
 goog.addDependency("../../../ydn-base/src/ydn/debug/debug.js", ['ydn.debug'], ['goog.debug.Console', 'goog.debug.Logger', 'goog.debug.LogManager', 'goog.debug.DivConsole']);
-goog.addDependency("../../../ydn-base/src/ydn/debug/error.js", ['ydn.debug.error.ArgumentException', 'ydn.debug.error.InternalError', 'ydn.debug.error.InvalidOperationException', 'ydn.debug.error.NotImplementedException', 'ydn.debug.error.NotSupportedException', 'ydn.debug.error.ConstraintError'], ['goog.debug.Error']);
+goog.addDependency("../../../ydn-base/src/ydn/debug/error.js", ['ydn.debug.error.ArgumentException', 'ydn.debug.error.ConstraintError', 'ydn.debug.error.InternalError', 'ydn.debug.error.InvalidOperationException', 'ydn.debug.error.NotImplementedException', 'ydn.debug.error.NotSupportedException'], ['goog.debug.Error']);
 goog.addDependency("../../../ydn-base/src/ydn/display/api/account_activity_display.js", ['ydn.display.api.AccountActivityDisplay'], []);
 goog.addDependency("../../../ydn-base/src/ydn/display/api/token_display.js", ['ydn.api.display.TokenDisplay'], []);
 goog.addDependency("../../../ydn-base/src/ydn/display/api/user_display.js", ['ydn.api.display.UserDisplay'], []);
@@ -39,3 +39,4 @@ goog.addDependency("../../../ydn-base/src/ydn/object/object.js", ['ydn.object'],
 goog.addDependency("../../../ydn-base/src/ydn/string/diff.js", ['ydn.string.diff'], []);
 goog.addDependency("../../../ydn-base/src/ydn/string/diffdemo.js", [], []);
 goog.addDependency("../../../ydn-base/src/ydn/string/string.js", ['ydn.string'], []);
+goog.addDependency("../../../ydn-base/src/ydn/xml/utils.js", ['ydn.xml.utils'], ['goog.dom.xml']);
