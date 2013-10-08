@@ -8,23 +8,20 @@ goog.provide('ydn.xml.utils');
 goog.require('goog.dom.xml');
 
 
-
 /**
  * Convert from XML to JSON format
  *
- *
  * @param {Element|Document|Node|string} xml XML data.
- * @param {(string|boolean)=} format This conversion assume xml is GData Atom
- * format.
+ * @param {string=} opt_root_xmlns root xmlns name space.
  * @return {Object|*} JSON object.
  */
-ydn.xml.utils.xml2json = function(xml, format) {
+ydn.xml.utils.xml2json = function(xml, opt_root_xmlns) {
   // this code is based on http://davidwalsh.name/convert-xml-json
 
   // see http://code.google.com/apis/gdata/docs/json.html for Google
   // specification about conversion
-  var is_atom_format = format == 'atom' || format === true;
-  var is_plain = format == 'plain';
+  var is_atom_format = opt_root_xmlns == 'atom';
+  var is_plain = !opt_root_xmlns;
 
   /**
    * If an element has a namespace alias, the alias and element are concatenated
@@ -68,18 +65,19 @@ ydn.xml.utils.xml2json = function(xml, format) {
       if (is_plain && nodeName == '$t') {
         obj = item.nodeValue;
       } else if (!goog.isDef(obj[nodeName])) {
-        obj[nodeName] = ydn.xml.utils.xml2json(item, format);
+        obj[nodeName] = ydn.xml.utils.xml2json(item, opt_root_xmlns);
       } else {
         if (!goog.isArray(obj[nodeName])) {
           var old = obj[nodeName];
           obj[nodeName] = [];
           obj[nodeName].push(old);
         }
-        obj[nodeName].push(ydn.xml.utils.xml2json(item, format));  // ?
+        obj[nodeName].push(ydn.xml.utils.xml2json(item, opt_root_xmlns));  // ?
       }
     }
   }
   return obj;
 };
+
 
 
