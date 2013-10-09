@@ -30,6 +30,7 @@ goog.inherits(ydn.http.SimpleQueryMockServer, ydn.http.StaticMockServer);
  */
 ydn.http.SimpleQueryMockServer.ResponseData;
 
+
 /**
  * Response data is hash by encoded query string.
  * @param {string} app_path url to response
