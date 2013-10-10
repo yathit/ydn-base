@@ -140,6 +140,21 @@ gapi.client.rpcRequest = function(method, version, rpcParams) {};
  *
  * @constructor
  */
+gapi.client.RpcRequest = function() {};
+
+
+/**
+ * Executes the request and runs the supplied callback on response.
+ * @param {function(Object, gapi.client.RawResp)} callback
+ */
+gapi.client.RpcRequest.prototype.execute = function(callback) {};
+
+
+
+/**
+ *
+ * @constructor
+ */
 gapi.client.HttpRequest = function() {};
 
 
@@ -183,3 +198,26 @@ gapi.client.newHttpBatch = function() {};
  * @param {Function} cb
  */
 gapi.client.load = function(lib, ver, cb) {};
+
+
+/**
+ * @const
+ * @type {Object}
+ */
+gapi.client.storage = {};
+
+
+/**
+ * @const
+ * @type {Object}
+ */
+gapi.client.storage.objects = {};
+
+
+/**
+ * @param {Object} params
+ * @return {gapi.client.RpcRequest}
+ */
+gapi.client.storage.objects.list = function(params) {};
+
+
