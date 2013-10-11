@@ -97,13 +97,16 @@ ydn.json.toShortString = function(obj) {
  * This is necessary since closure-library do not use native method.
  *
  * @param {Object} json object to stringify.
+ * @param {Function=} opt_replacer If a function, transforms values and properties
+ * encountered while stringifying.
+ * @param {number=} opt_space Causes the resulting string to be pretty-printed.
  * @return {string} result.
  */
-ydn.json.stringify = function(json) {
+ydn.json.stringify = function(json, opt_replacer, opt_space) {
 
   if (ydn.json.native_) {
-    return JSON.stringify(json);
+    return JSON.stringify(json, opt_replacer, opt_space);
   } else {
-    return goog.json.serialize(json);
+    return goog.json.serialize(json, opt_replacer);
   }
 };
