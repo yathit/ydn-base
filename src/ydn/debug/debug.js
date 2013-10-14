@@ -4,16 +4,16 @@
  * NOTE: these code are stripped using compiler prefix feature.
  * See more detail in tools/strip_debug.txt file.
  *
- * @author kyawtun@yathit.com <Kyaw Tun>
+ * @author kyawtun@yathit.com (Kyaw Tun)
  */
 
 goog.provide('ydn.debug');
 
 goog.require('goog.debug.Console');
-goog.require('goog.debug.Logger');
-goog.require('goog.debug.LogManager');
 goog.require('goog.debug.DivConsole');
-
+goog.require('goog.debug.LogManager');
+goog.require('goog.debug.Logger');
+goog.require('goog.events.BrowserEvent'); // cause compile error if not.
 
 
 /**
@@ -43,7 +43,7 @@ ydn.debug.logger = goog.debug.Logger.getLogger('ydn.debug');
  * @param {string|number=} level
  * @param {Element=} ele display target DIV. If not provided, it log to console.
  */
-ydn.debug.log = function (scope, level, ele) {
+ydn.debug.log = function(scope, level, ele) {
 
   scope = scope || 'ydn';
   var log_level = goog.isNumber(level) ? new goog.debug.Logger.Level(

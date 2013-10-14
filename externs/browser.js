@@ -153,38 +153,6 @@ IDBFactory.prototype.cmp = function(first, second) {};
 IDBRequest.prototype.error;
 
 
-
-/**
- * @constructor
- */
-function DataTransferItem() {}
-
-
-/**
- * @type {string}
- */
-DataTransferItem.prototype.kind;
-
-
-/**
- * @type {string}
- */
-DataTransferItem.prototype.type;
-
-
-/**
- * @return {File?}
- */
-DataTransferItem.prototype.getAsFile = function() {};
-
-
-/**
- * @type {Array.<DataTransferItem>}
- */
-DataTransfer.prototype.items;
-
-
-
 /**
  * The drag-and-drop processing model involves several events.
  * http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#the-dragevent-interface

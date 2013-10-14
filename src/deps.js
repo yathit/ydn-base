@@ -10,7 +10,7 @@ goog.addDependency("../../../ydn-base/src/client/resource.js", ['ydn.client.Reso
 goog.addDependency("../../../ydn-base/src/client/simple-client.js", ['ydn.client.SimpleClient'], ['ydn.client', 'ydn.client.SimpleHttpRequest']);
 goog.addDependency("../../../ydn-base/src/client/simple-request.js", ['ydn.client.SimpleHttpRequest'], ['goog.Uri', 'ydn.client']);
 goog.addDependency("../../../ydn-base/src/config/debug.js", ['ydn.base.debug'], ['ydn.debug']);
-goog.addDependency("../../../ydn-base/src/config/main.js", ['ydn.base'], ['goog.async.Deferred', 'goog.events.EventTarget']);
+goog.addDependency("../../../ydn-base/src/config/main.js", ['ydn.base'], ['goog.async.Deferred']);
 goog.addDependency("../../../ydn-base/src/http/dryrun.js", ['ydn.http.DryrunTransport'], ['ydn.http.ITransport', 'ydn.http.MockHttpTransport', 'goog.Uri', 'ydn.http.TransportFilter']);
 goog.addDependency("../../../ydn-base/src/http/filtered.js", ['ydn.http.FilteredTransport', 'ydn.http.TransportFilter'], ['ydn.http.ITransport', 'goog.Uri']);
 goog.addDependency("../../../ydn-base/src/http/gapi_request_adapter.js", ['ydn.http.GapiRequestAdapter'], ['ydn.http.Transport', 'goog.functions']);

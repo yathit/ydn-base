@@ -62,7 +62,6 @@ public class DebugStrippingCompilerRunner extends CommandLineRunner {
         // Only enable additional options when ADVANCED_OPTIMIZATIONS is specified
         // and goog.DEBUG is true
         if (isAdvancedOptionsEnabled && !is_debug) {
-            System.out.println("stripping debug message apply");
             applyDebugStrippingOptions(options);
         }
 
