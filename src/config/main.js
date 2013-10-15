@@ -1,5 +1,5 @@
 
-goog.provide('ydn.base');
+goog.provide('ydn.base.exports');
 goog.require('goog.async.Deferred');
 
 goog.exportProperty(goog.async.Deferred.prototype, 'done',

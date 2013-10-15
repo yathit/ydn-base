@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-goog.provide('ydn.base.debug');
+goog.provide('ydn.debug.exports');
 goog.require('ydn.debug');
 
 
