@@ -169,3 +169,34 @@ DragEvent.prototype.dataTransfer;
 
 
 
+
+/**
+ * @constructor
+ */
+function DataTransferItem() {}
+
+
+/**
+ * @type {string}
+ */
+DataTransferItem.prototype.kind;
+
+
+/**
+ * @type {string}
+ */
+DataTransferItem.prototype.type;
+
+
+/**
+ * @return {File?}
+ */
+DataTransferItem.prototype.getAsFile = function() {};
+
+
+/**
+ * @type {Array.<DataTransferItem>}
+ */
+DataTransfer.prototype.items;
+
+
