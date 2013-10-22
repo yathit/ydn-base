@@ -42,15 +42,6 @@ ydn.json.logger = goog.debug.Logger.getLogger('ydn');
 
 
 /**
- * @private
- * @const
- * @type {boolean} indicate native JSON paraser is available.
- */
-ydn.json.native_ = !ydn.json.POLY_FILL ? true :
-    !(typeof goog.global['JSON'] == 'undefined');
-
-
-/**
  * Parse JSON using native method if available.
  * This is necessary since closure-library do not use native method.
  *
@@ -61,10 +52,10 @@ ydn.json.parse = function(json_str) {
   if (!goog.isString(json_str) || goog.string.isEmpty(json_str)) {
     return {};
   }
-  if (ydn.json.native_) {
-    return /** @type {!Object} */ (JSON.parse(json_str));
+  if (ydn.json.POLY_FILL && (typeof goog.global['JSON'] == 'undefined')) {
+    return /** @type {!Object} */ (goog.json.unsafeParse(json_str));
   } else {
-    return /** @type {!Object} */ (goog.json.parse(json_str));
+    return /** @type {!Object} */ (JSON.parse(json_str));
   }
 };
 
@@ -104,9 +95,9 @@ ydn.json.toShortString = function(obj) {
  */
 ydn.json.stringify = function(json, opt_replacer, opt_space) {
 
-  if (ydn.json.native_) {
-    return JSON.stringify(json, opt_replacer, opt_space);
-  } else {
+  if (ydn.json.POLY_FILL && (typeof goog.global['JSON'] == 'undefined')) {
     return goog.json.serialize(json, opt_replacer);
+  } else {
+    return JSON.stringify(json, opt_replacer, opt_space);
   }
 };
