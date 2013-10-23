@@ -90,6 +90,8 @@
                 <arg line='-f "--compilation_level=@{compilationlevel}"'/>
                 <arg line='-f "--js=${closure-library.dir}/closure/goog/deps.js"'/>
                 <arg line='-f "--externs=${ydn-base.dir}/externs/browser.js"'/>
+                <arg line='-f "--externs=${closure-compiler.dir}/contrib/externs/jquery-1.7.js"'/>
+                <arg line='-f "--externs=${closure-compiler.dir}/contrib/externs/google_analytics_api.js"'/>
 
                 <extrapaths/>
                 <options/>
