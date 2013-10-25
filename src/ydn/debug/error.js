@@ -22,7 +22,7 @@
 
 
 goog.provide('ydn.debug.error.ArgumentException');
-goog.provide('ydn.debug.error.ConstraintError');
+goog.provide('ydn.debug.error.TypeError');
 goog.provide('ydn.debug.error.InternalError');
 goog.provide('ydn.debug.error.InvalidOperationException');
 goog.provide('ydn.debug.error.NotImplementedException');
@@ -43,6 +43,20 @@ ydn.debug.error.ArgumentException = function(opt_msg) {
   this.name = 'ydn.error.ArgumentException';
 };
 goog.inherits(ydn.debug.error.ArgumentException, goog.debug.Error);
+
+
+
+/**
+ * Base class for custom error objects.
+ * @param {*=} opt_msg The message associated with the error.
+ * @constructor
+ * @extends {goog.debug.Error}
+ */
+ydn.debug.error.TypeError = function(opt_msg) {
+  goog.base(this, opt_msg);
+  this.name = 'ydn.error.TypeError';
+};
+goog.inherits(ydn.debug.error.TypeError, goog.debug.Error);
 
 
 
