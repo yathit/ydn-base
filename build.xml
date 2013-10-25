@@ -24,7 +24,10 @@
 
     <property name="outputwrapper.norun" value="(function(){%output%})();"
             description="Closure compiler output wrapper"/>
-
+    <property name="outputwrapper.ydn" value="(function (name, definition, context) {if (typeof context['module'] !== 'undefined' &amp;&amp; context['module']['exports']) {context['module']['exports'] = definition.apply(context);}else if (typeof context['define'] !== 'undefined' &amp;&amp; context['define'] === 'function' &amp;&amp; context['define']['amd']) {define(name, [], definition);}else {context[name] = definition();}})('ydn', function () {%output% return ydn;}, (this || {}));"
+              description="wrapper for universal module export for ydn variable"/>
+    <property name="outputwrapper.ydn-pre" value="(function (name, definition, context) {if (typeof context['module'] !== 'undefined' &amp;&amp; context['module']['exports']) {context['module']['exports'] = definition.apply(context);}else if (typeof context['define'] !== 'undefined' &amp;&amp; context['define'] === 'function' &amp;&amp; context['define']['amd']) {define(name, [], definition);}else {context[name] = definition();}})('ydn', function () {%output% "
+              description="wrapper for universal module export for ydn variable without closing"/>
     <taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
              classpath="${closure-compiler.jar}"/>
 
