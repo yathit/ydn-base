@@ -35,18 +35,17 @@ goog.require('goog.async.Deferred');
  *     callbacks and errbacks in.
  * @constructor
  * @extends {goog.async.Deferred}
+ * @struct
+ * @suppress {checkStructDictInheritance} suppress closure-library code.
  */
 ydn.async.Deferred = function(opt_onCancelFunction, opt_defaultScope) {
   goog.base(this, opt_onCancelFunction, opt_defaultScope);
+  /**
+   * @type {!Array.<Array>} progress listener callbacks.
+   */
   this.progbacks_ = [];
 };
 goog.inherits(ydn.async.Deferred, goog.async.Deferred);
-
-
-/**
- * @type {!Array.<Array>} progress listener callbacks.
- */
-ydn.async.Deferred.prototype.progbacks_;
 
 
 /**
