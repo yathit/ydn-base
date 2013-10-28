@@ -169,5 +169,3 @@ function DragEvent() {}
  */
 DragEvent.prototype.dataTransfer;
 
-
-
