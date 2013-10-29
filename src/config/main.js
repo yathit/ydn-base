@@ -9,7 +9,7 @@ goog.exportProperty(goog.async.Deferred.prototype, 'fail',
     goog.async.Deferred.prototype.addErrback);
 if (ydn.base.JQUERY) {
   goog.exportProperty(ydn.async.Deferred.prototype, 'then',
-      ydn.async.Deferred.prototype.addCallbacks);
+      ydn.async.Deferred.prototype.then);
 } else {
   goog.exportProperty(goog.async.Deferred.prototype, 'then',
       goog.async.Deferred.prototype.addCallbacks);

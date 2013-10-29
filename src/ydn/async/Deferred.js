@@ -22,6 +22,7 @@
 
 goog.provide('ydn.async.Deferred');
 goog.require('goog.async.Deferred');
+goog.require('ydn.debug.error.ArgumentException');
 goog.require('ydn.base');
 
 
@@ -93,29 +94,39 @@ ydn.async.Deferred.prototype.errback = function(opt_result) {
 };
 
 
-if (ydn.base.JQUERY) {
-  /**
-   * @inheritDoc
-   */
-  ydn.async.Deferred.prototype.addCallbacks = function(cb, eb, opt_scope) {
-    // put a deferred adapter if callback return a thenable object.
-    var callback = cb;
-    if (goog.isFunction(cb)) {
-      callback = function(x) {
-        var value = cb(x);
-        if (goog.isObject(value) && goog.isFunction(value['then'])) {
-          var df = new goog.async.Deferred();
-          value['then'].call(opt_scope, function(x) {
-            df.callback(x);
-          }, function(e) {
-            df.errback(e);
-          });
-          return df;
-        } else {
-          return value;
-        }
-      };
-    }
-    return goog.base(this, 'addCallbacks', callback, eb, opt_scope);
-  };
-}
+/**
+ * Export as JQuery compatible then method.
+ *
+ * @param {(function(this:T,?):?)|null} cb The function to be called on a
+ *     successful result.
+ * @param {(function(this:T,?):?)|null} eb The function to be called on an
+ *     unsuccessful result.
+ * @param {T=} opt_scope An optional scope to call the functions in.
+ * @return {!goog.async.Deferred} This Deferred.
+ * @template T
+ */
+ydn.async.Deferred.prototype.then = function(cb, eb, opt_scope) {
+  // put a deferred adapter if callback return a thenable object.
+  if (!!opt_scope && goog.isFunction(opt_scope)) {
+    throw new ydn.debug.error.ArgumentException('progress callback is' +
+        ' not supported');
+  }
+  var callback = cb;
+  if (goog.isFunction(cb)) {
+    callback = function(x) {
+      var value = cb.call(opt_scope, x);
+      if (goog.isObject(value) && goog.isFunction(value['then'])) {
+        var df = new goog.async.Deferred();
+        value['then'].call(opt_scope, function(x) {
+          df.callback(x);
+        }, function(e) {
+          df.errback(e);
+        });
+        return df;
+      } else {
+        return value;
+      }
+    };
+  }
+  return this.addCallbacks(callback, eb, opt_scope);
+};
