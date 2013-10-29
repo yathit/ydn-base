@@ -22,6 +22,7 @@
 
 goog.provide('ydn.async.Deferred');
 goog.require('goog.async.Deferred');
+goog.require('ydn.base');
 
 
 
@@ -90,3 +91,31 @@ ydn.async.Deferred.prototype.errback = function(opt_result) {
   this.progbacks_.length = 0;
   goog.base(this, 'errback', opt_result);
 };
+
+
+if (ydn.base.JQUERY) {
+  /**
+   * @inheritDoc
+   */
+  ydn.async.Deferred.prototype.addCallbacks = function(cb, eb, opt_scope) {
+    // put a deferred adapter if callback return a thenable object.
+    var callback = cb;
+    if (goog.isFunction(cb)) {
+      callback = function(x) {
+        var value = cb(x);
+        if (goog.isObject(value) && goog.isFunction(value['then'])) {
+          var df = new goog.async.Deferred();
+          value['then'].call(opt_scope, function(x) {
+            df.callback(x);
+          }, function(e) {
+            df.errback(e);
+          });
+          return df;
+        } else {
+          return value;
+        }
+      };
+    }
+    return goog.base(this, 'addCallbacks', callback, eb, opt_scope);
+  };
+}
