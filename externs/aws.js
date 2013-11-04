@@ -43,6 +43,54 @@ AWS.WebIdentityCredentials.prototype.WebIdentityToken;
 AWS.config;
 
 
+/**
+ * This class encapsulates the the response information from a service request
+ * operation sent through AWS.Request.
+ * @constructor
+ */
+AWS.Response = function() {
+
+};
+
+
+/**
+ * @type {Object}
+ */
+AWS.Response.prototype.data;
+
+
+/**
+ * @type {Object}
+ */
+AWS.Response.prototype.error;
+
+
+/**
+ * @type {{
+ *    body: string,
+ *    headers: Object.<string>,
+ *    statusCode: number
+ * }}
+ */
+AWS.Response.prototype.httpResponse;
+
+
+/**
+ * All requests made through the SDK are asynchronous and use a callback interface.
+ * @constructor
+ */
+AWS.Request = function() {
+
+};
+
+
+/**
+ * Listen event.
+ * @param {string} event success, error or complete
+ * @param {function(AWS.Response)} cb
+ */
+AWS.Request.on = function(event, cb) {};
+
 
 /**
  * Constructs S3 service interface object.
@@ -130,6 +178,7 @@ AWS.S3.ListBucketResult.prototype.Prefix;
  *   Metadata:(Object.<string>|undefined)
  * }} params
  * @param {function(boolean, Object)=} callback
+ * @return {AWS.Response}
  */
 AWS.S3.prototype.putObject = function(params, callback) {};
 
@@ -146,6 +195,7 @@ AWS.S3.prototype.putObject = function(params, callback) {};
  *   Key: string
  * }} params
  * @param {function(boolean, Object)=} callback
+ * @return {AWS.Response}
  */
 AWS.S3.prototype.getObject = function(params, callback) {};
 
@@ -159,6 +209,8 @@ AWS.S3.prototype.getObject = function(params, callback) {};
  *   MaxKeys:(number|undefined),
  *   Prefix:(string|undefined)
  * }} params
- * @param {function(boolean, AWS.S3.ListBucketResult)=} callback result callback.
+ * @param {function(boolean, AWS.S3.ListBucketResult)=} callback result
+ * callback.
+ * @return {AWS.Response}
  */
 AWS.S3.prototype.listObjects = function(params, callback) {};
