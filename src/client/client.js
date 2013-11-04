@@ -205,6 +205,7 @@ ydn.client.HttpRequestData = function(path, opt_method,
    */
   this.path = path;
   /**
+   * Upper case HTTP method. Default to 'GET'.
    * @type {string}
    */
   this.method = opt_method ? opt_method.toUpperCase() : 'GET';
@@ -272,7 +273,7 @@ ydn.client.HttpRequest = function() {};
  * Execute the request.
  * @param {function(this: T, Object, ydn.client.HttpRespondData)?} cb
  * @param {T=} opt_obj scope.
- *  @template T
+ * @template T
  */
 ydn.client.HttpRequest.prototype.execute = function(cb, opt_obj) {};
 
@@ -288,9 +289,9 @@ ydn.client.Client = function() {};
 /**
  * Create a new HTTP request.
  * If callback is provided in the argument, the request is execute immediately.
- * @param {ydn.client.HttpRequestData} args
+ * @param {ydn.client.HttpRequestData} req
  * @return {!ydn.client.HttpRequest} Return request object if callback is not
  * provided in the argument.
  */
-ydn.client.Client.prototype.request = function(args) {};
+ydn.client.Client.prototype.request = function(req) {};
 

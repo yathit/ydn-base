@@ -3,6 +3,7 @@ goog.addDependency("../../../ydn-base/src/atom/atom.js", ['ydn.atom.Atom'], ['go
 goog.addDependency("../../../ydn-base/src/atom/entry.js", ['ydn.atom.Entry'], ['ydn.atom.Atom', 'goog.debug.Logger', 'ydn.error']);
 goog.addDependency("../../../ydn-base/src/atom/feed.js", ['ydn.atom.Feed'], ['ydn.atom.Atom']);
 goog.addDependency("../../../ydn-base/src/atom/link.js", ['ydn.atom.Link'], []);
+goog.addDependency("../../../ydn-base/src/client/aws_s3.js", ['ydn.client.aws.S3'], ['ydn.client.Client']);
 goog.addDependency("../../../ydn-base/src/client/client.js", ['ydn.client', 'ydn.client.Client', 'ydn.client.HttpRequest', 'ydn.client.HttpRequestData', 'ydn.client.HttpRespondData'], ['goog.net.XhrManager']);
 goog.addDependency("../../../ydn-base/src/client/gapi-client.js", ['ydn.client.GapiClient'], ['ydn.client', 'ydn.client.SimpleClient']);
 goog.addDependency("../../../ydn-base/src/client/json_mock_server.js", ['ydn.client.JsonMockServer'], ['goog.Timer', 'goog.debug.Logger', 'ydn.client.Resource', 'ydn.http.CallbackResult', 'ydn.object', 'ydn.structs.Buffer', 'ydn.utils']);
