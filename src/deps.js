@@ -43,3 +43,4 @@ goog.addDependency("../../../ydn-base/src/ydn/string/diff.js", ['ydn.string.diff
 goog.addDependency("../../../ydn-base/src/ydn/string/diffdemo.js", [], []);
 goog.addDependency("../../../ydn-base/src/ydn/string/string.js", ['ydn.string'], []);
 goog.addDependency("../../../ydn-base/src/ydn/xml/utils.js", ['ydn.xml.utils'], ['goog.dom.xml']);
+goog.addDependency('../../../ydn-base/alt/deferred.js', ['goog.async.Deferred', 'goog.async.Deferred.AlreadyCalledError', 'goog.async.Deferred.CanceledError'], ['goog.array', 'goog.asserts', 'goog.debug.Error', 'goog.functions']);

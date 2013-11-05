@@ -20,6 +20,7 @@ var AWS = {};
 AWS.Credentials = function() {};
 
 
+
 /**
  * @param {{RoleArn: string, WebIdentityToken: string}} params parameters.
  * @extends {AWS.Credentials}
@@ -41,6 +42,7 @@ AWS.WebIdentityCredentials.prototype.WebIdentityToken;
  * }}
  */
 AWS.config;
+
 
 
 /**
@@ -75,6 +77,7 @@ AWS.Response.prototype.error;
 AWS.Response.prototype.httpResponse;
 
 
+
 /**
  * All requests made through the SDK are asynchronous and use a callback interface.
  * @constructor
@@ -87,9 +90,21 @@ AWS.Request = function() {
 /**
  * Listen event.
  * @param {string} event success, error or complete
- * @param {function(AWS.Response)} cb
+ * @param {function(AWS.Response)} callback
  */
-AWS.Request.on = function(event, cb) {};
+AWS.Request.prototype.on = function(event, callback) {};
+
+
+/**
+ * Sends the request object.
+ * {Error} err the error object returned from the request.
+ * Set to null if the request is successful.
+ * {Object} data  the de-serialized data returned from the request.
+ * Set to null if a request error occurs.
+ * @param {function(Error, Object)=} opt_callback request callback.
+ */
+AWS.Request.prototype.send = function(opt_callback) {};
+
 
 
 /**
@@ -102,63 +117,80 @@ AWS.Request.on = function(event, cb) {};
 AWS.S3 = function(params) {};
 
 
+
 /**
  * @constructor
  */
 AWS.S3.Object = function() {};
+
 
 /**
  * @type {string}
  */
 AWS.S3.Object.prototype.ETag;
 
+
 /**
  * @type {string}
  */
 AWS.S3.Object.prototype.Generation;
+
 
 /**
  * @type {string}
  */
 AWS.S3.Object.prototype.Key;
 
+
 /**
  * @type {string}
  */
 AWS.S3.Object.prototype.LastModified;
+
 
 /**
  * @type {string}
  */
 AWS.S3.Object.prototype.MetaGeneration;
 
+
 /**
  * @type {string}
  */
 AWS.S3.Object.prototype.Size;
+
+
 
 /**
  * @constructor
  */
 AWS.S3.ListBucketResult = function() {};
 
+
 /**
  * @type {!Array.<!AWS.S3.Object>}
  */
 AWS.S3.ListBucketResult.prototype.Contents;
 
+
 /**
  * @type {string}
  */
 AWS.S3.ListBucketResult.prototype.IsTruncated;
+
+
 /**
  * @type {string}
  */
 AWS.S3.ListBucketResult.prototype.Marker;
+
+
 /**
  * @type {string}
  */
 AWS.S3.ListBucketResult.prototype.Name;
+
+
 /**
  * @type {string}
  */
@@ -166,8 +198,7 @@ AWS.S3.ListBucketResult.prototype.Prefix;
 
 
 /**
- * Adds an object to a bucket.
- * @param {{
+ * @typedef {{
  *   ACL: (string|undefined),
  *   Body: (Object|string),
  *   CacheControl: (string|undefined),
@@ -176,16 +207,22 @@ AWS.S3.ListBucketResult.prototype.Prefix;
  *   Key: string,
  *   ContentType:(string|undefined),
  *   Metadata:(Object.<string>|undefined)
- * }} params
+ * }} put object req parameter.
+ */
+AWS.S3.ParamPutObj;
+
+
+/**
+ * Adds an object to a bucket.
+ * @param {AWS.S3.ParamPutObj} params
  * @param {function(boolean, Object)=} callback
- * @return {AWS.Response}
+ * @return {AWS.Request}
  */
 AWS.S3.prototype.putObject = function(params, callback) {};
 
 
 /**
- * Retrieves objects from Amazon S3.
- * @param {{
+ * @typedef {{
  *   IfMatch: (string|undefined),
  *   IfModifiedSince: (Date|undefined),
  *   IfNoneMatch:(string|undefined),
@@ -193,9 +230,16 @@ AWS.S3.prototype.putObject = function(params, callback) {};
  *   Range:(string|undefined),
  *   VersionId:(string|undefined),
  *   Key: string
- * }} params
+ * }}
+ */
+AWS.S3.ObjectReqParam;
+
+
+/**
+ * Retrieves objects from Amazon S3.
+ * @param {AWS.S3.ObjectReqParam} params
  * @param {function(boolean, Object)=} callback
- * @return {AWS.Response}
+ * @return {AWS.Request}
  */
 AWS.S3.prototype.getObject = function(params, callback) {};
 
@@ -211,6 +255,6 @@ AWS.S3.prototype.getObject = function(params, callback) {};
  * }} params
  * @param {function(boolean, AWS.S3.ListBucketResult)=} callback result
  * callback.
- * @return {AWS.Response}
+ * @return {AWS.Request}
  */
 AWS.S3.prototype.listObjects = function(params, callback) {};

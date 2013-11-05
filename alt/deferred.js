@@ -22,6 +22,10 @@
  *
  */
 
+// To use this file in raw mode add this line to deps.js
+// goog.addDependency('../../../ydn-base/alt/deferred.js', ['goog.async.Deferred', 'goog.async.Deferred.AlreadyCalledError', 'goog.async.Deferred.CanceledError'], ['goog.array', 'goog.asserts', 'goog.debug.Error', 'goog.functions']);
+// and remove corresponding from closure-library deps.js file.
+
 goog.provide('goog.async.Deferred');
 goog.provide('goog.async.Deferred.AlreadyCalledError');
 goog.provide('goog.async.Deferred.CanceledError');

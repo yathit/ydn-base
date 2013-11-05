@@ -9,6 +9,7 @@ goog.provide('ydn.client.aws.S3');
 goog.require('ydn.client.Client');
 
 
+
 /**
  * Create AWS S3 client.
  * @param {string=} opt_bucket bucket name.
@@ -56,6 +57,12 @@ ydn.client.aws.S3 = function(opt_bucket, opt_region) {
 
 
 /**
+ * @define {boolean} debug flag.
+ */
+ydn.client.aws.DEBUG = false;
+
+
+/**
  * @inheritDoc
  */
 ydn.client.aws.S3.prototype.request = function(req) {
@@ -66,6 +73,7 @@ ydn.client.aws.S3.prototype.request = function(req) {
 /**
  * Get bucket or default.
  * @param {string=} opt_name
+ * @return {AWS.S3}
  */
 ydn.client.aws.S3.prototype.getBucket = function(opt_name) {
   var options = {
@@ -93,6 +101,7 @@ ydn.client.aws.S3.prototype.getBucket = function(opt_name) {
 };
 
 
+
 /**
  * @implements {ydn.client.HttpRequest}
  * @param {ydn.client.aws.S3} parent
@@ -117,19 +126,26 @@ ydn.client.aws.HttpRequest = function(parent, params) {
 
 /**
  * Execute and callback.
+ * @param {string} mth method.
  * @param {Object} params
  * @param {function(this: T, Object, ydn.client.HttpRespondData)?} cb
  * @param {T=} opt_scope scope.
  * @template T
  * @private
  */
-ydn.client.aws.HttpRequest.prototype.execute_ = function(params, cb,
-                                                         opt_scope) {
+ydn.client.aws.HttpRequest.prototype.execute_ = function(mth, params, cb, opt_scope) {
   var status = NaN;
   var status_text = '';
   var resp_headers = {};
-  var req = this.parent.getBucket().getObject(params);
+  if (ydn.client.aws.DEBUG) {
+    window.console.log(mth, params);
+  }
+  var req = this.parent.getBucket()[mth](
+      /** @type {AWS.S3.ObjectReqParam} */ (params));
   req.on('complete', function(resp) {
+    if (ydn.client.aws.DEBUG) {
+      window.console.log(resp);
+    }
     if (resp['httpResponse']) {
       status = resp['httpResponse']['statusCode'];
       if (goog.isString(status)) {
@@ -137,9 +153,20 @@ ydn.client.aws.HttpRequest.prototype.execute_ = function(params, cb,
       }
       resp_headers = resp['httpResponse']['headers'];
     }
+    if (resp['error']) {
+      // in case of error, statusCode is still undefined.
+      status_text = resp['error']['message'];
+      if (!status) {
+        status = 400;
+      }
+    }
   });
   req.send(function(err, data) {
-    var resp = new ydn.client.HttpRespondData(status, data, resp_headers);
+    if (ydn.client.aws.DEBUG) {
+      window.console.log(mth, params, err, data);
+    }
+    var resp = new ydn.client.HttpRespondData(status, data, resp_headers,
+        status_text);
     if (err) {
       cb.call(opt_scope, null, resp);
     } else {
@@ -156,15 +183,19 @@ ydn.client.aws.HttpRequest.prototype.execute = function(cb, opt_scope) {
   var uri = new goog.Uri(this.req_data_.getUri());
   var path = uri.getPath();
   var key = path.charAt(0) == '/' ? path.substr(1) : path;
-  var params = {};
+  var params = this.req_data_.headers || {};
+  if (key) {
+    params['Key'] = key;
+  }
 
   if (!key) {
     // Bucket request
   } else {
     // Object request
     if (this.req_data_.method == 'GET') {
-      params['Key'] = key;
-      this.execute_(params, cb, opt_scope);
+      this.execute_('getObject', params, cb, opt_scope);
+    } else if (this.req_data_.method == 'PUT') {
+      this.execute_('putObject', params, cb, opt_scope);
     } else {
       throw new ydn.debug.error.NotSupportedException('HTTP method ' +
           this.req_data_.method);
