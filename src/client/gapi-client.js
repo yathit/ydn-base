@@ -12,7 +12,7 @@ goog.require('ydn.client.SimpleClient');
 
 /**
  * Wrap Google Javascript Client.
- * @param {*} client ydn.client.GapiClient.
+ * @param {*} client gapi.client.
  * @param {boolean=} opt_immediately a client that executes request immediate.
  * @constructor
  * @implements {ydn.client.Client}
