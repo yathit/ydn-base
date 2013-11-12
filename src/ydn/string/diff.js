@@ -26,7 +26,7 @@
 
 
 /**
- * @fileoverview Merge text.
+ * @fileoverview Merge string.
  *
  */
 
@@ -120,9 +120,9 @@ ydn.string.diff.longest_common_subsequence = function(file1, file2) {
  * Find differences between file1 and file2.
  * @param {Array.<string>} file1
  * @param {Array.<string>} file2
- * @returns {Array.<string>}
+ * @return {Array.<string>}
  */
-ydn.string.diff.diff_comm = function (file1, file2) {
+ydn.string.diff.diff_comm = function(file1, file2) {
   // We apply the LCS to build a "comm"-style picture of the
   // differences between file1 and file2.
 
@@ -241,9 +241,16 @@ ydn.string.diff.strip_patch = function(patch) {
   var newpatch = [];
   for (var i = 0; i < patch.length; i++) {
     var chunk = patch[i];
-    newpatch.push({file1: {offset: chunk.file1.offset,
-      length: chunk.file1.length},
-      file2: {chunk: chunk.file2.chunk}});
+    newpatch.push(
+        {
+          file1: {
+            offset: chunk.file1.offset,
+            length: chunk.file1.length
+          },
+          file2: {
+            chunk: chunk.file2.chunk
+          }
+        });
   }
   return newpatch;
 };
@@ -345,7 +352,7 @@ ydn.string.diff.diff_indices = function(file1, file2) {
  * @param {Array.<string>} b
  * @return {Array}
  */
-ydn.string.diff.diff3_merge_indices = function (a, o, b) {
+ydn.string.diff.diff3_merge_indices = function(a, o, b) {
 
   // Sanjeev Khanna, Keshav Kunal, and Benjamin C. Pierce. "A
   // Formal Investigation of Diff3." In Arvind and Prasad,
