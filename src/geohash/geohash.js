@@ -21,6 +21,14 @@
  *
  */
 
+/**
+ * @fileoverview Geohash.
+ *
+ * http://en.wikipedia.org/wiki/Geohash
+ */
+
+// https://github.com/sunng87/node-geohash.git
+
 goog.provide('ydn.geohash');
 
 
@@ -33,61 +41,69 @@ ydn.geohash.BASE32_CODES = '0123456789bcdefghjkmnpqrstuvwxyz';
 
 /**
  * Encode coordinate into hash.
- * @param {number} latitude
- * @param {number} longitude
- * @param {number=} opt_precision number of char to use for encoding.
+ * @param {Array.<number>} args an array representing [latitude,
+ * longitude, opt_precision]
+ * Latitude starts from -90 to 90.
+ * Longitude starts from -180 to 180.
+ * Precision is number of char to use for encoding. Default to 12 char. One char
+ * encode 4 bits of latitude and longitude pair. The error is, thus,
+ * 1 / Math.pow(2, 4 * precision/2) * 180. For default precision of 12 char,
+ * the error is 0.0000107288 or 1.190 meter at equator.
  * @return {string}
  */
-ydn.geohash.encode = function(latitude, longitude, opt_precision) {
-  var numberOfChars = opt_precision || 9;
-  var chars = [], bits = 0;
-  var hash_value = 0;
+ydn.geohash.encode = function(args) {
+  // NOTE: asm annotation for double and int.
+  var lat = +args[0];
+  var lon = +args[1];
+  var numberOfChars = (args[2] || 12) | 0;
+  var chars = [];
 
-  var maxlat = 90, minlat = -90;
-  var maxlon = 180, minlon = -180;
+  var maxlat = 90;
+  var minlat = -90;
+  var maxlon = 180;
+  var minlon = -180;
 
   var mid;
   var islon = true;
-  while (chars.length < numberOfChars) {
-    if (islon) {
-      mid = (maxlon + minlon) / 2;
-      if (longitude > mid) {
-        hash_value = (hash_value << 1) + 1;
-        minlon = mid;
+  for (var i = 0; i < numberOfChars; i++) {
+    var hash_value = 0;
+    for (var bits = 0; bits < 5; bits++) {
+      if (islon) {
+        mid = (maxlon + minlon) / 2;
+        if (lon > mid) {
+          hash_value = (hash_value << 1) + 1;
+          minlon = mid;
+        } else {
+          hash_value = (hash_value << 1) + 0;
+          maxlon = mid;
+        }
       } else {
-        hash_value = (hash_value << 1) + 0;
-        maxlon = mid;
+        mid = (maxlat + minlat) / 2;
+        if (lat > mid) {
+          hash_value = (hash_value << 1) + 1;
+          minlat = mid;
+        } else {
+          hash_value = (hash_value << 1) + 0;
+          maxlat = mid;
+        }
       }
-    } else {
-      mid = (maxlat + minlat) / 2;
-      if (latitude > mid) {
-        hash_value = (hash_value << 1) + 1;
-        minlat = mid;
-      } else {
-        hash_value = (hash_value << 1) + 0;
-        maxlat = mid;
-      }
+      islon = !islon;
     }
-    islon = !islon;
 
-    bits++;
-    if (bits == 5) {
-      var code = ydn.geohash.BASE32_CODES[hash_value];
-      chars.push(code);
-      bits = 0;
-      hash_value = 0;
-    }
+    chars[i] = ydn.geohash.BASE32_CODES[hash_value];
   }
+
   return chars.join('');
 };
 
 
 /**
- * Eecode box has.
+ * Decode box hash.
  * @param {string} hash_string
  * @return {Array.<number>} [minlat, minlon, maxlat, maxlon]
+ * @private
  */
-ydn.geohash.decode_bbox = function(hash_string) {
+ydn.geohash.decodeBbox_ = function(hash_string) {
   var islon = true;
   var maxlat = 90, minlat = -90;
   var maxlon = 180, minlon = -180;
@@ -117,7 +133,7 @@ ydn.geohash.decode_bbox = function(hash_string) {
       islon = !islon;
     }
   }
-  return [minlat, minlon, maxlat, maxlon];
+  return [+minlat, +minlon, +maxlat, +maxlon];
 };
 
 
@@ -129,16 +145,17 @@ ydn.geohash.decode_bbox = function(hash_string) {
  * }}
  */
 ydn.geohash.decode = function(hash_string) {
-  var bbox = ydn.geohash.decode_bbox(hash_string);
+  var bbox = ydn.geohash.decodeBbox_(hash_string);
   var lat = (bbox[0] + bbox[2]) / 2;
   var lon = (bbox[1] + bbox[3]) / 2;
   var laterr = bbox[2] - lat;
   var lonerr = bbox[3] - lon;
-  return [lat, lon, laterr, lonerr];
+  return [+lat, +lon, +laterr, +lonerr];
 };
 
 
 /**
+ * Relative direction.
  * @enum {Array}
  */
 ydn.geohash.Direction = {
@@ -154,19 +171,20 @@ ydn.geohash.Direction = {
 
 
 /**
- * direction [lat, lon], i.e.
- * [1,0] - north
- * [1,1] - northeast
+ * Return neighbor geohash of a given center position.
  * @param {string} hashstring
- * @param {ydn.geohash.Direction} direction
- * @return {string}
+ * @param {ydn.geohash.Direction} direction Relative direction.
+ * @return {string} neighbor geohash.
  */
 ydn.geohash.neighbor = function(hashstring, direction) {
   var lonlat = ydn.geohash.decode(hashstring);
-  var neighbor_lat = lonlat.latitude + direction[0] * lonlat.error.latitude * 2;
-  var neighbor_lon = lonlat.longitude +
-      direction[1] * lonlat.error.longitude * 2;
-  return ydn.geohash.encode(neighbor_lat, neighbor_lon, hashstring.length);
+  var lat = lonlat[0];
+  var lon = lonlat[1];
+  var lat_err = lonlat[2];
+  var lon_err = lonlat[3];
+  var neighbor_lat = lat + direction[0] * lat_err * 2;
+  var neighbor_lon = lon + direction[1] * lon_err * 2;
+  return ydn.geohash.encode([neighbor_lat, neighbor_lon, hashstring.length]);
 };
 
 
