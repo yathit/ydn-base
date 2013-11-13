@@ -64,7 +64,7 @@ ydn.geohash.encode = function(args) {
   var minlon = -180;
 
   var mid;
-  var islon = true;
+  var islon = true; // the first bit is longitude
   for (var i = 0; i < numberOfChars; i++) {
     var hash_value = 0;
     for (var bits = 0; bits < 5; bits++) {
@@ -87,7 +87,7 @@ ydn.geohash.encode = function(args) {
           maxlat = mid;
         }
       }
-      islon = !islon;
+      islon = !islon; // alternate longitude and longitude
     }
 
     chars[i] = ydn.geohash.BASE32_CODES[hash_value];
@@ -99,7 +99,7 @@ ydn.geohash.encode = function(args) {
 
 /**
  * Decode box hash.
- * @param {string} hash_string
+ * @param {string} hash_string geohash in lower case.
  * @return {Array.<number>} [minlat, minlon, maxlat, maxlon]
  * @private
  */
@@ -110,7 +110,7 @@ ydn.geohash.decodeBbox_ = function(hash_string) {
 
   var hash_value = 0;
   for (var i = 0, l = hash_string.length; i < l; i++) {
-    var code = hash_string[i].toLowerCase();
+    var code = hash_string.charAt(i);
     hash_value = ydn.geohash.BASE32_CODES.indexOf(code);
 
     for (var bits = 4; bits >= 0; bits--) {
