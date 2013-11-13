@@ -155,7 +155,7 @@ ydn.geohash.decode = function(hash_string) {
 
 
 /**
- * Relative direction.
+ * Unit rectangular vector for relative direction representation.
  * @enum {Array}
  */
 ydn.geohash.Direction = {
