@@ -37,6 +37,7 @@ var test_reg = function() {
 };
 
 var test_precision = function() {
+  // NOTE: this test always pass in chrome, but fail in Firefox
   for (var i = 4; i < 32; i++) {
     var lat = Math.random() * 180 - 90;
     var lon = Math.random() * 360 - 180;
