@@ -121,6 +121,16 @@ ydn.client.HttpRespondData.prototype.getStatus = function() {
 
 
 /**
+ * Return true if status code is equal or more than 200 and less then 400.
+ * @return {boolean}
+ */
+ydn.client.HttpRespondData.prototype.isSuccess = function() {
+  this.ensureParse();
+  return this.status >= 200 && this.status < 400;
+};
+
+
+/**
  * @return {string}
  */
 ydn.client.HttpRespondData.prototype.getStatusText = function() {

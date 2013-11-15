@@ -11,14 +11,16 @@
 
 goog.provide('ydn.atom.Atom');
 goog.require('goog.debug.Logger');
-goog.require('ydn.error');
 goog.require('ydn.atom.Link');
+goog.require('ydn.error');
+
 
 
 /**
  *
  * @param {!Atom} data
  * @constructor
+ * @struct
  */
 ydn.atom.Atom = function(data) {
   /**
@@ -141,7 +143,7 @@ ydn.atom.Atom.prototype.getLinkSelf = function() {
  * @return {string|undefined}
  */
 ydn.atom.Atom.prototype.getLinkBatch = function() {
-  var link =  this.getLink(ydn.atom.Link.Rel.BATCH);
+  var link = this.getLink(ydn.atom.Link.Rel.BATCH);
   return link ? link.href : '';
 };
 

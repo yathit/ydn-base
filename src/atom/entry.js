@@ -5,9 +5,10 @@
  */
 
 goog.provide('ydn.atom.Entry');
-goog.require('ydn.atom.Atom');
 goog.require('goog.debug.Logger');
+goog.require('ydn.atom.Atom');
 goog.require('ydn.error');
+
 
 
 /**
@@ -15,6 +16,7 @@ goog.require('ydn.error');
  * @param {!AtomEntry} gdata
  * @constructor
  * @extends {ydn.atom.Atom}
+ * @struct
  */
 ydn.atom.Entry = function(gdata) {
   goog.base(this, gdata);
