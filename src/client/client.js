@@ -168,14 +168,33 @@ ydn.client.HttpRespondData.prototype.getHeaders = function() {
 
 
 /**
+ * Check or sniff respond data is JSON or not.
+ * @return {boolean}
+ */
+ydn.client.HttpRespondData.prototype.isJson = function() {
+  this.ensureParse();
+  if (this.getHeader('content-type') == 'application/json') {
+    return true;
+  } else {
+    var text = this.body;
+    if (goog.isString(text) && !goog.string.isEmpty(text)) {
+      return (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').
+          replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+          replace(/(?:^|:|,)(?:\s*\[)+/g, '')));
+    } else {
+      return false;
+    }
+  }
+};
+
+
+/**
  * @return {Object}
  */
 ydn.client.HttpRespondData.prototype.getJson = function() {
 
-  this.ensureParse();
-  var s = this.body;
-  if (goog.isString(s)) {
-    return /** @type {Object} */ (JSON.parse(s));
+  if (this.isJson()) {
+    return /** @type {Object} */ (JSON.parse(this.body));
   } else {
     return /** @type {Object} */ (this.body);
   }
