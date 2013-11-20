@@ -194,7 +194,8 @@ ydn.client.HttpRespondData.prototype.isJson = function() {
 ydn.client.HttpRespondData.prototype.getJson = function() {
 
   if (this.isJson()) {
-    return /** @type {Object} */ (JSON.parse(this.body));
+    var s = /** @type {string} */ (this.body);
+    return /** @type {Object} */ (JSON.parse(s));
   } else {
     return /** @type {Object} */ (this.body);
   }
