@@ -13,6 +13,12 @@ gapi.auth = {};
 
 
 /**
+ * @const
+ */
+gapi.signin = {};
+
+
+/**
  * @typedef{{
  *   client_id: string,
  *   scope: (Array.<string>|string),
@@ -73,6 +79,14 @@ var GapiToken;
  * @param {function(GapiAuthResult)} callback
  */
 gapi.auth.authorize = function(options, callback) {};
+
+
+/**
+ *
+ * @param {Element} login_btn
+ * @param {Object} options
+ */
+gapi.signin.render = function(login_btn, options) {};
 
 
 /**
