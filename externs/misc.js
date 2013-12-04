@@ -58,6 +58,20 @@ GapiRequest.prototype.headers;
 GapiRequest.prototype.body;
 
 
+/**
+ * @const
+ * @type {Object}
+ */
+var CryptoJS = {};
+
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+CryptoJS.MD5 = function(s) {};
+
+
 
 
 
