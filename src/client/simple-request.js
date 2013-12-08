@@ -89,7 +89,7 @@ ydn.client.SimpleHttpRequest.prototype.execute = function(cb, opt_obj) {
       } else if (goog.isString(body)) {
         try {
           json = ydn.json.parse(body);
-        } catch (e) {
+        } catch (je) {
           json = body;
         }
       }
@@ -106,7 +106,7 @@ ydn.client.SimpleHttpRequest.prototype.execute = function(cb, opt_obj) {
     var resp = new ydn.client.HttpRespondData(xhr.getStatus(), body, headers,
         xhr.getStatusText());
     if (cb) {
-      cb.call(opt_obj, json, resp);
+      cb.call(opt_obj, /** @type {Object} */ (json), resp);
       cb = null;
     }
   };
