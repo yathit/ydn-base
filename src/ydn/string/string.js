@@ -51,6 +51,24 @@ ydn.string.split_space = function(str) {
 };
 
 
+/**
+ * Normalize email address.
+ * @param {string|*} email
+ * @return {string?} null if not a valid email.
+ */
+ydn.string.normalizeEmail = function(email) {
+  if (!goog.isString(email)) {
+    return null;
+  }
+  if (!/[\w\+]+@\w+\.\w+/.test(email)) {
+    return null;
+  }
+  email = email.toLowerCase();
+  email = email.replace(/\+\w*?@/, '@'); // normalize for gmail using +
+  return email;
+};
+
+
 
 
 

@@ -81,3 +81,14 @@ var test_23_expression_rpn_arguments = function() {
   exp_test('"a" 3 $1 + +', 6, {a: 2}, 1);
   exp_test("'a' 'b' +", 'ba');
 };
+
+
+var test_email_normalize = function() {
+  assertEquals('valid', ydn.string.normalizeEmail('abc@gmail.com'), 'abc@gmail.com');
+  // assertEquals('remove dot', ydn.string.normalizeEmail('abc.de@gmail.com'), 'abcde@gmail.com');
+  assertEquals('lower case', ydn.string.normalizeEmail('aBc@GmaiL.com'), 'abc@gmail.com');
+  assertEquals('remove +', ydn.string.normalizeEmail('abc+@gmail.com'), 'abc@gmail.com');
+  assertEquals('remove after +', ydn.string.normalizeEmail('abc+de@gmail.com'), 'abc@gmail.com');
+  assertNull('invalid name', ydn.string.normalizeEmail('@gmail.com'));
+  assertNull('invalid domain', ydn.string.normalizeEmail('abc@gmailcom'));
+};
