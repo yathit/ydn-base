@@ -81,8 +81,19 @@ ydn.client.SimpleHttpRequest.prototype.execute = function(cb, opt_obj) {
   var callback = function(e) {
     var xhr = /** @type {goog.net.XhrIo} */ (e.target);
     var body = xhr.getResponse();
+    var json = null;
     var is_json = true; // todo
-    var json = is_json && goog.isObject(body) ? body : null;
+    if (is_json) {
+      if (goog.isObject(body)) {
+        json = body;
+      } else if (goog.isString(body)) {
+        try {
+          json = ydn.json.parse(body);
+        } catch (e) {
+          json = body;
+        }
+      }
+    }
     var header_lines = xhr.getAllResponseHeaders().split('\n');
     var headers = {};
     for (var i = 0; i < header_lines.length; i++) {
