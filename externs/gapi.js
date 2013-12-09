@@ -56,6 +56,13 @@ GapiAuthResult.prototype.expires_in;
 
 
 /**
+ * This is computed value.
+ * @type {number}
+ */
+GapiAuthResult.prototype.expires_at;
+
+
+/**
  * @type {string}
  */
 GapiAuthResult.prototype.state;
