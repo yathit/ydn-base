@@ -79,7 +79,8 @@ ydn.atom.Atom.prototype.getId = function() {
  * @return {string}
  */
 ydn.atom.Atom.prototype.getTitle = function() {
-  return this.data.title.$t;
+  var title = this.data.title ? this.data.title.$t : undefined;
+  return /** @type {string} */ (title); // title is always defined.
 };
 
 
