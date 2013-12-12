@@ -13,6 +13,93 @@ goog.require('goog.net.XhrManager');
 
 
 /**
+ * @private
+ * @type {Object.<ydn.client.Client>}
+ */
+ydn.client.clients_ = {};
+
+
+/**
+ * @private
+ * @type {Array.<function(string=): string>}
+ */
+ydn.client.scope_resolvers_ = [];
+
+
+/**
+ *
+ * @param {function(string=): string?} resolver
+ */
+ydn.client.setScopeResolver = function(resolver) {
+  ydn.client.scope_resolvers_ = [resolver];
+};
+
+
+/**
+ *
+ * @param {function(string=): string?} resolver Resolver should resolve given
+ * feed_uri to scope,
+ * or return null when feed_uri is irrelevant to the resolver.
+ */
+ydn.client.addScopeResolver = function(resolver) {
+  if (resolver) {
+    ydn.client.scope_resolvers_.push(resolver);
+  }
+};
+
+
+/**
+ * Set whatever proxy
+ *
+ * @param {ydn.client.Client} transport
+ * @param {string=} opt_scope
+ */
+ydn.client.setClient = function(transport, opt_scope) {
+  opt_scope = opt_scope || ydn.http.Scopes.DEFAULT;
+  ydn.client.clients_[opt_scope] = transport;
+};
+
+
+/**
+ * Get whatever proxy transport set previously
+ * If given proxy is not available, a default transport will be return instead
+ * of null.
+ * @see {@link ydn.http.Scopes}
+ * @param {string=} uri
+ * @return {ydn.client.Client} transport.
+ */
+ydn.client.getClient = function(uri) {
+  if (!goog.isDef(uri)) {
+    return ydn.client.clients_[ydn.http.Scopes.DEFAULT];
+  }
+  var scope = uri;
+  for (var i = 0; i < ydn.client.scope_resolvers_.length; i++) {
+    var resolver = ydn.client.scope_resolvers_[i];
+    var out = resolver(uri);
+    if (out) {
+      scope = out;
+      break;
+    }
+  }
+  return ydn.client.clients_[scope] || null;
+};
+
+
+/**
+ * Clear transport
+ * @param {string=} opt_scope if not specified, all transports will be cleared.
+ */
+ydn.client.clearTransport = function(opt_scope) {
+  if (goog.isDef(opt_scope)) {
+    delete ydn.client.clients_[opt_scope];
+  } else {
+    ydn.client.clients_ = {};
+    ydn.client.scope_resolvers_ = [];
+  }
+};
+
+
+/**
  * @type {goog.net.XhrManager}
  * @private
  */
@@ -193,9 +280,8 @@ ydn.client.HttpRespondData.prototype.isJson = function() {
  */
 ydn.client.HttpRespondData.prototype.getJson = function() {
 
-  if (this.isJson()) {
-    var s = /** @type {string} */ (this.body);
-    return /** @type {Object} */ (JSON.parse(s));
+  if (this.isJson() && goog.isString(this.body)) {
+    return /** @type {Object} */ (JSON.parse(this.body));
   } else {
     return /** @type {Object} */ (this.body);
   }
