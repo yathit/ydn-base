@@ -13,10 +13,11 @@ goog.require('ydn.client.SimpleHttpRequest');
  * Singleton simple client.
  * @param {goog.net.XhrManager=} opt_xm xhr manager.
  * @param {Object=} opt_headers optional headers to send with each request.
+ * @param {string=} opt_proxy proxy url.
  * @constructor
  * @implements {ydn.client.Client}
  */
-ydn.client.SimpleClient = function(opt_xm, opt_headers) {
+ydn.client.SimpleClient = function(opt_xm, opt_headers, opt_proxy) {
   this.xm_ = goog.isDef(opt_xm) ? // use default only if not null.
       opt_xm : ydn.client.getXhrManager();
   /**
@@ -24,6 +25,11 @@ ydn.client.SimpleClient = function(opt_xm, opt_headers) {
    * @private
    */
   this.header_ = opt_headers;
+  /**
+   * @type {string|undefined}
+   * @private
+   */
+  this.proxy_url_ = opt_proxy;
 };
 
 
@@ -45,6 +51,9 @@ ydn.client.SimpleClient.prototype.request = function(args) {
     for (var key in this.header_) {
       args.headers[key] = this.header_[key];
     }
+  }
+  if (this.proxy_url_) {
+    args.path = this.proxy_url_ + args.path;
   }
   return new ydn.client.SimpleHttpRequest(args, this.xm_);
 };
