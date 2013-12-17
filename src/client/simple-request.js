@@ -26,12 +26,13 @@ ydn.client.SimpleHttpRequest = function(args, opt_xm) {
    * @final
    * @private
    */
-  this.id_ = 'r' + (ydn.client.SimpleHttpRequest.IdCount_++);
+  this.id_ = 'sr' + (ydn.client.SimpleHttpRequest.IdCount_++);
   /**
    * @final
-   * @private
+   * @protected
+   * @type {ydn.client.HttpRequestData}
    */
-  this.req_data_ = args;
+  this.req_data = args;
 };
 
 
@@ -73,7 +74,7 @@ ydn.client.SimpleHttpRequest.prototype.xm_;
  */
 ydn.client.SimpleHttpRequest.prototype.execute = function(cb, opt_obj) {
   goog.asserts.assert(this.xm_, this + ' already executed.');
-  var data = this.req_data_;
+  var data = this.req_data;
   var url = new goog.Uri(data.path);
   for (var key in data.params) {
     url.setParameterValue(key, data.params[key]);

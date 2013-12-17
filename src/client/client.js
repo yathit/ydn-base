@@ -65,7 +65,7 @@ ydn.client.setClient = function(transport, opt_scope) {
  * If given proxy is not available, a default transport will be return instead
  * of null.
  * @see {@link ydn.http.Scopes}
- * @param {string=} uri
+ * @param {string=} uri scope or uri.
  * @return {ydn.client.Client} transport.
  */
 ydn.client.getClient = function(uri) {
