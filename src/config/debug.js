@@ -9,5 +9,7 @@
 goog.provide('ydn.debug.exports');
 goog.require('ydn.debug');
 
+if (goog.DEBUG) {
+  goog.exportSymbol('ydn.debug.log', ydn.debug.log);
 
-goog.exportSymbol('ydn.debug.log', ydn.debug.log);
+}
