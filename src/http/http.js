@@ -7,6 +7,7 @@
 
 
 goog.provide('ydn.http');
+goog.provide('ydn.http.Scopes');
 goog.require('goog.Uri');
 goog.require('goog.debug.Logger');
 goog.require('goog.net.XhrManager');

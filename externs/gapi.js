@@ -103,6 +103,12 @@ gapi.auth.getToken = function() {};
 
 
 /**
+ * @param {GapiToken} token
+ */
+gapi.auth.setToken = function(token) {};
+
+
+/**
  * @const
  */
 gapi.client = {};
