@@ -8,6 +8,7 @@ goog.provide('ydn.client.OAuthClient');
 goog.provide('ydn.client.OAuthProvider');
 goog.require('goog.async.Deferred');
 goog.require('ydn.client.Client');
+goog.require('ydn.client.SimpleHttpRequest');
 
 
 
@@ -74,6 +75,7 @@ ydn.client.OAuthClient.Request = function(args, parent) {
    * @type {ydn.client.OAuthClient}
    */
   this.parent = parent;
+  this.no_retry_ = false;
 };
 goog.inherits(ydn.client.OAuthClient.Request, ydn.client.SimpleHttpRequest);
 
@@ -82,33 +84,45 @@ goog.inherits(ydn.client.OAuthClient.Request, ydn.client.SimpleHttpRequest);
  * @const
  * @type {boolean}
  */
-ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER = true;
+ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER = false;
 
 
 /**
- * @inheritDoc
+ * Execute the request.
+ * @param {function(this: T, Object, ydn.client.HttpRespondData)?} cb
+ * @param {T=} opt_scope scope.
+ * @template T
  */
-ydn.client.OAuthClient.Request.prototype.execute = function(cb, opt_scope, opt_no_retry) {
+ydn.client.OAuthClient.Request.prototype.execute = function(cb, opt_scope) {
   var token = this.parent.token;
-  if (token && token.expires < goog.now()) {
+  if (!token || token.expires > goog.now()) {
+    if (this.no_retry_) {
+      if (cb) {
+        cb.call(opt_scope, null, new ydn.client.HttpRespondData(0));
+      }
+    } else {
+      this.no_retry_ = true;
+      this.parent.provider.getOAuthToken().addCallbacks(function(x) {
+        this.parent.token = /** @type {YdnApiToken} */ (x);
+        this.execute(cb, opt_scope);
+      }, function(e) {
+        this.parent.token = null;
+        if (cb) {
+          cb.call(opt_scope, null, new ydn.client.HttpRespondData(0));
+        }
+      }, this);
+    }
+
+  } else {
     if (ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER) {
       this.req_data.headers['Authorization'] = 'Bearer ' + token.access_token;
     } else {
       this.req_data.params['access_token'] = token.access_token;
     }
     goog.base(this, 'execute', cb, opt_scope);
-    return;
-  } else if (opt_no_retry) {
-    cb.call(opt_scope, null, new ydn.client.HttpRespondData(0));
-    return;
   }
-  this.parent.provider.getOAuthToken().addCallbacks(function(x) {
-    this.parent.token = /** @type {YdnApiToken} */ (x);
-    this.execute(cb, opt_scope, true);
-  }, function(e) {
-    this.parent.token = null;
-    cb.call(opt_scope, null, new ydn.client.HttpRespondData(0));
-  }, this);
+
+
 };
 
 
