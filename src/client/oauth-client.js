@@ -88,28 +88,34 @@ ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER = false;
 
 
 /**
- * Execute the request.
- * @param {function(this: T, Object, ydn.client.HttpRespondData)?} cb
+ * Insert oauth header.
+ * @param {function(this: T, boolean, ydn.client.HttpRespondData)} cb
  * @param {T=} opt_scope scope.
  * @template T
  */
-ydn.client.OAuthClient.Request.prototype.execute = function(cb, opt_scope) {
+ydn.client.OAuthClient.Request.prototype.insertHeader_ = function(cb, opt_scope) {
   var token = this.parent.token;
+  // window.console.log(token);
   if (!token || token.expires > goog.now()) {
     if (this.no_retry_) {
-      if (cb) {
-        cb.call(opt_scope, null, new ydn.client.HttpRespondData(0));
-      }
+      cb.call(opt_scope, false, new ydn.client.HttpRespondData(0, null, null,
+          'refreshing token fail'));
     } else {
       this.no_retry_ = true;
+      // window.console.log('refreshing token');
       this.parent.provider.getOAuthToken().addCallbacks(function(x) {
         this.parent.token = /** @type {YdnApiToken} */ (x);
-        this.execute(cb, opt_scope);
+        if (ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER) {
+          this.req_data.headers['Authorization'] = 'Bearer ' +
+              this.parent.token.access_token;
+        } else {
+          this.req_data.params['access_token'] = this.parent.token.access_token;
+        }
+        cb.call(opt_scope, true, null);
       }, function(e) {
         this.parent.token = null;
-        if (cb) {
-          cb.call(opt_scope, null, new ydn.client.HttpRespondData(0));
-        }
+        cb.call(opt_scope, false, new ydn.client.HttpRespondData(0, null, null,
+            'refreshing token fail'));
       }, this);
     }
 
@@ -119,10 +125,27 @@ ydn.client.OAuthClient.Request.prototype.execute = function(cb, opt_scope) {
     } else {
       this.req_data.params['access_token'] = token.access_token;
     }
-    goog.base(this, 'execute', cb, opt_scope);
+    cb.call(opt_scope, true, null);
   }
+};
 
 
+/**
+ * Execute the request.
+ * @param {function(this: T, Object, ydn.client.HttpRespondData)?} cb
+ * @param {T=} opt_scope scope.
+ * @template T
+ */
+ydn.client.OAuthClient.Request.prototype.execute = function(cb, opt_scope) {
+  this.insertHeader_(function(ok, raw) {
+    if (ok) {
+      ydn.client.OAuthClient.Request.superClass_.execute.call(this, cb, opt_scope);
+    } else {
+      if (cb) {
+        cb.call(opt_scope, null, raw);
+      }
+    }
+  }, this);
 };
 
 
