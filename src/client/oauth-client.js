@@ -96,7 +96,7 @@ ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER = false;
 ydn.client.OAuthClient.Request.prototype.insertHeader_ = function(cb, opt_scope) {
   var token = this.parent.token;
   // window.console.log(token);
-  if (!token || token.expires > goog.now()) {
+  if (!token || token.expires < goog.now()) {
     if (this.no_retry_) {
       cb.call(opt_scope, false, new ydn.client.HttpRespondData(0, null, null,
           'refreshing token fail'));
