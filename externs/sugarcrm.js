@@ -115,7 +115,7 @@ SugarCrm.ModuleField.prototype.name;
 
 
 /**
- * @type {Object.<SugarCrm.NameValue>}
+ * @type {!Object.<SugarCrm.NameValue>}
  */
 SugarCrm.ModuleField.prototype.options;
 
@@ -159,6 +159,6 @@ SugarCrm.ModuleInfo.prototype.table_name;
 
 
 /**
- * @type {Object.<SugarCrm.ModuleField>}
+ * @type {!Object.<SugarCrm.ModuleField>}
  */
 SugarCrm.ModuleInfo.prototype.module_fields;
