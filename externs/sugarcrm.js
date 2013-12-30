@@ -61,13 +61,13 @@ SugarCrm.NameValueEntry.prototype.name_value_list;
  * Represents SugarCRM entry.
  * @constructor
  */
-SugarCrm.Entry = function() {};
+SugarCrm.Record = function() {};
 
 
 /**
  * @type {string}
  */
-SugarCrm.NameValue.prototype.id;
+SugarCrm.Record.prototype.id;
 
 
 
@@ -162,3 +162,50 @@ SugarCrm.ModuleInfo.prototype.table_name;
  * @type {!Object.<SugarCrm.ModuleField>}
  */
 SugarCrm.ModuleInfo.prototype.module_fields;
+
+
+
+/**
+ * Represents query format in channel.
+ * @constructor
+ */
+SugarCrm.Query = function() {};
+
+
+/**
+ * @type {string} module name.
+ */
+SugarCrm.Query.prototype.store;
+
+
+/**
+ * @type {string} field name, use 'id' for primary key.
+ */
+SugarCrm.Query.prototype.index;
+
+
+/**
+ * @type {string} id.
+ */
+SugarCrm.Query.prototype.key;
+
+
+/**
+ * @type {{lower: string, upper: string}} id range.
+ */
+SugarCrm.Query.prototype.keyRange;
+
+
+
+/**
+ * Represents query result format in channel.
+ * @constructor
+ * @extends {SugarCrm.Query}
+ */
+SugarCrm.QueryResult = function() {};
+
+
+/**
+ * @type {Array.<SugarCrm.Record>} result of query.
+ */
+SugarCrm.Query.prototype.result;
