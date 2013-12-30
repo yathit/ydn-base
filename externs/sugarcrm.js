@@ -70,6 +70,12 @@ SugarCrm.Record = function() {};
 SugarCrm.Record.prototype.id;
 
 
+/**
+ * @type {string}
+ */
+SugarCrm.Record.prototype.date_modified;
+
+
 
 /**
  * Represents SugarCRM ModuleField.
