@@ -31,3 +31,12 @@ goog.inherits(ydn.atom.Entry, ydn.atom.Atom);
 ydn.atom.Entry.TYPE = 'ydn.atom.Entry';
 
 
+/**
+ * @param {string} text
+ * @return {AtomText}
+ */
+ydn.atom.Entry.asText = function(text) {
+  return /** @type {AtomText} */ (/** @type {Object} */({'$t': text}));
+};
+
+
