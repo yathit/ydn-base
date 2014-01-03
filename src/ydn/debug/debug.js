@@ -8,6 +8,7 @@
  */
 
 goog.provide('ydn.debug');
+goog.provide('ydn.debug.ILogger');
 
 goog.require('goog.debug.Console');
 goog.require('goog.debug.DivConsole');
@@ -69,4 +70,18 @@ ydn.debug.log = function(scope, level, ele) {
     }
   }
 };
+
+
+
+
+/**
+ * @interface
+ */
+ydn.debug.ILogger = function() {}
+
+
+/**
+ * @param {Object} x
+ */
+ydn.debug.ILogger.prototype.log = function(x) {}
 

@@ -10,6 +10,7 @@ goog.provide('ydn.client.HttpRequestData');
 goog.provide('ydn.client.HttpRespondData');
 goog.require('goog.net.XhrManager');
 goog.require('ydn.http.Scopes');
+goog.require('ydn.debug.ILogger');
 
 
 /**
@@ -410,4 +411,10 @@ ydn.client.Client = function() {};
  * provided in the argument.
  */
 ydn.client.Client.prototype.request = function(req) {};
+
+
+/**
+ * @type {ydn.debug.ILogger} log error.
+ */
+ydn.client.error_logger = null;
 

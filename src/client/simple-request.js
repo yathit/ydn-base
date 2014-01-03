@@ -109,6 +109,27 @@ ydn.client.SimpleHttpRequest.prototype.execute = function(cb, opt_scope) {
     }
     var resp = new ydn.client.HttpRespondData(xhr.getStatus(), body, headers,
         xhr.getStatusText());
+    if (ydn.client.error_logger && !resp.isSuccess()) {
+      ydn.client.error_logger.log({
+        'class': 'ydn.gdata.Entry',
+        'method': 'commit',
+        'context': 'HTTP request',
+        'HttpRequestData': {
+          'path': data.path,
+          'uri': xhr.getLastUri(),
+          'method': data.method,
+          'params': data.params,
+          'headers': data.headers,
+          'body': data.body
+        },
+        'HttpRespondData': {
+          'status': resp.getStatus(),
+          'statusText': resp.getStatusText(),
+          'body': resp.getBody(),
+          'headers': resp.getHeaders()
+        }
+      });
+    }
     if (cb) {
       cb.call(opt_scope, /** @type {Object} */ (json), resp);
       cb = null;
