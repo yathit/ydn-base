@@ -92,6 +92,7 @@ ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER = false;
  * @param {function(this: T, boolean, ydn.client.HttpRespondData)} cb
  * @param {T=} opt_scope scope.
  * @template T
+ * @private
  */
 ydn.client.OAuthClient.Request.prototype.insertHeader_ = function(cb, opt_scope) {
   var token = this.parent.token;
