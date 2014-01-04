@@ -81,6 +81,12 @@ goog.inherits(ydn.client.OAuthClient.Request, ydn.client.SimpleHttpRequest);
 
 
 /**
+ * @define {boolean} debug flag.
+ */
+ydn.client.OAuthClient.DEBUG = true;
+
+
+/**
  * @const
  * @type {boolean}
  */
@@ -88,47 +94,11 @@ ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER = false;
 
 
 /**
- * Insert oauth header.
- * @param {function(this: T, boolean, ydn.client.HttpRespondData)} cb
- * @param {T=} opt_scope scope.
- * @template T
- * @private
+ * @const
+ * @type {ydn.client.HttpRespondData}
  */
-ydn.client.OAuthClient.Request.prototype.insertHeader_ = function(cb, opt_scope) {
-  var token = this.parent.token;
-  // window.console.log(token);
-  if (!token || token.expires < goog.now()) {
-    if (this.no_retry_) {
-      cb.call(opt_scope, false, new ydn.client.HttpRespondData(0, null, null,
-          'refreshing token fail'));
-    } else {
-      this.no_retry_ = true;
-      // window.console.log('refreshing token');
-      this.parent.provider.getOAuthToken().addCallbacks(function(x) {
-        this.parent.token = /** @type {YdnApiToken} */ (x);
-        if (ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER) {
-          this.req_data.headers['Authorization'] = 'Bearer ' +
-              this.parent.token.access_token;
-        } else {
-          this.req_data.params['access_token'] = this.parent.token.access_token;
-        }
-        cb.call(opt_scope, true, null);
-      }, function(e) {
-        this.parent.token = null;
-        cb.call(opt_scope, false, new ydn.client.HttpRespondData(0, null, null,
-            'refreshing token fail'));
-      }, this);
-    }
-
-  } else {
-    if (ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER) {
-      this.req_data.headers['Authorization'] = 'Bearer ' + token.access_token;
-    } else {
-      this.req_data.params['access_token'] = token.access_token;
-    }
-    cb.call(opt_scope, true, null);
-  }
-};
+ydn.client.OAuthClient.Request.ERR_RESP =
+    new ydn.client.HttpRespondData(0, null, null, 'No access token');
 
 
 /**
@@ -138,15 +108,53 @@ ydn.client.OAuthClient.Request.prototype.insertHeader_ = function(cb, opt_scope)
  * @template T
  */
 ydn.client.OAuthClient.Request.prototype.execute = function(cb, opt_scope) {
-  this.insertHeader_(function(ok, raw) {
-    if (ok) {
-      ydn.client.OAuthClient.Request.superClass_.execute.call(this, cb, opt_scope);
+
+  var me = this;
+
+  var hasValidToken = function() {
+    return me.parent.token && me.parent.token.expires > goog.now();
+  };
+
+  var insertHeader = function() {
+    if (ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER) {
+      me.req_data.headers['Authorization'] = 'Bearer ' + me.parent.token.access_token;
     } else {
-      if (cb) {
-        cb.call(opt_scope, null, raw);
-      }
+      me.req_data.params['access_token'] = me.parent.token.access_token;
     }
-  }, this);
+  };
+
+  // start
+  if (hasValidToken()) {
+    insertHeader();
+    ydn.client.OAuthClient.Request.superClass_.execute.call(this, function(data, raw) {
+      if (raw.getStatus() == 401) { // (Unauthorized)
+        if (ydn.client.OAuthClient.DEBUG) {
+          window.console.log(me.parent.token);
+          window.console.log('Although not expires, refreshing token due to ' + raw.getStatus() + ' ' +
+              raw.getStatusText());
+        }
+        me.parent.provider.getOAuthToken().addCallbacks(function(x) {
+          me.parent.token = /** @type {YdnApiToken} */ (x);
+          insertHeader();
+          ydn.client.OAuthClient.Request.superClass_.execute.call(me, cb, opt_scope);
+        }, function(e) {
+          me.parent.token = null;
+          cb.call(opt_scope, null, ydn.client.OAuthClient.Request.ERR_RESP);
+        }, me);
+      } else {
+        cb.call(opt_scope, data, raw);
+      }
+    }, this);
+  } else {
+    this.parent.provider.getOAuthToken().addCallbacks(function(x) {
+      me.parent.token = /** @type {YdnApiToken} */ (x);
+      insertHeader();
+      ydn.client.OAuthClient.Request.superClass_.execute.call(this, cb, opt_scope);
+    }, function(e) {
+      me.parent.token = null;
+      cb.call(opt_scope, null, ydn.client.OAuthClient.Request.ERR_RESP);
+    }, this);
+  }
 };
 
 
