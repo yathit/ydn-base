@@ -15,6 +15,7 @@ goog.require('goog.debug.DivConsole');
 goog.require('goog.debug.LogManager');
 goog.require('goog.debug.Logger');
 goog.require('goog.events.BrowserEvent'); // cause compile error if not.
+goog.require('goog.functions');
 
 
 /**
@@ -73,15 +74,33 @@ ydn.debug.log = function(scope, level, ele) {
 
 
 
-
 /**
  * @interface
  */
-ydn.debug.ILogger = function() {}
+ydn.debug.ILogger = function() {};
 
 
 /**
  * @param {Object} x
  */
-ydn.debug.ILogger.prototype.log = function(x) {}
+ydn.debug.ILogger.prototype.log = function(x) {};
+
+
+/**
+ * @type {ydn.debug.ILogger}
+ */
+ydn.debug.ILogger.instance = null;
+
+
+/**
+ * Log data.
+ * @param {Object} data
+ */
+ydn.debug.ILogger.log = function(data) {
+  if (ydn.debug.ILogger.instance) {
+    setTimeout(function() {
+      ydn.debug.ILogger.instance.log(data);
+    }, 10);
+  }
+};
 
