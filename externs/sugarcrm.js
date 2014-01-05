@@ -215,3 +215,18 @@ SugarCrm.QueryResult = function() {};
  * @type {Array.<SugarCrm.Record>} result of query.
  */
 SugarCrm.Query.prototype.result;
+
+
+/**
+ * @typedef {{
+ *   baseUrl: (string|undefined),
+ *   domain: (string?|undefined),
+ *   userName: (string?|undefined),
+ *   isLogin: (boolean|undefined),
+ *   flavor: (string|undefined),
+ *   version: (string|undefined),
+ *   uptime: (string|undefined)
+ * }}
+ */
+SugarCrm.ServerInfo;
+
