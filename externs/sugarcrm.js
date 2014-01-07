@@ -222,6 +222,7 @@ SugarCrm.Query.prototype.result;
  *   baseUrl: (string|undefined),
  *   domain: (string?|undefined),
  *   userName: (string?|undefined),
+ *   hostPermission: (boolean|undefined),
  *   isLogin: (boolean|undefined),
  *   flavor: (string|undefined),
  *   version: (string|undefined),

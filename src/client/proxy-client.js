@@ -58,6 +58,14 @@ ydn.client.Proxy.prototype.request = function(req) {
 };
 
 
+/**
+ * @return {string}
+ */
+ydn.client.Proxy.prototype.getProxyPath = function() {
+  return this.proxy_path;
+};
+
+
 
 /**
  * Request data.
@@ -93,7 +101,7 @@ goog.inherits(ydn.client.Proxy.Request, ydn.client.SimpleHttpRequest);
 /**
  * @define {boolean} debug flag.
  */
-ydn.client.Proxy.DEBUG = true;
+ydn.client.Proxy.DEBUG = goog.DEBUG;
 
 
 /**
