@@ -121,10 +121,13 @@ ydn.client.Proxy.Request.prototype.execute = function(cb, opt_scope) {
       var is_numeric = !/[^0-9|\.]/.test(retry);
       if (is_numeric) {
         // retry after in second.
-        this.parent.next_retry = parseFloat(retry) / 1000 + goog.now();
+        this.parent.next_retry = parseFloat(retry) * 1000 + goog.now();
       } else {
         // retry after by date
         this.parent.next_retry = new Date(retry).getTime();
+      }
+      if (ydn.client.Proxy.DEBUG) {
+        goog.global.console.info('Next retry ' + this.parent.next_retry + ', now ' + goog.now());
       }
     } else {
       this.parent.next_retry = NaN;
@@ -140,17 +143,37 @@ ydn.client.Proxy.Request.prototype.execute = function(cb, opt_scope) {
       req.scope_ = null;
     }
   };
-  if (this.parent.next_retry && this.parent.next_retry > goog.now()) {
-    var intv = this.parent.next_retry - goog.now();
+  var intv = this.parent.next_retry - goog.now();
+  if (intv > 0) {
     if (ydn.client.Proxy.DEBUG) {
       goog.global.console.info('Proxy will call after ' + intv + ' ms');
-      goog.Timer.callOnce(function() {
-        this.req.execute(handleRequest, this);
-      }, intv, this);
     }
+    goog.Timer.callOnce(function() {
+      this.parent.next_retry = NaN;
+      this.req.execute(handleRequest, this);
+    }, intv, this);
   } else {
     this.req.execute(handleRequest, this);
   }
+};
+
+
+/**
+ * Test function.
+ * @param {number} n try 6.
+ * @private
+ */
+ydn.client.Proxy.test_ = function(n) {
+  var px = ydn.client.getClient('proxy');
+  goog.global.console.assert(px, 'no proxy client');
+  var req = px.request(new ydn.client.HttpRequestData('https://api.mixpanel.com/track/'));
+  req.execute(function(json, raw) {
+    goog.global.console.info(n);
+    if (n > 0) {
+      n--;
+      ydn.client.Proxy.test_(n);
+    }
+  });
 };
 
 
