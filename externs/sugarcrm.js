@@ -219,15 +219,22 @@ SugarCrm.Query.prototype.result;
 
 /**
  * @typedef {{
- *   baseUrl: (string|undefined),
- *   domain: (string?|undefined),
- *   userName: (string?|undefined),
- *   hostPermission: (boolean|undefined),
- *   isLogin: (boolean|undefined),
  *   flavor: (string|undefined),
  *   version: (string|undefined),
  *   uptime: (string|undefined)
  * }}
  */
 SugarCrm.ServerInfo;
+
+
+/**
+ * @typedef {{
+ *   baseUrl: (string|undefined),
+ *   domain: (string?|undefined),
+ *   userName: (string?|undefined),
+ *   hostPermission: (boolean|undefined),
+ *   isLogin: (boolean|undefined)
+ * }}
+ */
+SugarCrm.About;
 
