@@ -230,7 +230,7 @@ SugarCrm.ServerInfo;
 /**
  * @typedef {{
  *   baseUrl: (string|undefined),
- *   domain: (string?|undefined),
+ *   domain: (string),
  *   userName: (string?|undefined),
  *   hostPermission: (boolean|undefined),
  *   isLogin: (boolean|undefined)
