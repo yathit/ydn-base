@@ -217,24 +217,63 @@ SugarCrm.QueryResult = function() {};
 SugarCrm.Query.prototype.result;
 
 
+
 /**
- * @typedef {{
- *   flavor: (string|undefined),
- *   version: (string|undefined),
- *   uptime: (string|undefined)
- * }}
+ * @interface
  */
-SugarCrm.ServerInfo;
+SugarCrm.ServerInfo = function() {};
 
 
 /**
- * @typedef {{
- *   baseUrl: (string|undefined),
- *   domain: (string),
- *   userName: (string?|undefined),
- *   hostPermission: (boolean|undefined),
- *   isLogin: (boolean|undefined)
- * }}
+ * @type {(string|undefined)}
  */
-SugarCrm.About;
+SugarCrm.ServerInfo.prototype.flavor;
 
+
+/**
+ * @type {(string|undefined)}
+ */
+SugarCrm.ServerInfo.prototype.version;
+
+
+/**
+ * @type {(string|undefined)}
+ */
+SugarCrm.ServerInfo.prototype.uptime;
+
+
+
+/**
+ * @interface
+ */
+SugarCrm.About = function() {};
+
+
+/**
+ * @type {(string|undefined)}
+ */
+SugarCrm.About.prototype.baseUrl;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.About.prototype.domain;
+
+
+/**
+ * @type {(string|undefined)}
+ */
+SugarCrm.About.prototype.userName;
+
+
+/**
+ * @type {(boolean|undefined)}
+ */
+SugarCrm.About.prototype.hostPermission;
+
+
+/**
+ * @type {(boolean|undefined)}
+ */
+SugarCrm.About.prototype.isLogin;
