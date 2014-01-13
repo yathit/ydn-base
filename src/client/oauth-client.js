@@ -29,11 +29,13 @@ ydn.client.OAuthProvider.prototype.getOAuthToken = goog.abstractMethod;
  * OAuth client.
  * @param {ydn.client.OAuthProvider} provider
  * @param {goog.net.XhrManager} xm xhr manager.
+ * @param {boolean=} opt_use_header user authroization header, otherwise use
+ * token in parameter.
  * @constructor
  * @implements {ydn.client.Client}
  * @const
  */
-ydn.client.OAuthClient = function(provider, xm) {
+ydn.client.OAuthClient = function(provider, xm, opt_use_header) {
   /**
    * @protected
    * @type {ydn.client.OAuthProvider}
@@ -49,6 +51,8 @@ ydn.client.OAuthClient = function(provider, xm) {
    * @type {YdnApiToken}
    */
   this.token = null;
+  this.use_header_authorization = goog.isDef(opt_use_header) ? opt_use_header :
+      ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER;
 };
 
 
@@ -83,14 +87,14 @@ goog.inherits(ydn.client.OAuthClient.Request, ydn.client.SimpleHttpRequest);
 /**
  * @define {boolean} debug flag.
  */
-ydn.client.OAuthClient.DEBUG = true;
+ydn.client.OAuthClient.DEBUG = false;
 
 
 /**
  * @const
  * @type {boolean}
  */
-ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER = false;
+ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER = true;
 
 
 /**
