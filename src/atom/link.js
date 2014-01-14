@@ -49,6 +49,7 @@ ydn.atom.Link.Rel = {
   // extension for GData
   FEED: 'http://schemas.google.com/g/2005#feed',
   LIST_FEED: 'http://schemas.google.com/spreadsheets/2006#listfeed',
+  CELLS_FEED: 'http://schemas.google.com/spreadsheets/2006#cellsfeed',
   BATCH: "http://schemas.google.com/g/2005#batch",
   REVISION: "http://schemas.google.com/sites/2008#revision"
 };

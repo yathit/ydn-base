@@ -120,7 +120,7 @@ ydn.client.OAuthClient.Request.prototype.execute = function(cb, opt_scope) {
   };
 
   var insertHeader = function() {
-    if (ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER) {
+    if (this.use_header_authorization) {
       me.req_data.headers['Authorization'] = 'Bearer ' + me.parent.token.access_token;
     } else {
       me.req_data.params['access_token'] = me.parent.token.access_token;
