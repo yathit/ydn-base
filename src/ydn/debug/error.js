@@ -145,7 +145,7 @@ ydn.debug.error.ConstraintError = function(opt_msg) {
 
   // Ensure there is a stack trace.
   if (Error.captureStackTrace) {
-    Error.captureStackTrace(this, ydn.error.ConstraintError);
+    Error.captureStackTrace(this, ydn.debug.error.ConstraintError);
   } else {
     this.stack = new Error().stack || '';
   }
