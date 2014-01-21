@@ -124,6 +124,8 @@ ydn.client.Proxy.Request.prototype.execute = function(cb, opt_scope) {
    * @param {ydn.client.HttpRespondData} raw
    */
   var handleRequest = function(json, raw) {
+    // todo: need to think about Request timeout
+    // otherwise req queue will never flush.
     var retry = raw.getHeader('retry-after');
     if (retry) {
       var is_numeric = !/[^0-9|\.]/.test(retry);
