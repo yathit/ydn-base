@@ -7,10 +7,9 @@ goog.provide('ydn.client');
 goog.provide('ydn.client.Client');
 goog.provide('ydn.client.HttpRequest');
 goog.provide('ydn.client.HttpRequestData');
-goog.provide('ydn.client.HttpRespondData');
 goog.require('goog.net.XhrManager');
-goog.require('ydn.http.Scopes');
 goog.require('ydn.debug.ILogger');
+goog.require('ydn.http.Scopes');
 
 
 /**
