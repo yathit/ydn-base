@@ -3,7 +3,7 @@
  */
 
 
-goog.provide('ydn.client.SimpleClient');
+goog.provide('ydn.client.RichClient');
 goog.require('ydn.client');
 goog.require('ydn.client.SimpleHttpRequest');
 
@@ -14,11 +14,13 @@ goog.require('ydn.client.SimpleHttpRequest');
  * @param {goog.net.XhrManager=} opt_xm xhr manager.
  * @param {Object=} opt_headers optional headers to send with each request.
  * @param {string=} opt_proxy proxy url.
+ * @param {number=} opt_retry
+ * @param {boolean=} opt_credentials invoke with credentials
  * @constructor
  * @implements {ydn.client.Client}
  * @struct
  */
-ydn.client.SimpleClient = function(opt_xm, opt_headers, opt_proxy) {
+ydn.client.RichClient = function(opt_xm, opt_headers, opt_proxy, opt_retry, opt_credentials) {
   this.xm_ = goog.isDef(opt_xm) ? // use default only if not null.
       opt_xm : ydn.client.getXhrManager();
   /**
@@ -31,6 +33,16 @@ ydn.client.SimpleClient = function(opt_xm, opt_headers, opt_proxy) {
    * @private
    */
   this.proxy_url_ = opt_proxy;
+  /**
+   * @type {number}
+   * @private
+   */
+  this.retry_ = opt_retry || 0;
+  /**
+   * @type {boolean}
+   * @private
+   */
+  this.with_credentials_ = !!opt_credentials;
 };
 
 
@@ -38,13 +50,13 @@ ydn.client.SimpleClient = function(opt_xm, opt_headers, opt_proxy) {
  * @type {goog.net.XhrManager}
  * @private
  */
-ydn.client.SimpleClient.prototype.xm_;
+ydn.client.RichClient.prototype.xm_;
 
 
 /**
  * @inheritDoc
  */
-ydn.client.SimpleClient.prototype.request = function(args) {
+ydn.client.RichClient.prototype.request = function(args) {
   if (this.header_) {
     if (!args.headers) {
       args.headers = {};
@@ -56,19 +68,19 @@ ydn.client.SimpleClient.prototype.request = function(args) {
   if (this.proxy_url_) {
     args.path = this.proxy_url_ + args.path;
   }
-  return new ydn.client.SimpleHttpRequest(args, this.xm_);
+  return new ydn.client.SimpleHttpRequest(args, this.xm_, this.retry_, this.with_credentials_);
 };
 
 
 /**
  * Get singleton simple client.
- * @return {!ydn.client.SimpleClient}
+ * @return {!ydn.client.RichClient}
  */
-ydn.client.SimpleClient.getInstance = function() {
-  if (!ydn.client.SimpleClient.instance_) {
-    ydn.client.SimpleClient.instance_ = new ydn.client.SimpleClient();
+ydn.client.RichClient.getInstance = function() {
+  if (!ydn.client.RichClient.instance_) {
+    ydn.client.RichClient.instance_ = new ydn.client.RichClient();
   }
-  return ydn.client.SimpleClient.instance_;
+  return ydn.client.RichClient.instance_;
 };
 
 

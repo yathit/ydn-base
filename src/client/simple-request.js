@@ -15,11 +15,13 @@ goog.require('ydn.client');
  * Create a new request.
  * @param {ydn.client.HttpRequestData} args
  * @param {goog.net.XhrManager=} opt_xm xhr manager.
+ * @param {number=} opt_retry
+ * @param {boolean=} opt_credentials invoke with credentials
  * @constructor
  * @struct
  * @implements {ydn.client.HttpRequest}
  */
-ydn.client.SimpleHttpRequest = function(args, opt_xm) {
+ydn.client.SimpleHttpRequest = function(args, opt_xm, opt_retry, opt_credentials) {
   this.xm_ = goog.isDef(opt_xm) ? // use default only if not null.
       opt_xm : ydn.client.getXhrManager();
   /**
@@ -27,6 +29,16 @@ ydn.client.SimpleHttpRequest = function(args, opt_xm) {
    * @private
    */
   this.id_ = 'sr' + (ydn.client.SimpleHttpRequest.IdCount_++);
+  /**
+   * @type {number}
+   * @private
+   */
+  this.retry_ = opt_retry || 0;
+  /**
+   * @type {boolean}
+   * @private
+   */
+  this.with_credentials_ = !!opt_credentials;
   /**
    * @final
    * @protected
@@ -136,7 +148,8 @@ ydn.client.SimpleHttpRequest.prototype.execute = function(cb, opt_scope) {
     }
   };
   this.xm_.send(this.id_, url.toString(),
-      data.method, data.body, data.headers, undefined, callback);
+      data.method, data.body, data.headers, undefined, callback,
+      this.retry_, undefined, this.with_credentials_);
   this.xm_ = null;
 };
 
