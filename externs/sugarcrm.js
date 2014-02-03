@@ -146,10 +146,38 @@ SugarCrm.ModuleField.prototype.type;
 
 
 /**
+ * Represents meta data for ModuleInfo.
+ * @constructor
+ */
+SugarCrm.ModuleMeta = function() {};
+
+
+/**
+ * Color hex for module.
+ * @type {string}
+ */
+SugarCrm.ModuleMeta.prototype.color;
+
+
+/**
+ * List of email fields.
+ * @type {Array.<string>}
+ */
+SugarCrm.ModuleMeta.prototype.email_fields;
+
+
+
+/**
  * Represents SugarCRM ModuleInfo.
  * @constructor
  */
 SugarCrm.ModuleInfo = function() {};
+
+
+/**
+ * @type {SugarCrm.ModuleMeta}
+ */
+SugarCrm.ModuleInfo.prototype._meta;
 
 
 /**
