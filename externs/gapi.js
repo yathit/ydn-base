@@ -19,6 +19,31 @@ gapi.signin = {};
 
 
 /**
+ * Renders the specified container as a sign-in button.
+ * @param {Element|string} ele
+ * @param {Object} params
+ */
+gapi.signin.render = function(ele, params) {};
+
+
+/**
+ * Initiates the client-side Google+ Sign-In OAuth 2.0 flow.
+ * @param {{
+    'clientid' : string,
+    'cookiepolicy' : string?,
+    'callback' : Function
+   }} params
+ */
+gapi.auth.signIn = function(params) {};
+
+
+/**
+ * Singout.
+ */
+gapi.auth.signOut = function() {};
+
+
+/**
  * @typedef{{
  *   client_id: string,
  *   scope: (Array.<string>|string),
@@ -86,14 +111,6 @@ var GapiToken;
  * @param {function(GapiAuthResult)} callback
  */
 gapi.auth.authorize = function(options, callback) {};
-
-
-/**
- *
- * @param {Element} login_btn
- * @param {Object} options
- */
-gapi.signin.render = function(login_btn, options) {};
 
 
 /**
