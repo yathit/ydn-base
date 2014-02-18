@@ -2,18 +2,31 @@
  * @fileoverview Mock chrome extension api.
  */
 
-goog.provide('ydn.testing.MockChromeExtension');
+
+/**
+ * @define {string} extension origin
+ */
+_CHROME_EXTENSION_BASE_URL = '';
 
 
-if (!goog.global['chrome']) {
-  goog.global['chrome'] = {};
+if (!chrome) {
+  chrome = {};
 }
 
 
-if (!goog.global.chrome.extension) {
-  goog.global.chrome.extension = {
+if (!chrome.extension) {
+  chrome.extension = {
     'getURL': function(s) {
-      return s;
+      if (!s) {
+        return _CHROME_EXTENSION_BASE_URL;
+      } else if (!s.charAt(0) != '/' &&
+          _CHROME_EXTENSION_BASE_URL.charAt(0) != '/') {
+        s = '/' + s;
+      } else if (s.charAt(0) == '/' &&
+          _CHROME_EXTENSION_BASE_URL.charAt(0) == '/') {
+        s = s.substring(1);
+      }
+      return _CHROME_EXTENSION_BASE_URL + s;
     }
   };
 }
