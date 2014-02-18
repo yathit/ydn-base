@@ -19,16 +19,14 @@
  */
 
 goog.provide('ydn.testing');
-goog.require('goog.math');
 goog.require('goog.debug.Logger');
 goog.require('goog.debug.Console');
-goog.require('goog.debug.FancyWindow');
 goog.require('goog.debug.DebugWindow');
 goog.require('goog.debug.DivConsole');
+goog.require('goog.debug.FancyWindow');
 goog.require('goog.debug.Logger');
 goog.require('goog.debug.Logger.Level');
-
-
+goog.require('goog.math');
 
 
 /**
