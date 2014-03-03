@@ -73,6 +73,15 @@ ydn.debug.log = function(scope, level, ele) {
 };
 
 
+/**
+ * Set capturing status on default console.
+ * @param {boolean} val
+ */
+ydn.debug.captureOnConsole = function(val) {
+  ydn.debug.logger_console.setCapturing(val);
+};
+
+
 
 /**
  * @interface
