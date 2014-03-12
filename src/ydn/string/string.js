@@ -52,6 +52,19 @@ ydn.string.split_space = function(str) {
 
 
 /**
+ * Normalize phone number.
+ * @param {string} ph
+ * @return {string?} null if not a valid email.
+ */
+ydn.string.normalizePhone = function(ph) {
+  if (!goog.isString(ph)) {
+    return null;
+  }
+  return ph.replace(/\D/g, '').replace(/^0+/, '');
+};
+
+
+/**
  * Normalize email address.
  * @param {string|*} email
  * @return {string?} null if not a valid email.
