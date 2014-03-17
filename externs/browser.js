@@ -169,3 +169,34 @@ function DragEvent() {}
  */
 DragEvent.prototype.dataTransfer;
 
+
+
+/**
+ * The Promise interface represents a proxy for a value not necessarily known at its creation time.
+ * @param {Function} onFulfilled
+ * @param {Function=} onRejected
+ * @constructor
+ */
+function Promise(onFulfilled, onRejected) {}
+
+
+/**
+ * Appends fullfillment and rejection handlers to the promise, and returns a new promise resolving to the return value of the called handler.
+ * @param {Function} onFulfilled
+ * @param {Function} onRejected
+ */
+Promise.prototype.then = function(onFulfilled, onRejected) {};
+
+
+/**
+ * Appends a rejection handler callback to the promise
+ * @param {Function} onRejected
+ */
+Promise.prototype.catch = function(onRejected) {};
+
+
+/**
+ * Returns a promise that resolves when all of the promises in iterable have resolved.
+ * @param {Array.<Promise>} iterable
+ */
+Promise.all = function(iterable) {};
