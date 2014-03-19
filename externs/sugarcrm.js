@@ -10,6 +10,16 @@
 var SugarCrm = {};
 
 
+/**
+ * Represents SugarCRM field boolean value.
+ * @enum {string}
+ */
+SugarCrm.Boolean = {
+  '0': '0',
+  '1': '1'
+};
+
+
 
 /**
  * Represents SugarCRM name value list pair.
@@ -54,6 +64,92 @@ SugarCrm.NameValueEntry.prototype.module_name;
  * @type {Object.<SugarCrm.NameValue>}
  */
 SugarCrm.NameValueEntry.prototype.name_value_list;
+
+
+
+/**
+ * Represents SugarCRM email field.
+ * @constructor
+ */
+SugarCrm.EmailField = function() {};
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.EmailField.prototype.bean_id;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.EmailField.prototype.bean_module;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.EmailField.prototype.date_created;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.EmailField.prototype.date_modified;
+
+
+/**
+ * @type {SugarCrm.Boolean}
+ */
+SugarCrm.EmailField.prototype.deleted;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.EmailField.prototype.email_address;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.EmailField.prototype.email_address_caps;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.EmailField.prototype.email_address_id;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.EmailField.prototype.id;
+
+
+/**
+ * @type {SugarCrm.Boolean}
+ */
+SugarCrm.EmailField.prototype.invalid_email;
+
+
+/**
+ * @type {SugarCrm.Boolean}
+ */
+SugarCrm.EmailField.prototype.opt_out;
+
+
+/**
+ * @type {SugarCrm.Boolean}
+ */
+SugarCrm.EmailField.prototype.primary_address;
+
+
+/**
+ * @type {SugarCrm.Boolean}
+ */
+SugarCrm.EmailField.prototype.reply_to_address;
 
 
 
