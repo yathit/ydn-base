@@ -242,6 +242,26 @@ SugarCrm.ModuleField.prototype.type;
 
 
 /**
+ * Represents SugarCRM LinkField.
+ * @constructor
+ */
+SugarCrm.LinkField = function() {};
+
+
+/**
+ * @type {string} this is always 'link' ?
+ */
+SugarCrm.LinkField.prototype.type;
+
+
+/**
+ * @type {string} Module name
+ */
+SugarCrm.LinkField.prototype.module;
+
+
+
+/**
  * Represents meta data for ModuleInfo.
  * @constructor
  */
@@ -292,6 +312,12 @@ SugarCrm.ModuleInfo.prototype.table_name;
  * @type {!Object.<SugarCrm.ModuleField>}
  */
 SugarCrm.ModuleInfo.prototype.module_fields;
+
+
+/**
+ * @type {!Object.<SugarCrm.LinkField>}
+ */
+SugarCrm.ModuleInfo.prototype.link_fields;
 
 
 
