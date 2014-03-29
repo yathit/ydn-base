@@ -84,7 +84,7 @@ ydn.debug.DbLogger.prototype.checkForPurge_ = function() {
       var keys = ids.map(function(id) {
         return new ydn.db.Key(ydn.debug.DbLogger.STORE_NAME, id);
       });
-      this.db_.remove(ydn.debug.DbLogger.STORE_NAME, keys).addCallback(function() {
+      this.db_.remove(keys).addCallback(function() {
         this.db_.count(ydn.debug.DbLogger.STORE_NAME).addCallback(function(cnt) {
           this.record_count_ = cnt;
         }, this);
