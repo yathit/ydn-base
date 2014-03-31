@@ -324,41 +324,9 @@ SugarCrm.ModuleInfo.prototype.link_fields;
 /**
  * Represents query format in channel.
  * @constructor
+ * @extends {CrmReqQuery}
  */
 SugarCrm.Query = function() {};
-
-
-/**
- * @type {string} module name.
- */
-SugarCrm.Query.prototype.store;
-
-
-/**
- * @type {string} field name, use 'id' for primary key.
- */
-SugarCrm.Query.prototype.index;
-
-
-/**
- * @type {string} id.
- */
-SugarCrm.Query.prototype.key;
-
-
-/**
- * @type {{lower: string, upper: string}} id range.
- */
-SugarCrm.Query.prototype.keyRange;
-
-
-
-/**
- * Represents query result format in channel.
- * @constructor
- * @extends {SugarCrm.Query}
- */
-SugarCrm.QueryResult = function() {};
 
 
 /**
