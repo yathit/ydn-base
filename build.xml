@@ -116,6 +116,46 @@
             </exec>
         </sequential>
     </macrodef>
+
+    <macrodef name="compile-raw"  description="compile js files using
+     closure compiler with strict compilation setting">
+        <attribute name="input"/>
+        <attribute name="output.fn"/>
+        <attribute name="input.dir"/>
+        <attribute name="flagfile" default="${ydn-base.dir}/flagfile.txt"/>
+        <attribute name="compilerjarfile" default="${closure-compiler.jar}"/>
+        <element name="options" optional="yes"/>
+        <sequential>
+            <exec executable="python" failonerror="true" logError="true" dir="${basedir}">
+                <arg value="${closure-library.dir}/closure/bin/calcdeps.py"/>
+
+                <arg line='-i "@{input}"'/>
+                <arg line='--output_file "@{output.fn}"'/>
+                <arg line='-p "${closure-library.dir}"'/>
+
+                <arg line="-o script"/>
+                <arg line='-c "@{compilerjarfile}"'/>
+                <arg line='-f "--flagfile=@{flagfile}"'/>
+                <arg line='-f "--js=${closure-library.dir}/closure/goog/deps.js"'/>
+                <arg line='-f "--externs=${ydn-base.dir}/externs/browser.js"'/>
+                <options/>
+            </exec>
+            <tempfile property="temp.file"/>
+            <concat destfile="${temp.file}" overwrite="true">
+                <header>
+                    var CLOSURE_DEFINES = {'goog.ENABLE_DEBUG_LOADER': false};
+                </header>
+                <filelist>
+                    <file name="@{output.fn}"/>
+                </filelist>
+            </concat>
+            <move file="${temp.file}" tofile="@{output.fn}"/>
+            <concat destfile="@{output.fn}" append="true">
+                ydn.json.POLY_FILL = true;
+            </concat>
+            <echo>@{output.fn} generated.</echo>
+        </sequential>
+    </macrodef>
     <macrodef name="jstd-gen" description="generate JSTD file">
         <attribute name="base.dir"/>
         <attribute name="js.dir" default="@{base.dir}/src"/>
