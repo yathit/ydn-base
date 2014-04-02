@@ -76,8 +76,18 @@ ydn.string.normalizeEmail = function(email) {
   if (!/[\w\+]+@\w+\.\w+/.test(email)) {
     return null;
   }
+  // remove name from email label, such as 'brandi steel <brandiengage@gmail.com>'
+  email = email.replace(/.*</, '').replace(/>.*/, '');
   email = email.toLowerCase();
+  // remove + and . before @ sign
+  // http://gmailblog.blogspot.sg/2008/03/2-hidden-ways-to-get-more-from-your.html
   email = email.replace(/\+\w*?@/, '@'); // normalize for gmail using +
+  // should we be using regexp?
+  for (var i = email.indexOf('@'); i >= 0; i--) {
+    if (email.charAt(i) == '.') {
+      email.slice(i, 1);
+    }
+  }
   return email;
 };
 
