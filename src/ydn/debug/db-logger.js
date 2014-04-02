@@ -37,11 +37,12 @@ ydn.debug.DbLogger = function(db) {
   goog.asserts.assert(schema_ok, 'Database schema does not have for db-logger');
   /**
    * Storage.
-   * @type {ydn.db.core.Storage}
+   * @type {ydn.db.crud.DbOperator}
    * @private
    */
-  this.db_ = db;
-  this.db_.onReady(this.initDb, this);
+  this.db_ = /** @type {ydn.db.crud.DbOperator} */ (db.branch(ydn.db.tr.Thread.Policy.SINGLE, false));
+  this.db_ready_ = false;
+  db.onReady(this.initDb, this);
   /**
    * @type {number}
    * @private
@@ -136,12 +137,19 @@ ydn.debug.DbLogger.prototype.getLevelLimit = function() {
  * @protected
  */
 ydn.debug.DbLogger.prototype.initDb = function(err) {
-  if (this.max_records_) {
-    this.db_.count(ydn.debug.DbLogger.STORE_NAME).addCallback(function(cnt) {
-      this.record_count_ = cnt;
-      this.checkForPurge_();
-    }, this);
-  }
+  var me = this;
+  // FIXME: should not need settimeout
+  // parallel thread has problem.
+  // setTimeout(function() {
+    if (me.max_records_) {
+      me.db_ready_ = true;
+      me.db_.count(ydn.debug.DbLogger.STORE_NAME).addCallback(function(cnt) {
+        this.record_count_ = cnt;
+        this.checkForPurge_();
+      }, me);
+    }
+  // }, 500);
+
 };
 
 
@@ -213,8 +221,18 @@ ydn.debug.DbLogger.prototype.setCapturing = function(capturing) {
  */
 ydn.debug.DbLogger.prototype.addLogRecord = function(logRecord) {
 
+  if (!this.db_ready_) {
+    return;
+  }
+  // to prevent circular logging when error originate from putting the logger
+  var logger_name = logRecord.getLoggerName();
+  if (goog.string.startsWith(logger_name, 'ydn.db.')) {
+    return;
+  }
+
+
   // Check to see if the log record is filtered or not.
-  if (this.filteredLoggers_[logRecord.getLoggerName()]) {
+  if (this.filteredLoggers_[logger_name]) {
     return;
   }
 
