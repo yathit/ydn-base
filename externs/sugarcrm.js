@@ -169,6 +169,12 @@ SugarCrm.Record.prototype.id;
 /**
  * @type {string}
  */
+SugarCrm.Record.prototype.name;
+
+
+/**
+ * @type {string}
+ */
 SugarCrm.Record.prototype.date_modified;
 
 
