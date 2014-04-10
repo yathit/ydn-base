@@ -17,7 +17,7 @@
  */
 
 goog.provide('ydn.json');
-goog.require('goog.debug.Logger');
+goog.require('goog.log');
 goog.require('goog.json');
 
 
@@ -38,7 +38,7 @@ ydn.json.POLY_FILL = false;
  * @final
  * @type {goog.debug.Logger}
  */
-ydn.json.logger = goog.debug.Logger.getLogger('ydn');
+ydn.json.logger = goog.log.getLogger('ydn');
 
 
 /**

@@ -25,7 +25,7 @@ ydn.http.JsonpTransport = function() {
  * @protected
  * @type {goog.debug.Logger}
  */
-ydn.http.JsonpTransport.prototype.logger = goog.debug.Logger.getLogger('ydn.http.JsonpTransport');
+ydn.http.JsonpTransport.prototype.logger = goog.log.getLogger('ydn.http.JsonpTransport');
 
 
 /**

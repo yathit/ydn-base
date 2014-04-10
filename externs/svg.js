@@ -400,17 +400,13 @@ SVGElementInstance.prototype.onunload;
 
 
 /**
- * @param {string} type
- * @param {!EventListener|(function(Event): (boolean|undefined))| null} listener
- * @param {boolean=} opt_useCapture
+ * @inheritDoc
  */
 SVGElementInstance.prototype.addEventListener = function(type, listener, opt_useCapture){};
 
 
 /**
- * @param {string} type
- * @param {!EventListener|(function(Event): (boolean|undefined))| null} listener
- * @param {boolean=} opt_useCapture
+ * @inheritDoc
  */
 SVGElementInstance.prototype.removeEventListener = function(type, listener, opt_useCapture){};
 

@@ -9,7 +9,7 @@
 goog.provide('ydn.http');
 goog.provide('ydn.http.Scopes');
 goog.require('goog.Uri');
-goog.require('goog.debug.Logger');
+goog.require('goog.log');
 goog.require('goog.net.XhrManager');
 goog.require('ydn.http.ITransport');
 goog.require('ydn.json');
@@ -77,7 +77,7 @@ ydn.http.BUG_REPORT_SERVER_ORIGIN = 'https://yathit-dev.appspot.com';
  * @protected
  * @type {goog.debug.Logger}
  */
-ydn.http.logger = goog.debug.Logger.getLogger('ydn.http');
+ydn.http.logger = goog.log.getLogger('ydn.http');
 
 
 /**

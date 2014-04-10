@@ -6,7 +6,7 @@
 goog.provide('ydn.client.JsonMockServer');
 
 goog.require('goog.Timer');
-goog.require('goog.debug.Logger');
+goog.require('goog.log');
 goog.require('ydn.client.Resource');
 goog.require('ydn.http.CallbackResult');
 goog.require('ydn.object');
@@ -47,7 +47,7 @@ ydn.client.JsonMockServer.DEBUG = false;
  * @type {goog.debug.Logger}
  */
 ydn.client.JsonMockServer.prototype.logger =
-    goog.debug.Logger.getLogger('ydn.client.JsonMockServer');
+    goog.log.getLogger('ydn.client.JsonMockServer');
 
 
 /**

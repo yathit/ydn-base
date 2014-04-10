@@ -10,7 +10,7 @@
  */
 
 goog.provide('ydn.atom.Atom');
-goog.require('goog.debug.Logger');
+goog.require('goog.log');
 goog.require('ydn.atom.Link');
 goog.require('ydn.error');
 

@@ -6,7 +6,7 @@
 goog.provide('ydn.http.StaticMockServer');
 goog.require('ydn.http.ITransport');
 goog.require('ydn.http.CallbackResult');
-goog.require('goog.debug.Logger');
+goog.require('goog.log');
 goog.require('ydn.utils');
 goog.require('ydn.json');
 
@@ -50,7 +50,7 @@ ydn.http.StaticMockServer = function(opt_domains, opt_sync, opt_delay) {
  * @protected
  * @type {goog.debug.Logger}
  */
-ydn.http.StaticMockServer.prototype.logger = goog.debug.Logger.getLogger('ydn.http.StaticMockServer');
+ydn.http.StaticMockServer.prototype.logger = goog.log.getLogger('ydn.http.StaticMockServer');
 
 
 /**

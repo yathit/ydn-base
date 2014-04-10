@@ -5,7 +5,7 @@
  */
 
 goog.provide('ydn.atom.Entry');
-goog.require('goog.debug.Logger');
+goog.require('goog.log');
 goog.require('ydn.atom.Atom');
 goog.require('ydn.error');
 

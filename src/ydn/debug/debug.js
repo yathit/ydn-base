@@ -13,7 +13,7 @@ goog.provide('ydn.debug.ILogger');
 goog.require('goog.debug.Console');
 goog.require('goog.debug.DivConsole');
 goog.require('goog.debug.LogManager');
-goog.require('goog.debug.Logger');
+goog.require('goog.log');
 goog.require('goog.events.BrowserEvent'); // cause compile error if not.
 goog.require('goog.functions');
 
@@ -35,7 +35,7 @@ ydn.debug.logger_div = null;
 /**
  * @type {goog.debug.Logger} logger.
  */
-ydn.debug.logger = goog.debug.Logger.getLogger('ydn.debug');
+ydn.debug.logger = goog.log.getLogger('ydn.debug');
 
 
 /**
@@ -54,7 +54,7 @@ ydn.debug.log = function(scope, level, ele) {
         level.toUpperCase()) :
           goog.debug.Logger.Level.FINE;
 
-  goog.debug.Logger.getLogger(scope).setLevel(log_level);
+  goog.log.getLogger(scope).setLevel(log_level);
 
 
   if (goog.isDef(ele)) {

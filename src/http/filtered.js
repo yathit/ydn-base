@@ -33,7 +33,7 @@ ydn.http.TransportFilter = function(filter, pass_transport, fail_transport) {
  * @protected
  * @type {goog.debug.Logger}
  */
-ydn.http.TransportFilter.prototype.logger = goog.debug.Logger.getLogger('ydn.http.TransportFilter');
+ydn.http.TransportFilter.prototype.logger = goog.log.getLogger('ydn.http.TransportFilter');
 
 
 

@@ -23,7 +23,7 @@ ydn.http.MockHttpTransport = function() {
  * @protected
  * @type {goog.debug.Logger}
  */
-ydn.http.MockHttpTransport.prototype.logger = goog.debug.Logger.getLogger('ydn.http.MockHttpTransport');
+ydn.http.MockHttpTransport.prototype.logger = goog.log.getLogger('ydn.http.MockHttpTransport');
 
 
 /**

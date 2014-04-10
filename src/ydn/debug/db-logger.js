@@ -4,7 +4,7 @@
 
 
 goog.provide('ydn.debug.DbLogger');
-goog.require('goog.debug.Logger');
+goog.require('goog.log');
 goog.require('goog.debug.TextFormatter');
 goog.require('ydn.db.core.Storage');
 
