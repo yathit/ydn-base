@@ -14,7 +14,12 @@ var Kinetic = {};
  * @typedef {{
  *   data: (string|undefined),
  *   fill: (string|undefined),
+ *   fontSize: (number|undefined),
+ *   fontFamily: (string|undefined),
  *   scale: (number|undefined),
+ *   stroke: (string|undefined),
+ *   strokeWidth: (number|undefined),
+ *   text: (string|undefined),
  *   x: (number|undefined),
  *   y: (number|undefined)
  * }}
@@ -26,6 +31,15 @@ Kinetic.Config;
 /**
  * @param {Kinetic.Config=} params
  * @constructor
+ */
+Kinetic.Node = function(params) {};
+
+
+
+/**
+ * @param {Kinetic.Config=} params
+ * @constructor
+ * @extends {Kinetic.Node}
  */
 Kinetic.Shape = function(params) {};
 
@@ -107,6 +121,14 @@ Kinetic.Rect = function(params) {};
 Kinetic.Text = function(params) {};
 
 
+/**
+ * Set/Get text.
+ * @param {string=} text
+ * @return {string}
+ */
+Kinetic.Text.prototype.text = function(text) {};
+
+
 
 /**
  * @param {{scaleX: number, scaleY: number}=} params
@@ -131,14 +153,21 @@ Kinetic.Group.prototype.getChildren = function() {};
 
 /**
  * @constructor
+ * @extends {Kinetic.Container}
  */
 Kinetic.Layer = function() {};
 
 
 /**
- * @param {Kinetic.Container} g
+ * @param {Kinetic.Node} g
  */
 Kinetic.Layer.prototype.add = function(g) {};
+
+
+/**
+ * clear scene and hit canvas contexts tied to the layer
+ */
+Kinetic.Layer.prototype.clear = function() {};
 
 
 /**
