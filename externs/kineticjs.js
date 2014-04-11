@@ -16,6 +16,8 @@ var Kinetic = {};
  *   fill: (string|undefined),
  *   fontSize: (number|undefined),
  *   fontFamily: (string|undefined),
+ *   offsetX: (number|undefined),
+ *   offsetY: (number|undefined),
  *   scale: (number|undefined),
  *   stroke: (string|undefined),
  *   strokeWidth: (number|undefined),
@@ -153,15 +155,22 @@ Kinetic.Group.prototype.getChildren = function() {};
 
 /**
  * @constructor
+ * @param {Kinetic.Config=} opt_config
  * @extends {Kinetic.Container}
  */
-Kinetic.Layer = function() {};
+Kinetic.Layer = function(opt_config) {};
 
 
 /**
  * @param {Kinetic.Node} g
  */
 Kinetic.Layer.prototype.add = function(g) {};
+
+
+/**
+ * Draw.
+ */
+Kinetic.Layer.prototype.draw = function() {};
 
 
 /**
