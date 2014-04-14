@@ -175,6 +175,12 @@ SugarCrm.Record.prototype.name;
 /**
  * @type {string}
  */
+SugarCrm.Record.prototype.date_entered;
+
+
+/**
+ * @type {string}
+ */
 SugarCrm.Record.prototype.date_modified;
 
 
