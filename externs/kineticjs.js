@@ -16,6 +16,8 @@ var Kinetic = {};
  *   fill: (string|undefined),
  *   fontSize: (number|undefined),
  *   fontFamily: (string|undefined),
+ *   lineCap: (string|undefined),
+ *   lineJoin: (string|undefined),
  *   offsetX: (number|undefined),
  *   offsetY: (number|undefined),
  *   scale: (number|undefined),
@@ -77,6 +79,37 @@ Kinetic.Shape.prototype.fillRed = function(opt_color) {};
  */
 Kinetic.Shape.prototype.fillBlue = function(opt_color) {};
 
+
+/**
+ * get/set fill blue component
+ * @param {number=} x
+ * @return {number}
+ */
+Kinetic.Shape.prototype.offsetX = function(x) {};
+
+
+/**
+ * get/set fill blue component
+ * @param {number=} x
+ * @return {number}
+ */
+Kinetic.Shape.prototype.offsetY = function(x) {};
+
+
+/**
+ * get/set fill blue component
+ * @param {number=} x
+ * @return {number}
+ */
+Kinetic.Shape.prototype.width = function(x) {};
+
+
+/**
+ * get/set fill blue component
+ * @param {number=} x
+ * @return {number}
+ */
+Kinetic.Shape.prototype.height = function(x) {};
 
 
 /**
