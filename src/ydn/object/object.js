@@ -23,6 +23,12 @@ goog.require('ydn.json');
 
 
 /**
+ * @define {boolean} debug flat.
+ */
+ydn.object.DEBUG = false;
+
+
+/**
  * Deep object cloning by JSON stringify/parse
  *
  * @param {Object|Array} obj object to be cloned.
@@ -49,6 +55,9 @@ ydn.object.equals = function(obj1, obj2, opt_ignore_fields) {
     var arr1 = obj1;
     var arr2 = /** @type {Array} */ (obj2);
     if (obj1.length != obj2.length) {
+      if (ydn.object.DEBUG) {
+        goog.global.console.log('different array length ' + obj1.length + ' vs ' + obj2.length);
+      }
       return false;
     }
     for (var i = 0; i < obj1.length; i++) {
@@ -56,7 +65,9 @@ ydn.object.equals = function(obj1, obj2, opt_ignore_fields) {
         return ydn.object.equals(ele, arr1[i]);
       });
       if (idx == -1) {
-        // console.log('obj2 do not have ' + obj1[i]);
+        if (ydn.object.DEBUG) {
+          goog.global.console.log('obj2 do not have ' + obj1[i]);
+        }
         return false;
       }
     }
@@ -70,6 +81,9 @@ ydn.object.equals = function(obj1, obj2, opt_ignore_fields) {
       if (obj1.hasOwnProperty(key) && !opt_ignore_fields[key]) {
         var same = ydn.object.equals(obj1[key], obj2[key]);
         if (!same) {
+          if (ydn.object.DEBUG) {
+            goog.global.console.log('value for ' + key);
+          }
           return false;
         }
       }
@@ -78,6 +92,9 @@ ydn.object.equals = function(obj1, obj2, opt_ignore_fields) {
       if (obj2.hasOwnProperty(key) && !opt_ignore_fields[key]) {
         var same = ydn.object.equals(obj1[key], obj2[key]);
         if (!same) {
+          if (ydn.object.DEBUG) {
+            goog.global.console.log('value for ' + key);
+          }
           return false;
         }
       }
