@@ -50,6 +50,14 @@ ydn.object.clone = function(obj) {
 ydn.object.equals = function(obj1, obj2, opt_ignore_fields) {
   opt_ignore_fields = opt_ignore_fields || {};
   if (!goog.isDefAndNotNull(obj1) || !goog.isDefAndNotNull(obj2)) {
+    if (ydn.object.DEBUG) {
+      if (!goog.isDefAndNotNull(obj1)) {
+        goog.global.console.log('obj1 is not defined.');
+      }
+      if (!goog.isDefAndNotNull(obj2)) {
+        goog.global.console.log('obj2 is not defined.');
+      }
+    }
     return false;
   } else if (goog.isArrayLike(obj1) && goog.isArrayLike(obj2)) {
     var arr1 = obj1;
