@@ -79,7 +79,7 @@ ydn.client.OAuthClient.Request = function(args, parent) {
    * @type {ydn.client.OAuthClient}
    */
   this.parent = parent;
-  this.no_retry_ = false;
+
 };
 goog.inherits(ydn.client.OAuthClient.Request, ydn.client.SimpleHttpRequest);
 

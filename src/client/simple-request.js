@@ -49,6 +49,12 @@ ydn.client.SimpleHttpRequest = function(args, opt_xm, opt_retry, opt_credentials
 
 
 /**
+ * @define {boolean} debug flag.
+ */
+ydn.client.SimpleHttpRequest.DEBUG = false;
+
+
+/**
  * Count request create for id purpose.
  * @type {number}
  * @private
@@ -68,6 +74,14 @@ ydn.client.SimpleHttpRequest.prototype.id_;
  */
 ydn.client.SimpleHttpRequest.prototype.getId = function() {
   return this.id_;
+};
+
+
+/**
+ * @param {boolean} val
+ */
+ydn.client.SimpleHttpRequest.prototype.setWithCredentials = function(val) {
+  this.with_credentials_ = val;
 };
 
 
@@ -147,6 +161,9 @@ ydn.client.SimpleHttpRequest.prototype.execute = function(cb, opt_scope) {
       cb = null;
     }
   };
+  if (ydn.client.SimpleHttpRequest.DEBUG) {
+    window.console.log('sending to ' + url + (this.with_credentials_ ? ' withCredential ' : ''));
+  }
   this.xm_.send(this.id_, url.toString(),
       data.method, data.body, data.headers, undefined, callback,
       this.retry_, undefined, this.with_credentials_);

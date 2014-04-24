@@ -16,11 +16,12 @@ goog.require('ydn.client.SimpleHttpRequest');
  * OAuth client.
  * @param {ydn.client.Client} client
  * @param {string} proxy_path xhr manager.
+ * @param {boolean=} opt_credentials invoke with credentials
  * @constructor
  * @implements {ydn.client.Client}
  * @const
  */
-ydn.client.Proxy = function(client, proxy_path) {
+ydn.client.Proxy = function(client, proxy_path, opt_credentials) {
   /**
    * @protected
    * @type {ydn.client.Client}
@@ -47,7 +48,18 @@ ydn.client.Proxy = function(client, proxy_path) {
    * @private
    */
   this.in_req_ = false;
+  /**
+   * @type {boolean}
+   * @protected
+   */
+  this.with_credentials = !!opt_credentials;
 };
+
+
+/**
+ * @define {boolean} debug flag.
+ */
+ydn.client.Proxy.DEBUG = false;
 
 
 /**
@@ -88,6 +100,16 @@ ydn.client.Proxy.Request = function(args, parent) {
    * @type {ydn.client.Proxy}
    */
   this.parent = parent;
+  if (parent.with_credentials) {
+    if (this.req instanceof ydn.client.SimpleHttpRequest) {
+      var sq = /** @type {ydn.client.SimpleHttpRequest} */ (this.req);
+      sq.setWithCredentials(true);
+      if (ydn.client.Proxy.DEBUG) {
+        window.console.log('set with credentials');
+      }
+    }
+    this.setWithCredentials(true);
+  }
   /**
    * @type {Function}
    * @private
@@ -96,12 +118,6 @@ ydn.client.Proxy.Request = function(args, parent) {
   this.scope_ = undefined;
 };
 goog.inherits(ydn.client.Proxy.Request, ydn.client.SimpleHttpRequest);
-
-
-/**
- * @define {boolean} debug flag.
- */
-ydn.client.Proxy.DEBUG = goog.DEBUG;
 
 
 /**
