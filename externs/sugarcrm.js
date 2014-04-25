@@ -343,7 +343,7 @@ SugarCrm.ModuleInfo.prototype.link_fields;
 /**
  * Represents query format in channel.
  * @constructor
- * @extends {CrmReqQuery}
+ * @extends {CrmApp.ReqQuery}
  */
 SugarCrm.Query = function() {};
 
