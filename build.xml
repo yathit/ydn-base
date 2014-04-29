@@ -209,6 +209,33 @@
             </exec>
         </sequential>
     </macrodef>
+    <macrodef name="compile-gss" description="compile closure stylesheets">
+        <attribute name="rename.style" default="DEBUG"/>
+        <attribute name="input.dir"/>
+        <element name="opt-include" optional="yes" />
+        <attribute name="output.fn"/>
+        <attribute name="pretty" default=""/>
+        <attribute name="rename-format" default="CLOSURE_COMPILED"/>
+        <sequential>
+            <local name="gss-input"/>
+            <fileset dir="@{input.dir}" id="gss-files">
+                <include name="*.css"/>
+            </fileset>
+            <pathconvert property="gss-input" refid="gss-files" pathsep=" "/>
+            <echo>"compiling gss files: ${gss-input}"</echo>
+            <java description="compile closure stylesheets" fork="true"
+                  jar="${closure-stylesheets.dir}/build/closure-stylesheets.jar"
+                  failonerror="true">
+                <!-- <arg value="-pretty-print"/> -->
+                <arg line="@{pretty}"/>
+                <arg line="--rename @{rename.style}" description="options are DEBUG or CLOSURE"/>
+                <arg line='--output-file "@{output.fn}"'/>
+
+                <arg line="${gss-input}"/>
+            </java>
+            <echo>"save css file: @{output.fn}"</echo>
+        </sequential>
+    </macrodef>
     <macrodef name="comp-gss" description="compile closure stylesheets">
         <attribute name="platform"/>
         <attribute name="rename.style" default="DEBUG"/>
