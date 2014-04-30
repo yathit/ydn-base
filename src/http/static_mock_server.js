@@ -74,7 +74,7 @@ ydn.http.StaticMockServer.prototype.load = function(url, html) {
  * @param {string} url
  * @param {number} status
  * @param {string} content
- * @param {function(ydn.http.CallbackResult)=} callback
+ * @param {function(!ydn.http.CallbackResult)=} callback
  */
 ydn.http.StaticMockServer.prototype.response = function(url, status, content, callback) {
 

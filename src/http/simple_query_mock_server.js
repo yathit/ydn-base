@@ -41,7 +41,6 @@ ydn.http.SimpleQueryMockServer.prototype.loadAppData = function(app_path, data) 
 };
 
 
-
 /**
  * @override
  */
