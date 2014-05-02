@@ -13,9 +13,9 @@ goog.provide('ydn.debug.ILogger');
 goog.require('goog.debug.Console');
 goog.require('goog.debug.DivConsole');
 goog.require('goog.debug.LogManager');
-goog.require('goog.log');
 goog.require('goog.events.BrowserEvent'); // cause compile error if not.
 goog.require('goog.functions');
+goog.require('goog.log');
 
 
 /**
