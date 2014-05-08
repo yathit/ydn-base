@@ -155,18 +155,3 @@ IDBRequest.prototype.error;
 
 
 
-/**
- * The drag-and-drop processing model involves several events.
- * http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#the-dragevent-interface
- * @constructor
- * @extends {MouseEvent}
- */
-function DragEvent() {}
-
-
-/**
- * @type {DataTransfer}
- */
-DragEvent.prototype.dataTransfer;
-
-
