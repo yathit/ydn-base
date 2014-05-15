@@ -45,15 +45,15 @@ ydn.http.TransportFilter.prototype.send = function(uri, callback, options) {
   options = ydn.http.getDefaultOptions(options);
 
   if (this.filter(uri, /** @type {string} */ (options.method), options)) {
-    this.logger.finest('pass transport selected.');
+    goog.log.finest(db.logger, 'pass transport selected.');
     this.pass_transport.send(uri, callback, options);
   } else if (this.fail_transport) {
-    this.logger.finest('fail transport selected.');
+    goog.log.finest(db.logger, 'fail transport selected.');
     this.fail_transport.send(uri, callback, options);
   } else {
-    this.logger.info('Drop ' + options.method + ' request: ' + uri);
+    goog.log.info(db.logger, 'Drop ' + options.method + ' request: ' + uri);
     if (goog.isString(options.body)) {
-      this.logger.finest(options.body);
+      goog.log.finest(db.logger, options.body);
     }
   }
 };

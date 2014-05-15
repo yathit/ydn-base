@@ -53,7 +53,7 @@ ydn.http.JsonpTransport.prototype.send = function(url, opt_callback, options) {
     var jsonp = new goog.net.Jsonp(url);
     jsonp.send(options.params, callback, error_callback);
   } else {
-    this.logger.finest(method + ' Http request to ' + url + ' ignored.');
+    goog.log.finest(db.logger, method + ' Http request to ' + url + ' ignored.');
   }
 };
 

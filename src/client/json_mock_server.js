@@ -239,7 +239,7 @@ ydn.client.JsonMockServer.prototype.request = function(req) {
 
   var response = this.prepareResult(req, content_type, status, res);
 
-  this.logger.finest('Responding ' + response.status + ' to ' + method +
+  goog.log.finest(this.logger, 'Responding ' + response.status + ' to ' + method +
       ' ' + url);
 
   var reply = function() {

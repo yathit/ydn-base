@@ -81,7 +81,7 @@ ydn.http.StaticMockServer.prototype.response = function(url, status, content, ca
   var content_type = 'text/plain';
 
   var response = new ydn.http.CallbackResult(content_type, content, url, status);
-  this.logger.finest('Responding ' + status + ' to ' + url);
+  goog.log.finest(db.logger, 'Responding ' + status + ' to ' + url);
   if (callback) {
     callback(response);
   }
@@ -105,7 +105,7 @@ ydn.http.StaticMockServer.prototype.isDomainValid = function(guri) {
 ydn.http.StaticMockServer.prototype.send = function(url, callback, options) {
 
   options = ydn.http.getDefaultOptions(options);
-  this.logger.finest('Receiving ' + options.method + ' request: ' + url);
+  goog.log.finest(db.logger, 'Receiving ' + options.method + ' request: ' + url);
 
   var guri = new goog.Uri(url);
   var path = guri.getPath();

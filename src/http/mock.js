@@ -49,7 +49,7 @@ ydn.http.MockHttpTransport.prototype.send = function(uri, callback, options) {
   var header = options.headers;
   var uri_params = options.params;
 
-  this.logger.info('Mocking HTTP ' + method + ': ' + uri);
+  goog.log.info(db.logger, 'Mocking HTTP ' + method + ': ' + uri);
   if (this.print_body && goog.isDef(body)) {
     window.console.info(body);
   }

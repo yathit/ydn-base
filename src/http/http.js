@@ -186,7 +186,7 @@ ydn.http.getTransport = function(uri) {
       break;
     }
   }
-  ydn.http.logger.finest('Resolving ' + uri + ' to ' + scope);
+  goog.log.finest(ydn.http.logger, 'Resolving ' + uri + ' to ' + scope);
   return ydn.http.transports[scope] || null;
 };
 
