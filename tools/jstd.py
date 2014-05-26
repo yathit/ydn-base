@@ -42,6 +42,8 @@ def main():
 		for js in jss:
 			output.write("  - test/%s\n" % js)
 
+		output.write("\ntimeout: 90\n");
+
 		input.close()
 		output.close()
 		print "JSTD test file saved to %s" % sys.argv[1]
