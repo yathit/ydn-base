@@ -97,38 +97,6 @@ IDBObjectStore.prototype.autoIncrement;
 //IDBVersionChangeEvent.prototype.version;
 
 
-/**
- * @extends {IDBCursor}
- * @constructor
- */
-var IDBCursorWithValue = function() {};
-
-
-/**
- * @type {*}
- */
-IDBCursorWithValue.prototype.value;
-
-
-/**
- * @type {*}
- */
-IDBCursorWithValue.prototype.primaryKey;
-
-//
-///**
-//* Closure compiler incorrectly define as Array.<string>
-//* @final
-//* @type {DOMStringList}
-//*/
-//IDBObjectStore.prototype.indexNames;
-
-///**
-// * @param {*=} key Key identifying the record to be retrieved.
-// * @return {!IDBRequest} The IDBRequest object.
-// */
-//IDBObjectStore.prototype.count = function(key) {};
-
 
 /**
  * @param {*=} key Key identifying the record to be retrieved.
