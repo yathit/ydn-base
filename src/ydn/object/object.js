@@ -31,8 +31,9 @@ ydn.object.DEBUG = false;
 /**
  * Deep object cloning by JSON stringify/parse
  *
- * @param {Object|Array} obj object to be cloned.
- * @return {Object|Array} cloned object.
+ * @param {T} obj object to be cloned.
+ * @return {T} cloned object.
+ * @template T
  */
 ydn.object.clone = function(obj) {
   return ydn.json.parse(ydn.json.stringify(obj));
