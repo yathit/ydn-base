@@ -19,7 +19,7 @@
  * Unfortunately, the original class cannot be override since some functions
  * are not expose to superclass.
  *
- *  @suppress {accessControls}
+ * @suppress {accessControls}
  */
 
 
