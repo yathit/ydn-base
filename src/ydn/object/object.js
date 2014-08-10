@@ -31,7 +31,7 @@ ydn.object.DEBUG = false;
 /**
  * Deep object cloning by JSON stringify/parse
  *
- * @param {T} obj object to be cloned.
+ * @param {T} obj object to be cloned. `obj` must be defined, but may be `null`.
  * @return {T} cloned object.
  * @template T
  */

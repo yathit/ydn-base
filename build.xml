@@ -168,7 +168,7 @@
             <property name="deps-list.fn" value="@{base.dir}/deps-list.txt"/>
             <calc-deps
                     output-mode="list"
-                    input.dir="@{base.dir}/src/"
+                    input.dir="@{js.dir}"
                     output.fn="${deps-list.fn}">
                 <calc-options>
                     <arg line='--path "${closure-library.dir}"'/>
