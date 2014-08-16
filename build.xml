@@ -181,9 +181,11 @@
             <fileset dir="@{test.dir}" id="jstest.files">
                 <include name="**/*Jstest.js"/>
             </fileset>
+
             <pathconvert pathsep="," property="jstestfiles" refid="jstest.files" dirsep="/">
-                <map from="@{base.dir}/test/" to=""/>
+                <map from="@{base.dir}/" to=""/>
             </pathconvert>
+
             <exec executable="python" failonerror="true" logError="true">
                 <arg value="${ydn-base.dir}/tools/jstd.py"/>
                 <arg line='"${deps-list.fn}"'/>
