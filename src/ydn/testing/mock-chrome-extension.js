@@ -12,6 +12,16 @@ goog.provide('ydn.testing.mockExtension');
 ydn.testing.mockExtension.BASE_URL = '';
 
 
+ydn.testing.mockExtension.storage_ = {
+  'get': function(obj, cb) {
+    cb({});
+  },
+  'set': function(obj, cb) {
+    cb({});
+  }
+};
+
+
 if (!window.chrome) {
   window.chrome = {};
 }
@@ -33,3 +43,14 @@ if (!chrome.extension) {
     }
   };
 }
+
+if (!chrome.storage) {
+  chrome.storage = {
+    'sync': ydn.testing.mockExtension.storage_,
+    'local': ydn.testing.mockExtension.storage_,
+    'onChanged': {
+      'addListener': function() {}
+    }
+  };
+}
+
