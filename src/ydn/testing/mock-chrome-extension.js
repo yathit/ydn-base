@@ -12,12 +12,35 @@ goog.provide('ydn.testing.mockExtension');
 ydn.testing.mockExtension.BASE_URL = '';
 
 
+ydn.testing.mockExtension.storage_data_ = {};
+
+
 ydn.testing.mockExtension.storage_ = {
   'get': function(obj, cb) {
     cb({});
   },
   'set': function(obj, cb) {
     cb({});
+  }
+};
+
+
+ydn.testing.mockExtension.Storage = function() {
+  this.data_ = {};
+};
+
+
+ydn.testing.mockExtension.Storage.prototype.get = function(name) {
+  var obj = {};
+  obj[name] = JSON.parse(JSON.stringify(this.data_[name] || null));
+};
+
+
+ydn.testing.mockExtension.Storage.prototype.set = function(name, obj) {
+  if (obj) {
+    this.data_[name] = JSON.parse(JSON.stringify(obj));
+  } else {
+    delete this.data_[name];
   }
 };
 
@@ -46,8 +69,8 @@ if (!chrome.extension) {
 
 if (!chrome.storage) {
   chrome.storage = {
-    'sync': ydn.testing.mockExtension.storage_,
-    'local': ydn.testing.mockExtension.storage_,
+    'sync': new ydn.testing.mockExtension.Storage(),
+    'local': new ydn.testing.mockExtension.Storage(),
     'onChanged': {
       'addListener': function() {}
     }
