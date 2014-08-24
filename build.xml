@@ -146,6 +146,9 @@
                     var CLOSURE_DEFINES = {'goog.ENABLE_DEBUG_LOADER': false};
                 </header>
                 <filelist>
+                    <file name="${work.dir}/fullproof/js/tokenizer/categ_letters_numbers.js"/>
+                    <file name="${work.dir}/fullproof/js/tokenizer/normalizer_lowercase.js"/>
+                    <file name="${work.dir}/fullproof/js/tokenizer/normalizer_lowercase_nomark.js"/>
                     <file name="@{output.fn}"/>
                 </filelist>
             </concat>
