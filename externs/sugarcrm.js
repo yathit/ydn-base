@@ -303,6 +303,59 @@ SugarCrm.ModuleMeta.prototype.email_fields;
 
 
 /**
+ * Represents SugarCRM Acl.
+ * @constructor
+ */
+SugarCrm.Acl = function() {};
+
+
+/**
+ * @type {boolean}
+ */
+SugarCrm.Acl.prototype.access;
+
+
+/**
+ * Enum of 'edit', 'delete', 'list', 'view', 'import', 'export'
+ * @type {string}
+ */
+SugarCrm.Acl.prototype.action;
+
+
+
+/**
+ * Represents SugarCRM AvailableModule.
+ * @constructor
+ */
+SugarCrm.AvailableModule = function() {};
+
+
+/**
+ * @type {boolean}
+ */
+SugarCrm.AvailableModule.prototype.favorite_enabled;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.AvailableModule.prototype.module_key;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.AvailableModule.prototype.module_label;
+
+
+/**
+ * @type {Array.<SugarCrm.Acl>}
+ */
+SugarCrm.AvailableModule.prototype.acls;
+
+
+
+/**
  * Represents SugarCRM ModuleInfo.
  * @constructor
  */
@@ -436,8 +489,14 @@ SugarCrm.Details.prototype.serverInfo;
 
 
 /**
- * @type {Array.<SugarCrm.ModuleInfo>}
+ * @type {Array.<SugarCrm.AvailableModule>}
  */
 SugarCrm.Details.prototype.availableModules;
+
+
+/**
+ * @type {Array.<SugarCrm.ModuleInfo>}
+ */
+SugarCrm.Details.prototype.modulesInfo;
 
 
