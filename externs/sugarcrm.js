@@ -414,3 +414,30 @@ SugarCrm.About.prototype.hostPermission;
  * @type {(boolean|undefined)}
  */
 SugarCrm.About.prototype.isLogin;
+
+
+
+/**
+ * @interface
+ */
+SugarCrm.Details = function() {};
+
+
+/**
+ * @type {SugarCrm.About}
+ */
+SugarCrm.Details.prototype.about;
+
+
+/**
+ * @type {SugarCrm.ServerInfo}
+ */
+SugarCrm.Details.prototype.serverInfo;
+
+
+/**
+ * @type {Array.<SugarCrm.ModuleInfo>}
+ */
+SugarCrm.Details.prototype.availableModules;
+
+
