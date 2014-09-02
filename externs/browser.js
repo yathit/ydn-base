@@ -36,30 +36,6 @@ function io() {}
 */
 io.prototype.connect = function(server) {};
 
-//
-///**
-// * New IndexedDB interface not in closure externs.
-// * This must be remove when they updated.
-// * @constructor
-// */
-//
-///**
-// * @extends {IDBRequest}
-// * @constructor
-// */
-//var IDBOpenDBRequest = function() {};
-//
-///**
-// *
-// * @param ev
-// */
-//IDBOpenDBRequest.prototype.onblocked = function(ev) {};
-//
-///**
-// *
-// * @param ev
-// */
-//IDBOpenDBRequest.prototype.onupgradeneeded = function(ev) {};
 
 
 /**
@@ -75,26 +51,6 @@ IDBIndex.prototype.multiEntry;
  * @type {boolean}
  */
 IDBObjectStore.prototype.autoIncrement;
-//
-//
-///**
-// * Closure compiler incorrectly define as Array.<string>
-//* @final
-//* @type {DOMStringList}
-//*/
-//IDBDatabase.prototype.objectStoreNames;
-//
-//
-///**
-// * @constructor
-// */
-//var IDBVersionChangeEvent = function() {};
-//
-///**
-// * @final
-// * @type {string}
-// */
-//IDBVersionChangeEvent.prototype.version;
 
 
 
@@ -122,4 +78,33 @@ IDBRequest.prototype.error;
 
 
 
+/**
+ * Socket IO service
+ * @constructor
+ * @extends {HTMLElement}
+ */
+function HTMLDialogElement() {}
 
+
+/**
+ * @param {HTMLElement=} anchor
+ */
+HTMLDialogElement.prototype.show = function(anchor) {};
+
+
+/**
+ * @param {HTMLElement=} anchor
+ */
+HTMLDialogElement.prototype.showModal = function(anchor) {};
+
+
+/**
+ * @param result
+ */
+HTMLDialogElement.prototype.close = function(result) {};
+
+
+/**
+ * @type {*}
+ */
+HTMLDialogElement.prototype.returnValue;
