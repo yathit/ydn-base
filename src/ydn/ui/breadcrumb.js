@@ -86,6 +86,12 @@ goog.inherits(ydn.ui.Breadcrumb, goog.events.EventTarget);
 
 
 /**
+ * @define {boolean} debug flag;
+ */
+ydn.ui.Breadcrumb.DEBUG = true;
+
+
+/**
  * A collapsible breadcomb label shorten if not active node. It dynamically
  * expend upon hover.
  * @type {boolean}
@@ -106,13 +112,16 @@ ydn.ui.Breadcrumb.prototype.collapsedWidth = 60;
  * @param {Element=} opt_ele_peer option element for peer nodes.
  */
 ydn.ui.Breadcrumb.prototype.render = function(ele, opt_ele_peer) {
+  if (ydn.ui.Breadcrumb.DEBUG) {
+    window.console.log('rendering breadcrumb');
+  }
   this.root_ = ele;
   // goog.style.setHeight(ele, '2em');
   this.ul_ = document.createElement('UL');
-  this.ul_.className = 'breadcrumb';
+  this.ul_.className = 'ydn-breadcrumb';
   if (opt_ele_peer) {
     this.ele_peer_ = document.createElement('UL');
-    this.ele_peer_.className = 'breadcrumb-sidemenu';
+    this.ele_peer_.className = 'ydn-breadcrumb-sidemenu';
     opt_ele_peer.innerHTML = '';
     opt_ele_peer.appendChild(this.ele_peer_);
     goog.style.setElementShown(opt_ele_peer, false);
@@ -170,7 +179,7 @@ ydn.ui.Breadcrumb.prototype.initBreadcrumb_ = function(maps) {
   for (var i = 0; i < maps.length; i++) {
     var map = maps[i];
     var li = document.createElement('LI');
-    li.className = 'breadcrumb-li';
+    li.className = 'ydn-breadcrumb-li';
     var a = document.createElement('A');
     a.textContent = map.getLabel();
     var href = ydn.ui.Breadcrumb.url2Path(map.url);
@@ -185,7 +194,7 @@ ydn.ui.Breadcrumb.prototype.initBreadcrumb_ = function(maps) {
     // console.log(i, map.count(), n, map.title);
     if (n > 0) {
       var menu = document.createElement('UL');
-      // menu.className = 'breadcrumb-menu';
+      // menu.className = 'ydn-breadcrumb-menu';
       var next = maps[i + 1];
       for (var j = 0; j < n; j++) {
         var child = map.child(j);
@@ -193,7 +202,7 @@ ydn.ui.Breadcrumb.prototype.initBreadcrumb_ = function(maps) {
           continue;
         }
         var menu_li = document.createElement('LI');
-        menu_li.className = 'breadcrumb-menu';
+        menu_li.className = 'ydn-breadcrumb-menu';
         var ma = document.createElement('A');
         ma.textContent = child.getLabel();
         ma.href = ydn.ui.Breadcrumb.url2Path(child.url);
@@ -203,7 +212,7 @@ ydn.ui.Breadcrumb.prototype.initBreadcrumb_ = function(maps) {
       li.appendChild(menu);
     }
     if (i == maps.length - 1) {
-      li.className = 'breadcrumb-li current';
+      li.className = 'ydn-breadcrumb-li current';
     }
   }
   /*
@@ -254,7 +263,7 @@ ydn.ui.Breadcrumb.prototype.initMenu_ = function(current, parent, grand) {
       if (current.url == peer.url) {
         a.className = 'current';
         var ul = document.createElement('UL');
-        ul.className = 'breadcrumb-sidemenu';
+        ul.className = 'ydn-breadcrumb-sidemenu';
         li.appendChild(ul);
         for (var j = 0, cn = peer.count(); j < cn; j++) {
           var child = peer.child(j);
@@ -323,8 +332,8 @@ ydn.ui.Breadcrumb.prototype.show = function(maps) {
 ydn.ui.Breadcrumb.prototype.handleMouseOver = function(e) {
   var ele = /** @type {Element} */ (e.target);
   var li = ele;
-  if (li.tagName != 'LI' || !li.classList.contains('breadcrumb-li')) {
-    li = goog.dom.getAncestorByTagNameAndClass(ele, 'LI', 'breadcrumb-li');
+  if (li.tagName != 'LI' || !li.classList.contains('ydn-breadcrumb-li')) {
+    li = goog.dom.getAncestorByTagNameAndClass(ele, 'LI', 'ydn-breadcrumb-li');
   }
   // console.log('in', ele.tagName, li);
   if (!li) {
@@ -376,12 +385,12 @@ ydn.ui.Breadcrumb.prototype.handleClick = function(e) {
  */
 ydn.ui.Breadcrumb.prototype.handleMouseOut = function(e) {
   var ele = /** @type {Element} */ (e.target);
-  if (ele.tagName != 'UL' || ele.classList.contains('breadcrumb')) {
+  if (ele.tagName != 'UL' || ele.classList.contains('ydn-breadcrumb')) {
     return;
   }
   var li = ele;
-  if (li.tagName != 'LI' || !li.classList.contains('breadcrumb-li')) {
-    li = goog.dom.getAncestorByTagNameAndClass(ele, 'LI', 'breadcrumb-li');
+  if (li.tagName != 'LI' || !li.classList.contains('ydn-breadcrumb-li')) {
+    li = goog.dom.getAncestorByTagNameAndClass(ele, 'LI', 'ydn-breadcrumb-li');
   }
   var ul = goog.dom.getElementsByTagNameAndClass('UL', null, li)[0];
   // console.log('out', ul.tagName, ul, ele.tagName, ele);
@@ -478,5 +487,9 @@ ydn.ui.Breadcrumb.prototype.walk = function(url, opt_site_map) {
   var arr = [];
   var site_map = this.model_ || opt_site_map;
   site_map.walk(url, arr);
+  if (ydn.ui.Breadcrumb.DEBUG) {
+    window.console.log('breadcrumb walking to ' + url + ' results ' + arr.length +
+        ' steps');
+  }
   this.show(arr);
 };
