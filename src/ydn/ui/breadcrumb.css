@@ -9,17 +9,10 @@
     white-space: nowrap;
 }
 
-.ydn-breadcrumb UL {
+.ydn-breadcrumb LI:not(:hover) UL:not(:hover) {
     display: none;
 }
 
-.ydn-breadcrumb LI:hover UL {
-    display: inherit;
-}
-
-.ydn-breadcrumb LI:hover UL:hover {
-    display: inherit;
-}
 
 .ydn-breadcrumb LI UL {
     position: absolute;
