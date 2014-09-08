@@ -117,6 +117,37 @@
         </sequential>
     </macrodef>
 
+
+    <macrodef name="generate-template">
+        <attribute name="input.fn" />
+        <attribute name="outputPathFormat" />
+        <sequential>
+            <java jar="${closure-templates.dir}/build/SoyToJsSrcCompiler.jar"
+                  fork="true" failonerror="true" logError="true">
+                <arg line='--outputPathFormat "@{outputPathFormat}"' />
+                <arg line="--shouldGenerateJsdoc" />
+                <arg line="--shouldProvideRequireSoyNamespaces" />
+                <arg line='"@{input.fn}"' />
+            </java>
+        </sequential>
+    </macrodef>
+    <macrodef name="generate-wedget-template">
+        <attribute name="filename" />
+        <attribute name="input.dir" />
+        <attribute name="output.dir" default="@{input.dir}" />
+        <element name="templ-options" optional="true"/>
+        <sequential>
+            <java jar="${closure-templates.dir}/build/SoyToJsSrcCompiler.jar"
+                  fork="true" failonerror="true" logError="true" dir="@{input.dir}">
+                <arg line='--outputPathFormat "@{output.dir}/{INPUT_DIRECTORY}/{INPUT_FILE_NAME_NO_EXT}.soy.js"' />
+                <arg line="--cssHandlingScheme GOOG" />
+                <arg line="--shouldGenerateJsdoc" />
+                <templ-options/>
+                <arg line="--shouldProvideRequireSoyNamespaces" />
+                <arg line="'@{filename}'" />
+            </java>
+        </sequential>
+    </macrodef>
     <macrodef name="compile-raw"  description="compile js files using
      closure compiler with strict compilation setting">
         <attribute name="input"/>
@@ -286,6 +317,22 @@
              <arg line='-f "--externs=${ydn-base.dir}/externs/shindig.js"'/>
             </options>
         </closure-compile>
+    </target>
+    <target name="templ" description="compile templates">
+
+        <property name="templ.dir" location="${ydn-base.dir}/templ" />
+        <fileset dir="${ydn-base.dir}/templ" id="templ.files">
+            <include name="**/*.soy"/>
+        </fileset>
+        <pathconvert pathsep="' '"  property="templfiles" refid="templ.files" dirsep="/">
+            <map from="${ydn-base.dir}/templ/" to=""/>
+        </pathconvert>
+        <generate-wedget-template filename="${templfiles}"
+                                  input.dir="${templ.dir}"
+                                  output.dir="${ydn-base.dir}/src/templ/">
+
+        </generate-wedget-template>
+
     </target>
     <target name="deps" description="list dependency files">
         <delete file="${ydn-base.dir}/src/deps.js"/>

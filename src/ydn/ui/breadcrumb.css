@@ -1,0 +1,142 @@
+
+.breadcrumb {
+    position: relative;
+    background-color: #FEFCFF;
+    clear: both;
+    z-index: 1000;
+    width: 100%;
+    height: 1.8em;
+    white-space: nowrap;
+}
+
+.breadcrumb UL {
+    display: none;
+}
+
+.breadcrumb LI:hover UL {
+    display: inherit;
+}
+
+.breadcrumb LI:hover UL:hover {
+    display: inherit;
+}
+
+.breadcrumb LI UL {
+    position: absolute;
+    float: left;
+}
+
+.breadcrumb, .breadcrumb LI, .breadcrumb UL, .breadcrumb UL LI {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumb LI {
+    float: left;
+}
+
+.breadcrumb LI {
+    height: 16px;
+    border-right: none;
+    background-color: #F6F6F6;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAYUlEQVQYV2NkYGB4BcSFQLwUiDEAI1DkPRCD6ClAXIOuAqZAACjxA4gPAbE7siJkBSDxr0D8EoiVYYrQFXwDStwHYh1sCj4BBQ8CsR82K5iBgl1A3ILNkSBvxgHxDmzeBADHqhQJ5ClAVwAAAABJRU5ErkJggg==");
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding: 0 12px 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+UL.breadcrumb > LI {
+    max-width: 6em;
+}
+
+UL.breadcrumb > LI:hover {
+    max-width: inherit !important;
+}
+
+.breadcrumb LI.current {
+    background: none;
+    max-width: inherit;
+}
+
+.breadcrumb LI A {
+    text-decoration: none;
+    color: #0A8ECC;
+    padding-left: 4px;
+}
+
+.breadcrumb LI A:HOVER, .breadcrumb LI.hover A {
+    color: #0a8ecc;
+    text-decoration: none;
+}
+
+
+.breadcrumb LI.current > A {
+    color: #333;
+    cursor: default;
+}
+
+.breadcrumb LI UL {
+    background: #FEFCFF;
+    top: 1.4em;
+    padding-left: 8px;
+    padding-bottom: 8px;
+}
+
+.breadcrumb LI UL LI {
+    clear: both;
+    width: 100%;
+    border-right: none;
+    height: auto;
+    background: none;
+    padding: 0;
+}
+
+
+.breadcrumb LI UL LI A {
+    text-decoration: none;
+    color: #0A8ECC !important;
+    display: block;
+    padding: 2px 4px 2px 2px;
+}
+
+.breadcrumb LI UL LI:last-child A {
+    border-bottom: none
+}
+
+.breadcrumb LI UL LI A:HOVER {
+    background: #444;
+}
+
+
+
+ul.breadcrumb-sidemenu {
+    list-style: none;
+    margin: 4px 0;
+    padding: 0;
+}
+
+ul.breadcrumb-sidemenu li a {
+    text-decoration: none;
+    color: #0A8ECC;
+    padding: 2px 0px;
+}
+
+ul.breadcrumb-sidemenu li a.current {
+    font-weight: bold;
+    color: black;
+}
+
+/* children menu */
+ul.breadcrumb-sidemenu li ul.breadcrumb-sidemenu {
+    list-style: none;
+    margin: 4px 4px 4px 1em;
+    padding: 0;
+    font-weight: normal;
+    color: #0A8ECC;
+}
+
+
+

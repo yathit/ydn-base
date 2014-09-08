@@ -1,0 +1,33 @@
+{namespace templ.ydn.ui}
+
+/**
+* Social widget
+* @param data data data list.
+*/
+{template .social}
+
+<section class="socialshares">
+    Share this on
+    {foreach $a in $data}
+      <a class="social {$a.name}" target="_blank"
+        href="{$a.href}">{$a.content}</a>
+    {/foreach}
+</section>
+
+{/template}
+
+/**
+* Social widget
+* @param data data data list.
+*/
+{template .followMe}
+
+<span class="follow-me">
+    follow me on
+    {foreach $a in $data}
+      <a class="social {$a.name}" target="_blank"
+        href="{$a.href}">{$a.content}</a>
+    {/foreach}
+</span>
+
+{/template}
