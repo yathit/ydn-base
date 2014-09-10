@@ -399,10 +399,7 @@ ydn.data.SiteMap.prototype.getLabel = function() {
  * @inheritDoc
  */
 ydn.data.SiteMap.prototype.toJSON = function() {
-  var json = {
-    'children': [],
-    'subpages': []
-  };
+  var json = {};
   if (this.url) {
     json['url'] = this.url;
   }
@@ -415,11 +412,17 @@ ydn.data.SiteMap.prototype.toJSON = function() {
   if (this.name) {
     json['name'] = this.name;
   }
-  for (var i = 0; i < this.children_.length; i++) {
-    json['children'].push(this.children_[i].toJSON());
+  if (this.children_.length > 0) {
+    json['children'] = [];
+    for (var i = 0; i < this.children_.length; i++) {
+      json['children'].push(this.children_[i].toJSON());
+    }
   }
-  for (var i = 0; i < this.sub_pages_.length; i++) {
-    json['subpages'].push(this.sub_pages_[i].toJSON());
+  if (this.sub_pages_.length > 0) {
+    json['subpages'] = [];
+    for (var i = 0; i < this.sub_pages_.length; i++) {
+      json['subpages'].push(this.sub_pages_[i].toJSON());
+    }
   }
   return json;
 };
@@ -492,4 +495,54 @@ ydn.data.SiteMap.fromJSON = function(json, opt_ignore_sub_pages) {
     }
   }
   return sitemap;
+};
+
+
+/**
+ * @param {Document} xml
+ * @param {string} root_url
+ * @return {ydn.data.SiteMap} `null` if root_url not found in sitemap.
+ */
+ydn.data.SiteMap.fromXML = function(xml, root_url) {
+  var n = xml.documentElement.childElementCount;
+  var urlsets = {};
+  for (var i = 0; i < n; i++) {
+    var page = xml.documentElement.children[i];
+    var url = page.children[0].textContent.trim();
+    var title = page.children[2].textContent.trim();
+    var idx = url.substr(0, url.length - 1).lastIndexOf('/');
+    var parent = url.substr(0, idx + 1) + 'index.html';
+    if (url.charAt(url.length - 1) == '/') {
+      url = url + 'index.html';
+    }
+    urlsets[url] = {
+      title: title,
+      url: url,
+      parent: parent
+    };
+  }
+  var getChildren = function(url) {
+    var ch = [];
+    for (var name in urlsets) {
+      var page = urlsets[name];
+      if (page.parent == url) {
+        ch.push(page);
+      }
+    }
+    return ch;
+  };
+  if (!urlsets[root_url]) {
+    return null;
+  }
+  var map = new ydn.data.SiteMap(root_url, urlsets[root_url].title);
+  var appendChildren = function(map) {
+    var children = getChildren(map.url);
+    for (var i = 0; i < children.length; i++) {
+      var ch = new ydn.data.SiteMap(children[i].url, children[i].title);
+      appendChildren(ch);
+      map.add(ch);
+    }
+  };
+  appendChildren(map);
+  return map;
 };

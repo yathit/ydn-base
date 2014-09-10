@@ -486,7 +486,10 @@ ydn.ui.Breadcrumb.prototype.hideAllSubLevels_ = function() {
 ydn.ui.Breadcrumb.prototype.walk = function(url, opt_site_map) {
   var arr = [];
   var site_map = this.model_ || opt_site_map;
-  site_map.walk(url, arr);
+  var node = site_map.walk(url, arr);
+  if (!node && url.charAt(url.length - 1) == '/') {
+    node = site_map.walk(url + 'index.html', arr);
+  }
   if (ydn.ui.Breadcrumb.DEBUG) {
     window.console.log('breadcrumb walking to ' + url + ' results ' + arr.length +
         ' steps');
