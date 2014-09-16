@@ -22,6 +22,7 @@
     <condition property="gsutil" value="D:/opt/gsutil/gsutil"><os family="windows"/></condition>
     <condition property="gsutil" value="/Users/kyawtun/opt/gsutil/gsutil"><os family="unix"/></condition>
 
+    <property name="outputwrapper.app" value="(function(){%output%})();app=runApp();"/>
     <property name="outputwrapper.norun" value="(function(){%output%})();"
             description="Closure compiler output wrapper"/>
     <property name="outputwrapper.ydn" value="(function (name, definition, context) {if (typeof context['module'] !== 'undefined' &amp;&amp; context['module']['exports']) {context['module']['exports'] = definition.apply(context);}else if (typeof context['define'] !== 'undefined' &amp;&amp; context['define'] === 'function' &amp;&amp; context['define']['amd']) {define(name, [], definition);}else {context[name] = definition();}})('ydn', function () {%output% return ydn;}, (this || {}));"
