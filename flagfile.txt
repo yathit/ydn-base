@@ -18,7 +18,10 @@
 --jscomp_error=internetExplorerChecks
 --jscomp_error=misplacedTypeAnnotation
 --jscomp_error=missingProperties
+--jscomp_error=missingReturn
+--jscomp_error=newCheckTypes
 --jscomp_error=nonStandardJsDocs
+--jscomp_warning=suspiciousCode
 --jscomp_error=strictModuleDepCheck
 --jscomp_error=typeInvalidation
 --jscomp_error=undefinedNames

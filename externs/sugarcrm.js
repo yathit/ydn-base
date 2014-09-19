@@ -191,6 +191,12 @@ SugarCrm.Record.prototype.date_modified;
 SugarCrm.Record.prototype._module;
 
 
+/**
+ * @type {string} either '1' or '0'
+ */
+SugarCrm.Record.prototype.deleted;
+
+
 
 /**
  * Represents SugarCRM ModuleField.
