@@ -88,7 +88,7 @@ goog.inherits(ydn.ui.Breadcrumb, goog.events.EventTarget);
 /**
  * @define {boolean} debug flag;
  */
-ydn.ui.Breadcrumb.DEBUG = true;
+ydn.ui.Breadcrumb.DEBUG = false;
 
 
 /**
