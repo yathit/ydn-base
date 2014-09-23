@@ -1,5 +1,5 @@
 {
-  "name": "ydn",
+  "name": "ydn.base",
   "title": "YDN Javascript library",
   "description": "YDN Javascript library for authorization, authentication, database and application utilities.",
   "keywords": [
@@ -9,7 +9,7 @@
     "storage",
     "database"
   ],
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": {
     "name": "YDN Authors, Yathit",
     "url": "https://raw.github.com/yathit/ydn-base/master/AUTHORS"
@@ -23,7 +23,7 @@
   ],
   "licenses": [
     {
-      "type": "Apache License",
+      "type": "Apache License V2",
       "url": "https://raw.github.com/yathit/ydn-base/master/LICENSE"
     }
   ],
