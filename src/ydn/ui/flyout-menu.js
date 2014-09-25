@@ -162,6 +162,7 @@ ydn.ui.FlyoutMenu.Option;
  *   label: string,
  *   name: (string),
  *   value: *,
+ *   title: (string|undefined),
  *   type: (string|undefined),
  *   disabled: (boolean|undefined),
  *   children: (Array.<ydn.ui.FlyoutMenu.ItemOption>|undefined)
@@ -194,6 +195,7 @@ ydn.ui.FlyoutMenu.renderMenu = function(items_option) {
       items.push(rep);
       continue;
     }
+
     var menu_content = [dom.createDom('div', {
       'class': 'goog-menuitem-content'
     }, opt.label)];
@@ -209,10 +211,14 @@ ydn.ui.FlyoutMenu.renderMenu = function(items_option) {
       svg_arrow.classList.add('left-arrow');
       menu_content.unshift(svg_arrow);
     }
-    var menuitem = dom.createDom('div', {
+    var div_options = {
       'class': 'goog-menuitem',
       'role': opt.type == 'bool' ? 'goog-menuitem-checkbox' : 'menuitem'
-    }, menu_content);
+    };
+    if (opt.title) {
+      div_options['title'] = opt.title;
+    }
+    var menuitem = dom.createDom('div', div_options, menu_content);
     menuitem.setAttribute('name', opt.name);
     if (opt.value) {
       menuitem.classList.add('goog-option-selected');
