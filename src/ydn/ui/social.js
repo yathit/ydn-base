@@ -177,6 +177,3 @@ ydn.ui.Social.prototype.render = function() {
     return goog.soy.renderAsElement(templ.ydn.ui.social, data);
   }
 };
-
-
-
