@@ -101,10 +101,10 @@ ydn.ui.MessageDialog.showModal = function(title, message, opt_btn) {
   var default_btn = buttons.querySelector('button.default');
   default_btn.onclick = function(e) {
     dialog.dialog_.close('apply');
-    dialog.dispose_();
+    dialog.dispose();
   };
   dialog.dialog_.onclose = function(event) {
-    df.resolve(dialog.dialog_.returnValue);
+    df.callback(dialog.dialog_.returnValue);
     dialog.dispose();
   };
   dialog.dialog_.showModal();
