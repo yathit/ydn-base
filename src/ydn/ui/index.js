@@ -88,3 +88,26 @@ ydn.ui.getTemplateById = function(id, opt_doc) {
   return /** @type {Element} */ (el);
 };
 
+
+/**
+ * Instead of creating a new tab, open like a dialog box.
+ * @param {Event} e
+ */
+ydn.ui.openPageAsDialog = function(e) {
+  e.preventDefault();
+  var w = 200;
+  var h = 100;
+  var wh = e.target.getAttribute('data-window-height');
+  var ww = e.target.getAttribute('data-window-width');
+  if (ww) {
+    w = parseInt(ww, 10);
+  }
+  if (wh) {
+    h = parseInt(wh, 10);
+  }
+  // dual monitor solution
+  var left = (window.innerWidth / 2) - (w / 2) + window.screenLeft;
+  var top = (window.innerWidth / 2) - (h / 2) + window.screenTop;
+  var url = e.target.href;
+  window.open(url, undefined, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+};
