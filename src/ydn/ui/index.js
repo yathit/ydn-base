@@ -79,8 +79,11 @@ ydn.ui.getTemplateDocument_ = function() {
  * @return {Element}
  */
 ydn.ui.getTemplateById = function(id, opt_doc) {
-  var doc = opt_doc || ydn.ui.getTemplateDocument_();
-  var el = doc.documentElement.querySelector('#' + id);
+  var el = document.getElementById(id);
+  if (!el) {
+    var doc = opt_doc || ydn.ui.getTemplateDocument_();
+    el = doc.documentElement.querySelector('#' + id);
+  }
   if (!document.body.contains(el)) {
     el = document.importNode(el, true);
     document.body.appendChild(el);
@@ -95,8 +98,8 @@ ydn.ui.getTemplateById = function(id, opt_doc) {
  */
 ydn.ui.openPageAsDialog = function(e) {
   e.preventDefault();
-  var w = 200;
-  var h = 100;
+  var w = 600;
+  var h = 400;
   var wh = e.target.getAttribute('data-window-height');
   var ww = e.target.getAttribute('data-window-width');
   if (ww) {
