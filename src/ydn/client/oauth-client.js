@@ -87,7 +87,7 @@ goog.inherits(ydn.client.OAuthClient.Request, ydn.client.SimpleHttpRequest);
 /**
  * @define {boolean} debug flag.
  */
-ydn.client.OAuthClient.DEBUG = true;
+ydn.client.OAuthClient.DEBUG = false;
 
 
 /**
