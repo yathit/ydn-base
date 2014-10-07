@@ -36,7 +36,6 @@ ydn.http.TransportFilter = function(filter, pass_transport, fail_transport) {
 ydn.http.TransportFilter.prototype.logger = goog.log.getLogger('ydn.http.TransportFilter');
 
 
-
 /**
  * @inheritDoc
  */
@@ -45,18 +44,19 @@ ydn.http.TransportFilter.prototype.send = function(uri, callback, options) {
   options = ydn.http.getDefaultOptions(options);
 
   if (this.filter(uri, /** @type {string} */ (options.method), options)) {
-    goog.log.finest(db.logger, 'pass transport selected.');
+    goog.log.finest(this.logger, 'pass transport selected.');
     this.pass_transport.send(uri, callback, options);
   } else if (this.fail_transport) {
-    goog.log.finest(db.logger, 'fail transport selected.');
+    goog.log.finest(this.logger, 'fail transport selected.');
     this.fail_transport.send(uri, callback, options);
   } else {
-    goog.log.info(db.logger, 'Drop ' + options.method + ' request: ' + uri);
+    goog.log.info(this.logger, 'Drop ' + options.method + ' request: ' + uri);
     if (goog.isString(options.body)) {
-      goog.log.finest(db.logger, options.body);
+      goog.log.finest(this.logger, options.body);
     }
   }
 };
+
 
 /**
  * Simple filtered transport, allowing only GET request. Set {@code allow_request} as necessary.

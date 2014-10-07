@@ -24,7 +24,7 @@ ydn.base.JQUERY = false;
  */
 goog.log.finest = function(logger, msg, opt_exception) {
   if (goog.log.ENABLED && logger) {
-    logger.finest(msg, opt_exception);
+    logger.log(goog.debug.Logger.Level.FINEST, msg, opt_exception);
   }
 };
 
@@ -39,6 +39,6 @@ goog.log.finest = function(logger, msg, opt_exception) {
  */
 goog.log.finer = function(logger, msg, opt_exception) {
   if (goog.log.ENABLED && logger) {
-    logger.finer(msg, opt_exception);
+    logger.log(goog.debug.Logger.Level.FINER, msg, opt_exception);
   }
 };
