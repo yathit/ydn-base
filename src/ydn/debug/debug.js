@@ -54,20 +54,31 @@ ydn.debug.log = function(scope, level, ele) {
         level.toUpperCase()) :
           goog.debug.Logger.Level.FINE;
 
-  goog.log.getLogger(scope).setLevel(log_level);
+  var logger = goog.log.getLogger(scope);
+  if (logger) {
+    logger.setLevel(log_level);
+  } else if (goog.DEBUG) {
+    window.console.log('logger ' + scope + ' not available.');
+  }
 
 
   if (goog.isDef(ele)) {
     if (!ydn.debug.logger_div) {
       ydn.debug.logger_div = new goog.debug.DivConsole(ele);
       ydn.debug.logger_div.setCapturing(true);
-      goog.debug.LogManager.getRoot().setLevel(goog.debug.Logger.Level.WARNING);
+      var root_logger = goog.debug.LogManager.getRoot();
+      if (root_logger) {
+        root_logger.setLevel(goog.debug.Logger.Level.WARNING);
+      }
     }
   } else {
     if (!ydn.debug.logger_console && !ydn.debug.logger_div) {
       ydn.debug.logger_console = new goog.debug.Console();
       ydn.debug.logger_console.setCapturing(true);
-      goog.debug.LogManager.getRoot().setLevel(goog.debug.Logger.Level.WARNING);
+      var root_logger = goog.debug.LogManager.getRoot();
+      if (root_logger) {
+        root_logger.setLevel(goog.debug.Logger.Level.WARNING);
+      }
     }
   }
 };
