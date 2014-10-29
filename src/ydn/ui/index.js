@@ -114,3 +114,25 @@ ydn.ui.openPageAsDialog = function(e) {
   var url = e.target.href;
   window.open(url, undefined, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
 };
+
+
+/**
+ * Dump all css rules to console.
+ * @private
+ */
+ydn.ui.dumpAllCssRules_ = function() {
+  var text = ['/*  Created with ydn.ui.dumpAllCssRules_() */'];
+  for (var i = 0; i < document.styleSheets.length; i++) {
+    var ss = document.styleSheets[i];
+    for (var j = 0; j < ss.rules.length; j++) {
+      var rule = ss.rules[j];
+      text.push(rule.cssText);
+    }
+  }
+  window.all_css_rules = text.join('\n');
+  window.console.log(window.all_css_rules);
+  window.console.log('copy(window.all_css_rules); // to copy clipboard');
+  // chrome command line api
+  // copy(window.all_css_rules);
+  // console.log('All css rule copy to clipboard');
+};
