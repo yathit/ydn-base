@@ -73,6 +73,11 @@ ydn.ui.getTemplateDocument_ = function() {
 
 
 /**
+ * Get or import template element.
+ * <pre>
+ *   var t = ydn.ui.getTemplateById('template-id').content;
+ *   el.appendChild(t.cloneNode(true));
+ * </pre>
  * @param {string} id get template element by id from template document.
  * @param {Document=} opt_doc template document. Default to default template
  * document.
