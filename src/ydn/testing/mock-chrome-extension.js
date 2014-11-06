@@ -93,3 +93,7 @@ if (!chrome.runtime.getManifest) {
   }
 }
 
+if (!window['CRMinInbox']) {
+  window['CRMinInbox'] = {"Version":{"release":"1.4.2"},"sugarcrm":{"Version":{"release":"0.18.3"}}};
+}
+

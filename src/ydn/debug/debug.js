@@ -49,7 +49,7 @@ ydn.debug.log = function(scope, level, ele) {
 
   scope = scope || 'ydn';
   var log_level = goog.isNumber(level) ? new goog.debug.Logger.Level(
-    'log', level) :
+      'log', level) :
       goog.isString(level) ? goog.debug.Logger.Level.getPredefinedLevel(
         level.toUpperCase()) :
           goog.debug.Logger.Level.FINE;
