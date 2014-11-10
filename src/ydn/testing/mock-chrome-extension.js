@@ -77,3 +77,23 @@ if (!chrome.storage) {
   };
 }
 
+if (!chrome.runtime) {
+  chrome.runtime = {};
+}
+if (!chrome.runtime.getManifest) {
+  chrome.runtime.getManifest = function () {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', chrome.extension.getURL('manifest.json'), false);
+    var manifest = {};
+    xhr.onload = function () {
+      manifest = JSON.parse(xhr.responseText);
+    };
+    xhr.send();
+    return manifest;
+  }
+}
+
+if (!window['CRMinInbox']) {
+  window['CRMinInbox'] = {"Version":{"release":"1.4.2"},"sugarcrm":{"Version":{"release":"0.18.3"}}};
+}
+

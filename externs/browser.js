@@ -108,3 +108,65 @@ HTMLDialogElement.prototype.close = function(result) {};
  * @type {*}
  */
 HTMLDialogElement.prototype.returnValue;
+
+
+/**
+ * @const
+ * @type {Object}
+ */
+chrome.declarativeContent = {};
+
+
+
+/**
+ * @param {Object} details
+ * @constructor
+ */
+chrome.declarativeContent.PageStateMatcher = function(details) {};
+
+
+
+/**
+ * @constructor
+ */
+chrome.declarativeContent.ShowPageAction = function() {};
+
+
+
+/**
+ * @param {Object} details
+ * @constructor
+ */
+chrome.declarativeContent.RequestContentScript = function(details) {};
+
+
+/**
+ * @const
+ * @param {Object} details
+ */
+chrome.declarativeContent.onPageChanged = {};
+
+
+/**
+ * @typedef {{
+ *   id: string,
+ *  conditions: Array,
+ *  actions: Array
+ * }}
+ */
+chrome.declarativeContent.RuleOptions;
+
+
+
+/**
+ * @param {Array.<chrome.declarativeContent.RuleOptions>|undefined} rules
+ * @param {function(Object)} callback
+ * @see http://developer.chrome.com/apps/app.runtime.html#event-onLaunched
+ */
+chrome.declarativeContent.onPageChanged.removeRules = function(rules, callback) {};
+
+
+/**
+ * @param {Array.<chrome.declarativeContent.RuleOptions>} rules
+ */
+chrome.declarativeContent.onPageChanged.addRules = function(rules) {};
