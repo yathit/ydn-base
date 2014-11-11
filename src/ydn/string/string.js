@@ -92,6 +92,25 @@ ydn.string.normalizeEmail = function(email) {
 };
 
 
+/**
+ * Join list of string by comma and lastly by word 'and'.
+ * @param {Array.<string>} items
+ * @return {string} string joining all items by comma separated and and.
+ */
+ydn.string.joinWithCommaAnd = function(items) {
+  var n = items.length;
+  if (n == 0) {
+    return '';
+  } else if (n == 1) {
+    return items[0];
+  } else if (n == 2) {
+    return items[0] + ' and ' + items[1];
+  } else {
+    var city_name = items.slice(0, n - 2).join(', ');
+    return city_name + ', ' + items[n - 2] + ' and ' + items[n - 1];
+  }
+};
+
 
 
 
