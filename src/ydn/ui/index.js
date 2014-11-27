@@ -38,13 +38,31 @@ ydn.ui.template_url_ = null;
 /**
  * Set default template document.
  * @param {Document|string} doc Document or URL of the document to load. Note:
- * Document will be load synchronously.
+ * Document will be load asynchronously.
+ * @param {Function=} opt_cb callback after loaded.
  */
-ydn.ui.setTemplateDocument = function(doc) {
+ydn.ui.setTemplateDocument = function(doc, opt_cb) {
   if (goog.isString(doc)) {
     ydn.ui.template_url_ = doc;
+    if (!ydn.ui.template_doc_ || ydn.ui.template_doc_.URL != doc) {
+      ydn.ui.template_doc_ = null;
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', ydn.ui.template_url_, true);
+      xhr.onload = function() {
+        var parser = new DOMParser();
+        ydn.ui.template_doc_ = parser.parseFromString(xhr.responseText, 'text/html');
+        xhr = null;
+        if (opt_cb) {
+          opt_cb();
+        }
+      };
+      xhr.send();
+    }
   } else {
     ydn.ui.template_doc_ = doc;
+    if (opt_cb) {
+      opt_cb();
+    }
   }
 };
 
