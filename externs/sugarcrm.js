@@ -477,6 +477,26 @@ SugarCrm.About.prototype.isLogin;
 
 
 /**
+ * @constructor
+ * @extends {SugarCrm.About}
+ */
+CrmApp.Credential = function() {};
+
+
+/**
+ * @type {string}
+ */
+CrmApp.Credential.prototype.password;
+
+
+/**
+ * @type {boolean|undefined}
+ */
+CrmApp.Credential.prototype.hashed;
+
+
+
+/**
  * @interface
  */
 SugarCrm.Details = function() {};
