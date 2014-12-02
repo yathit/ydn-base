@@ -23,7 +23,7 @@ goog.require('ydn.utils');
  * @struct
  */
 ydn.client.JsonMockServer = function(opt_delay) {
-  goog.base(this);
+
   this.delay = opt_delay || 0;
   this.resources = new ydn.structs.Buffer(ydn.client.Resource.cmp);
   this.hit_counts = {
@@ -204,7 +204,7 @@ ydn.client.JsonMockServer.prototype.request = function(req) {
   var status = 404;
   var res = null;
 
-  var uri = new goog.Uri(url);
+  var uri = new goog.Uri(req.getUri());
   this.hit_counts[method]++;
 
   if (method == 'GET') {
@@ -219,7 +219,9 @@ ydn.client.JsonMockServer.prototype.request = function(req) {
     } else {
       status = 201;
     }
-    res = this.loadData(uri.getPath(), ydn.json.parse(req.body));
+    var load = goog.isString(req.body) ? ydn.json.parse(req.body) :
+        req.body || {};
+    res = this.loadData(uri.getPath(), load);
     if (status == 201) {
       // leave it
     } else {

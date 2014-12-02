@@ -440,7 +440,7 @@ SugarCrm.ServerInfo.prototype.uptime;
 
 
 /**
- * @interface
+ * @constructor
  */
 SugarCrm.About = function() {};
 
