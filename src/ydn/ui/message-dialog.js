@@ -11,17 +11,18 @@ goog.provide('ydn.ui.MessageDialog');
  * Model message dialog box using native.
  * @param {string} title
  * @param {string|Element} message message or message content.
- * @param {Array.<ydn.ui.MessageDialog.Button>} btn button set. Default to
+ * @param {Array<ydn.ui.MessageDialog.Button>} buttons button set. Default to
  * OK button.
  * @constructor
  * @struct
  */
-ydn.ui.MessageDialog = function(title, message, btn) {
+ydn.ui.MessageDialog = function(title, message, buttons) {
+  var dialog = document.createElement('dialog');
   /**
    * @type {HTMLDialogElement}
    * @private
    */
-  this.dialog_ = /** @type {HTMLDialogElement} */ (document.createElement('dialog'));
+  this.dialog_ = /** @type {HTMLDialogElement} */ (dialog);
   var header = document.createElement('div');
   header.className = 'header';
   var content = document.createElement('div');
@@ -41,11 +42,20 @@ ydn.ui.MessageDialog = function(title, message, btn) {
     content.appendChild(message);
   }
 
-  var default_btn = document.createElement('button');
-  default_btn.className = 'ok default';
-  default_btn.value = 'ok';
-  default_btn.textContent = 'OK';
-  button_bar.appendChild(default_btn);
+  for (var i = 0; i < buttons.length; i++) {
+    var btn_name = buttons[i];
+    var button = document.createElement('button');
+    button.className = btn_name.toLowerCase();
+    if (btn_name == ydn.ui.MessageDialog.Button.OK) {
+      button.classList.add('default');
+    }
+    button.value = btn_name;
+    button.textContent = btn_name;
+    button.onclick = function(e) {
+      dialog.close(e.target.value);
+    };
+    button_bar.appendChild(button);
+  }
 
   this.dialog_.appendChild(header);
   this.dialog_.appendChild(content);
@@ -60,8 +70,8 @@ ydn.ui.MessageDialog = function(title, message, btn) {
  * @enum {string} dialog button name.
  */
 ydn.ui.MessageDialog.Button = {
-  OK: 'ok',
-  CANCEL: 'cancel'
+  OK: 'OK',
+  CANCEL: 'Cancel'
 };
 
 
@@ -75,6 +85,9 @@ ydn.ui.MessageDialog.CSS_CLASS_NAME = 'ydn-crm';
  * Clean up reference.
  */
 ydn.ui.MessageDialog.prototype.dispose = function() {
+  if (!this.dialog_) {
+    return;
+  }
   var buttons = this.dialog_.querySelector('.button-bar').querySelectorAll('button');
   for (var i = buttons.length - 1; i >= 0; i--) {
     buttons[i].onclick = null;
@@ -95,13 +108,13 @@ ydn.ui.MessageDialog.prototype.dispose = function() {
  * dialog close, resolved with button click.
  */
 ydn.ui.MessageDialog.showModal = function(title, message, opt_btn) {
-  var dialog = new ydn.ui.MessageDialog(title, message, [ydn.ui.MessageDialog.Button.OK]);
+  var buttons = opt_btn || [ydn.ui.MessageDialog.Button.OK];
+  var dialog = new ydn.ui.MessageDialog(title, message, buttons);
   var df = new goog.async.Deferred();
-  var buttons = dialog.dialog_.querySelector('.button-bar');
-  var default_btn = buttons.querySelector('button.default');
+  var bar = dialog.dialog_.querySelector('.button-bar');
+  var default_btn = bar.querySelector('button.default');
   default_btn.onclick = function(e) {
-    dialog.dialog_.close('apply');
-    dialog.dispose();
+    dialog.dialog_.close(e.target.value);
   };
   dialog.dialog_.onclose = function(event) {
     df.callback(dialog.dialog_.returnValue);
