@@ -12,35 +12,47 @@ goog.provide('ydn.testing.mockExtension');
 ydn.testing.mockExtension.BASE_URL = '';
 
 
-ydn.testing.mockExtension.storage_data_ = {};
-
-
-ydn.testing.mockExtension.storage_ = {
-  'get': function(obj, cb) {
-    cb({});
-  },
-  'set': function(obj, cb) {
-    cb({});
-  }
-};
-
-
 ydn.testing.mockExtension.Storage = function() {
   this.data_ = {};
 };
 
 
-ydn.testing.mockExtension.Storage.prototype.get = function(name) {
+ydn.testing.mockExtension.Storage.prototype.get = function(name, cb) {
   var obj = {};
-  obj[name] = JSON.parse(JSON.stringify(this.data_[name] || null));
+  if (typeof name == 'string') {
+    obj[name] = JSON.parse(JSON.stringify(this.data_[name] || null));
+  } else {
+    for (var i = 0; i < name.length; i++) {
+      obj[name[i]] = JSON.parse(JSON.stringify(this.data_[name[i]] || null));
+    }
+  }
+  setTimeout(function() {
+    cb(obj);
+  }, 1);
+
 };
 
 
-ydn.testing.mockExtension.Storage.prototype.set = function(name, obj) {
+ydn.testing.mockExtension.Storage.prototype.set = function(name, obj, cb) {
   if (obj) {
     this.data_[name] = JSON.parse(JSON.stringify(obj));
   } else {
     delete this.data_[name];
+  }
+  if (cb) {
+    setTimeout(function() {
+      cb(obj);
+    }, 1);
+  }
+};
+
+
+ydn.testing.mockExtension.Storage.prototype.clear = function(cb) {
+  this.data_ = {};
+  if (cb) {
+    setTimeout(function() {
+      cb();
+    }, 1);
   }
 };
 
@@ -81,19 +93,19 @@ if (!chrome.runtime) {
   chrome.runtime = {};
 }
 if (!chrome.runtime.getManifest) {
-  chrome.runtime.getManifest = function () {
+  chrome.runtime.getManifest = function() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', chrome.extension.getURL('manifest.json'), false);
     var manifest = {};
-    xhr.onload = function () {
+    xhr.onload = function() {
       manifest = JSON.parse(xhr.responseText);
     };
     xhr.send();
     return manifest;
-  }
+  };
 }
 
 if (!window['CRMinInbox']) {
-  window['CRMinInbox'] = {"Version":{"release":"1.4.2"},"sugarcrm":{"Version":{"release":"0.18.3"}}};
+  window['CRMinInbox'] = {'Version': {'release': '1.4.2'},'sugarcrm': {'Version': {'release': '0.18.3'}}};
 }
 
