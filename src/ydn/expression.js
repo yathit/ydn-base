@@ -175,3 +175,4 @@ ydn.math.Expression.parseInfix = function(expression) {
     'Too lazy to learn Dutch in Shunting Yard station, ' +
       'we speak Polish here.');
 };
+
