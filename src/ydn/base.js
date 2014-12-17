@@ -3,6 +3,7 @@
  */
 
 goog.provide('ydn.base');
+goog.provide('ydn.time');
 goog.require('goog.log');
 
 
@@ -42,3 +43,26 @@ goog.log.finer = function(logger, msg, opt_exception) {
     logger.log(goog.debug.Logger.Level.FINER, msg, opt_exception);
   }
 };
+
+
+/**
+ * @const
+ * @type {number}
+ */
+ydn.time.MINUTE = 60 * 1000;
+
+
+/**
+ * @const
+ * @type {number}
+ */
+ydn.time.HOUR = 60 * ydn.time.MINUTE;
+
+
+/**
+ * @const
+ * @type {number}
+ */
+ydn.time.DAY = 24 * ydn.time.HOUR;
+
+
