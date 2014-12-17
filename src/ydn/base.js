@@ -66,3 +66,10 @@ ydn.time.HOUR = 60 * ydn.time.MINUTE;
 ydn.time.DAY = 24 * ydn.time.HOUR;
 
 
+/**
+ * @const
+ * @type {number}
+ */
+ydn.time.WEEK = 7 * ydn.time.DAY;
+
+
