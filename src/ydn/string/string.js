@@ -54,7 +54,7 @@ ydn.string.split_space = function(str) {
 /**
  * Normalize phone number.
  * @param {string} ph
- * @return {string?} null if not a valid email.
+ * @return {?string} null if not a valid email.
  */
 ydn.string.normalizePhone = function(ph) {
   if (!goog.isString(ph)) {
@@ -67,7 +67,7 @@ ydn.string.normalizePhone = function(ph) {
 /**
  * Normalize email address.
  * @param {string|*} email
- * @return {string?} null if not a valid email.
+ * @return {?string} null if not a valid email.
  */
 ydn.string.normalizeEmail = function(email) {
   if (!goog.isString(email)) {
