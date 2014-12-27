@@ -526,3 +526,33 @@ SugarCrm.Details.prototype.availableModules;
 SugarCrm.Details.prototype.modulesInfo;
 
 
+
+/**
+ * Query result for GData contact to SugarCRM records.
+ * @interface
+ */
+SugarCrm.ContactSimilarityResult = function() {};
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.ContactSimilarityResult.prototype.module;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.ContactSimilarityResult.prototype.index;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.ContactSimilarityResult.prototype.key;
+
+
+/**
+ * @type {Array<SugarCrm.Record>}
+ */
+SugarCrm.ContactSimilarityResult.prototype.result;
