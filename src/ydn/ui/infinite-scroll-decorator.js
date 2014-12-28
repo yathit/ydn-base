@@ -22,7 +22,6 @@
 
 goog.provide('ydn.ui.InfiniteScrollDecorator');
 goog.provide('ydn.ui.InfiniteScrollItemProvider');
-goog.require('goog.async.Delay');
 
 
 
@@ -68,61 +67,19 @@ ydn.ui.InfiniteScrollDecorator = function(el, provider) {
   el.style.right = '0';
   el.addEventListener('scroll', this.onScroll_.bind(this), false);
   el.addEventListener('wheel', this.onScroll_.bind(this), false);
-
-  this.delay_remover_ = new goog.async.Delay(this.onRemove_, 500, this);
 };
 
 
 /**
  * @define {boolean} debug flag
  */
-ydn.ui.InfiniteScrollDecorator.DEBUG = true;
+ydn.ui.InfiniteScrollDecorator.DEBUG = false;
 
 
 /**
  * @define {number} reserve number of items.
  */
-ydn.ui.InfiniteScrollDecorator.RESERVE = 10;
-
-
-/**
- * Check necessary for removal.
- * @param {goog.events.Event} ev
- * @private
- */
-ydn.ui.InfiniteScrollDecorator.prototype.onRemove_ = function(ev) {
-
-  for (var i = 0; i < 5; i++) {
-    var third = this.scroll_el_.children[ydn.ui.InfiniteScrollDecorator.RESERVE];
-    if (this.scroll_el_.firstElementChild &&
-        !ydn.dom.isElementVisible(this.scroll_el_.firstElementChild) &&
-        third && !ydn.dom.isElementVisible(third)) {
-      if (ydn.ui.InfiniteScrollDecorator.DEBUG) {
-        window.console.log('removing first');
-      }
-      this.provider_.removeItem(true);
-    } else {
-      break;
-    }
-  }
-
-
-  for (var i = 0; i < 5; i++) {
-    var last_third = this.scroll_el_.children[this.scroll_el_.childElementCount -
-        ydn.ui.InfiniteScrollDecorator.RESERVE];
-    if (this.scroll_el_.lastElementChild &&
-        !ydn.dom.isElementVisible(this.scroll_el_.lastElementChild) &&
-        last_third && !ydn.dom.isElementVisible(last_third)) {
-      if (ydn.ui.InfiniteScrollDecorator.DEBUG) {
-        window.console.log('removing last');
-      }
-      this.provider_.removeItem(false);
-    } else {
-      break;
-    }
-  }
-
-};
+ydn.ui.InfiniteScrollDecorator.RESERVE = 5;
 
 
 /**
@@ -131,18 +88,20 @@ ydn.ui.InfiniteScrollDecorator.prototype.onRemove_ = function(ev) {
  */
 ydn.ui.InfiniteScrollDecorator.prototype.onScroll_ = function(ev) {
   if (ev.type == 'wheel') {
-    var we = /** @type {WheelEvent} */(ev);
-    this.appending_ = we.deltaY > 0;
+    if (this.prev_pos_ == ev.currentTarget.scrollTop) {
+      var we = /** @type {WheelEvent} */(ev);
+      this.appending_ = we.deltaY > 0;
+    }
   } else {
-    this.appending_ = this.prev_pos_ < ev.currentTarget.scrollTop;
-    this.prev_pos_ = ev.currentTarget.scrollTop;
+    if (this.prev_pos_ != ev.currentTarget.scrollTop) {
+      this.appending_ = this.prev_pos_ < ev.currentTarget.scrollTop;
+      this.prev_pos_ = ev.currentTarget.scrollTop;
+    }
   }
   if (ydn.ui.InfiniteScrollDecorator.DEBUG) {
     window.console.log(this.appending_ ? 'down' : 'up');
   }
   this.doAppend_();
-  // remove items only when not scrolling, so that it is not jerky.
-  // this.delay_remover_.start();
 };
 
 
@@ -169,11 +128,30 @@ ydn.ui.InfiniteScrollDecorator.prototype.stop_ = function() {
 ydn.ui.InfiniteScrollDecorator.prototype.doAppend_ = function() {
   if (!this.appending_df_ && this.appending_ !== null && this.shouldAppend_()) {
 
+    var should_remove = false;
+    if (this.appending_) {
+      var third = this.scroll_el_.children[ydn.ui.InfiniteScrollDecorator.RESERVE];
+      if (third && !ydn.dom.isElementVisible(third)) {
+        if (ydn.ui.InfiniteScrollDecorator.DEBUG) {
+          window.console.log('removing first');
+        }
+        should_remove = true;
+      }
+    } else {
+      var last_third = this.scroll_el_.children[this.scroll_el_.childElementCount -
+          ydn.ui.InfiniteScrollDecorator.RESERVE];
+      if (last_third && !ydn.dom.isElementVisible(last_third)) {
+        if (ydn.ui.InfiniteScrollDecorator.DEBUG) {
+          window.console.log('removing last');
+        }
+        should_remove = true;
+      }
+    }
     if (ydn.ui.InfiniteScrollDecorator.DEBUG) {
       window.console.log('appending');
     }
 
-    this.appending_df_ = this.provider_.appendItem(!this.appending_);
+    this.appending_df_ = this.provider_.appendItem(!this.appending_, should_remove);
     this.appending_df_.addCallbacks(function() {
       setTimeout(this.continue_.bind(this), 10);
     }, function() {
@@ -222,9 +200,10 @@ ydn.ui.InfiniteScrollItemProvider = function() {};
 /**
  * Append item to the scroll element.
  * @param {boolean} prepend prepend instead of append.
+ * @param {boolean} should_remove should remove item before appending.
  * @return {!goog.async.Deferred} resolve after adding item.
  */
-ydn.ui.InfiniteScrollItemProvider.prototype.appendItem = function(prepend) {};
+ydn.ui.InfiniteScrollItemProvider.prototype.appendItem = function(prepend, should_remove) {};
 
 
 /**
