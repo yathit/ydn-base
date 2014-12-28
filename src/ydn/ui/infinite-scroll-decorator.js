@@ -205,9 +205,3 @@ ydn.ui.InfiniteScrollItemProvider = function() {};
  */
 ydn.ui.InfiniteScrollItemProvider.prototype.appendItem = function(prepend, should_remove) {};
 
-
-/**
- * Remove item from the scroll element.
- * @param {boolean} first first item should be removed
- */
-ydn.ui.InfiniteScrollItemProvider.prototype.removeItem = function(first) {};
