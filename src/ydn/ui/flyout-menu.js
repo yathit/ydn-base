@@ -68,6 +68,13 @@ ydn.ui.FlyoutMenu.CSS_CLASS_MENU = 'flyout-menu';
 
 
 /**
+ * @const
+ * @type {string}
+ */
+ydn.ui.FlyoutMenu.CSS_CLASS_LEFT = 'left-menu';
+
+
+/**
  * @param {Element} el
  */
 ydn.ui.FlyoutMenu.prototype.render = function(el) {
@@ -81,6 +88,7 @@ ydn.ui.FlyoutMenu.prototype.render = function(el) {
   button.appendChild(svg);
   var menu = ydn.ui.FlyoutMenu.renderMenu(this.items_option_);
   menu.classList.add(ydn.ui.FlyoutMenu.CSS_CLASS_MENU);
+  menu.classList.add(ydn.ui.FlyoutMenu.CSS_CLASS_LEFT);
   this.el_.appendChild(button);
   this.el_.appendChild(menu);
   el.appendChild(this.el_);
@@ -133,6 +141,7 @@ ydn.ui.FlyoutMenu.prototype.setItems = function(item) {
     this.el_.removeChild(menu);
     menu = ydn.ui.FlyoutMenu.renderMenu(this.items_option_);
     menu.classList.add(ydn.ui.FlyoutMenu.CSS_CLASS_MENU);
+    menu.classList.add(ydn.ui.FlyoutMenu.CSS_CLASS_LEFT);
     this.el_.appendChild(menu);
   }
 };
@@ -148,10 +157,14 @@ ydn.ui.FlyoutMenu.prototype.getElement = function() {
 
 /**
  * @typedef {{
+ *   iconName: (string|undefined),
  *   className: (string|undefined),
- *   title: (string|undefined)
+ *   title: (string|undefined),
+ *   isRightMenu: (boolean|undefined)
  * }}
- * className: css class name. 'more-vert', 'more-horiz' or 'menu'
+ * iconName: svg icon name 'more-vert', 'more-horiz' or 'menu'
+ * className: css class name.
+ * isRightMenu: menu render to right side. By default, render to left.
  * title: div title for the menu item.
  */
 ydn.ui.FlyoutMenu.Option;
@@ -243,20 +256,39 @@ ydn.ui.FlyoutMenu.renderMenu = function(items_option) {
 
 
 /**
+ * <pre>
+ *   var el = document.querySelector('#menu');
+ *   var menu = ydn.ui.FlyoutMenu.decoratePopupMenu(el, items);
+ *   el.onclick = function(e) {
+ *     var name = ydn.ui.FlyoutMenu.handleClick(e);
+ *     if (name) {
+ *       // menu item with the name click.
+ *     }
+ *   }
+ * </pre>
  * @param {Element} el
- * @param {Array.<?ydn.ui.FlyoutMenu.ItemOption>} items_option
+ * @param {Array<?ydn.ui.FlyoutMenu.ItemOption>} items_option
  * @param {ydn.ui.FlyoutMenu.Option=} opt_option
  */
 ydn.ui.FlyoutMenu.decoratePopupMenu = function(el, items_option, opt_option) {
   // console.log(options);
   var icon_name = 'more-vert';
+  if (opt_option) {
+    if (opt_option.iconName) {
+      icon_name = opt_option.iconName;
+    }
+  }
   var button = document.createElement('span');
   button.className = 'flyout-button';
-  var svg = ydn.crm.ui.createSvgIcon('more-vert');
+  var svg = ydn.crm.ui.createSvgIcon(icon_name);
   var menu = ydn.ui.FlyoutMenu.renderMenu(items_option);
-  menu.classList.add('flyout-menu');
+  menu.classList.add(ydn.ui.FlyoutMenu.CSS_CLASS_MENU);
+  if (!opt_option || !opt_option.isRightMenu) {
+    menu.classList.add(ydn.ui.FlyoutMenu.CSS_CLASS_LEFT);
+  }
   button.appendChild(svg);
   button.appendChild(menu);
+  el.classList.add(ydn.ui.FlyoutMenu.CSS_CLASS);
   el.appendChild(button);
 };
 
