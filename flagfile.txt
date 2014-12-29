@@ -28,5 +28,6 @@
 --jscomp_error=undefinedVars
 --jscomp_error=unknownDefines
 --jscomp_warning=uselessCode
+--jscomp_warning=useOfGoogBase
 --jscomp_error=visibility
 --warning_level=VERBOSE
