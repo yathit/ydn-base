@@ -313,6 +313,7 @@ ydn.structs.Buffer.Iterator = function(opt_key_range, opt_reverse, opt_unique) {
   /**
    * @final
    * @private
+   * @type {?ydn.db.KeyRange}
    */
   this.key_range_ = opt_key_range || null;
   /**
