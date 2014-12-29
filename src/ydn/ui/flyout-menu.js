@@ -101,6 +101,7 @@ ydn.ui.FlyoutMenu.prototype.render = function(el) {
  * @return {?string} if menu item is click, it will be return item name.
  */
 ydn.ui.FlyoutMenu.handleClick = function(e) {
+  // todo: e.target or e.target.parentElement instead.
   var item = goog.dom.getAncestorByClass(/** @type {Node} */ (e.target),
       'goog-menuitem');
   if (item) {
