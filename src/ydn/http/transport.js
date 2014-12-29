@@ -26,7 +26,10 @@ ydn.http.CallbackResult = function (content_type, text, url, status, response,
   this.status = status;
   /** @final */
   this.contentType = content_type;
-  /** @final */
+  /**
+   * @final
+   * @type {string}
+   */
   this.responseText = text || '';
   /** @final */
   this.url = url;

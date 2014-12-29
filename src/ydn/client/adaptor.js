@@ -35,6 +35,7 @@ ydn.client.AdaptorClient = function(client, adaptor, opt_scope) {
   /**
    * @protected
    * @final
+   * @type {*}
    */
   this.scope = opt_scope;
 };
