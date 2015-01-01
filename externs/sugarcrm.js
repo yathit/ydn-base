@@ -185,7 +185,7 @@ SugarCrm.Record.prototype.date_modified;
 
 
 /**
- * This field include in v10 REST result, but not in v4.
+ * This field include in v10 REST result.
  * @type {string} module name.
  */
 SugarCrm.Record.prototype._module;
