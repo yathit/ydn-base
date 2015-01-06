@@ -96,18 +96,51 @@ ydn.ui.FlyoutMenu.prototype.render = function(el) {
 
 
 /**
+ * @param {Element} el
+ * @param {string} names
+ * @return {string}
+ * @private
+ */
+ydn.ui.FlyoutMenu.listItemName_ = function(el, names) {
+  if (el && el instanceof Element) {
+    if (el.classList.contains('goog-menuitem')) {
+      var name = el.getAttribute('name');
+      if (!names) {
+        names = name;
+      } else {
+        names = name + ',' + names;
+      }
+      return ydn.ui.FlyoutMenu.listItemName_(el.parentElement, names);
+    } else if (el.classList.contains('goog-menu')) {
+      return ydn.ui.FlyoutMenu.listItemName_(el.parentElement, names);
+    }
+  }
+  return names;
+};
+
+
+/**
  * Handle click event to root menu.
  * @param {goog.events.BrowserEvent|Event} e
- * @return {?string} if menu item is click, it will be return item name.
+ * @return {?string} if menu item is click, it will be return item name. For
+ * hierichal menu, item name are separated by comma from root t leave, i.e.,
+ * 'sync,contact'.
  */
 ydn.ui.FlyoutMenu.handleClick = function(e) {
   // todo: e.target or e.target.parentElement instead.
-  var item = goog.dom.getAncestorByClass(/** @type {Node} */ (e.target),
-      'goog-menuitem');
+  var item = null;
+
+  if (e.target instanceof Element) {
+    if (e.target.classList.contains('goog-menuitem')) {
+      item = e.target;
+    } else if (e.target.parentElement &&
+        e.target.parentElement.classList.contains('goog-menuitem')) {
+      item = e.target.parentElement;
+    }
+  }
   if (item) {
     e.preventDefault();
     e.stopPropagation();
-    var name = item.getAttribute('name');
     var is_disable = item.classList.contains('goog-menuitem-disabled');
     var el = goog.dom.getAncestorByClass(item, ydn.ui.FlyoutMenu.CSS_CLASS_MENU);
     goog.style.setElementShown(el, false);
@@ -115,7 +148,7 @@ ydn.ui.FlyoutMenu.handleClick = function(e) {
       // menu show/hide status is determine by hover state
       goog.style.setElementShown(el, true);
     }, 1000);
-    return is_disable ? null : name;
+    return is_disable ? null : ydn.ui.FlyoutMenu.listItemName_(item, '');
   }
   return null;
 };
