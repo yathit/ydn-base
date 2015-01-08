@@ -73,3 +73,27 @@ ydn.time.DAY = 24 * ydn.time.HOUR;
 ydn.time.WEEK = 7 * ydn.time.DAY;
 
 
+/**
+ * Create a next nearest time slot, to make go to date.
+ * For example, if current time is '11:09AM', this will return a time of
+ * '12:00AM'. If current time is '03:56PM', this will return a time of
+ * '05:00PM'.
+ * @return {Date}
+ */
+ydn.time.getNextNominal = function() {
+  var date = new Date();
+  var y = date.getYear();
+  var mo = date.getMonth();
+  var d = date.getDate();
+  var h = date.getHours();
+  var m = date.getMinutes();
+  if (m > 30) {
+    h += 1;
+  } else {
+    h += 2;
+  }
+  // Note: when h becomes larger then 24, Date will automatically increment.
+  return new Date(y, mo, d, h);
+};
+
+
