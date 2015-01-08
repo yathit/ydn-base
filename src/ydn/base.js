@@ -82,7 +82,7 @@ ydn.time.WEEK = 7 * ydn.time.DAY;
  */
 ydn.time.getNextNominal = function() {
   var date = new Date();
-  var y = date.getYear();
+  var y = date.getFullYear();
   var mo = date.getMonth();
   var d = date.getDate();
   var h = date.getHours();
