@@ -199,6 +199,63 @@ SugarCrm.Record.prototype.deleted;
 
 
 /**
+ * Record in login respond.
+ * @constructor
+ * @extends {SugarCrm.Record}
+ */
+SugarCrm.LoginRecord = function() {};
+
+
+/**
+ * @type {string} "-99"
+ */
+SugarCrm.LoginRecord.prototype.user_currency_id;
+
+
+/**
+ * @type {string} "US Dollars"
+ */
+SugarCrm.LoginRecord.prototype.user_currency_name;
+
+
+/**
+ * @type {string} "."
+ */
+SugarCrm.LoginRecord.prototype.user_decimal_seperator;
+
+
+/**
+ * @type {string} "m/d/Y"
+ */
+SugarCrm.LoginRecord.prototype.user_default_dateformat;
+
+
+/**
+ * @type {?string}
+ */
+SugarCrm.LoginRecord.prototype.user_default_team_id;
+
+
+/**
+ * @type {string} "h:ia"
+ */
+SugarCrm.LoginRecord.prototype.user_default_timeformat;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.LoginRecord.prototype.user_id;
+
+
+/**
+ * @type {boolean}
+ */
+SugarCrm.LoginRecord.prototype.user_is_admin;
+
+
+
+/**
  * Represents SugarCRM ModuleField.
  * @constructor
  */
@@ -512,6 +569,12 @@ SugarCrm.Details.prototype.about;
  * @type {SugarCrm.ServerInfo}
  */
 SugarCrm.Details.prototype.serverInfo;
+
+
+/**
+ * @type {SugarCrm.LoginRecord}
+ */
+SugarCrm.Details.prototype.loginInfo;
 
 
 /**
