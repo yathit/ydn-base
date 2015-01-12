@@ -74,7 +74,7 @@ ydn.time.WEEK = 7 * ydn.time.DAY;
 
 
 /**
- * Create a next nearest time slot, to make go to date.
+ * Create a next nearest go-to datetime.
  * For example, if current time is '11:09AM', this will return a time of
  * '12:00AM'. If current time is '03:56PM', this will return a time of
  * '05:00PM'.
@@ -94,6 +94,20 @@ ydn.time.getNextNominal = function() {
   }
   // Note: when h becomes larger then 24, Date will automatically increment.
   return new Date(y, mo, d, h);
+};
+
+
+/**
+ * Get date of coming Sunday midnight.
+ * @param {Date=} opt_d reference date. Default to now.
+ * @return {Date}
+ */
+ydn.time.getWeekend = function(opt_d) {
+  var d = opt_d || new Date();
+  // number of days until next Sunday.
+  var forward_days = (7 - d.getDay()) % 7;
+  var day_forwarded = forward_days + d.getDate();
+  return new Date(d.getFullYear(), d.getMonth(), day_forwarded);
 };
 
 
