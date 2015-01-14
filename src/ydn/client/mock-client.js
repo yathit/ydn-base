@@ -1,5 +1,5 @@
 /**
- * @fileoverview Mock server for REST resource in JSON format.
+ * @fileoverview Basic mock client.
  */
 
 
@@ -12,6 +12,7 @@ goog.require('ydn.client.SimpleHttpRequest');
 
 
 /**
+ * Basic mock client.
  * @param {number=} opt_delay server respond time, default to 0 for
  * synchronous respond.
  * @constructor
@@ -29,6 +30,30 @@ ydn.client.MockClient = function(opt_delay) {
     'DELETE': 0,
     'HEAD': 0
   };
+
+
+  /**
+   * @type {Object}
+   */
+  this.body = {};
+
+
+  /**
+   * @type {Object}
+   */
+  this.headers = {'content-type': 'applicatioin/json'};
+
+
+  /**
+   * @type {number}
+   */
+  this.status = 200;
+
+
+  /**
+   * @type {string}
+   */
+  this.statusText = 'OK';
 };
 
 
@@ -64,30 +89,6 @@ ydn.client.MockClient.prototype.delay = 0;
 
 
 /**
- * @type {number}
- */
-ydn.client.MockClient.prototype.status = 200;
-
-
-/**
- * @type {string}
- */
-ydn.client.MockClient.prototype.status_text = 'OK';
-
-
-/**
- * @type {Object}
- */
-ydn.client.MockClient.prototype.body = {};
-
-
-/**
- * @type {Object}
- */
-ydn.client.MockClient.prototype.headers = {'content-type': 'applicatioin/json'};
-
-
-/**
  * Get HTTP query count.
  * @param {string=} opt_mth HTTP method. By default return all queries count.
  * @return {number} number of query.
@@ -107,7 +108,7 @@ ydn.client.MockClient.prototype.getHitCount = function(opt_mth) {
 
 /**
  * @type {ydn.client.HttpRequestData}
- * @private
+ * @protected
  */
 ydn.client.MockClient.prototype.response = null;
 
@@ -118,7 +119,6 @@ ydn.client.MockClient.prototype.response = null;
 ydn.client.MockClient.prototype.request = function(req) {
 
   var method = req.method ? req.method.toUpperCase() : 'GET';
-  var content_type = 'application/json';
 
   var res = null;
 
@@ -126,10 +126,9 @@ ydn.client.MockClient.prototype.request = function(req) {
   this.hit_counts[method]++;
 
   var response = new ydn.client.HttpRespondData(this.status, this.body,
-      this.headers, this.status_text);
+      this.headers, this.statusText);
 
-  goog.log.fine(this.logger, 'Responding ' + response.status + ' to ' +
-      method + ' ' + uri);
+  goog.log.fine(this.logger, 'Making request for ' + method + ' ' + uri);
 
   return new ydn.client.MockRequest(req, response, this.delay);
 };
