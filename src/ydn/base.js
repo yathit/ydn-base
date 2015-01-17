@@ -107,7 +107,7 @@ ydn.time.getWeekend = function(opt_d) {
   // number of days until next Sunday.
   var forward_days = (7 - d.getDay()) % 7;
   var day_forwarded = forward_days + d.getDate();
-  return new Date(d.getFullYear(), d.getMonth(), day_forwarded);
+  return new Date(d.getFullYear(), d.getMonth(), day_forwarded, 23, 59, 59, 999);
 };
 
 
