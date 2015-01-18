@@ -299,7 +299,7 @@ SugarCrm.ModuleField.prototype.name;
 
 
 /**
- * @type {!Object.<SugarCrm.NameValue>}
+ * @type {Object.<SugarCrm.NameValue>|undefined}
  */
 SugarCrm.ModuleField.prototype.options;
 
