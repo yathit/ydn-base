@@ -28,47 +28,47 @@
     <url>
         <loc>/api/ydn/crm/sugarcrm/model/field.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.model.Field</title>
+        <title>Class ydn.crm.su.model.Field</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/model/group.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.model.Group</title>
+        <title>Class ydn.crm.su.model.Group</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/model/record.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.model.Record</title>
+        <title>Class ydn.crm.su.model.Record</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/model/sugarcrm.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.model.SugarCrm</title>
+        <title>Class ydn.crm.su.model.SugarCrm</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/record.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.Record</title>
+        <title>Class ydn.crm.su.Record</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/schema.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.Schema</title>
+        <title>Class ydn.crm.su.Schema</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/ui/events.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.ui.events</title>
+        <title>Class ydn.crm.su.ui.events</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/ui/record/record.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.ui.record.Record</title>
+        <title>Class ydn.crm.su.ui.record.Record</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/ui/simple-sugar-panel.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.ui.SimpleSugarPanel</title>
+        <title>Class ydn.crm.su.ui.SimpleSugarPanel</title>
     </url>
     <url>
         <loc>/api/ydn/db/events.html</loc>
@@ -1040,47 +1040,47 @@
     <url>
         <loc>/api/ydn/crm/sugarcrm/model/field.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.model.Field</title>
+        <title>Class ydn.crm.su.model.Field</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/model/group.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.model.Group</title>
+        <title>Class ydn.crm.su.model.Group</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/model/record.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.model.Record</title>
+        <title>Class ydn.crm.su.model.Record</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/model/sugarcrm.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.model.SugarCrm</title>
+        <title>Class ydn.crm.su.model.SugarCrm</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/record.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.Record</title>
+        <title>Class ydn.crm.su.Record</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/schema.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.Schema</title>
+        <title>Class ydn.crm.su.Schema</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/ui/events.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.ui.events</title>
+        <title>Class ydn.crm.su.ui.events</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/ui/record/record.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.ui.record.Record</title>
+        <title>Class ydn.crm.su.ui.record.Record</title>
     </url>
     <url>
         <loc>/api/ydn/crm/sugarcrm/ui/simple-sugar-panel.html</loc>
         <lastmod>2014-09-08T19:41:42+08:00</lastmod>
-        <title>Class ydn.crm.sugarcrm.ui.SimpleSugarPanel</title>
+        <title>Class ydn.crm.su.ui.SimpleSugarPanel</title>
     </url>
     <url>
         <loc>/api/ydn/db/events.html</loc>
