@@ -24,6 +24,7 @@ goog.provide('ydn.ui.FlyoutMenu');
 goog.require('goog.asserts');
 goog.require('goog.dom');
 goog.require('goog.style');
+goog.require('ydn.crm.ui');
 
 
 
