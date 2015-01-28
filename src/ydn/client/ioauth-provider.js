@@ -4,8 +4,8 @@
  */
 
 
+goog.provide('ydn.client.IOAuthProvider');
 goog.provide('ydn.client.OAuthClient');
-goog.provide('ydn.client.OAuthProvider');
 goog.require('goog.async.Deferred');
 goog.require('ydn.client.Client');
 goog.require('ydn.client.SimpleHttpRequest');
@@ -15,19 +15,19 @@ goog.require('ydn.client.SimpleHttpRequest');
 /**
  * @interface
  */
-ydn.client.OAuthProvider = function() {};
+ydn.client.IOAuthProvider = function() {};
 
 
 /**
  * @return {goog.async.Deferred}
  */
-ydn.client.OAuthProvider.prototype.getOAuthToken = goog.abstractMethod;
+ydn.client.IOAuthProvider.prototype.getOAuthToken = goog.abstractMethod;
 
 
 
 /**
  * OAuth client.
- * @param {ydn.client.OAuthProvider} provider
+ * @param {ydn.client.IOAuthProvider} provider
  * @param {goog.net.XhrManager} xm xhr manager.
  * @param {boolean=} opt_use_header user authroization header, otherwise use
  * token in parameter.
@@ -38,7 +38,7 @@ ydn.client.OAuthProvider.prototype.getOAuthToken = goog.abstractMethod;
 ydn.client.OAuthClient = function(provider, xm, opt_use_header) {
   /**
    * @protected
-   * @type {ydn.client.OAuthProvider}
+   * @type {ydn.client.IOAuthProvider}
    */
   this.provider = provider;
   /**

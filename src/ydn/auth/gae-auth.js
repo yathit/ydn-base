@@ -25,7 +25,7 @@ goog.require('goog.async.Delay');
 goog.require('mbi.web.base');
 goog.require('ydn.client.AdaptorClient');
 goog.require('ydn.client.FilteredClient');
-goog.require('ydn.client.OAuthProvider');
+goog.require('ydn.client.IOAuthProvider');
 
 
 
@@ -33,7 +33,7 @@ goog.require('ydn.client.OAuthProvider');
  * Create Google Appengine authentication app.
  * @constructor
  * @struct
- * @implements {ydn.client.OAuthProvider}
+ * @implements {ydn.client.IOAuthProvider}
  */
 ydn.auth.GaeAuth = function() {
 
