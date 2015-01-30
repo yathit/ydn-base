@@ -241,7 +241,7 @@ ydn.debug.DbLogger.prototype.addLogRecord = function(logRecord) {
     return;
   }
   var record = {
-    'exception': logRecord.getExceptionText(),
+    // 'exception': logRecord.getExceptionText(),
     'level': level.value,
     'logger': logRecord.getLoggerName(),
     'name': level.name,
