@@ -99,6 +99,14 @@ ydn.ui.MessageDialog.prototype.dispose = function() {
 
 
 /**
+ * @return {Element}
+ */
+ydn.ui.MessageDialog.prototype.getContentElement = function() {
+  return this.dialog_.querySelector('.content');
+};
+
+
+/**
  * Show model message dialog.
  * @param {string} title
  * @param {string|Element} message message or message content.
