@@ -7,7 +7,8 @@
 
 goog.provide('ydn.client.SimpleHttpRequest');
 goog.require('goog.Uri');
-goog.require('ydn.client');
+goog.require('ydn.client.Client');
+goog.require('ydn.client.base');
 
 
 
@@ -23,7 +24,7 @@ goog.require('ydn.client');
  */
 ydn.client.SimpleHttpRequest = function(args, opt_xm, opt_retry, opt_credentials) {
   this.xm_ = goog.isDef(opt_xm) ? // use default only if not null.
-      opt_xm : ydn.client.getXhrManager();
+      opt_xm : ydn.client.base.getXhrManager();
   /**
    * @final
    * @private

@@ -4,8 +4,9 @@
 
 
 goog.provide('ydn.client.SimpleClient');
-goog.require('ydn.client');
+goog.require('ydn.client.Client');
 goog.require('ydn.client.SimpleHttpRequest');
+goog.require('ydn.client.base');
 
 
 
@@ -20,7 +21,7 @@ goog.require('ydn.client.SimpleHttpRequest');
  */
 ydn.client.SimpleClient = function(opt_xm, opt_headers, opt_proxy) {
   this.xm_ = goog.isDef(opt_xm) ? // use default only if not null.
-      opt_xm : ydn.client.getXhrManager();
+      opt_xm : ydn.client.base.getXhrManager();
   /**
    * @type {Object|undefined}
    * @private

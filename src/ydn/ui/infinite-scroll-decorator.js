@@ -151,7 +151,8 @@ ydn.ui.InfiniteScrollDecorator.prototype.doAppend_ = function() {
       window.console.log('appending');
     }
 
-    this.appending_df_ = this.provider_.appendItem(!this.appending_, should_remove);
+    this.appending_df_ = this.provider_.showMoreItemsOnScroll(!this.appending_,
+        should_remove);
     this.appending_df_.addCallbacks(function() {
       setTimeout(this.continue_.bind(this), 10);
     }, function() {
@@ -198,10 +199,11 @@ ydn.ui.InfiniteScrollItemProvider = function() {};
 
 
 /**
- * Append item to the scroll element.
- * @param {boolean} prepend prepend instead of append.
+ * Append items to the scroll element. Number of items can be one or more.
+ * @param {boolean} prepend if `true`, prepend, otherwise `append` items to
+ * the list.
  * @param {boolean} should_remove should remove item before appending.
  * @return {!goog.async.Deferred} resolve after adding item.
  */
-ydn.ui.InfiniteScrollItemProvider.prototype.appendItem = function(prepend, should_remove) {};
+ydn.ui.InfiniteScrollItemProvider.prototype.showMoreItemsOnScroll = function(prepend, should_remove) {};
 
