@@ -154,6 +154,6 @@ ydn.ui.ReportableLink.prototype.setError = function(opt_payload, opt_msg) {
   var msg = opt_msg ? ' for ' + opt_msg : '';
   a.setAttribute('title', 'Click to report error' + msg);
   if (opt_payload) {
-    ydn.msg.getChannel().send(ydn.crm.Ch.Req.LOG_BUG, opt_payload);
+    ydn.msg.getChannel().send(ydn.crm.ch.Req.LOG_BUG, opt_payload);
   }
 };

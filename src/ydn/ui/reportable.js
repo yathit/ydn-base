@@ -175,6 +175,6 @@ ydn.ui.Reportable.prototype.setError = function(msg, opt_payload) {
   msg = msg ? ' for ' + msg : '';
   a.setAttribute('title', 'Click to report error' + msg);
   if (opt_payload) {
-    ydn.msg.getChannel().send(ydn.crm.Ch.Req.LOG, opt_payload);
+    ydn.msg.getChannel().send(ydn.crm.ch.Req.LOG, opt_payload);
   }
 };
