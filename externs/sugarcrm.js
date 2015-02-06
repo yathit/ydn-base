@@ -527,6 +527,12 @@ SugarCrm.About.prototype.hostPermission;
 
 
 /**
+ * @type {(string|undefined)} authentication provider.
+ */
+SugarCrm.About.prototype.provider;
+
+
+/**
  * @type {(boolean|undefined)}
  */
 SugarCrm.About.prototype.isLogin;
@@ -544,6 +550,12 @@ CrmApp.Credential = function() {};
  * @type {string}
  */
 CrmApp.Credential.prototype.password;
+
+
+/**
+ * @type {string|undefined}
+ */
+CrmApp.Credential.prototype.provider;
 
 
 /**
