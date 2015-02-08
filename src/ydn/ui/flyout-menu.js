@@ -14,7 +14,8 @@
 
 
 /**
- * @fileoverview CSS base light weight popup menu.
+ * @fileoverview CSS base Light weight popup menu that flyout on hovering over
+ * the menu button.
  *
  * @author kyawtun@yathit.com (Kyaw Tun)
  */
@@ -29,7 +30,7 @@ goog.require('ydn.crm.ui');
 
 
 /**
- * Popup menu
+ * Light weight popup menu that flyout on hovering over the menu button.
  * @param {ydn.ui.FlyoutMenu.Option=} opt_option
  * @param {Array.<?ydn.ui.FlyoutMenu.ItemOption>=} opt_menu_items
  * @constructor
