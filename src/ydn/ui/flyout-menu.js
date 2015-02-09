@@ -83,7 +83,7 @@ ydn.ui.FlyoutMenu.prototype.render = function(el) {
   goog.asserts.assert(!this.el_, 'Already rendered.');
   this.el_ = document.createElement('div');
   this.el_.className = ydn.ui.FlyoutMenu.CSS_CLASS;
-  var icon_name = this.option_.className || 'more-vert';
+  var icon_name = this.option_.iconName || 'more-vert';
   var svg = ydn.crm.ui.createSvgIcon(icon_name);
   var button = document.createElement('div');
   button.className = 'svg-button';
