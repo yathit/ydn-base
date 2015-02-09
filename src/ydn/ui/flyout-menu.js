@@ -125,7 +125,7 @@ ydn.ui.FlyoutMenu.listItemName_ = function(el, names) {
  * Handle click event to root menu.
  * @param {goog.events.BrowserEvent|Event} e
  * @return {?string} if menu item is click, it will be return item name. For
- * hierichal menu, item name are separated by comma from root t leave, i.e.,
+ * hierarchical menu, item name are separated by comma from root to leave, i.e.,
  * 'sync,contact'.
  */
 ydn.ui.FlyoutMenu.handleClick = function(e) {
