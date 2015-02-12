@@ -33,7 +33,7 @@ ydn.debug.logger_div = null;
 
 
 /**
- * @type {goog.debug.Logger} logger.
+ * @type {goog.log.Logger} logger.
  */
 ydn.debug.logger = goog.log.getLogger('ydn.debug');
 
@@ -89,7 +89,18 @@ ydn.debug.log = function(scope, level, ele) {
  * @param {boolean} val
  */
 ydn.debug.captureOnConsole = function(val) {
-  ydn.debug.logger_console.setCapturing(val);
+  if (!ydn.debug.logger_console) {
+    if (val) {
+      ydn.debug.logger_console = new goog.debug.Console();
+      ydn.debug.logger_console.setCapturing(true);
+      var root_logger = goog.debug.LogManager.getRoot();
+      if (root_logger) {
+        root_logger.setLevel(goog.debug.Logger.Level.WARNING);
+      }
+    }
+  } else {
+    ydn.debug.logger_console.setCapturing(val);
+  }
 };
 
 
