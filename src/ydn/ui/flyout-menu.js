@@ -308,7 +308,7 @@ ydn.ui.FlyoutMenu.renderMenu = function(items_option) {
  */
 ydn.ui.FlyoutMenu.decoratePopupMenu = function(el, items_option, opt_option) {
   // console.log(options);
-  var icon_name = 'more-vert';
+  var icon_name = 'menu';
   if (opt_option) {
     if (opt_option.iconName) {
       icon_name = opt_option.iconName;
