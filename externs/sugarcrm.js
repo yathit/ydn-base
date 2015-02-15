@@ -631,3 +631,52 @@ SugarCrm.ContactSimilarityResult.prototype.key;
  * @type {Array<SugarCrm.Record>}
  */
 SugarCrm.ContactSimilarityResult.prototype.result;
+
+
+
+/**
+ * Module name and id pair in relationship result.
+ * @constructor
+ */
+SugarCrm.ModuleNameIdPair = function() {};
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.ModuleNameIdPair.prototype.module_name;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.ModuleNameIdPair.prototype.id;
+
+
+
+/**
+ * Record format for relationships cache.
+ * @constructor
+ */
+SugarCrm.Relationships = function() {};
+
+
+/**
+ * @type {number}
+ */
+SugarCrm.Relationships.prototype.modified;
+
+
+/**
+ * @type {SugarCrm.ModuleNameIdPair}
+ */
+SugarCrm.Relationships.prototype.to;
+
+
+/**
+ * @type {SugarCrm.ModuleNameIdPair}
+ */
+SugarCrm.Relationships.prototype.from;
+
+
+
