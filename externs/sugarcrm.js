@@ -199,6 +199,21 @@ SugarCrm.Record.prototype.deleted;
 
 
 /**
+ * Result record from query with scoring.
+ * @constructor
+ * @extends {SugarCrm.Record}
+ */
+SugarCrm.ScoredRecord = function() {};
+
+
+/**
+ * @type {number}
+ */
+SugarCrm.ScoredRecord.prototype._score;
+
+
+
+/**
  * Record in login respond.
  * @constructor
  * @extends {SugarCrm.Record}
