@@ -33,9 +33,11 @@ ydn.testing.mockExtension.Storage.prototype.get = function(name, cb) {
 };
 
 
-ydn.testing.mockExtension.Storage.prototype.set = function(name, obj, cb) {
+ydn.testing.mockExtension.Storage.prototype.set = function(obj, cb) {
   if (obj) {
-    this.data_[name] = JSON.parse(JSON.stringify(obj));
+    for (var name in obj) {
+      this.data_[name] = JSON.parse(JSON.stringify(obj[name]));
+    }
   } else {
     delete this.data_[name];
   }
