@@ -105,7 +105,7 @@ if (!chrome.runtime.getManifest) {
   };
 }
 
-if (!window['CRMinInbox']) {
-  window['CRMinInbox'] = {'Version': {'release': '1.4.2'},'sugarcrm': {'Version': {'release': '0.18.3'}}};
+if (!window['YathitCrm']) {
+  window['YathitCrm'] = {'Version': {'release': '1.4.2'},'sugarcrm': {'Version': {'release': '0.18.3'}}};
 }
 
