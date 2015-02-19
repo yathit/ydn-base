@@ -47,7 +47,6 @@ ydn.ui.MessageDialog = function(title, message, buttons) {
   for (var i = 0; i < buttons.length; i++) {
     var btn_name = buttons[i];
     var button = document.createElement('button');
-    button.className = btn_name.toLowerCase();
     if (btn_name == ydn.ui.MessageDialog.Button.OK) {
       button.classList.add('default');
     }
@@ -96,6 +95,7 @@ ydn.ui.MessageDialog.prototype.dispose = function() {
     buttons[i].onclick = null;
   }
   this.dialog.onclose = null;
+  this.dialog.oncancel = null;
   document.body.removeChild(this.dialog);
   this.dialog = null;
 };
@@ -124,6 +124,9 @@ ydn.ui.MessageDialog.showModal = function(title, message, opt_btn) {
   var df = new goog.async.Deferred();
   var bar = dialog.dialog.querySelector('.button-bar');
   var default_btn = bar.querySelector('button.default');
+  dialog.dialog.oncancel = function(e) {
+    dialog.dialog.close(e.target.value);
+  };
   default_btn.onclick = function(e) {
     dialog.dialog.close(e.target.value);
   };
