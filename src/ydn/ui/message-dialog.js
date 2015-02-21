@@ -4,6 +4,7 @@
 
 
 goog.provide('ydn.ui.MessageDialog');
+goog.require('goog.events.EventHandler');
 
 
 
@@ -19,6 +20,11 @@ goog.provide('ydn.ui.MessageDialog');
  * @struct
  */
 ydn.ui.MessageDialog = function(title, message, buttons) {
+  /**
+   * @protected
+   * @type {goog.events.EventHandler}
+   */
+  this.handler = new goog.events.EventHandler(this);
   var dialog = document.createElement('dialog');
   /**
    * @type {HTMLDialogElement}
@@ -52,11 +58,11 @@ ydn.ui.MessageDialog = function(title, message, buttons) {
     }
     button.value = btn_name;
     button.textContent = btn_name;
-    button.onclick = function(e) {
-      dialog.close(e.target.value);
-    };
+    this.handler.listen(button, 'click', this.onButtonClick);
     button_bar.appendChild(button);
   }
+
+  this.handler.listen(this.dialog, 'cancel', this.onButtonClick);
 
   this.dialog.appendChild(header);
   this.dialog.appendChild(content);
@@ -83,6 +89,15 @@ ydn.ui.MessageDialog.CSS_CLASS_NAME = 'ydn-crm';
 
 
 /**
+ * @protected
+ * @param {goog.events.BrowserEvent} e
+ */
+ydn.ui.MessageDialog.prototype.onButtonClick = function(e) {
+  this.dialog.close(e.target.value);
+};
+
+
+/**
  * Clean up reference.
  * @protected
  */
@@ -90,12 +105,9 @@ ydn.ui.MessageDialog.prototype.dispose = function() {
   if (!this.dialog) {
     return;
   }
-  var buttons = this.dialog.querySelector('.button-bar').querySelectorAll('button');
-  for (var i = buttons.length - 1; i >= 0; i--) {
-    buttons[i].onclick = null;
-  }
+  this.handler.dispose();
+  this.handler = null;
   this.dialog.onclose = null;
-  this.dialog.oncancel = null;
   document.body.removeChild(this.dialog);
   this.dialog = null;
 };
@@ -122,14 +134,6 @@ ydn.ui.MessageDialog.showModal = function(title, message, opt_btn) {
   var buttons = opt_btn || [ydn.ui.MessageDialog.Button.OK];
   var dialog = new ydn.ui.MessageDialog(title, message, buttons);
   var df = new goog.async.Deferred();
-  var bar = dialog.dialog.querySelector('.button-bar');
-  var default_btn = bar.querySelector('button.default');
-  dialog.dialog.oncancel = function(e) {
-    dialog.dialog.close(e.target.value);
-  };
-  default_btn.onclick = function(e) {
-    dialog.dialog.close(e.target.value);
-  };
   dialog.dialog.onclose = function(event) {
     df.callback(dialog.dialog.returnValue);
     dialog.dispose();
