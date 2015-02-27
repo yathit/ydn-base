@@ -578,3 +578,4 @@ ydn.string.diff.diff3_merge = function(a, o, b, opt_excludeFalseConflicts) {
   flushOk();
   return result;
 };
+

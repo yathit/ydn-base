@@ -154,6 +154,32 @@ SugarCrm.EmailField.prototype.reply_to_address;
 
 
 /**
+ * CRUD Request result.
+ * @interface
+ */
+SugarCrm.CrudResult = function() {};
+
+
+/**
+ * @type {number}
+ */
+SugarCrm.CrudResult.prototype.created;
+
+
+/**
+ * @type {number}
+ */
+SugarCrm.CrudResult.prototype.failed;
+
+
+/**
+ * @type {number}
+ */
+SugarCrm.CrudResult.prototype.deleted;
+
+
+
+/**
  * Represents SugarCRM entry.
  * @constructor
  */
@@ -355,6 +381,12 @@ SugarCrm.LinkField.prototype.type;
  * @type {string} Module name
  */
 SugarCrm.LinkField.prototype.module;
+
+
+/**
+ * @type {string} Link name. Same as its object hash key.
+ */
+SugarCrm.LinkField.prototype.name;
 
 
 

@@ -174,5 +174,27 @@ ydn.string.encodeArrayBuffer2base64 = function(arrayBuffer) {
 };
 
 
+/**
+ * Returns the non-overlapping occurrences of ss in reg.
+ * @param {string} ss
+ * @param {RegExp} reg
+ * @return {number} occurrences.
+ */
+ydn.string.countByReg = function(ss, reg) {
+  // a first way to count occurrences.
+  return ss.length - ss.replace(reg, '').length;
+};
+
+
+/**
+ * Returns the non-overlapping occurrences of ss in t.
+ * @param {string} ss
+ * @param {string} t
+ * @return {number} occurrences of t.
+ */
+ydn.string.countToken = function(ss, t) {
+  return ydn.string.countByReg(ss, new RegExp(ss, 'g'));
+};
+
 
 
