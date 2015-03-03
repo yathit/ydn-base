@@ -17,6 +17,10 @@
  * @fileoverview CSS base Light weight popup menu that flyout on hovering over
  * the menu button.
  *
+ * The main advantage for using FlyoutMenu is less listener is required and
+ * does not require disposing if no handler are attached. Instead, event handler
+ * can be attach to ancestor element.
+ *
  * @author kyawtun@yathit.com (Kyaw Tun)
  */
 
@@ -31,12 +35,33 @@ goog.require('ydn.crm.ui');
 
 /**
  * Light weight popup menu that flyout on hovering over the menu button.
+ * <pre>
+ *   var menu = new ydn.ui.FlyoutMenu();
+ *   menu.setItems([{
+ *     label: 'File'
+ *   }, {
+ *     label: 'Edit'
+ *   ]);
+ *   menu.render(root);
+ *   root.onclick = function(e) {
+ *     var cmds = menu.handleClick(e);
+ *     if (cmds) {
+ *       // handle menu click.
+ *     }
+ *   }
+ * Simple rendering a menu.
+ * <pre>
+ *   var btn = document.createElement('span');
+ *   btn.className = ydn.crm.ui.CSS_CLASS_MORE_MENU;
+ *   ydn.ui.FlyoutMenu.decoratePopupMenu(btn, options);
+ * </pre>
  * @param {ydn.ui.FlyoutMenu.Option=} opt_option
  * @param {Array.<?ydn.ui.FlyoutMenu.ItemOption>=} opt_menu_items
  * @constructor
  * @struct
  */
 ydn.ui.FlyoutMenu = function(opt_option, opt_menu_items) {
+
   /**
    * @type {Element}
    * @private

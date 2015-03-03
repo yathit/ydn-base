@@ -151,6 +151,14 @@ goog.inherits(ydn.client.MockRequest, ydn.client.SimpleHttpRequest);
 
 
 /**
+ * @protected
+ * @type {goog.log.Logger}
+ */
+ydn.client.MockRequest.prototype.logger =
+    goog.log.getLogger('ydn.client.MockRequest');
+
+
+/**
  * @override
  */
 ydn.client.MockRequest.prototype.execute = function(cb, opt_scope) {
@@ -158,11 +166,15 @@ ydn.client.MockRequest.prototype.execute = function(cb, opt_scope) {
     var me = this;
     setTimeout(function() {
       if (cb) {
+        goog.log.fine(me.logger, me.req_data.method + ' ' + me.req_data.path + ' ' +
+            me.response.status);
         cb.call(opt_scope, me.response.body, me.response);
       }
     }, this.delay);
   } else {
     if (cb) {
+      goog.log.fine(me.logger, me.req_data.method + ' ' + me.req_data.path + ' ' +
+          me.response.status);
       cb.call(opt_scope, me.response.body, me.response);
     }
   }

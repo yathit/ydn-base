@@ -103,11 +103,13 @@ ydn.client.JsonMockClient.prototype.addResource = function(mth, url, resp) {
  * @return {number} 1 if added, 0 if replace the resource.
  */
 ydn.client.JsonMockClient.prototype.setResource = function(mth, url, resp) {
-  for (var i = 0; i < this.resources.length; i++) {
-    if (this.resources[i].method == mth && this.resources[i].url == url) {
-      this.resources[i].resp = resp;
-      return 0;
-    }
+  var idx = this.findResource_({
+    method: mth,
+    url: url
+  });
+  if (idx >= 0) {
+    this.resources[idx].resp = resp;
+    return 0;
   }
   this.resources.push({
     method: mth,
@@ -119,6 +121,25 @@ ydn.client.JsonMockClient.prototype.setResource = function(mth, url, resp) {
 
 
 /**
+ * Find resource index.
+ * @param req
+ * @return {number}
+ * @private
+ */
+ydn.client.JsonMockClient.prototype.findResource_ = function(req) {
+  for (var i = 0; i < this.resources.length; i++) {
+    var res = this.resources[i];
+    if ((!res.method || res.method == req.method) &&
+        (!res.url || res.url == req.path) &&
+        (!res.body || res.body == req.body)) {
+      return i;
+    }
+  }
+  return -1;
+};
+
+
+/**
  * @inheritDoc
  */
 ydn.client.JsonMockClient.prototype.request = function(req) {
@@ -126,14 +147,12 @@ ydn.client.JsonMockClient.prototype.request = function(req) {
   var resp = r.response;
   resp.status = 404;
   resp.statusText = req.method + ' ' + req.path + ' Not Found';
-  for (var i = 0; i < this.resources.length; i++) {
-    var res = this.resources[i];
-    if (res.method == req.method && res.url == req.path) {
-      resp.status = res.resp.status;
-      resp.statusText = res.resp.statusText || '';
-      resp.body = res.resp.body;
-      break;
-    }
+  var idx = this.findResource_(req);
+  if (idx >= 0) {
+    var res = this.resources[idx];
+    resp.status = res.resp.status;
+    resp.statusText = res.resp.statusText || '';
+    resp.body = res.resp.body;
   }
   return r;
 };
