@@ -107,6 +107,17 @@ if (!chrome.runtime.getManifest) {
   };
 }
 
+if (!chrome.i18n) {
+  chrome.i18n = {
+    getMessage: function(s) {
+      return s;
+    },
+    getUILanguage: function() {
+      return 'en-US';
+    }
+  };
+}
+
 if (!window['YathitCrm']) {
   window['YathitCrm'] = {'Version': {'release': '1.4.2'},'sugarcrm': {'Version': {'release': '0.18.3'}}};
 }
