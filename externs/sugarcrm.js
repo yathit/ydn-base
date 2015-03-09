@@ -631,9 +631,15 @@ SugarCrm.Details.prototype.serverInfo;
 
 
 /**
- * @type {SugarCrm.LoginRecord}
+ * @type {?SugarCrm.LoginRecord}
  */
 SugarCrm.Details.prototype.loginInfo;
+
+
+/**
+ * @type {?CrmApp.Credential}
+ */
+SugarCrm.Details.prototype.credential;
 
 
 /**
