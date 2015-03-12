@@ -491,7 +491,7 @@ SugarCrm.ModuleInfo.prototype.table_name;
 
 
 /**
- * @type {!Object.<SugarCrm.ModuleField>}
+ * @type {!Object.<SugarCrm.ModuleField>|!Array.<SugarCrm.ModuleField>}
  */
 SugarCrm.ModuleInfo.prototype.module_fields;
 
