@@ -15,7 +15,7 @@ goog.require('goog.events.EventHandler');
  * </pre>
  * @param {string} title
  * @param {string|Node} message message or message content DOM node.
- * @param {Array<ydn.ui.MessageDialog.Button>} buttons button set.
+ * @param {Array<ydn.ui.MessageDialog.ButtonDef>} buttons button set.
  * @constructor
  * @struct
  */
@@ -50,19 +50,21 @@ ydn.ui.MessageDialog = function(title, message, buttons) {
     content.appendChild(message);
   }
 
+
+
   for (var i = 0; i < buttons.length; i++) {
-    var btn_name = buttons[i];
+    var btn_def = buttons[i];
     var button = document.createElement('button');
-    if (btn_name == ydn.ui.MessageDialog.Button.OK) {
+    if (btn_def.isDefault) {
       button.classList.add('default');
     }
-    button.value = btn_name;
-    button.textContent = btn_name;
+    button.value = btn_def.name;
+    button.textContent = btn_def.label;
     this.handler.listen(button, 'click', this.onButtonClick);
     button_bar.appendChild(button);
   }
 
-  this.handler.listen(this.dialog, 'cancel', this.onButtonClick);
+  this.handler.listen(this.dialog, 'cancel', this.onCancelClick);
 
   this.dialog.appendChild(header);
   this.dialog.appendChild(content);
@@ -74,18 +76,38 @@ ydn.ui.MessageDialog = function(title, message, buttons) {
 
 
 /**
- * @enum {string} dialog button name.
+ * @enum {string}
  */
 ydn.ui.MessageDialog.Button = {
-  OK: 'OK',
-  CANCEL: 'Cancel'
+  OK: 'ok',
+  CANCEL: 'cancel'
 };
+
+
+/**
+ * @typedef {{
+ *   name: string,
+ *   label: string,
+ *   isDefault: (boolean|undefined),
+ *   isCancel: (boolean|undefined)
+ * }}
+ */
+ydn.ui.MessageDialog.ButtonDef;
 
 
 /**
  * @define {string} default class name
  */
 ydn.ui.MessageDialog.CSS_CLASS_NAME = 'ydn-crm';
+
+
+/**
+ * @protected
+ * @param {goog.events.BrowserEvent} e
+ */
+ydn.ui.MessageDialog.prototype.onCancelClick = function(e) {
+  this.dialog.close('cancel');
+};
 
 
 /**
@@ -122,16 +144,44 @@ ydn.ui.MessageDialog.prototype.getContentElement = function() {
 
 
 /**
+ * @return {Array<ydn.ui.MessageDialog.ButtonDef>}
+ */
+ydn.ui.MessageDialog.createOKButtonSet = function() {
+  return [{
+    name: ydn.ui.MessageDialog.Button.OK,
+    label: chrome.i18n.getMessage('OK'),
+    isDefault: true
+  }];
+};
+
+
+/**
+ * @return {Array<ydn.ui.MessageDialog.ButtonDef>}
+ */
+ydn.ui.MessageDialog.createOKCancelButtonSet = function() {
+  return [{
+    name: ydn.ui.MessageDialog.Button.OK,
+    label: chrome.i18n.getMessage('OK'),
+    isDefault: true
+  }, {
+    name: ydn.ui.MessageDialog.Button.CANCEL,
+    label: chrome.i18n.getMessage('Cancel'),
+    isCancel: true
+  }];
+};
+
+
+/**
  * Show model message dialog.
  * @param {string} title
  * @param {string|Node} message message or message content.
- * @param {Array.<ydn.ui.MessageDialog.Button>=} opt_btn button set. Default to
+ * @param {Array.<ydn.ui.MessageDialog.ButtonDef>=} opt_btn button set. Default to
  * OK button.
  * @return {!goog.async.Deferred.<ydn.ui.MessageDialog.Button>} promise on
  * dialog close, resolved with button click.
  */
 ydn.ui.MessageDialog.showModal = function(title, message, opt_btn) {
-  var buttons = opt_btn || [ydn.ui.MessageDialog.Button.OK];
+  var buttons = opt_btn || ydn.ui.MessageDialog.createOKButtonSet();
   var dialog = new ydn.ui.MessageDialog(title, message, buttons);
   var df = new goog.async.Deferred();
   dialog.dialog.onclose = function(event) {
