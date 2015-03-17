@@ -149,7 +149,7 @@ ydn.ui.MessageDialog.prototype.getContentElement = function() {
 ydn.ui.MessageDialog.createOKButtonSet = function() {
   return [{
     name: ydn.ui.MessageDialog.Button.OK,
-    label: chrome.i18n.getMessage('OK'),
+    label: 'OK',
     isDefault: true
   }];
 };
@@ -161,11 +161,11 @@ ydn.ui.MessageDialog.createOKButtonSet = function() {
 ydn.ui.MessageDialog.createOKCancelButtonSet = function() {
   return [{
     name: ydn.ui.MessageDialog.Button.OK,
-    label: chrome.i18n.getMessage('OK'),
+    label: 'OK',
     isDefault: true
   }, {
     name: ydn.ui.MessageDialog.Button.CANCEL,
-    label: chrome.i18n.getMessage('Cancel'),
+    label: 'Cancel',
     isCancel: true
   }];
 };
