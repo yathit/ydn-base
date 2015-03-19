@@ -118,6 +118,26 @@ if (!chrome.i18n) {
   };
 }
 
+if (!chrome.permissions) {
+  chrome.permissions = {
+    request: function(perm, cb) {
+      setTimeout(function() {
+        if (cb) {cb(true);}
+      }, 10);
+    },
+    contains: function(perm, cb) {
+      setTimeout(function() {
+        if (cb) {cb(true);}
+      }, 10);
+    },
+    remove: function(perm, cb) {
+      setTimeout(function() {
+        if (cb) {cb(true);}
+      }, 10);
+    }
+  };
+}
+
 if (!window['YathitCrm']) {
   window['YathitCrm'] = {'Version': {'release': '1.4.2'},'sugarcrm': {'Version': {'release': '0.18.3'}}};
 }
