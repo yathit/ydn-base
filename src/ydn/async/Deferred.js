@@ -22,8 +22,8 @@
 
 goog.provide('ydn.async.Deferred');
 goog.require('goog.async.Deferred');
-goog.require('ydn.debug.error.ArgumentException');
 goog.require('ydn.base');
+goog.require('ydn.debug.error.ArgumentException');
 
 
 
@@ -91,6 +91,21 @@ ydn.async.Deferred.prototype.callback = function(opt_result) {
 ydn.async.Deferred.prototype.errback = function(opt_result) {
   this.progbacks_.length = 0;
   goog.base(this, 'errback', opt_result);
+};
+
+
+/**
+ * @inheritDoc
+ */
+ydn.async.Deferred.prototype.chainDeferred = function(df) {
+  goog.base(this, 'chainDeferred', df);
+  if (df instanceof ydn.async.Deferred) {
+    var ydf = /** @type {ydn.async.Deferred} */(df);
+    ydf.addProgback(function(x) {
+      this.notify(x);
+    }, this);
+  }
+  return this;
 };
 
 

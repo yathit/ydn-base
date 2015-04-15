@@ -197,4 +197,16 @@ ydn.string.countToken = function(ss, t) {
 };
 
 
+/**
+ * Try parse string to number.
+ * @param {string} val
+ * @return {number} NaN return if fail to parse.
+ */
+ydn.string.tryParse = function(val) {
+  try {
+    return parseInt(val, 10);
+  } catch (e) {
+    return NaN;
+  }
+};
 

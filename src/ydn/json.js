@@ -17,7 +17,6 @@
  */
 
 goog.provide('ydn.json');
-goog.require('goog.log');
 goog.require('goog.json');
 
 
@@ -32,13 +31,6 @@ ydn.json.DEBUG = false;
  * @define {boolean} Use JSON polyfill.
  */
 ydn.json.POLY_FILL = false;
-
-
-/**
- * @final
- * @type {goog.debug.Logger}
- */
-ydn.json.logger = goog.log.getLogger('ydn');
 
 
 /**

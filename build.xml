@@ -3,6 +3,7 @@
     <property name="work.dir" location="${ydn-base.dir}/.."
               description="all repository root are in this working directory" />
     <property name="home.dir" location="${user.home}"/>
+    <property name="ydn-db.dir" location="${work.dir}/ydn-db"/>
     <property name="lib.dir" location="${home.dir}/lib"
               description="library files, mostly non-javascript."/>
 
