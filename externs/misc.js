@@ -74,6 +74,89 @@ CryptoJS.MD5 = function(s) {};
 
 
 
+/**
+ * https://developers.facebook.com/docs/javascript/reference/v2.3
+ * @const Facebook SDK.
+ */
+var FB = {};
+
+
+
+/**
+ * @interface
+ */
+FB.AuthResponse = function() {};
+
+
+/**
+ * Enum of 'connected', 'not_authorized', or 'unknown'.
+ * @type {string}
+ */
+FB.AuthResponse.prototype.status;
+
+
+/**
+ * @type {Object}
+ */
+FB.AuthResponse.prototype.photo;
+
+
+/**
+ * Returns the Facebook Login status of a user, with an authResponse object if
+ * they are logged in.
+ * @param {function(FB.AuthResponse)} callback
+ */
+FB.getLoginStatus = function(callback) {};
+
+
+
+/**
+ * @interface
+ */
+FB.Profile = function() {};
+
+
+/**
+ * @type {string}
+ */
+FB.Profile.prototype.id;
+
+
+/**
+ * @type {string}
+ */
+FB.Profile.prototype.first_name;
+
+
+/**
+ * @type {string}
+ */
+FB.Profile.prototype.name;
+
+
+/**
+ * @type {string}
+ */
+FB.Profile.prototype.link;
+
+
+/**
+ * Used to initialize and setup the SDK. All other SDK methods must be called after this one.
+ * @param {Object} param A collection of initialization parameters that
+ * control the setup of the SDK.
+ */
+FB.init = function(param) {};
+
+
+/**
+ * Make calls to the Graph API.
+ * @param {string} path the Graph API endpoint
+ * @param {Function} callback the API returns a response.
+ */
+FB.api = function(path, callback) {};
+
+
+
 
 
 
