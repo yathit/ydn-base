@@ -148,7 +148,8 @@ ydn.client.HttpRespondData.prototype.getHeaders = function() {
  */
 ydn.client.HttpRespondData.prototype.isJson = function() {
   this.ensureParse();
-  if (this.getHeader('content-type') == 'application/json') {
+  if (this.getHeader('content-type').toLocaleLowerCase()
+          .indexOf('application/json') >= 0) {
     return true;
   } else {
     var text = this.body;
