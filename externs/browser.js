@@ -77,39 +77,6 @@ IDBFactory.prototype.cmp = function(first, second) {};
 IDBRequest.prototype.error;
 
 
-
-/**
- * Socket IO service
- * @constructor
- * @extends {HTMLElement}
- */
-function HTMLDialogElement() {}
-
-
-/**
- * @param {HTMLElement=} anchor
- */
-HTMLDialogElement.prototype.show = function(anchor) {};
-
-
-/**
- * @param {HTMLElement=} anchor
- */
-HTMLDialogElement.prototype.showModal = function(anchor) {};
-
-
-/**
- * @param result
- */
-HTMLDialogElement.prototype.close = function(result) {};
-
-
-/**
- * @type {*}
- */
-HTMLDialogElement.prototype.returnValue;
-
-
 /**
  * @const
  * @type {Object}
