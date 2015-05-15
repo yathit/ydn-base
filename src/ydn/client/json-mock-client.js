@@ -12,12 +12,16 @@ goog.require('ydn.client.MockClient');
  *   client = new ydn.client.JsonMockClient(1);
  *   client.setResources([{
  *     method: 'GET',
- *     url: 'http://localhost/test',
+ *     path: 'http://localhost/test',
  *     resp: {
  *       body: 'OK'
  *       status: 200
  *     }
  *   }]);
+ * </pre>
+ * Set debug log for tracking bug.
+ * <pre>
+ *   ydn.debug.log('ydn.client', 'fine');
  * </pre>
  * Mock server for REST resource in JSON format.
  * @param {number=} opt_delay server respond time, default to 0 for
@@ -49,7 +53,7 @@ ydn.client.JsonMockClient.RespObj;
 /**
  * @typedef {{
  *   method: string,
- *   url: string,
+ *   path: string,
  *   resp: ydn.client.JsonMockClient.RespObj
  * }}
  */
@@ -67,11 +71,11 @@ ydn.client.JsonMockClient.prototype.setResources = function(res) {
 
 /**
  * Set resource stored in JSON file in server.
- * @param {string} url
+ * @param {string} path
  */
-ydn.client.JsonMockClient.prototype.setResourcesByUrl = function(url) {
+ydn.client.JsonMockClient.prototype.setResourcesByUrl = function(path) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', url, false);
+  xhr.open('GET', path, false);
   var me = this;
   xhr.onload = function() {
     me.resources = JSON.parse(xhr.responseText);
@@ -83,13 +87,13 @@ ydn.client.JsonMockClient.prototype.setResourcesByUrl = function(url) {
 /**
  * Add a resource
  * @param {string} mth 'GET', 'POST'
- * @param {string} url
+ * @param {string} path
  * @param {ydn.client.JsonMockClient.RespObj} resp
  */
-ydn.client.JsonMockClient.prototype.addResource = function(mth, url, resp) {
+ydn.client.JsonMockClient.prototype.addResource = function(mth, path, resp) {
   this.resources.push({
     method: mth,
-    url: url,
+    path: path,
     resp: resp
   });
 };
@@ -98,14 +102,14 @@ ydn.client.JsonMockClient.prototype.addResource = function(mth, url, resp) {
 /**
  * Set a resource
  * @param {string} mth 'GET', 'POST'
- * @param {string} url
+ * @param {string} path
  * @param {ydn.client.JsonMockClient.RespObj} resp
  * @return {number} 1 if added, 0 if replace the resource.
  */
-ydn.client.JsonMockClient.prototype.setResource = function(mth, url, resp) {
+ydn.client.JsonMockClient.prototype.setResource = function(mth, path, resp) {
   var idx = this.findResource_({
     method: mth,
-    url: url
+    path: path
   });
   if (idx >= 0) {
     this.resources[idx].resp = resp;
@@ -113,7 +117,7 @@ ydn.client.JsonMockClient.prototype.setResource = function(mth, url, resp) {
   }
   this.resources.push({
     method: mth,
-    url: url,
+    path: path,
     resp: resp
   });
   return 1;
@@ -130,7 +134,7 @@ ydn.client.JsonMockClient.prototype.findResource_ = function(req) {
   for (var i = 0; i < this.resources.length; i++) {
     var res = this.resources[i];
     if ((!res.method || res.method == req.method) &&
-        (!res.url || res.url == req.path) &&
+        (!res.path || res.path == req.path) &&
         (!res.body || res.body == req.body)) {
       return i;
     }
