@@ -70,7 +70,7 @@ ydn.object.equals = function(obj1, obj2, opt_ignore_fields) {
       return false;
     }
     for (var i = 0; i < obj1.length; i++) {
-      var idx = goog.array.find(arr2, function(ele) {
+      var idx = goog.array.findIndex(arr2, function(ele) {
         return ydn.object.equals(ele, arr1[i]);
       });
       if (idx == -1) {
