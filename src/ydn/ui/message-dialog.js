@@ -57,7 +57,7 @@ ydn.ui.MessageDialog = function(title, message, buttons) {
     var button = document.createElement('button');
     if (btn_def.isDefault) {
       button.classList.add('default');
-      button.setAttribute('tabIndex', '0');
+      button.setAttribute('autofocus', 'autofocus');
     }
     button.value = btn_def.name;
     button.textContent = btn_def.label;
