@@ -613,7 +613,7 @@ CrmApp.Credential.prototype.hashed;
 
 
 /**
- * @interface
+ * @constructor
  */
 SugarCrm.Details = function() {};
 
@@ -621,37 +621,37 @@ SugarCrm.Details = function() {};
 /**
  * @type {SugarCrm.About}
  */
-SugarCrm.Details.prototype.about;
+SugarCrm.Details.prototype.about = null;
 
 
 /**
  * @type {SugarCrm.ServerInfo}
  */
-SugarCrm.Details.prototype.serverInfo;
+SugarCrm.Details.prototype.serverInfo = null;
 
 
 /**
  * @type {?SugarCrm.LoginRecord}
  */
-SugarCrm.Details.prototype.loginInfo;
+SugarCrm.Details.prototype.loginInfo = null;
 
 
 /**
  * @type {?CrmApp.Credential}
  */
-SugarCrm.Details.prototype.credential;
+SugarCrm.Details.prototype.credential = null;
 
 
 /**
  * @type {Array.<SugarCrm.AvailableModule>}
  */
-SugarCrm.Details.prototype.availableModules;
+SugarCrm.Details.prototype.availableModules = [];
 
 
 /**
  * @type {Array.<SugarCrm.ModuleInfo>}
  */
-SugarCrm.Details.prototype.modulesInfo;
+SugarCrm.Details.prototype.modulesInfo = [];
 
 
 
