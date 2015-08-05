@@ -272,9 +272,6 @@ ydn.http.xhr_manager_;
 ydn.http.getXhrManager = function() {
   if (!ydn.http.xhr_manager_) {
     var xhr = new goog.net.XhrManager();
-    /**
-     * @final
-     */
     ydn.http.xhr_manager_ = xhr;
     return xhr;
   } else {
