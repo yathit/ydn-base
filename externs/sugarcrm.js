@@ -733,3 +733,29 @@ SugarCrm.Relationships.prototype.from;
 
 
 
+/**
+ * Represents SugarCRM entry.
+ * @constructor
+ */
+SugarCrm.SyncCheckpoint = function() {};
+
+
+/**
+ * Lower value of updated timestamp.
+ * @type {string}
+ */
+SugarCrm.SyncCheckpoint.prototype.lower = '';
+
+
+/**
+ * Upper value of updated timestamp.
+ * @type {string}
+ */
+SugarCrm.SyncCheckpoint.prototype.upper = '';
+
+
+/**
+ * Updated timestamp.
+ * @type {number}
+ */
+SugarCrm.SyncCheckpoint.prototype.updated = 0;
