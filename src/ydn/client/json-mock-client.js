@@ -139,7 +139,7 @@ ydn.client.JsonMockClient.prototype.findResource_ = function(req) {
       return i;
     }
   }
-  console.log(req.body);
+  // console.log(req.body);
   return -1;
 };
 
