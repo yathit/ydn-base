@@ -189,38 +189,38 @@ SugarCrm.Record = function() {};
 /**
  * @type {string}
  */
-SugarCrm.Record.prototype.id;
+SugarCrm.Record.prototype.id = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.Record.prototype.name;
+SugarCrm.Record.prototype.name = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.Record.prototype.date_entered;
+SugarCrm.Record.prototype.date_entered = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.Record.prototype.date_modified;
+SugarCrm.Record.prototype.date_modified = '';
 
 
 /**
  * This field include in v10 REST result, but not in v4.
  * @type {string} module name.
  */
-SugarCrm.Record.prototype._module;
+SugarCrm.Record.prototype._module = '';
 
 
 /**
  * @type {string} either '1' or '0'
  */
-SugarCrm.Record.prototype.deleted;
+SugarCrm.Record.prototype.deleted = '';
 
 
 
