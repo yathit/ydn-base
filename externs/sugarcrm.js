@@ -643,7 +643,7 @@ SugarCrm.Details.prototype.credential = null;
 
 
 /**
- * @type {Array.<SugarCrm.AvailableModule>}
+ * @type {Array<SugarCrm.AvailableModule>}
  */
 SugarCrm.Details.prototype.availableModules = [];
 
