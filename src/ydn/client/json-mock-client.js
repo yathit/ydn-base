@@ -19,6 +19,18 @@ goog.require('ydn.client.MockClient');
  *     }
  *   }]);
  * </pre>
+ * Override getResource method for more custom respond.
+ * <pre>
+ *   client = new ydn.client.JsonMockClient(1);
+ *   var old = client.getResource;
+ *   client.getResource = function(req) {
+ *     if (req.path == '/') {
+ *
+ *     } else {
+ *       return old.call(client, req);
+ *     }
+ *   };
+ * </pre>
  * Set debug log for tracking bug.
  * <pre>
  *   ydn.debug.log('ydn.client', 'fine');
@@ -145,6 +157,21 @@ ydn.client.JsonMockClient.prototype.findResource_ = function(req) {
 
 
 /**
+ * Get resource.
+ * @param {ydn.client.JsonMockClient.ReqObj} req
+ * @return {?ydn.client.JsonMockClient.RespObj}
+ */
+ydn.client.JsonMockClient.prototype.getResource = function(req) {
+  var idx = this.findResource_(req);
+  if (idx >= 0) {
+    return this.resources[idx];
+  } else {
+    return null;
+  }
+};
+
+
+/**
  * @inheritDoc
  */
 ydn.client.JsonMockClient.prototype.request = function(req) {
@@ -152,9 +179,8 @@ ydn.client.JsonMockClient.prototype.request = function(req) {
   var resp = r.response;
   resp.status = 404;
   resp.statusText = req.method + ' ' + req.path + ' Not Found';
-  var idx = this.findResource_(req);
-  if (idx >= 0) {
-    var res = this.resources[idx];
+  var res = this.getResource(req);
+  if (res) {
     resp.status = res.resp.status;
     resp.statusText = res.resp.statusText || '';
     resp.body = res.resp.body;
