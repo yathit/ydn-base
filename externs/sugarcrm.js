@@ -748,10 +748,24 @@ SugarCrm.SyncCheckpoint.prototype.lower = '';
 
 
 /**
+ * Lower record id.
+ * @type {string}
+ */
+SugarCrm.SyncCheckpoint.prototype.lowerId = '';
+
+
+/**
  * Upper value of updated timestamp.
  * @type {string}
  */
 SugarCrm.SyncCheckpoint.prototype.upper = '';
+
+
+/**
+ * Upper record id.
+ * @type {string}
+ */
+SugarCrm.SyncCheckpoint.prototype.upperId = '';
 
 
 /**
