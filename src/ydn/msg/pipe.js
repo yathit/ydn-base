@@ -27,8 +27,8 @@ goog.require('ydn.crm.ch.Req');
  *   ydn.msg.initPipe('dev');
  *   // send message
  *   ydn.msg.getMain().send('req').addCallback(...);
- *   // listen broadcast
- *   goog.events.listen(ydn.msg.getMain(), 'error', ...);
+ *   // listen broadcast message of type ydn.msg.Event
+ *   goog.events.listen(ydn.msg.getMain(), ydn.crm.ch.BReq.HOST_PERMISSION, ...);
  * </pre>
  * @param {string|exYdn.PipeInfo} name_or_info channel name or channel info.
  * @constructor
