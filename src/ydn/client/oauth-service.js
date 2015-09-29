@@ -10,12 +10,13 @@ goog.require('ydn.client.IOAuthProvider');
 
 
 /**
- * @param {string} redirect_url
+ * @param {string} redirect_url redirect URL.
+ * @param {Object=} opt_params optional parameter.
  * @constructor
  * @struct
  * @implements {ydn.client.IOAuthProvider}
  */
-ydn.client.OAuthService = function(redirect_url) {
+ydn.client.OAuthService = function(redirect_url, opt_params) {
   /**
    * @private
    * @type {string}
@@ -32,6 +33,11 @@ ydn.client.OAuthService = function(redirect_url) {
    * @private
    */
   this.df_gdata_token_ = null;
+  /**
+   * @type {Object}
+   * @private
+   */
+  this.params_ = opt_params || null;
 };
 
 
@@ -52,6 +58,9 @@ ydn.client.OAuthService.prototype.getOAuthToken = function(opt_redirect) {
   var params = {
     'url': redirect
   };
+  if (this.params_) {
+    goog.object.extend(params, this.params_);
+  }
 
   var data = new ydn.client.HttpRequestData('/token', 'GET', params);
   var client = ydn.client.getClient(ydn.http.Scopes.AUTH);
