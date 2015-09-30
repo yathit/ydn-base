@@ -38,7 +38,6 @@ goog.require('ydn.debug.error.ArgumentException');
  * @constructor
  * @extends {goog.async.Deferred}
  * @struct
- * @suppress {checkStructDictInheritance} suppress closure-library code.
  */
 ydn.async.Deferred = function(opt_onCancelFunction, opt_defaultScope) {
   goog.base(this, opt_onCancelFunction, opt_defaultScope);

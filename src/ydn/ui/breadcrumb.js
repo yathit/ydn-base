@@ -50,7 +50,6 @@ goog.require('ydn.data.SiteMap');
  * @constructor
  * @extends {goog.events.EventTarget}
  * @struct
- * @suppress {checkStructDictInheritance} suppress closure-library code.
  */
 ydn.ui.Breadcrumb = function(opt_model, opt_dispatch_click) {
   goog.base(this);

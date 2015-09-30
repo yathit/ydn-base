@@ -15,7 +15,6 @@ goog.require('ydn.ui.Reportable');
  * @constructor
  * @extends {goog.ui.Component}
  * @struct
- * @suppress {checkStructDictInheritance} suppress closure-library code.
  */
 ydn.ui.ReportableLink = function(opt_dom) {
   goog.base(this, opt_dom);

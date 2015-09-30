@@ -14,7 +14,6 @@ goog.require('ydn.msg');
  * @constructor
  * @extends {goog.events.EventTarget}
  * @struct
- * @suppress {checkStructDictInheritance} suppress closure-library code.
  */
 ydn.ui.Reportable = function() {
   goog.base(this);

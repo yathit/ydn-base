@@ -3,7 +3,6 @@
 --jscomp_error=ambiguousFunctionDecl
 --jscomp_error=checkDebuggerStatement
 --jscomp_error=checkRegExp
---jscomp_error=checkStructDictInheritance
 --jscomp_error=checkTypes
 --jscomp_error=checkVars
 --jscomp_error=conformanceViolations

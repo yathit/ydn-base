@@ -34,7 +34,6 @@ goog.require('ydn.crm.ch.Req');
  * @constructor
  * @struct
  * @extends {goog.events.EventTarget}
- * @suppress {checkStructDictInheritance} suppress closure-library code.
  */
 ydn.msg.Pipe = function(name_or_info) {
   goog.base(this);
