@@ -158,6 +158,7 @@
         <attribute name="flagfile" default="${ydn-base.dir}/flagfile.txt"/>
         <attribute name="compilerjarfile" default="${closure-compiler.jar}"/>
         <element name="options" optional="yes"/>
+        <element name="row-header" optional="yes"/>
         <sequential>
             <exec executable="python" failonerror="true" logError="true" dir="${basedir}">
                 <arg value="${closure-library.dir}/closure/bin/calcdeps.py"/>
@@ -176,7 +177,8 @@
             <tempfile property="temp.file"/>
             <concat destfile="${temp.file}" overwrite="true">
                 <header>
-                    var CLOSURE_DEFINES = {'goog.ENABLE_DEBUG_LOADER': false};
+                    var CLOSURE_DEFINES = {'goog.ENABLE_DEBUG_LOADER': false, 'goog.json.USE_NATIVE_JSON': true};
+                    <row-header/>
                 </header>
                 <filelist>
                     <file name="${work.dir}/fullproof/js/tokenizer/categ_letters_numbers.js"/>
