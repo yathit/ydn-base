@@ -7,6 +7,7 @@
 
 goog.provide('ydn.msg.Message');
 goog.require('ydn.async.Deferred');
+goog.require('goog.json');
 
 
 
@@ -166,13 +167,17 @@ ydn.msg.Message.prototype.listen = function(msg) {
         this.error_['source'] = error;
         this.error_['result'] = this.data_;
       } else if (goog.isString(error)) {
-        try {
-          var err_obj = JSON.parse(error);
-          this.error_ = new Error(err_obj['message']);
-          for (var k in err_obj) {
-            this.error_[k] = err_obj[k];
+        if (goog.json.isValid(error)) {
+          try {
+            var err_obj = JSON.parse(error);
+            this.error_ = new Error(err_obj['message']);
+            for (var k in err_obj) {
+              this.error_[k] = err_obj[k];
+            }
+          } catch (e) {
+            this.error_ = new Error(error);
           }
-        } catch (e) {
+        } else {
           this.error_ = new Error(error);
         }
       } else {
