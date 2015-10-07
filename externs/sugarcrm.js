@@ -235,7 +235,7 @@ SugarCrm.ScoredRecord = function() {};
 /**
  * @type {number}
  */
-SugarCrm.ScoredRecord.prototype._score;
+SugarCrm.ScoredRecord.prototype._score = 0;
 
 
 
@@ -250,49 +250,49 @@ SugarCrm.LoginRecord = function() {};
 /**
  * @type {string} "-99"
  */
-SugarCrm.LoginRecord.prototype.user_currency_id;
+SugarCrm.LoginRecord.prototype.user_currency_id = '';
 
 
 /**
  * @type {string} "US Dollars"
  */
-SugarCrm.LoginRecord.prototype.user_currency_name;
+SugarCrm.LoginRecord.prototype.user_currency_name = '';
 
 
 /**
  * @type {string} "."
  */
-SugarCrm.LoginRecord.prototype.user_decimal_seperator;
+SugarCrm.LoginRecord.prototype.user_decimal_seperator = '';
 
 
 /**
  * @type {string} "m/d/Y"
  */
-SugarCrm.LoginRecord.prototype.user_default_dateformat;
+SugarCrm.LoginRecord.prototype.user_default_dateformat = '';
 
 
 /**
  * @type {?string}
  */
-SugarCrm.LoginRecord.prototype.user_default_team_id;
+SugarCrm.LoginRecord.prototype.user_default_team_id = '';
 
 
 /**
  * @type {string} "h:ia"
  */
-SugarCrm.LoginRecord.prototype.user_default_timeformat;
+SugarCrm.LoginRecord.prototype.user_default_timeformat = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.LoginRecord.prototype.user_id;
+SugarCrm.LoginRecord.prototype.user_id = '';
 
 
 /**
  * @type {boolean}
  */
-SugarCrm.LoginRecord.prototype.user_is_admin;
+SugarCrm.LoginRecord.prototype.user_is_admin = false;
 
 
 
@@ -306,61 +306,61 @@ SugarCrm.ModuleField = function() {};
 /**
  * @type {boolean}
  */
-SugarCrm.ModuleField.prototype.calculated;
+SugarCrm.ModuleField.prototype.calculated = false;
 
 
 /**
  * @type {string}
  */
-SugarCrm.ModuleField.prototype.group;
+SugarCrm.ModuleField.prototype.group = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.ModuleField.prototype.id_name;
+SugarCrm.ModuleField.prototype.id_name = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.ModuleField.prototype.label;
+SugarCrm.ModuleField.prototype.label = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.ModuleField.prototype.len;
+SugarCrm.ModuleField.prototype.len = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.ModuleField.prototype.name;
+SugarCrm.ModuleField.prototype.name = '';
 
 
 /**
  * @type {Object.<SugarCrm.NameValue>|undefined}
  */
-SugarCrm.ModuleField.prototype.options;
+SugarCrm.ModuleField.prototype.options = {};
 
 
 /**
  * @type {string}
  */
-SugarCrm.ModuleField.prototype.related_module;
+SugarCrm.ModuleField.prototype.related_module = '';
 
 
 /**
  * @type {number}
  */
-SugarCrm.ModuleField.prototype.required;
+SugarCrm.ModuleField.prototype.required = 0;
 
 
 /**
  * @type {string}
  */
-SugarCrm.ModuleField.prototype.type;
+SugarCrm.ModuleField.prototype.type = '';
 
 
 
@@ -374,19 +374,19 @@ SugarCrm.LinkField = function() {};
 /**
  * @type {string} this is always 'link' ?
  */
-SugarCrm.LinkField.prototype.type;
+SugarCrm.LinkField.prototype.type = '';
 
 
 /**
  * @type {string} Module name
  */
-SugarCrm.LinkField.prototype.module;
+SugarCrm.LinkField.prototype.module = '';
 
 
 /**
  * @type {string} Link name. Same as its object hash key.
  */
-SugarCrm.LinkField.prototype.name;
+SugarCrm.LinkField.prototype.name = '';
 
 
 
@@ -401,14 +401,14 @@ SugarCrm.ModuleMeta = function() {};
  * Color hex for module.
  * @type {string}
  */
-SugarCrm.ModuleMeta.prototype.color;
+SugarCrm.ModuleMeta.prototype.color = '';
 
 
 /**
  * List of email fields.
  * @type {Array.<string>}
  */
-SugarCrm.ModuleMeta.prototype.email_fields;
+SugarCrm.ModuleMeta.prototype.email_fields = [];
 
 
 
@@ -443,25 +443,25 @@ SugarCrm.AvailableModule = function() {};
 /**
  * @type {boolean}
  */
-SugarCrm.AvailableModule.prototype.favorite_enabled;
+SugarCrm.AvailableModule.prototype.favorite_enabled = false;
 
 
 /**
  * @type {string}
  */
-SugarCrm.AvailableModule.prototype.module_key;
+SugarCrm.AvailableModule.prototype.module_key = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.AvailableModule.prototype.module_label;
+SugarCrm.AvailableModule.prototype.module_label = '';
 
 
 /**
  * @type {Array.<SugarCrm.Acl>}
  */
-SugarCrm.AvailableModule.prototype.acls;
+SugarCrm.AvailableModule.prototype.acls = [];
 
 
 
