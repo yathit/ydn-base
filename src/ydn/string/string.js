@@ -73,7 +73,7 @@ ydn.string.normalizeEmail = function(email) {
   if (!goog.isString(email)) {
     return null;
   }
-  if (!/[\w\+]+@\w+\.\w+/.test(email)) {
+  if (!/.+@.+\..+/.test(email)) {
     return null;
   }
   // remove name from email label, such as 'brandi steel <brandiengage@gmail.com>'

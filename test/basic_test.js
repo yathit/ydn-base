@@ -91,6 +91,7 @@ var test_email_normalize = function() {
   assertEquals('remove after +', ydn.string.normalizeEmail('abc+de@gmail.com'), 'abc@gmail.com');
   assertNull('invalid name', ydn.string.normalizeEmail('@gmail.com'));
   assertNull('invalid domain', ydn.string.normalizeEmail('abc@gmailcom'));
+  assertEquals('with dash', 'thinht@smg-united.com', ydn.string.normalizeEmail('thinht@smg-united.com'));
   assertEquals('with naming', 'brandiengage@gmail.com', ydn.string.normalizeEmail('brandi steel <brandiengage@gmail.com>'));
 };
 

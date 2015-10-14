@@ -145,28 +145,31 @@ ydn.ui.MessageDialog.prototype.getContentElement = function() {
 
 
 /**
+ * @param {string=} opt_ok_label optional OK label.
  * @return {Array<ydn.ui.MessageDialog.ButtonDef>}
  */
-ydn.ui.MessageDialog.createOKButtonSet = function() {
+ydn.ui.MessageDialog.createOKButtonSet = function(opt_ok_label) {
   return [{
     name: ydn.ui.MessageDialog.Button.OK,
-    label: 'OK',
+    label: opt_ok_label || 'OK',
     isDefault: true
   }];
 };
 
 
 /**
+ * @param {string=} opt_ok_label optional OK label.
+ * @param {string=} opt_cancel_label optional Cancel label.
  * @return {Array<ydn.ui.MessageDialog.ButtonDef>}
  */
-ydn.ui.MessageDialog.createOKCancelButtonSet = function() {
+ydn.ui.MessageDialog.createOKCancelButtonSet = function(opt_ok_label, opt_cancel_label) {
   return [{
     name: ydn.ui.MessageDialog.Button.OK,
-    label: 'OK',
+    label: opt_ok_label || 'OK',
     isDefault: true
   }, {
     name: ydn.ui.MessageDialog.Button.CANCEL,
-    label: 'Cancel',
+    label: opt_cancel_label || 'Cancel',
     isCancel: true
   }];
 };

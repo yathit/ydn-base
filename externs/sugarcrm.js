@@ -422,14 +422,14 @@ SugarCrm.Acl = function() {};
 /**
  * @type {boolean}
  */
-SugarCrm.Acl.prototype.access;
+SugarCrm.Acl.prototype.access = false;
 
 
 /**
  * Enum of 'edit', 'delete', 'list', 'view', 'import', 'export'
  * @type {string}
  */
-SugarCrm.Acl.prototype.action;
+SugarCrm.Acl.prototype.action = '';
 
 
 
@@ -475,31 +475,31 @@ SugarCrm.ModuleInfo = function() {};
 /**
  * @type {SugarCrm.ModuleMeta}
  */
-SugarCrm.ModuleInfo.prototype._meta;
+SugarCrm.ModuleInfo.prototype._meta = null;
 
 
 /**
  * @type {string}
  */
-SugarCrm.ModuleInfo.prototype.module_name;
+SugarCrm.ModuleInfo.prototype.module_name = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.ModuleInfo.prototype.table_name;
+SugarCrm.ModuleInfo.prototype.table_name = '';
 
 
 /**
  * @type {!Object.<SugarCrm.ModuleField>|!Array.<SugarCrm.ModuleField>}
  */
-SugarCrm.ModuleInfo.prototype.module_fields;
+SugarCrm.ModuleInfo.prototype.module_fields = [];
 
 
 /**
  * @type {!Object.<SugarCrm.LinkField>}
  */
-SugarCrm.ModuleInfo.prototype.link_fields;
+SugarCrm.ModuleInfo.prototype.link_fields = {};
 
 
 
@@ -514,12 +514,12 @@ SugarCrm.Query = function() {};
 /**
  * @type {Array.<SugarCrm.Record>} result of query.
  */
-SugarCrm.Query.prototype.result;
+SugarCrm.Query.prototype.result = [];
 
 
 
 /**
- * @interface
+ * @constructor
  */
 SugarCrm.ServerInfo = function() {};
 
@@ -527,19 +527,19 @@ SugarCrm.ServerInfo = function() {};
 /**
  * @type {(string|undefined)}
  */
-SugarCrm.ServerInfo.prototype.flavor;
+SugarCrm.ServerInfo.prototype.flavor = '';
 
 
 /**
  * @type {(string|undefined)}
  */
-SugarCrm.ServerInfo.prototype.version;
+SugarCrm.ServerInfo.prototype.version = '';
 
 
 /**
  * @type {(string|undefined)}
  */
-SugarCrm.ServerInfo.prototype.uptime;
+SugarCrm.ServerInfo.prototype.uptime = '';
 
 
 
@@ -552,37 +552,37 @@ SugarCrm.About = function() {};
 /**
  * @type {(string|undefined)}
  */
-SugarCrm.About.prototype.baseUrl;
+SugarCrm.About.prototype.baseUrl = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.About.prototype.domain;
+SugarCrm.About.prototype.domain = '';
 
 
 /**
  * @type {(string|undefined)}
  */
-SugarCrm.About.prototype.userName;
+SugarCrm.About.prototype.userName = '';
 
 
 /**
  * @type {(boolean|undefined)}
  */
-SugarCrm.About.prototype.hostPermission;
+SugarCrm.About.prototype.hostPermission = false;
 
 
 /**
  * @type {(string|undefined)} authentication provider.
  */
-SugarCrm.About.prototype.provider;
+SugarCrm.About.prototype.provider = '';
 
 
 /**
  * @type {(boolean|undefined)}
  */
-SugarCrm.About.prototype.isLogin;
+SugarCrm.About.prototype.isLogin = false;
 
 
 
@@ -596,19 +596,19 @@ CrmApp.Credential = function() {};
 /**
  * @type {string}
  */
-CrmApp.Credential.prototype.password;
+CrmApp.Credential.prototype.password = '';
 
 
 /**
  * @type {string|undefined}
  */
-CrmApp.Credential.prototype.provider;
+CrmApp.Credential.prototype.provider = '';
 
 
 /**
  * @type {boolean|undefined}
  */
-CrmApp.Credential.prototype.hashed;
+CrmApp.Credential.prototype.hashed = false;
 
 
 
