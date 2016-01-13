@@ -223,6 +223,12 @@ SugarCrm.Record.prototype._module = '';
 SugarCrm.Record.prototype.deleted = '';
 
 
+/**
+ * @type {string}
+ */
+SugarCrm.Record.prototype.description = '';
+
+
 
 /**
  * Result record from query with scoring.
