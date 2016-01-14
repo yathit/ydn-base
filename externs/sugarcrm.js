@@ -229,6 +229,12 @@ SugarCrm.Record.prototype.deleted = '';
 SugarCrm.Record.prototype.description = '';
 
 
+/**
+ * @type {string}
+ */
+SugarCrm.Record.prototype.assigned_user_id = '';
+
+
 
 /**
  * Result record from query with scoring.
