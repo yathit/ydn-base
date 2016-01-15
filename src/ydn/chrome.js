@@ -8,9 +8,10 @@ goog.provide('ydn.chrome.alarms');
 /**
  *
  * @param {string} name
+ * @param {Object} info
  * @return {Alarm}
  */
-ydn.chrome.alarms.create = function(name) {
+ydn.chrome.alarms.create = function(name, info) {
   if (goog.global.chrome && goog.global.chrome.alarms) {
     return chrome.alarms.create(name);
   } else {
