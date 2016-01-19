@@ -235,6 +235,24 @@ SugarCrm.Record.prototype.description = '';
 SugarCrm.Record.prototype.assigned_user_id = '';
 
 
+/**
+ * @type {string}
+ */
+SugarCrm.Record.prototype.parent_id = '';
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.Record.prototype.parent_name = '';
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.Record.prototype.parent_type = '';
+
+
 
 /**
  * Result record from query with scoring.
