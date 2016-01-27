@@ -66,6 +66,9 @@ ydn.async.DelayService = function(provider, ms, scope) {
 };
 
 
+/**
+ * @private
+ */
 ydn.async.DelayService.prototype.listener_ = function() {
   if (this.df_) {
     return;
