@@ -248,6 +248,18 @@ SugarCrm.Record.prototype.parent_name = '';
 
 
 /**
+ * @type {?string}
+ */
+SugarCrm.Record.prototype.account_id = '';
+
+
+/**
+ * @type {?string}
+ */
+SugarCrm.Record.prototype.account_name = '';
+
+
+/**
  * @type {string}
  */
 SugarCrm.Record.prototype.parent_type = '';
