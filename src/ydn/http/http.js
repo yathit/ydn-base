@@ -126,7 +126,7 @@ ydn.http.transports = {};
 
 /**
  * @private
- * @type {Array.<function(string=): string>}
+ * @type {Array.<function(string=): string?>}
  */
 ydn.http.scope_resolvers = [];
 

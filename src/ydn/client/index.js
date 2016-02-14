@@ -19,7 +19,7 @@ ydn.client.clients_ = {};
 
 /**
  * @private
- * @type {Array.<function(string=): string>}
+ * @type {Array.<function(string=): string?>}
  */
 ydn.client.scope_resolvers_ = [];
 
