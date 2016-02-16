@@ -26,6 +26,9 @@ ydn.testing.mockExtension.Storage.prototype.get = function(name, cb) {
       obj[name[i]] = JSON.parse(JSON.stringify(this.data_[name[i]] || null));
     }
   }
+  if (!cb) {
+    return;
+  }
   setTimeout(function() {
     cb(obj);
   }, 1);
