@@ -282,6 +282,68 @@ SugarCrm.ScoredRecord.prototype._score = 0;
 
 
 /**
+ * OAuth2 respond.
+ * @constructor
+ */
+SugarCrm.OauthToken = function() {};
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.LoginRecord.prototype.access_token = '';
+
+
+/**
+ * @type {number}
+ */
+SugarCrm.LoginRecord.prototype.expires_in = 0;
+
+
+/**
+ * @type {number} computed value.
+ */
+SugarCrm.LoginRecord.prototype.expires_at = 0;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.LoginRecord.prototype.token_type = '';
+
+
+/**
+ * @type {?string}
+ */
+SugarCrm.LoginRecord.prototype.scope = null;
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.LoginRecord.prototype.refresh_token = '';
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.LoginRecord.prototype.download_token = '';
+
+
+/**
+ * @type {number}
+ */
+SugarCrm.LoginRecord.prototype.refresh_expires_in = 0;
+
+
+/**
+ * @type {number} computed value
+ */
+SugarCrm.LoginRecord.prototype.refresh_expires_at = 0;
+
+
+
+/**
  * Record in login respond.
  * @constructor
  * @extends {SugarCrm.Record}
