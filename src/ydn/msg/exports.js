@@ -24,3 +24,5 @@ goog.exportProperty(goog.async.Deferred.prototype, 'addBoth',
     goog.async.Deferred.prototype.addBoth);
 goog.exportProperty(goog.async.Deferred.prototype, 'addCallbacks',
     goog.async.Deferred.prototype.addCallbacks);
+goog.exportProperty(ydn.async.Deferred.prototype, 'addProgback',
+    ydn.async.Deferred.prototype.addProgback);

@@ -120,3 +120,26 @@ ydn.async.Deferred.prototype.promise = function() {
   // simply return itself.
   return this;
 };
+
+
+/**
+ * @param {*} x
+ * @return {!ydn.async.Deferred}
+ */
+ydn.async.Deferred.fail = function(x) {
+  var df = new ydn.async.Deferred();
+  df.errback(x);
+  return df;
+};
+
+
+/**
+ * @param {T} x
+ * @return {!ydn.async.Deferred<T>}
+ * @template T
+ */
+ydn.async.Deferred.succeed = function(x) {
+  var df = new ydn.async.Deferred();
+  df.callback(x);
+  return df;
+};
