@@ -136,7 +136,7 @@ ydn.client.SimpleHttpRequest.prototype.execute = function(cb, opt_scope) {
     }
     var resp = new ydn.client.HttpRespondData(xhr.getStatus(), body, headers,
         xhr.getStatusText());
-    if (ydn.client.error_logger && !resp.isSuccess() && resp.getStatus() != 404) {
+    if (ydn.client.error_logger && resp.getStatus() == 400) {
       ydn.client.error_logger.log({
         'context': 'HTTP request',
         'path': data.path,
