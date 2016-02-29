@@ -825,6 +825,12 @@ SugarCrm.Relationships.prototype.modified;
 
 
 /**
+ * @type {string}
+ */
+SugarCrm.Relationships.prototype.date_modified;
+
+
+/**
  * @type {SugarCrm.ModuleNameIdPair}
  */
 SugarCrm.Relationships.prototype.to;
