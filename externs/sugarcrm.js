@@ -801,13 +801,28 @@ SugarCrm.ModuleNameIdPair = function() {};
 /**
  * @type {string}
  */
-SugarCrm.ModuleNameIdPair.prototype.module_name;
+SugarCrm.ModuleNameIdPair.prototype.module_name = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.ModuleNameIdPair.prototype.id;
+SugarCrm.ModuleNameIdPair.prototype.id = '';
+
+
+
+/**
+ * Module name and id pair in relationship result.
+ * @constructor
+ * @extends {SugarCrm.ModuleNameIdPair}
+ */
+SugarCrm.ModuleNameIdPairWithLabel = function() {};
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.ModuleNameIdPairWithLabel.prototype.label = '';
 
 
 
