@@ -180,22 +180,47 @@ SugarCrm.CrudResult.prototype.deleted;
 
 
 /**
- * Represents SugarCRM entry.
+ * Id and _module.
  * @constructor
  */
+SugarCrm.RecordIdentifier = function() {};
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.RecordIdentifier.prototype.id = '';
+
+
+/**
+ * This field include in v10 REST result, but not in v4.
+ * @type {string} module name.
+ */
+SugarCrm.RecordIdentifier.prototype._module = '';
+
+
+
+/**
+ * Id and _module.
+ * @constructor
+ * @extends {SugarCrm.RecordIdentifier}
+ */
+SugarCrm.RecordIdentifierWithName = function() {};
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.RecordIdentifierWithName.prototype.name = '';
+
+
+
+/**
+ * Represents SugarCRM entry.
+ * @constructor
+ * @extends {SugarCrm.RecordIdentifierWithName}
+ */
 SugarCrm.Record = function() {};
-
-
-/**
- * @type {string}
- */
-SugarCrm.Record.prototype.id = '';
-
-
-/**
- * @type {string}
- */
-SugarCrm.Record.prototype.name = '';
 
 
 /**
@@ -208,13 +233,6 @@ SugarCrm.Record.prototype.date_entered = '';
  * @type {string}
  */
 SugarCrm.Record.prototype.date_modified = '';
-
-
-/**
- * This field include in v10 REST result, but not in v4.
- * @type {string} module name.
- */
-SugarCrm.Record.prototype._module = '';
 
 
 /**

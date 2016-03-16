@@ -50,8 +50,6 @@ ydn.ui.MessageDialog = function(title, message, buttons) {
     content.appendChild(message);
   }
 
-
-
   for (var i = 0; i < buttons.length; i++) {
     var btn_def = buttons[i];
     var button = document.createElement('button');
