@@ -23,6 +23,7 @@ ydn.msg.MockPipe = function(name, pre_main, opt_pre_sugar, opt_pre_by_id) {
   this.pre = pre_main;
   this.pre_sugar = opt_pre_sugar || {};
   this.pre_by_id = opt_pre_by_id || {};
+  this.default_respond_ = undefined;
 };
 goog.inherits(ydn.msg.MockPipe, ydn.msg.Pipe);
 
@@ -31,6 +32,18 @@ goog.inherits(ydn.msg.MockPipe, ydn.msg.Pipe);
  * @define {number} delay, positive will cause to invoke on setTimeout.
  */
 ydn.msg.MockPipe.DELAY = 0;
+
+
+/**
+ * <pre>
+ *   var mock = ydn.msg.MockPipe();
+ *   mock.setDefaultMessageRespond({});
+ * </pre>
+ * @param {*} obj
+ */
+ydn.msg.MockPipe.prototype.setDefaultMessageRespond = function(obj) {
+  this.default_respond_ = obj;
+};
 
 
 /**
@@ -46,6 +59,9 @@ ydn.msg.MockPipe.prototype.sendMsg = function(msg) {
   }
   if (!resp) {
     resp = this.pre_by_id[msg.id];
+  }
+  if (!resp && goog.isDef(this.default_respond_)) {
+    resp = this.default_respond_;
   }
   var msg_id = msg.group_ ? msg.group_ + ':' + msg.req : msg.req;
   if (!goog.isDef(resp)) {
