@@ -91,6 +91,16 @@ ydn.async.DelayService.prototype.listener_ = function() {
 
 
 /**
+ * Purge all previous listener.
+ * Note: this make previous deferred from {@link #invoke} neither invoke
+ * success nor error.
+ */
+ydn.async.DelayService.prototype.purge = function() {
+  goog.array.clear(this.dfs_);
+};
+
+
+/**
  * Invoke service with given argument.
  * @param {*} arg argument for service. Only the last invoked argument will
  * be used.
