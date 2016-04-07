@@ -378,14 +378,16 @@ ydn.ui.FlyoutMenu.setEnableMenuItem = function(menu, name, val) {
  * @param {Element} menu goog-menu element
  * @param {string} name menu item name.
  * @param {string} val true to enable, false to disable.
+ * @param {string=} opt_tooltip if not provided, will clear existing tooltip.
  */
-ydn.ui.FlyoutMenu.setMenuItemLabel = function(menu, name, val) {
+ydn.ui.FlyoutMenu.setMenuItemLabel = function(menu, name, val, opt_tooltip) {
   var el = menu.querySelector('div.goog-menuitem[name="' + name + '"]');
   if (!el) {
     return;
   }
   var content = el.querySelector('.goog-menuitem-content');
   content.textContent = val;
+  content.setAttribute('title', opt_tooltip || '');
 };
 
 
@@ -404,8 +406,9 @@ ydn.ui.FlyoutMenu.prototype.setEnableMenuItem = function(name, val) {
  * Set menu label.
  * @param {string} name menu item name.
  * @param {string} val true to enable, false to disable.
+ * @param {string=} opt_tooltip if not provided, will clear existing tooltip.
  */
-ydn.ui.FlyoutMenu.prototype.setMenuItemLabel = function(name, val) {
+ydn.ui.FlyoutMenu.prototype.setMenuItemLabel = function(name, val, opt_tooltip) {
   var el = this.getElement();
-  ydn.ui.FlyoutMenu.setMenuItemLabel(el, name, val);
+  ydn.ui.FlyoutMenu.setMenuItemLabel(el, name, val, opt_tooltip);
 };
