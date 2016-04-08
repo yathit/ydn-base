@@ -34,7 +34,7 @@ ydn.ui.MessageDialog = function(title, message, buttons) {
   var header = document.createElement('div');
   header.className = 'header';
   var content = document.createElement('div');
-  content.className = 'content';
+  content.className = 'ydn-content';
   var button_bar = document.createElement('div');
   button_bar.className = 'button-bar';
 
