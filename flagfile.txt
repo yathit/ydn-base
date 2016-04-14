@@ -1,6 +1,7 @@
 --use_types_for_optimization
 --jscomp_error=accessControls
 --jscomp_error=ambiguousFunctionDecl
+--jscomp_error=checkEventfulObjectDisposal
 --jscomp_error=checkDebuggerStatement
 --jscomp_error=checkRegExp
 --jscomp_error=checkTypes
