@@ -138,7 +138,7 @@ ydn.ui.MessageDialog.prototype.dispose = function() {
  * @return {Element}
  */
 ydn.ui.MessageDialog.prototype.getContentElement = function() {
-  return this.dialog.querySelector('.content');
+  return this.dialog.querySelector('.' + ydn.crm.ui.CSS_CLASS_CONTENT);
 };
 
 
