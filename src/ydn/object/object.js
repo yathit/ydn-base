@@ -31,12 +31,18 @@ ydn.object.DEBUG = false;
 /**
  * Deep object cloning by JSON stringify/parse
  *
- * @param {T} obj object to be cloned. `obj` must be defined, but may be `null`.
- * @return {T} cloned object.
+ * @param {T} any entity to be cloned.
+ * @return {T} cloned entity.
  * @template T
  */
-ydn.object.clone = function(obj) {
-  return ydn.json.parse(ydn.json.stringify(obj));
+ydn.object.clone = function(any) {
+  if (typeof any == 'undefined') {
+    return undefined;
+  }
+  if (typeof any == 'number' && isNaN(any)) {
+    return NaN;
+  }
+  return ydn.json.parse(ydn.json.stringify(any));
 };
 
 
