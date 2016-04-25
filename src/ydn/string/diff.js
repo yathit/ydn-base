@@ -118,9 +118,9 @@ ydn.string.diff.longest_common_subsequence = function(file1, file2) {
 
 /**
  * Find differences between file1 and file2.
- * @param {Array.<string>} file1
- * @param {Array.<string>} file2
- * @return {Array.<string>}
+ * @param {Array<string>} file1
+ * @param {Array<string>} file2
+ * @return {Array<{common: Array, file1: Array, file2: Array}>}
  */
 ydn.string.diff.diff_comm = function(file1, file2) {
   // We apply the LCS to build a "comm"-style picture of the
