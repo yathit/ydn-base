@@ -121,17 +121,24 @@ var Atom = function() {};
 /**
  * @type {AtomText}
  */
-Atom.prototype.id;
+Atom.prototype.id = null;
 
 /**
  * @type {AtomText}
  */
-Atom.prototype.title;
+Atom.prototype.title = null;
+
 
 /**
  * @type {AtomText}
  */
-Atom.prototype.updated;
+Atom.prototype.updated = null;
+
+
+/**
+ * @type {AtomText}
+ */
+Atom.prototype.app$edited = null;
 
 
 /**
@@ -153,13 +160,13 @@ Atom.prototype.author;
 /**
  * @type {AtomContent|undefined}
  */
-Atom.prototype.content;
+Atom.prototype.content = null;
 
 
 /**
  * @type {AtomText|undefined}
  */
-Atom.prototype.summary;
+Atom.prototype.summary = null;
 
 
 
