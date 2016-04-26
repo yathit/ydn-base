@@ -187,6 +187,16 @@ ydn.string.countByReg = function(ss, reg) {
 
 
 /**
+ * Count number of words.
+ * @param {string} ss
+ * @return {number}
+ */
+ydn.string.wordCount = function(ss) {
+  return ydn.string.countByReg(ss, /\w+/g);
+};
+
+
+/**
  * Returns the non-overlapping occurrences of ss in t.
  * @param {string} ss
  * @param {string} t
