@@ -182,7 +182,11 @@ ydn.string.encodeArrayBuffer2base64 = function(arrayBuffer) {
  */
 ydn.string.countByReg = function(ss, reg) {
   // a first way to count occurrences.
-  return ss.match(reg).length;
+  if (!ss) {
+    return 0;
+  }
+  var m = ss.match(reg);
+  return m ? m.length : 0;
 };
 
 
