@@ -114,9 +114,10 @@ ydn.msg.Message.counter_ = 0;
  * Promise time out.
  * This value should be sufficiently large for all requests.
  * Note: Twitter user profile API take around 15 sec.
+ * Note: Sync process could take very long.
  * @type {number}
  */
-ydn.msg.Message.TIMEOUT = 30000;
+ydn.msg.Message.TIMEOUT = ydn.time.MINUTE * 2;
 
 
 /**
