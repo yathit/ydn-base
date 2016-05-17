@@ -117,7 +117,7 @@ ydn.msg.Message.counter_ = 0;
  * Note: Sync process could take very long.
  * @type {number}
  */
-ydn.msg.Message.TIMEOUT = ydn.time.MINUTE * 2;
+ydn.msg.Message.TIMEOUT = ydn.time.MINUTE * 5;
 
 
 /**
