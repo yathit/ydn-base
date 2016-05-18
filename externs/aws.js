@@ -86,7 +86,7 @@ AWS.Response.prototype.error = null;
  *    statusCode: number
  * }}
  */
-AWS.Response.prototype.httpResponse = null;
+AWS.Response.prototype.httpResponse;
 
 
 
@@ -180,7 +180,7 @@ AWS.S3.ListBucketResult = function() {};
 
 
 /**
- * @type {Array.<!AWS.S3.Object>}
+ * @type {!Array.<!AWS.S3.Object>}
  */
 AWS.S3.ListBucketResult.prototype.Contents;
 
