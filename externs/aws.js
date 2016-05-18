@@ -20,6 +20,27 @@ var AWS = {};
 AWS.Credentials = function() {};
 
 
+/**
+ * Amazon Mobile Analytics Manager
+ * @param {Object} options
+ * @constructor
+ * @extends {AWS.Credentials}
+ */
+AWS.CognitoIdentityCredentials = function(options) {};
+
+
+/**
+ * @type {string}
+ */
+AWS.config.region = '';
+
+
+/**
+ * @type {AWS.Credentials}
+ */
+AWS.config.credentials = null;
+
+
 
 /**
  * @param {{RoleArn: string, WebIdentityToken: string}} params parameters.
@@ -32,16 +53,7 @@ AWS.WebIdentityCredentials = function(params) {};
 /**
  * @type {string}
  */
-AWS.WebIdentityCredentials.prototype.WebIdentityToken;
-
-
-/**
- * @typedef {{
- *   region: string,
- *   credentials: AWS.Credentials
- * }}
- */
-AWS.config;
+AWS.WebIdentityCredentials.prototype.WebIdentityToken = '';
 
 
 
@@ -58,13 +70,13 @@ AWS.Response = function() {
 /**
  * @type {Object}
  */
-AWS.Response.prototype.data;
+AWS.Response.prototype.data = null;
 
 
 /**
  * @type {Object}
  */
-AWS.Response.prototype.error;
+AWS.Response.prototype.error = null;
 
 
 /**
@@ -74,7 +86,7 @@ AWS.Response.prototype.error;
  *    statusCode: number
  * }}
  */
-AWS.Response.prototype.httpResponse;
+AWS.Response.prototype.httpResponse = null;
 
 
 
@@ -127,37 +139,37 @@ AWS.S3.Object = function() {};
 /**
  * @type {string}
  */
-AWS.S3.Object.prototype.ETag;
+AWS.S3.Object.prototype.ETag = '';
 
 
 /**
  * @type {string}
  */
-AWS.S3.Object.prototype.Generation;
+AWS.S3.Object.prototype.Generation = '';
 
 
 /**
  * @type {string}
  */
-AWS.S3.Object.prototype.Key;
+AWS.S3.Object.prototype.Key = '';
 
 
 /**
  * @type {string}
  */
-AWS.S3.Object.prototype.LastModified;
+AWS.S3.Object.prototype.LastModified = '';
 
 
 /**
  * @type {string}
  */
-AWS.S3.Object.prototype.MetaGeneration;
+AWS.S3.Object.prototype.MetaGeneration = '';
 
 
 /**
  * @type {string}
  */
-AWS.S3.Object.prototype.Size;
+AWS.S3.Object.prototype.Size = '';
 
 
 
@@ -168,7 +180,7 @@ AWS.S3.ListBucketResult = function() {};
 
 
 /**
- * @type {!Array.<!AWS.S3.Object>}
+ * @type {Array.<!AWS.S3.Object>}
  */
 AWS.S3.ListBucketResult.prototype.Contents;
 
@@ -176,25 +188,25 @@ AWS.S3.ListBucketResult.prototype.Contents;
 /**
  * @type {string}
  */
-AWS.S3.ListBucketResult.prototype.IsTruncated;
+AWS.S3.ListBucketResult.prototype.IsTruncated = '';
 
 
 /**
  * @type {string}
  */
-AWS.S3.ListBucketResult.prototype.Marker;
+AWS.S3.ListBucketResult.prototype.Marker = '';
 
 
 /**
  * @type {string}
  */
-AWS.S3.ListBucketResult.prototype.Name;
+AWS.S3.ListBucketResult.prototype.Name = '';
 
 
 /**
  * @type {string}
  */
-AWS.S3.ListBucketResult.prototype.Prefix;
+AWS.S3.ListBucketResult.prototype.Prefix = '';
 
 
 /**
@@ -258,3 +270,35 @@ AWS.S3.prototype.getObject = function(params, callback) {};
  * @return {AWS.Request}
  */
 AWS.S3.prototype.listObjects = function(params, callback) {};
+
+
+/**
+ * @const
+ * @type {Object}
+ */
+var AMA = {};
+
+
+
+/**
+ * Amazon Mobile Analytics Manager
+ * @param {Object} options
+ * @constructor
+ * @link https://aws.github.io/aws-sdk-mobile-analytics-js/doc/AMA.Manager.html
+ */
+AMA.Manager = function(options) {};
+
+
+/**
+ * <pre>
+ *   mobileAnalyticsClient.recordEvent('CUSTOM EVENT NAME', {
+ *      'ATTRIBUTE_1_NAME': 'ATTRIBUTE_1_VALUE',
+ *      }, {
+ *       'METRIC_1_NAME': 1,
+ *   });
+ * </pre>
+ * @param name
+ * @param attributes
+ * @param matric
+ */
+AMA.Manager.recordEvent = function(name, attributes, matric) {};
