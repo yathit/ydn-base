@@ -41,7 +41,7 @@ ydn.client.OAuthService = function(redirect_url, opt_params) {
 
   var cache = goog.global.localStorage.getItem(this.getStorageKey());
   if (cache) {
-    this.gdata_token_ = JSON.parse(cache);
+    this.gdata_token_ = /** @type {YdnApiToken} */(JSON.parse(cache));
   }
 };
 
