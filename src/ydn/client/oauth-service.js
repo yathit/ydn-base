@@ -38,6 +38,20 @@ ydn.client.OAuthService = function(redirect_url, opt_params) {
    * @private
    */
   this.params_ = opt_params || null;
+
+  var cache = goog.global.localStorage.getItem(this.getStorageKey());
+  if (cache) {
+    this.gdata_token_ = JSON.parse(cache);
+  }
+};
+
+
+/**
+ * @protected
+ * @return {string}
+ */
+ydn.client.OAuthService.prototype.getStorageKey = function() {
+  return 'oauth-service' + this.redirect_url_;
 };
 
 
@@ -76,6 +90,7 @@ ydn.client.OAuthService.prototype.getOAuthToken = function(opt_redirect) {
       } else {
         token['expires'] = (token.expires_in * 1000) + goog.now();
         this.gdata_token_ = token;
+        goog.global.localStorage.setItem(this.getStorageKey(), JSON.stringify(this.gdata_token_));
         this.df_gdata_token_.callback(token);
       }
     } else {
