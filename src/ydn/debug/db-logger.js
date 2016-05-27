@@ -12,6 +12,10 @@ goog.require('ydn.db.core.Storage');
 
 /**
  * Create and install closure log record into the database.
+ * Typical use case:
+ * <pre>
+ *   ydn.debug.ILogger.log({error: 'something wrong'}};
+ * </pre>
  * <pre>
  * var schema = {
  *   stores: [ydn.debug.DbLogger.getStoreSchema()]
