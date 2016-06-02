@@ -109,6 +109,7 @@ ydn.client.OAuthService.prototype.getOAuthToken = function(opt_redirect) {
 ydn.client.OAuthService.prototype.reset = function() {
   this.gdata_token_ = null;
   this.df_gdata_token_ = null;
+  goog.global.localStorage.removeItem(this.getStorageKey());
 };
 
 
@@ -121,7 +122,7 @@ ydn.client.OAuthService.prototype.revokeGDataToken = function() {
   var client = ydn.client.getClient(ydn.http.Scopes.AUTH);
   var req = client.request(new ydn.client.HttpRequestData('/token', 'DELETE'));
   req.execute(function(json, raw) {
-    if (raw.isSuccess()) {
+    if (raw.isSuccess() || raw.getStatus() == 404)  {
       this.reset();
       df.callback(null);
     } else {
