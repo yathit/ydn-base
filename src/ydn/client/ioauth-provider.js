@@ -19,7 +19,7 @@ ydn.client.IOAuthProvider = function() {};
 
 
 /**
- * @return {goog.async.Deferred}
+ * @return {!goog.async.Deferred}
  */
 ydn.client.IOAuthProvider.prototype.getOAuthToken = goog.abstractMethod;
 

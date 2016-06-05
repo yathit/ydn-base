@@ -58,7 +58,7 @@ ydn.client.OAuthService.prototype.getStorageKey = function() {
 /**
  * Get GData token.
  * @param {string=} opt_redirect redirect url.
- * @return {goog.async.Deferred}
+ * @return {!goog.async.Deferred}
  */
 ydn.client.OAuthService.prototype.getOAuthToken = function(opt_redirect) {
   if (this.df_gdata_token_) {
@@ -115,7 +115,7 @@ ydn.client.OAuthService.prototype.reset = function() {
 
 /**
  * Revoke Google gdata refresh token in the server.
- * @return {goog.async.Deferred}
+ * @return {!goog.async.Deferred}
  */
 ydn.client.OAuthService.prototype.revokeGDataToken = function() {
   var df = new goog.async.Deferred();
