@@ -61,7 +61,7 @@ ydn.json.toShortString = function(obj) {
   var json;
   /** @preserveTry */
   try {
-    json = ydn.json.stringify(obj);
+    json = goog.isString(obj) ? obj : ydn.json.stringify(obj);
   } catch (e) {
     json = '';
   }
