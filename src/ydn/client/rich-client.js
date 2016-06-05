@@ -51,7 +51,24 @@ ydn.client.RichClient = function(opt_xm, opt_headers, opt_proxy, opt_retry, opt_
  * @type {goog.net.XhrManager}
  * @private
  */
-ydn.client.RichClient.prototype.xm_;
+ydn.client.RichClient.prototype.xm_ = null;
+
+
+/**
+ * Set header to the client.
+ * @param {string} name
+ * @param {?string} value
+ */
+ydn.client.RichClient.prototype.setHeader = function(name, value) {
+  if (!this.header_) {
+    this.header_ = {};
+  }
+  if (value) {
+    this.header_[name] = value;
+  } else {
+    delete this.header_[name];
+  }
+};
 
 
 /**
