@@ -53,6 +53,26 @@ ydn.json.parse = function(json_str) {
 
 
 /**
+ * @param {string} s
+ * @return {*}
+ */
+ydn.json.tryParse = function(s) {
+  if (goog.isString(s) && !goog.string.isEmpty(s)) {
+    var json;
+    /** @preserveTry */
+    try {
+      json = JSON.parse(s);
+    } catch (e) {
+      json = null;
+    }
+    return json;
+  } else {
+    return undefined;
+  }
+};
+
+
+/**
  * Note: This is mainly used in debugging.
  * @param obj
  * @return {string}
