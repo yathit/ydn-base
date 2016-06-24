@@ -74,6 +74,13 @@ ydn.time.WEEK = 7 * ydn.time.DAY;
 
 
 /**
+ * @const
+ * @type {number}
+ */
+ydn.time.YEAR = 365 * ydn.time.DAY;
+
+
+/**
  * Create a next nearest go-to datetime.
  * For example, if current time is '11:09AM', this will return a time of
  * '12:00AM'. If current time is '03:56PM', this will return a time of
