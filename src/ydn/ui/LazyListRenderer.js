@@ -17,7 +17,7 @@ ydn.ui.LazyListRenderer = function(opt_height) {
    * @protected
    * @type {number}
    */
-  this.height = opt_height || 24;
+  this.height = opt_height || 60;
 };
 
 

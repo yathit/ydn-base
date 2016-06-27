@@ -13,9 +13,21 @@
 
 </head>
 <body>
+<style>
+    #root {
+        width: 20em;
+        height: 30em;
+        border: solid blue thin;
+        padding: 4px;
+    }
+
+    .ydn-lazy-list {
+        border: solid gray thin;
+    }
+</style>
 <div id="root"></div>
 <script>
-    var model = new ydn.ui.LazyListModel(5);
+    var model = new ydn.ui.LazyListModel(100);
     var list = new ydn.ui.LazyList(model);
     list.render(document.getElementById('root'));
 </script>

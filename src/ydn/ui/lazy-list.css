@@ -1,3 +1,10 @@
 .ydn-lazy-list {
+    min-height: 10em; /* needs vendor prefixes */
+    display: flex;
+}
 
+.ydn-lazy-list > .ydn-content {
+    flex: 1;
+    display: flex;
+    overflow: auto;
 }
