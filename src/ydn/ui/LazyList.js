@@ -290,7 +290,6 @@ ydn.ui.LazyList.createContainer_ = function(w, h) {
   c.style.overflow = 'auto';
   c.style.position = 'relative';
   c.style.padding = 0;
-  c.style.border = '1px solid black';
   return c;
 };
 
