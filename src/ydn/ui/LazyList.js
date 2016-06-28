@@ -23,7 +23,7 @@
  */
 
 /**
- * @fileOverview List panel for large items.
+ * @fileoverview List panel for large items.
  *
  * @link https://github.com/sergi/virtual-list
  */
@@ -55,8 +55,28 @@ ydn.ui.LazyList = function(model, renderer, opt_dom) {
   this.renderer_ = renderer;
   this.setModel(model);
 
+  /**
+   * @type {number}
+   * @private
+   */
   this.prev_first_ = 0;
 
+  /**
+   * @protected
+   * @type {number}
+   */
+  this.screenItemsLen = 0;
+
+  /**
+   * @protected
+   * @type {number}
+   */
+  this.cachedItemsLen = 0;
+
+  /**
+   * @type {goog.async.Delay}
+   * @private
+   */
   this.delay_cleanup_ = new goog.async.Delay(this.cleanUpItems_, 100, this);
 
 };
@@ -74,7 +94,7 @@ ydn.ui.LazyList.prototype.getModel = function() {
 /**
  * @define {boolean} debug flag.
  */
-ydn.ui.LazyList.DEBUG = true;
+ydn.ui.LazyList.DEBUG = false;
 
 /**
  * @const
@@ -97,6 +117,15 @@ ydn.ui.LazyList.prototype.createDom = function() {
   el.appendChild(scroller);
 };
 
+
+/**
+ * @inheritDoc
+ */
+ydn.ui.LazyList.prototype.disposeInternal = function() {
+  this.delay_cleanup_.dispose();
+  this.delay_cleanup_ = null;
+  ydn.ui.LazyList.base(this, 'disposeInternal');
+};
 
 
 /**
@@ -177,7 +206,7 @@ ydn.ui.LazyList.prototype.prev_first_ = 0;
  * acceleration. We delete them once scrolling has finished.
  *
  * @param {Node} node Parent node where we want to append the children chunk.
- * @param {Number} from Starting position, i.e. first children index.
+ * @param {number} from Starting position, i.e. first children index.
  * @return {void}
  */
 ydn.ui.LazyList.prototype.renderChunk_ = function(node, from) {
@@ -250,8 +279,8 @@ ydn.ui.LazyList.createScroller_ = function(h) {
   scroller.classList.add('ydn-lazy-list-scroller');
   scroller.style.opacity = 0;
   scroller.style.position = 'absolute';
-  scroller.style.top = 0;
-  scroller.style.left = 0;
+  scroller.style.top = '0';
+  scroller.style.left = '0';
   scroller.style.width = '1px';
   scroller.style.height = h + 'px';
   return scroller;

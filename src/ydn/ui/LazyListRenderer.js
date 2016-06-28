@@ -1,5 +1,5 @@
 /**
- * @fileOverview Lazy list data model.
+ * @fileoverview Lazy list data model.
  */
 
 

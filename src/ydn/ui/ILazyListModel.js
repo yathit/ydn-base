@@ -1,5 +1,5 @@
 /**
- * @fileOverview Lazy list data model interface.
+ * @fileoverview Lazy list data model interface.
  *
  * When number of items change, this dispatch {@link goog.events.EventType.CHANGE} event.
  */
@@ -14,7 +14,6 @@ goog.provide('ydn.ui.ILazyListModel');
  * @extends {goog.events.Listenable}
  */
 ydn.ui.ILazyListModel = function() {};
-goog.inherits(ydn.ui.ILazyListModel, goog.events.EventTarget);
 
 
 /**

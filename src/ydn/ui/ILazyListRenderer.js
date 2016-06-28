@@ -1,5 +1,5 @@
 /**
- * @fileOverview Lazy list item renderer.
+ * @fileoverview Lazy list item renderer.
  */
 
 
@@ -21,6 +21,7 @@ ydn.ui.ILazyListRenderer.prototype.getHeight = function() {};
 /**
  * Render on given element.
  * @param {Object} data
+ * @return {Element}
  */
 ydn.ui.ILazyListRenderer.prototype.render = function(data) {};
 
