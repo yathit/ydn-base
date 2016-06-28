@@ -56,12 +56,6 @@ ydn.ui.LazyList = function(model, renderer, opt_dom) {
   this.setModel(model);
 
   /**
-   * @type {number}
-   * @private
-   */
-  this.prev_first_ = 0;
-
-  /**
    * @protected
    * @type {number}
    */
@@ -94,7 +88,7 @@ ydn.ui.LazyList.prototype.getModel = function() {
 /**
  * @define {boolean} debug flag.
  */
-ydn.ui.LazyList.DEBUG = false;
+ydn.ui.LazyList.DEBUG = true;
 
 /**
  * @const
@@ -172,13 +166,19 @@ ydn.ui.LazyList.prototype.enterDocument = function() {
  * Reset.
  */
 ydn.ui.LazyList.prototype.reset = function() {
+  if (ydn.ui.LazyList.DEBUG) {
+    console.log('reset');
+  }
+  this.delay_cleanup_.stop();
+  this.lastRepaintY_ = 0;
   var el = this.getElement();
-  var sh = this.renderer_.getHeight() * this.getModel().getCount();
-  goog.style.setHeight(el.querySelector('.ydn-lazy-list-scroller'), sh);
   this.screenItemsLen = Math.ceil(el.clientHeight / this.renderer_.getHeight());
   // Cache 4 times the number of items that fit in the container viewport
   this.cachedItemsLen = this.screenItemsLen * 3;
-  this.renderChunk_(el, this.prev_first_);
+  el.innerHTML = '';
+  var scroller = ydn.ui.LazyList.createScroller_(this.renderer_.getHeight() * this.getModel().getCount());
+  el.appendChild(scroller);
+  this.renderChunk_(el, 0);
 };
 
 
@@ -257,7 +257,6 @@ ydn.ui.LazyList.prototype.renderChunk_ = function(node, from) {
   }
 
   node.appendChild(fragment);
-  this.prev_first_ = from;
 };
 
 
