@@ -31,7 +31,7 @@
     var list = new ydn.ui.LazyList(model, new ydn.ui.LazyListRenderer());
     list.render(document.getElementById('root'));
 
-    setTimeout(function() {
+    setInterval(function() {
         msg.textContent = document.querySelector('.ydn-lazy-list').childElementCount + ' elements';
     }, 1000)
 </script>

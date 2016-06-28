@@ -185,9 +185,9 @@ ydn.ui.LazyList.prototype.reset = function() {
 ydn.ui.LazyList.prototype.createRow = function(i) {
   var itemHeight = this.renderer_.getHeight();
   var item = this.renderer_.render(this.getModel().getItemAt(i));
-  item.classList.add('vrow');
   item.style.position = 'absolute';
   item.style.top = (i * itemHeight) + 'px';
+  item.setAttribute('data-offset', i);
   return item;
 };
 
@@ -205,7 +205,7 @@ ydn.ui.LazyList.prototype.prev_first_ = 0;
  * deletion instead of deleting them right away, which would suddenly stop the
  * acceleration. We delete them once scrolling has finished.
  *
- * @param {Node} node Parent node where we want to append the children chunk.
+ * @param {Element} node Parent node where we want to append the children chunk.
  * @param {number} from Starting position, i.e. first children index.
  * @return {void}
  */
@@ -220,19 +220,42 @@ ydn.ui.LazyList.prototype.renderChunk_ = function(node, from) {
     finalItem = totalRows;
   }
 
+  var prev_start = -1;
+  var prev_end = -1;
+  if (node.childElementCount > 1) {
+    // Note: there is dummy element in the list
+    prev_start = parseInt(node.firstElementChild.nextElementSibling.getAttribute('data-offset'), 10);
+    prev_end = parseInt(node.lastElementChild.getAttribute('data-offset'), 10);
+  }
 
   // Append all the new rows in a document fragment that we will later append to
   // the parent node
+  var created = 0;
+  var purged = 0;
   var fragment = document.createDocumentFragment();
   for (var i = from; i < finalItem; i++) {
-    fragment.appendChild(this.createRow(i));
+    var already = i >= prev_start && i <= prev_end;
+    if (!already) {
+      fragment.appendChild(this.createRow(i));
+      created++;
+    }
   }
 
   // Hide and mark obsolete nodes for deletion.
-  for (var j = 1, l = node.childNodes.length; j < l; j++) {
-    node.childNodes[j].style.display = 'none';
-    node.childNodes[j].setAttribute('data-rm', '1');
+  for (var i = 1; i < node.childElementCount; i++) {
+    // Note: there is dummy element in the list
+    var offset = parseInt(node.children[i].getAttribute('data-offset'), 10);
+    if (offset < from || offset > finalItem) {
+      node.children[i].style.display = 'none';
+      node.children[i].setAttribute('data-rm', '1');
+      purged++;
+    }
   }
+
+  if (ydn.ui.LazyList.DEBUG) {
+    console.log(created + ' created' + ' ' + purged + ' purged from ' + prev_start + '-' + prev_end);
+  }
+
   node.appendChild(fragment);
   this.prev_first_ = from;
 };
@@ -247,6 +270,9 @@ ydn.ui.LazyList.prototype.cleanUpItems_ = function() {
   var badNodes = el.querySelectorAll('[data-rm="1"]');
   for (var i = 0, l = badNodes.length; i < l; i++) {
     el.removeChild(badNodes[i]);
+  }
+  if (ydn.ui.LazyList.DEBUG) {
+    console.log(badNodes.length + ' elements clean');
   }
 };
 
