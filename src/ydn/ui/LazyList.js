@@ -177,7 +177,7 @@ ydn.ui.LazyList.prototype.reset = function() {
   this.cachedItemsLen = this.screenItemsLen * 3;
   var h = this.renderer_.getHeight() * this.getModel().getCount();
   goog.style.setHeight(el.firstElementChild, h);
-  for (var i = el.childElementCount - 1; i > 1; i--) {
+  for (var i = el.childElementCount - 1; i > 0; i--) {
     el.removeChild(el.children[i]);
   }
   this.renderChunk_(el, 0);
