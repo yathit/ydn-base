@@ -88,7 +88,7 @@ ydn.ui.LazyList.prototype.getModel = function() {
 /**
  * @define {boolean} debug flag.
  */
-ydn.ui.LazyList.DEBUG = true;
+ydn.ui.LazyList.DEBUG = false;
 
 /**
  * @const
