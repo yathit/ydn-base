@@ -11,14 +11,27 @@ goog.provide('ydn.ui.LazyListModel');
  * @param {number=} opt_count number of items.
  * @constructor
  * @struct
+ * @extends {goog.events.EventTarget}
  */
 ydn.ui.LazyListModel = function(opt_count) {
+  ydn.ui.LazyListModel.base(this, 'constructor');
   /**
    * @protected
    * @type {number}
    */
   this.count = opt_count || 0;
+
+  var me = this;
+  var flash = function() {
+    setTimeout(function() {
+      me.count = (me.count * (Math.random() + 0.6)) | 0;
+      me.dispatchEvent(new goog.events.Event(goog.events.EventType.CHANGE));
+      flash();
+    }, Math.random() * 1000 * 15);
+  };
+  flash();
 };
+goog.inherits(ydn.ui.LazyListModel, goog.events.EventTarget);
 
 
 /**

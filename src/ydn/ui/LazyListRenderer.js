@@ -4,12 +4,14 @@
 
 
 goog.provide('ydn.ui.LazyListRenderer');
+goog.require('ydn.ui.ILazyListRenderer');
 
 
 /**
  * Lazy list data model.
  * @param {number=} opt_height item height.
  * @constructor
+ * @implements {ydn.ui.ILazyListRenderer}
  * @struct
  */
 ydn.ui.LazyListRenderer = function(opt_height) {
@@ -31,12 +33,16 @@ ydn.ui.LazyListRenderer.prototype.getHeight = function() {
 
 /**
  * Render on given element.
- * @param {Element} el
  * @param {Object} data
  */
-ydn.ui.LazyListRenderer.prototype.render = function(el, data) {
-  el.textContent = data['id'] + '. ' + data['name'];
+ydn.ui.LazyListRenderer.prototype.render = function(data) {
+  var el = document.createElement('DIV');
+  el.textContent = data['id'];
   el.setAttribute('data-id', data['id']);
   goog.style.setHeight(el, this.height);
+  setTimeout(function() {
+    el.textContent = data['id'] + '. ' + data['name'];
+  }, Math.random() * 1000);
+  return el;
 };
 

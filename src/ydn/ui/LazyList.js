@@ -30,40 +30,51 @@
 
 
 goog.provide('ydn.ui.LazyList');
+goog.require('goog.async.Delay');
 goog.require('goog.ui.Component');
+goog.require('ydn.ui.ILazyListRenderer');
 goog.require('ydn.ui.LazyListModel');
 goog.require('ydn.ui.LazyListRenderer');
 
 
 /**
  *
- * @param {ydn.ui.LazyListModel} model
- * @param {ydn.ui.LazyListRenderer=} opt_renderrer
+ * @param {ydn.ui.ILazyListModel} model
+ * @param {ydn.ui.ILazyListRenderer} renderer
  * @param {goog.dom.DomHelper=} opt_dom
  * @constructor
  * @extends {goog.ui.Component}
  * @struct
  */
-ydn.ui.LazyList = function(model, opt_renderrer, opt_dom) {
+ydn.ui.LazyList = function(model, renderer, opt_dom) {
   ydn.ui.LazyList.base(this, 'constructor', opt_dom);
   /**
-   * @type {ydn.ui.LazyListRenderer}
+   * @type {ydn.ui.ILazyListRenderer}
    * @private
    */
-  this.renderer_ = opt_renderrer || new ydn.ui.LazyListRenderer();
+  this.renderer_ = renderer;
   this.setModel(model);
+
+  this.prev_first_ = 0;
+
+  this.delay_cleanup_ = new goog.async.Delay(this.cleanUpItems_, 100, this);
 
 };
 goog.inherits(ydn.ui.LazyList, goog.ui.Component);
 
 
 /**
- * @return {ydn.ui.LazyListModel}
+ * @return {ydn.ui.ILazyListModel}
  */
 ydn.ui.LazyList.prototype.getModel = function() {
-  return /** @type {ydn.ui.LazyListModel} */(ydn.ui.LazyList.base(this, 'getModel'));
+  return /** @type {ydn.ui.ILazyListModel} */(ydn.ui.LazyList.base(this, 'getModel'));
 };
 
+
+/**
+ * @define {boolean} debug flag.
+ */
+ydn.ui.LazyList.DEBUG = true;
 
 /**
  * @const
@@ -80,23 +91,12 @@ ydn.ui.LazyList.prototype.createDom = function() {
   var dom = this.getDomHelper();
   var el = ydn.ui.LazyList.createContainer_('100%', '100%');
   this.setElementInternal(el);
+  el.classList.add(ydn.ui.LazyList.CSS_CLASS);
 
   var scroller = ydn.ui.LazyList.createScroller_(this.renderer_.getHeight() * this.getModel().getCount());
   el.appendChild(scroller);
-
-
 };
 
-
-/**
- * Refresh list.
- */
-ydn.ui.LazyList.prototype.refresh = function() {
-  var cnt = this.getModel().getCount();
-  var el = this.getElement().querySelector('.' + ydn.ui.LazyList.CSS_CLASS + ' .ydn-content');
-  goog.style.setHeight(el, this.renderer_.getHeight() * cnt);
-
-};
 
 
 /**
@@ -107,29 +107,21 @@ ydn.ui.LazyList.prototype.lastRepaintY_ = 0;
 
 
 /**
- * @type {number}
- * @private
- */
-ydn.ui.LazyList.prototype.lastScrolled_ = 0;
-
-/**
  * @param {goog.events.BrowserEvent} ev
  * @private
  */
 ydn.ui.LazyList.prototype.onScroll_ = function(ev) {
   var el = this.getElement();
-  var screenItemsLen = Math.ceil(el.clientHeight / this.renderer_.getHeight());
   var itemHeight = this.renderer_.getHeight();
-  var maxBuffer = screenItemsLen * itemHeight;
+  var maxBuffer = this.screenItemsLen * itemHeight;
 
-  var scrollTop = ev.target.scrollTop; // Triggers reflow
+  var scrollTop = el.scrollTop; // Triggers reflow
   if (!this.lastRepaintY_ || Math.abs(scrollTop - this.lastRepaintY_) > maxBuffer) {
-    var first = parseInt(scrollTop / itemHeight) - screenItemsLen;
-    self.renderChunk_(this.getElement(), first < 0 ? 0 : first);
+    var first = ((scrollTop / itemHeight) | 0) - this.screenItemsLen;
+    this.renderChunk_(this.getElement(), first < 0 ? 0 : first);
     this.lastRepaintY_ = scrollTop;
   }
-
-  this.lastScrolled_ = Date.now();
+  this.delay_cleanup_.start();
   ev.preventDefault();
 };
 
@@ -141,23 +133,41 @@ ydn.ui.LazyList.prototype.enterDocument = function() {
   ydn.ui.LazyList.base(this, 'enterDocument');
 
   this.getHandler().listen(this.getElement(), 'scroll', this.onScroll_);
+  this.getHandler().listen(this.getModel(), goog.events.EventType.CHANGE, this.reset);
+
+  this.reset();
 };
 
 
+/**
+ * Reset.
+ */
 ydn.ui.LazyList.prototype.reset = function() {
   var el = this.getElement();
-  var screenItemsLen = Math.ceil(el.clientHeight / this.renderer_.getHeight());
+  var sh = this.renderer_.getHeight() * this.getModel().getCount();
+  goog.style.setHeight(el.querySelector('.ydn-lazy-list-scroller'), sh);
+  this.screenItemsLen = Math.ceil(el.clientHeight / this.renderer_.getHeight());
   // Cache 4 times the number of items that fit in the container viewport
-  this.cachedItemsLen = screenItemsLen * 3;
-  this.renderChunk_(el, 0);
+  this.cachedItemsLen = this.screenItemsLen * 3;
+  this.renderChunk_(el, this.prev_first_);
 };
 
 
 ydn.ui.LazyList.prototype.createRow = function(i) {
-  var div = document.createElement('DIV');
-  this.renderer_.render(div, this.getModel().getItemAt(i));
-  return div;
+  var itemHeight = this.renderer_.getHeight();
+  var item = this.renderer_.render(this.getModel().getItemAt(i));
+  item.classList.add('vrow');
+  item.style.position = 'absolute';
+  item.style.top = (i * itemHeight) + 'px';
+  return item;
 };
+
+
+/**
+ * @type {number}
+ * @private
+ */
+ydn.ui.LazyList.prototype.prev_first_ = 0;
 
 
 /**
@@ -173,6 +183,10 @@ ydn.ui.LazyList.prototype.createRow = function(i) {
 ydn.ui.LazyList.prototype.renderChunk_ = function(node, from) {
   var finalItem = from + this.cachedItemsLen;
   var totalRows = this.getModel().getCount();
+
+  if (ydn.ui.LazyList.DEBUG) {
+    window.console.log('render from ' + from + ' to ' + finalItem + ' for ' + totalRows);
+  }
   if (finalItem > totalRows) {
     finalItem = totalRows;
   }
@@ -191,13 +205,27 @@ ydn.ui.LazyList.prototype.renderChunk_ = function(node, from) {
     node.childNodes[j].setAttribute('data-rm', '1');
   }
   node.appendChild(fragment);
+  this.prev_first_ = from;
+};
+
+
+/**
+ *
+ * @private
+ */
+ydn.ui.LazyList.prototype.cleanUpItems_ = function() {
+  var el = this.getElement();
+  var badNodes = el.querySelectorAll('[data-rm="1"]');
+  for (var i = 0, l = badNodes.length; i < l; i++) {
+    el.removeChild(badNodes[i]);
+  }
 };
 
 
 /**
  * @param {string} w
  * @param {string} h
- * @returns {Element}
+ * @return {Element}
  * @private
  */
 ydn.ui.LazyList.createContainer_ = function(w, h) {
@@ -215,10 +243,11 @@ ydn.ui.LazyList.createContainer_ = function(w, h) {
 /**
  * @private
  * @param {number} h
- * @returns {Element}
+ * @return {Element}
  */
 ydn.ui.LazyList.createScroller_ = function(h) {
   var scroller = document.createElement('div');
+  scroller.classList.add('ydn-lazy-list-scroller');
   scroller.style.opacity = 0;
   scroller.style.position = 'absolute';
   scroller.style.top = 0;
