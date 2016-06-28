@@ -175,10 +175,13 @@ ydn.ui.LazyList.prototype.reset = function() {
   this.screenItemsLen = Math.ceil(el.clientHeight / this.renderer_.getHeight());
   // Cache 4 times the number of items that fit in the container viewport
   this.cachedItemsLen = this.screenItemsLen * 3;
-  el.innerHTML = '';
-  var scroller = ydn.ui.LazyList.createScroller_(this.renderer_.getHeight() * this.getModel().getCount());
-  el.appendChild(scroller);
+  var h = this.renderer_.getHeight() * this.getModel().getCount();
+  goog.style.setHeight(el.firstElementChild, h);
+  for (var i = el.childElementCount - 1; i > 1; i--) {
+    el.removeChild(el.children[i]);
+  }
   this.renderChunk_(el, 0);
+  el.scrollTop = 0;
 };
 
 
@@ -286,7 +289,8 @@ ydn.ui.LazyList.createContainer_ = function(w, h) {
   var c = document.createElement('div');
   c.style.width = w;
   c.style.height = h;
-  c.style.overflow = 'auto';
+  c.style.overflowX = 'auto';
+  c.style.overflowY = 'scroll';
   c.style.position = 'relative';
   c.style.padding = 0;
   return c;
