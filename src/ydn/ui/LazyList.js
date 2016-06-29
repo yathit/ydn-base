@@ -156,9 +156,20 @@ ydn.ui.LazyList.prototype.enterDocument = function() {
   ydn.ui.LazyList.base(this, 'enterDocument');
 
   this.getHandler().listen(this.getElement(), 'scroll', this.onScroll_);
-  this.getHandler().listen(this.getModel(), goog.events.EventType.CHANGE, this.reset);
+  this.getHandler().listen(this.getModel(), goog.events.EventType.LOAD, this.reset);
+  this.getHandler().listen(this.getModel(), goog.events.EventType.CHANGE, this.updated);
 
   this.reset();
+};
+
+
+/**
+ * Reset.
+ */
+ydn.ui.LazyList.prototype.updated = function() {
+  var h = this.renderer_.getHeight() * this.getModel().getCount();
+  var el = this.getElement().querySelector('.ydn-lazy-list-scroller');
+  goog.style.setHeight(el, h);
 };
 
 
@@ -176,7 +187,7 @@ ydn.ui.LazyList.prototype.reset = function() {
   // Cache 4 times the number of items that fit in the container viewport
   this.cachedItemsLen = this.screenItemsLen * 3;
   var h = this.renderer_.getHeight() * this.getModel().getCount();
-  goog.style.setHeight(el.firstElementChild, h);
+  goog.style.setHeight(el.querySelector('.ydn-lazy-list-scroller'), h);
   for (var i = el.childElementCount - 1; i > 0; i--) {
     el.removeChild(el.children[i]);
   }
