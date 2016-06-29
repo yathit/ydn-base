@@ -183,6 +183,7 @@ ydn.ui.LazyList.prototype.reset = function() {
   this.delay_cleanup_.stop();
   this.lastRepaintY_ = 0;
   var el = this.getElement();
+
   this.screenItemsLen = Math.ceil(el.clientHeight / this.renderer_.getHeight());
   // Cache 4 times the number of items that fit in the container viewport
   this.cachedItemsLen = this.screenItemsLen * 3;
@@ -192,7 +193,9 @@ ydn.ui.LazyList.prototype.reset = function() {
     el.removeChild(el.children[i]);
   }
   this.renderChunk_(el, 0);
-  el.scrollTop = 0;
+  // HACK: Here calling offsetHeight is just to trigger a reflow.
+  // otherwise, newly added elements are not show up, until user scroll the panel.
+  el.scrollTop = Math.min(el.offsetHeight, 0);
 };
 
 
