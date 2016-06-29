@@ -167,9 +167,13 @@ ydn.ui.LazyList.prototype.enterDocument = function() {
  * Reset.
  */
 ydn.ui.LazyList.prototype.updated = function() {
-  var h = this.renderer_.getHeight() * this.getModel().getCount();
-  var el = this.getElement().querySelector('.ydn-lazy-list-scroller');
-  goog.style.setHeight(el, h);
+  if (this.getElement().childElementCount == 1) {
+    this.reset();
+  } else {
+    var h = this.renderer_.getHeight() * this.getModel().getCount();
+    var el = this.getElement().querySelector('.ydn-lazy-list-scroller');
+    goog.style.setHeight(el, h);
+  }
 };
 
 
