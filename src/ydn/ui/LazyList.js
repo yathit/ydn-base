@@ -41,13 +41,19 @@ goog.require('ydn.ui.LazyListRenderer');
  *
  * @param {ydn.ui.ILazyListModel} model
  * @param {ydn.ui.ILazyListRenderer} renderer
+ * @param {goog.dom.TagName=} opt_tag
  * @param {goog.dom.DomHelper=} opt_dom
  * @constructor
  * @extends {goog.ui.Component}
  * @struct
  */
-ydn.ui.LazyList = function(model, renderer, opt_dom) {
+ydn.ui.LazyList = function(model, renderer, opt_tag, opt_dom) {
   ydn.ui.LazyList.base(this, 'constructor', opt_dom);
+  /**
+   * @type {goog.dom.TagName}
+   * @private
+   */
+  this.tag_ = opt_tag || goog.dom.TagName.DIV;
   /**
    * @type {ydn.ui.ILazyListRenderer}
    * @private
@@ -101,9 +107,8 @@ ydn.ui.LazyList.CSS_CLASS = 'ydn-lazy-list';
  * @override
  */
 ydn.ui.LazyList.prototype.createDom = function() {
-  ydn.ui.LazyList.base(this, 'createDom');
   var dom = this.getDomHelper();
-  var el = ydn.ui.LazyList.createContainer_('100%', '100%');
+  var el = ydn.ui.LazyList.createContainer_('100%', '100%', this.tag_);
   this.setElementInternal(el);
   el.classList.add(ydn.ui.LazyList.CSS_CLASS);
 
@@ -300,11 +305,12 @@ ydn.ui.LazyList.prototype.cleanUpItems_ = function() {
 /**
  * @param {string} w
  * @param {string} h
+ * @param {goog.dom.TagName=} opt_tag
  * @return {Element}
  * @private
  */
-ydn.ui.LazyList.createContainer_ = function(w, h) {
-  var c = document.createElement('div');
+ydn.ui.LazyList.createContainer_ = function(w, h, opt_tag) {
+  var c = document.createElement(opt_tag || goog.dom.TagName.DIV);
   c.style.width = w;
   c.style.height = h;
   c.style.overflowX = 'auto';
