@@ -55,17 +55,17 @@ var AtomCategory = function() {};
 /**
  * @type {string}
  */
-AtomCategory.prototype.term;
+AtomCategory.prototype.term = '';
 
 /**
  * @type {string|undefined}
  */
-AtomCategory.prototype.scheme;
+AtomCategory.prototype.scheme = '';
 
 /**
  * @type {string|undefined}
  */
-AtomCategory.prototype.label;
+AtomCategory.prototype.label = '';
 
 
 /**
@@ -77,39 +77,40 @@ var AtomPerson = function() {};
 /**
  * @type {AtomText}
  */
-AtomPerson.prototype.name;
+AtomPerson.prototype.name = null;
 
 /**
  * @type {AtomText}
  */
-AtomPerson.prototype.uri;
+AtomPerson.prototype.uri = null;
 
 /**
  * @type {AtomText}
  */
-AtomPerson.prototype.email;
+AtomPerson.prototype.email = null;
 
 
 /**
  * either contains, or links to, the complete content of the entry.
  * @constructor
+ * @extends {AtomText}
  */
 var AtomContent = function() {};
 
 /**
  * @type {string}
  */
-AtomContent.prototype.src;
+AtomContent.prototype.src = '';
 
 /**
  * @type {string}
  */
-AtomContent.prototype.type;
+AtomContent.prototype.type = '';
 
 /**
  * @type {string}
  */
-AtomContent.prototype.$t;
+AtomContent.prototype.$t = '';
 
 
 /**

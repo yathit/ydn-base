@@ -46,14 +46,16 @@ ydn.atom.Atom.text = function(text) {
 /**
  *
  * @param {string} text
- * @param {string} type
+ * @param {string=} opt_type
  * @return {!AtomContent}
  */
-ydn.atom.Atom.content = function(text, type) {
+ydn.atom.Atom.content = function(text, opt_type) {
   var content = {
-    '$t': text,
-    'type': type
+    '$t': text
   };
+  if (opt_type) {
+    content['type'] = opt_type;
+  }
   return /** @type {!AtomContent} */ (content);
 };
 
