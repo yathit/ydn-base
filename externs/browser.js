@@ -137,3 +137,16 @@ chrome.declarativeContent.onPageChanged.removeRules = function(rules, callback) 
  * @param {Array.<chrome.declarativeContent.RuleOptions>} rules
  */
 chrome.declarativeContent.onPageChanged.addRules = function(rules) {};
+
+
+/**
+ * @const
+ * @type {Object}
+ */
+chrome.instanceID = {};
+
+
+/**
+ * @param {function(string)} cb
+ */
+chrome.instanceID.getID = function(cb) {};
