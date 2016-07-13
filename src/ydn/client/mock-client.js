@@ -88,6 +88,11 @@ ydn.client.MockClient.ResponseData;
 ydn.client.MockClient.prototype.delay = 0;
 
 
+ydn.client.MockClient.prototype.setHeader = function(name, val) {
+
+};
+
+
 /**
  * Get HTTP query count.
  * @param {string=} opt_mth HTTP method. By default return all queries count.

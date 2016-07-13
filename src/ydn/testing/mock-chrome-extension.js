@@ -145,3 +145,32 @@ if (!window['YathitCrm']) {
   window['YathitCrm'] = {'Version': {'release': '1.4.2'},'sugarcrm': {'Version': {'release': '0.18.3'}}};
 }
 
+/**
+ * chrome.identity.getAuthToken
+ * @type {string}
+ */
+ydn.testing.mockExtension.auth_token = '123456';
+if (!chrome.identity) {
+  chrome.identity = {
+    getAuthToken: function (detail, cb) {
+      setTimeout(function () {
+        cb(ydn.testing.mockExtension.auth_token);
+      }, 10);
+    },
+    removeCachedAuthToken: function(detail, cb) {
+      setTimeout(function () {
+        cb();
+      }, 10);
+    },
+    launchWebAuthFlow: function(detail, cb) {
+      setTimeout(function () {
+        cb('');
+      }, 10);
+    },
+    onSignInChanged: {
+      addListener: function(lis) {
+
+      }
+    }
+  };
+}
