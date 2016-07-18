@@ -15,8 +15,8 @@ var SugarCrm = {};
  * @enum {string}
  */
 SugarCrm.Boolean = {
-  '0': '0',
-  '1': '1'
+  FALSE: '0',
+  TRUE: '1'
 };
 
 
@@ -31,13 +31,13 @@ SugarCrm.NameValue = function() {};
 /**
  * @type {string}
  */
-SugarCrm.NameValue.prototype.name;
+SugarCrm.NameValue.prototype.name = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.NameValue.prototype.value;
+SugarCrm.NameValue.prototype.value = '';
 
 
 
@@ -51,19 +51,19 @@ SugarCrm.NameValueEntry = function() {};
 /**
  * @type {string}
  */
-SugarCrm.NameValueEntry.prototype.id;
+SugarCrm.NameValueEntry.prototype.id = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.NameValueEntry.prototype.module_name;
+SugarCrm.NameValueEntry.prototype.module_name = '';
 
 
 /**
  * @type {Object.<SugarCrm.NameValue>}
  */
-SugarCrm.NameValueEntry.prototype.name_value_list;
+SugarCrm.NameValueEntry.prototype.name_value_list = null;
 
 
 
@@ -71,85 +71,93 @@ SugarCrm.NameValueEntry.prototype.name_value_list;
  * Represents SugarCRM email field.
  * @constructor
  */
+SugarCrm.Bean = function() {};
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.Bean.prototype.bean_id = '';
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.Bean.prototype.bean_module = '';
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.Bean.prototype.date_created = '';
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.Bean.prototype.date_modified = '';
+
+
+/**
+ * @type {SugarCrm.Boolean}
+ */
+SugarCrm.Bean.prototype.deleted = SugarCrm.Boolean.FALSE;
+
+
+/**
+ * Represents SugarCRM email field.
+ * @constructor
+ * @extends {SugarCrm.Bean}
+ */
 SugarCrm.EmailField = function() {};
 
 
 /**
  * @type {string}
  */
-SugarCrm.EmailField.prototype.bean_id;
+SugarCrm.EmailField.prototype.email_address = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.EmailField.prototype.bean_module;
+SugarCrm.EmailField.prototype.email_address_caps = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.EmailField.prototype.date_created;
+SugarCrm.EmailField.prototype.email_address_id = '';
 
 
 /**
  * @type {string}
  */
-SugarCrm.EmailField.prototype.date_modified;
+SugarCrm.Bean.prototype.id = '';
 
 
 /**
  * @type {SugarCrm.Boolean}
  */
-SugarCrm.EmailField.prototype.deleted;
-
-
-/**
- * @type {string}
- */
-SugarCrm.EmailField.prototype.email_address;
-
-
-/**
- * @type {string}
- */
-SugarCrm.EmailField.prototype.email_address_caps;
-
-
-/**
- * @type {string}
- */
-SugarCrm.EmailField.prototype.email_address_id;
-
-
-/**
- * @type {string}
- */
-SugarCrm.EmailField.prototype.id;
+SugarCrm.EmailField.prototype.invalid_email = SugarCrm.Boolean.FALSE;
 
 
 /**
  * @type {SugarCrm.Boolean}
  */
-SugarCrm.EmailField.prototype.invalid_email;
+SugarCrm.EmailField.prototype.opt_out = SugarCrm.Boolean.FALSE;
 
 
 /**
  * @type {SugarCrm.Boolean}
  */
-SugarCrm.EmailField.prototype.opt_out;
+SugarCrm.EmailField.prototype.primary_address = SugarCrm.Boolean.FALSE;
 
 
 /**
  * @type {SugarCrm.Boolean}
  */
-SugarCrm.EmailField.prototype.primary_address;
-
-
-/**
- * @type {SugarCrm.Boolean}
- */
-SugarCrm.EmailField.prototype.reply_to_address;
+SugarCrm.EmailField.prototype.reply_to_address = SugarCrm.Boolean.FALSE;
 
 
 
