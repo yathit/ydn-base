@@ -123,6 +123,37 @@ ydn.ui.FlyoutMenu.prototype.render = function(el) {
 
 
 /**
+ * @typedef {{
+ *   name: string,
+ *   checked: boolean
+ * }}
+ */
+ydn.ui.FlyoutMenu.ItemState;
+
+
+/**
+ * @param {Element} el
+ * @param {Array<ydn.ui.FlyoutMenu.ItemState>=} opt_states
+ * @return {!Array<ydn.ui.FlyoutMenu.ItemState>}
+ * @private
+ */
+ydn.ui.FlyoutMenu.listItemState_ = function(el, opt_states) {
+  var states = opt_states || [];
+  if (el && el instanceof Element) {
+    if (el.classList.contains('goog-menuitem')) {
+      var name = el.getAttribute('name');
+      var val = el.classList.contains('goog-option-selected');
+      states.push({name: name, checked: val});
+      return ydn.ui.FlyoutMenu.listItemState_(el.parentElement, states);
+    } else if (el.classList.contains('goog-menu')) {
+      return ydn.ui.FlyoutMenu.listItemState_(el.parentElement, states);
+    }
+  }
+  return states;
+};
+
+
+/**
  * @param {Element} el
  * @param {string} names
  * @return {string}
@@ -152,9 +183,9 @@ ydn.ui.FlyoutMenu.listItemName_ = function(el, names) {
  * @return {?string} if menu item is click, it will be return item name. For
  * hierarchical menu, item name are separated by comma from root to leave, i.e.,
  * 'sync,contact'.
+ * @see ydn.ui.FlyoutMenu.handleClickState with check state.
  */
 ydn.ui.FlyoutMenu.handleClick = function(e) {
-  // todo: e.target or e.target.parentElement instead.
   var item = null;
 
   if (e.target instanceof Element) {
@@ -176,6 +207,41 @@ ydn.ui.FlyoutMenu.handleClick = function(e) {
       goog.style.setElementShown(el, true);
     }, 1000);
     return is_disable ? null : ydn.ui.FlyoutMenu.listItemName_(item, '');
+  }
+  return null;
+};
+
+
+/**
+ * Handle click event to root menu.
+ * @param {goog.events.BrowserEvent|Event} e
+ * @return {Array<ydn.ui.FlyoutMenu.ItemState>} if menu item is click, it will be return item name. For
+ * hierarchical menu, item name are separated by comma from root to leave, i.e.,
+ * 'sync,contact'.
+ * @see ydn.ui.FlyoutMenu.handleClick
+ */
+ydn.ui.FlyoutMenu.handleClickState = function(e) {
+  var item = null;
+
+  if (e.target instanceof Element) {
+    if (e.target.classList.contains('goog-menuitem')) {
+      item = e.target;
+    } else if (e.target.parentElement &&
+        e.target.parentElement.classList.contains('goog-menuitem')) {
+      item = e.target.parentElement;
+    }
+  }
+  if (item) {
+    e.preventDefault();
+    e.stopPropagation();
+    var is_disable = item.classList.contains('goog-menuitem-disabled');
+    var el = goog.dom.getAncestorByClass(item, ydn.ui.FlyoutMenu.CSS_CLASS_MENU);
+    goog.style.setElementShown(el, false);
+    setTimeout(function() {
+      // menu show/hide status is determine by hover state
+      goog.style.setElementShown(el, true);
+    }, 1000);
+    return is_disable ? null : ydn.ui.FlyoutMenu.listItemState_(item);
   }
   return null;
 };
