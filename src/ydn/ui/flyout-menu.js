@@ -102,13 +102,20 @@ ydn.ui.FlyoutMenu.CSS_CLASS_LEFT = 'left-menu';
 
 
 /**
+ * @const
+ * @type {string}
+ */
+ydn.ui.FlyoutMenu.SVG_ICON_NAME = 'more-vert';
+
+
+/**
  * @param {Element} el
  */
 ydn.ui.FlyoutMenu.prototype.render = function(el) {
   goog.asserts.assert(!this.el_, 'Already rendered.');
   this.el_ = document.createElement('div');
   this.el_.className = ydn.ui.FlyoutMenu.CSS_CLASS;
-  var icon_name = this.option_.iconName || 'menu';
+  var icon_name = this.option_.iconName || ydn.ui.FlyoutMenu.SVG_ICON_NAME;
   var svg = ydn.crm.ui.createSvgIcon(icon_name);
   var button = document.createElement('div');
   button.className = 'svg-button';
@@ -399,7 +406,7 @@ ydn.ui.FlyoutMenu.renderMenu = function(items_option) {
  */
 ydn.ui.FlyoutMenu.decoratePopupMenu = function(el, items_option, opt_option) {
   // console.log(options);
-  var icon_name = 'menu';
+  var icon_name = ydn.ui.FlyoutMenu.SVG_ICON_NAME;
   if (opt_option) {
     if (opt_option.iconName) {
       icon_name = opt_option.iconName;
