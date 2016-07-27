@@ -715,6 +715,12 @@ SugarCrm.About.prototype.provider = '';
 SugarCrm.About.prototype.isLogin = false;
 
 
+/**
+ * @type {YdnCrm.UserSiteLicense}
+ */
+SugarCrm.About.prototype.siteLicense = null;
+
+
 
 /**
  * @constructor
