@@ -68,6 +68,41 @@
         </sequential>
     </macrodef>
 
+    <macrodef name="closure-compile-2"  description="compile js files using
+     closure compiler with strict compilation setting">
+        <element name="cssmap" optional="yes"/>
+        <element name="options" optional="yes"/>
+        <element name="extrapaths" optional="yes"/>
+        <attribute name="input.dir"/>
+        <attribute name="flagfile" default="${ydn-base.dir}/flagfile.txt"/>
+        <attribute name="base.dir" default="@{input.dir}" />
+        <attribute name="compilerjarfile" default="${closure-compiler.jar}"/>
+        <attribute name="compilationlevel" default="ADVANCED_OPTIMIZATIONS"/>
+        <attribute name="outputmode" default="compiled"/>
+        <attribute name="input"/>
+        <attribute name="output.fn"/>
+        <sequential>
+            <exec executable="python" failonerror="true" logError="true" dir="@{base.dir}">
+                <arg value="${closure-library.dir}/closure/bin/build/closurebuilder.py"/>
+                <cssmap/>
+                <arg line='-i "@{input}"'/>
+                <arg line='--output_file "@{output.fn}"'/>
+                <arg line='--root "${closure-library.dir}"'/>
+                <arg line='--root "@{input.dir}"'/>
+                <arg line="-o @{outputmode}"/>
+                <arg line='-c "@{compilerjarfile}"'/>
+                <arg line='-f "--flagfile=@{flagfile}"'/>
+                <arg line='-f "--compilation_level=@{compilationlevel}"'/>
+                <arg line='-f "--js=${closure-library.dir}/closure/goog/deps.js"'/>
+                <arg line='-f "--externs=${ydn-base.dir}/externs/browser.js"'/>
+
+                <extrapaths/>
+                <options/>
+            </exec>
+            <echo>"@{output.fn}" generated.</echo>
+        </sequential>
+    </macrodef>
+
     <macrodef name="closure-compile"  description="compile js files using
      closure compiler with strict compilation setting">
         <element name="cssmap" optional="yes"/>

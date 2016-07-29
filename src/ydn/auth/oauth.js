@@ -29,7 +29,6 @@
 
 goog.provide('ydn.auth.Oauth');
 goog.require('goog.Timer');
-goog.require('mbi.web.base');
 
 
 

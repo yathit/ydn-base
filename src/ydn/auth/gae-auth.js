@@ -22,7 +22,6 @@
 goog.provide('ydn.auth.GaeAuth');
 goog.require('goog.Timer');
 goog.require('goog.async.Delay');
-goog.require('mbi.web.base');
 goog.require('ydn.client.AdaptorClient');
 goog.require('ydn.client.FilteredClient');
 goog.require('ydn.client.IOAuthProvider');
