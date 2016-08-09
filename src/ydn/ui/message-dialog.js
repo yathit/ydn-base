@@ -32,7 +32,7 @@ ydn.ui.MessageDialog = function(title, message, buttons) {
    */
   this.dialog = /** @type {HTMLDialogElement} */ (dialog);
   var header = document.createElement('div');
-  header.className = 'header';
+  header.className = 'ydn-header';
   var content = document.createElement('div');
   content.className = 'ydn-content';
   var button_bar = document.createElement('div');
