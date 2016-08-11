@@ -129,9 +129,7 @@ ydn.debug.ILogger.instance = null;
  */
 ydn.debug.ILogger.log = function(data) {
   if (ydn.debug.ILogger.instance) {
-    setTimeout(function() {
-      ydn.debug.ILogger.instance.log(data);
-    }, 10);
+    ydn.debug.ILogger.instance.log(data);
   }
 };
 
