@@ -309,6 +309,7 @@ ydn.msg.Pipe.dryRun = function() {
 ydn.msg.ChannelName = {
   DEV: 'dev', // development channel for testing
   CONTENT_SCRIPT: 'content-script',
+  WEB_APP: 'web-app',
   HOST_PERMISSION: 'hostper',
   POPUP: 'popup',
   OPTIONS: 'options',
