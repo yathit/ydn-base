@@ -11,7 +11,6 @@
  */
 
 
-goog.provide('ydn.msg');
 goog.provide('ydn.msg.Pipe');
 goog.require('goog.events.EventTarget');
 goog.require('ydn.msg.Channel');
@@ -115,9 +114,9 @@ ydn.msg.RReq = {
 /**
  * Message listener.
  * @param {exYdn.PostMessage} msg
- * @private
+ * @protected
  */
-ydn.msg.Pipe.prototype.defaultListener_ = function(msg) {
+ydn.msg.Pipe.prototype.defaultListener = function(msg) {
   if (!msg) {
     return;
   }
@@ -169,8 +168,18 @@ ydn.msg.Pipe.prototype.defaultListener_ = function(msg) {
 
 
 /**
+ * @protected
+ * @param {Object} msg
+ */
+ydn.msg.Pipe.prototype.postMessage = function(msg) {
+  this.getPort().postMessage(msg);
+};
+
+
+/**
  * Send message to background service.
  * @param {ydn.msg.Message} msgr
+ * @final
  */
 ydn.msg.Pipe.prototype.sendMsg = function(msgr) {
 
@@ -193,7 +202,7 @@ ydn.msg.Pipe.prototype.sendMsg = function(msgr) {
     }
   }
 
-  this.getPort().postMessage(msg);
+  this.postMessage(msg);
 
   this.messages_.push(msgr);
   if (this.messages_.length > ydn.msg.Pipe.MAX_MESSANGERS) {
@@ -254,7 +263,7 @@ ydn.msg.Pipe.prototype.getPort = function() {
   if (!this.port_) {
     var me = this;
     this.port_ = chrome.runtime.connect({'name': this.name});
-    var listener = goog.bind(this.defaultListener_, this);
+    var listener = goog.bind(this.defaultListener, this);
     this.port_.onMessage.addListener(listener);
     this.port_.onDisconnect.addListener(function() {
       if (ydn.msg.Pipe.DEBUG) {
@@ -266,44 +275,6 @@ ydn.msg.Pipe.prototype.getPort = function() {
     });
   }
   return this.port_;
-};
-
-
-/**
- * @type {ydn.msg.Pipe}
- * @private
- */
-ydn.msg.main_ = null;
-
-
-/**
- * @return {!ydn.msg.Pipe}
- */
-ydn.msg.getMain = function() {
-  if (!ydn.msg.main_) {
-    var name = ydn.msg.Group.MAIN + '-' + goog.now();
-    ydn.msg.main_ = new ydn.msg.Pipe(name);
-  }
-  return ydn.msg.main_;
-};
-
-
-/**
- * Initialize pipe.
- * @param {exYdn.PipeInfo|string} info_or_name info or group name.
- * @return {!ydn.msg.Pipe}
- */
-ydn.msg.initPipe = function(info_or_name) {
-  goog.asserts.assert(!ydn.msg.main_, 'already initialize pipe.');
-  var info = info_or_name;
-  if (goog.isString(info_or_name)) {
-    info = {
-      'group': info_or_name,
-      'name': info_or_name + '-' + goog.now()
-    };
-  }
-  ydn.msg.main_ = new ydn.msg.Pipe(/** @type {exYdn.PipeInfo} */ (/** @type {Object} */ (info)));
-  return ydn.msg.main_;
 };
 
 
