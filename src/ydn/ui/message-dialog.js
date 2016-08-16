@@ -56,7 +56,11 @@ ydn.ui.MessageDialog = function(title, message, buttons) {
     if (btn_def.isDefault) {
       button.classList.add('default');
       button.setAttribute('autofocus', 'autofocus');
+    } else {
+      button.classList.add('maia-button-secondary');
     }
+    button.classList.add('maia-button');
+    button.classList.add('blue');
     button.value = btn_def.name;
     button.textContent = btn_def.label;
     this.handler.listen(button, 'click', this.onButtonClick);
