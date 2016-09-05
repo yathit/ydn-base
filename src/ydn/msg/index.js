@@ -4,6 +4,7 @@
 
 goog.provide('ydn.msg');
 goog.require('ydn.msg.Pipe');
+goog.require('ydn.msg.WorkerPipe');
 
 
 
@@ -28,6 +29,17 @@ ydn.msg.initPipe = function(info_or_name) {
     };
   }
   ydn.msg.main_ = new ydn.msg.Pipe(/** @type {exYdn.PipeInfo} */ (/** @type {Object} */ (info)));
+  return ydn.msg.main_;
+};
+
+
+/**
+ * Initialize pipe.
+ * @return {!ydn.msg.Pipe}
+ */
+ydn.msg.initWorkerPipe = function(worker) {
+  goog.asserts.assert(!ydn.msg.main_, 'already initialize pipe.');
+  ydn.msg.main_ = new ydn.msg.WorkerPipe('background');
   return ydn.msg.main_;
 };
 

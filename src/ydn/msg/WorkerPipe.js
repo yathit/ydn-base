@@ -4,6 +4,7 @@
 
 
 goog.provide('ydn.msg.WorkerPipe');
+goog.require('ydn.msg.Pipe');
 
 
 
@@ -33,8 +34,17 @@ ydn.msg.WorkerPipe.prototype.worker_ = null;
  */
 ydn.msg.WorkerPipe.prototype.getWorker = function() {
   if (!this.worker_) {
-    this.worker_ = new Worker('https://www.yathit.com/source-code/edge/ydn.crm.js');
-    this.worker_.onmessage = this.defaultListener.bind(this);
+    var fn = typeof COMPILED == 'undefined' ?
+        'https://www.yathit.com/source-code/edge/ydn.crm.js' :
+        'http://localhost/cwork/crm-back/src/app/worker-loader-dev.js';
+    this.worker_ = new Worker(fn);
+    this.worker_.onmessage = (function(ev) {
+      this.defaultListener(ev.data);
+    }).bind(this);
+    this.worker_.onerror = function(e) {
+      window.console.log(e);
+      window.console.error(e.message);
+    }
   }
   return this.worker_;
 };
