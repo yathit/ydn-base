@@ -37,7 +37,7 @@ ydn.msg.initPipe = function(info_or_name) {
  * Initialize pipe.
  * @return {!ydn.msg.Pipe}
  */
-ydn.msg.initWorkerPipe = function(worker) {
+ydn.msg.initWorkerPipe = function() {
   goog.asserts.assert(!ydn.msg.main_, 'already initialize pipe.');
   ydn.msg.main_ = new ydn.msg.WorkerPipe('background');
   return ydn.msg.main_;
