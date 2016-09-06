@@ -42,8 +42,8 @@ ydn.msg.WorkerPipe.prototype.getWorker = function() {
       this.defaultListener(ev.data);
     }).bind(this);
     this.worker_.onerror = function(e) {
-      window.console.log(e);
-      window.console.error(e.message);
+      goog.global.console.log(e);
+      goog.global.console.error(e.message);
     }
   }
   return this.worker_;

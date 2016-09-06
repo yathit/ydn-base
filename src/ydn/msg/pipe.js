@@ -130,7 +130,7 @@ ydn.msg.Pipe.prototype.defaultListener = function(msg) {
       msg.data = this.info_;
       this.port_.postMessage(msg);
     } else if (msg.req == ydn.msg.RReq.HTML_BODY_INNER) {
-      window.console.log('html', msg);
+      goog.global.console.log('html', msg);
       msg.req = ''; // clear request
       msg.done = true;
       msg.data = (!!document && !!document.body) ? document.body.innerHTML : '';
@@ -142,11 +142,11 @@ ydn.msg.Pipe.prototype.defaultListener = function(msg) {
   }
   for (var i = this.messages_.length - 1; i >= 0; i--) {
     if (ydn.msg.Pipe.DEBUG) {
-      window.console.log('handing ' + i + ' of ' + this.messages_.length);
+      goog.global.console.log('handing ' + i + ' of ' + this.messages_.length);
     }
     if (this.messages_[i].getId() == msg.id) {
       if (ydn.msg.Pipe.DEBUG) {
-        window.console.log(this + ' receiving msg ' + msg['req'] + ':' + msg['id'], msg);
+        goog.global.console.log(this + ' receiving msg ' + msg['req'] + ':' + msg['id'], msg);
       }
       var handled = this.messages_[i].listen(msg);
       if (handled) {
@@ -185,7 +185,7 @@ ydn.msg.Pipe.prototype.sendMsg = function(msgr) {
 
   var msg = msgr.toJSON();
   if (ydn.msg.Pipe.DEBUG) {
-    window.console.log(this + ' sending msg ' + msg['req'] + ':' + msg['id']);
+    goog.global.console.log(this + ' sending msg ' + msg['req'] + ':' + msg['id']);
   }
 
   if (goog.DEBUG && ydn.msg.Pipe.dry_run_) {
@@ -197,7 +197,7 @@ ydn.msg.Pipe.prototype.sendMsg = function(msgr) {
       ydn.crm.ch.SReq.SET_REL, ydn.crm.ch.SReq.PUT_RECORD
     ];
     if (block.indexOf(msgr.getReq()) >= 0) {
-      window.console.log('dryRun: ' + msgr.getReq(), msgr);
+      goog.global.console.log('dryRun: ' + msgr.getReq(), msgr);
       return;
     }
   }

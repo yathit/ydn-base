@@ -69,7 +69,7 @@ ydn.msg.MockPipe.prototype.sendMsg = function(msg) {
   }
   resp = JSON.parse(JSON.stringify(resp));
   if (ydn.msg.Pipe.DEBUG) {
-    window.console.log('mock resp: ' + msg_id);
+    goog.global.console.log('mock resp: ' + msg_id);
   }
   if (ydn.msg.MockPipe.DELAY > 0) {
     setTimeout(function() {
