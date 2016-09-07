@@ -36,7 +36,7 @@ ydn.msg.WorkerPipe.prototype.getWorker = function() {
   if (!this.worker_) {
     var fn = typeof COMPILED == 'undefined' ?
         'https://www.yathit.com/source-code/edge/ydn.crm.js' :
-        'http://localhost/cwork/crm-back/src/app/worker-loader-dev.js';
+        'worker-loader-dev.js';
     this.worker_ = new Worker(fn);
     this.worker_.onmessage = (function(ev) {
       this.defaultListener(ev.data);
