@@ -35,11 +35,12 @@ ydn.msg.initPipe = function(info_or_name) {
 
 /**
  * Initialize pipe.
+ * @param {string} fn
  * @return {!ydn.msg.Pipe}
  */
-ydn.msg.initWorkerPipe = function() {
+ydn.msg.initWorkerPipe = function(fn) {
   goog.asserts.assert(!ydn.msg.main_, 'already initialize pipe.');
-  ydn.msg.main_ = new ydn.msg.WorkerPipe('background');
+  ydn.msg.main_ = new ydn.msg.WorkerPipe('background', fn);
   return ydn.msg.main_;
 };
 

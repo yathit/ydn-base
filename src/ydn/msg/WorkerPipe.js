@@ -11,12 +11,18 @@ goog.require('ydn.msg.Pipe');
 /**
  * Channel provider for web worker.
  * @param {string} name
+ * @param {string} fn worker file name;
  * @constructor
  * @extends {ydn.msg.Pipe}
  */
-ydn.msg.WorkerPipe = function(name) {
+ydn.msg.WorkerPipe = function(name, fn) {
   ydn.msg.WorkerPipe.base(this, 'constructor', name);
   this.worker_ = null;
+  /**
+   * @type {string}
+   * @private
+   */
+  this.fn_ = fn;
 };
 goog.inherits(ydn.msg.WorkerPipe, ydn.msg.Pipe);
 
@@ -34,10 +40,7 @@ ydn.msg.WorkerPipe.prototype.worker_ = null;
  */
 ydn.msg.WorkerPipe.prototype.getWorker = function() {
   if (!this.worker_) {
-    var fn = typeof COMPILED == 'undefined' ?
-        'https://www.yathit.com/source-code/edge/ydn.crm.js' :
-        'worker-loader-dev.js';
-    this.worker_ = new Worker(fn);
+    this.worker_ = new Worker(this.fn_);
     this.worker_.onmessage = (function(ev) {
       this.defaultListener(ev.data);
     }).bind(this);
