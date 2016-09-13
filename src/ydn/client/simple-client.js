@@ -43,6 +43,23 @@ ydn.client.SimpleClient.prototype.xm_;
 
 
 /**
+ * Set header to the client.
+ * @param {string} name
+ * @param {?string} value
+ */
+ydn.client.SimpleClient.prototype.setHeader = function(name, value) {
+  if (!this.header_) {
+    this.header_ = {};
+  }
+  if (value) {
+    this.header_[name] = value;
+  } else {
+    delete this.header_[name];
+  }
+};
+
+
+/**
  * @inheritDoc
  */
 ydn.client.SimpleClient.prototype.request = function(args) {
