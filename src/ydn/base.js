@@ -2,7 +2,6 @@
  * @fileoverview About this file
  */
 
-goog.provide('ydn');
 goog.provide('ydn.base');
 goog.provide('ydn.time');
 goog.require('goog.log');

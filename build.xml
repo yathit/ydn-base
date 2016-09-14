@@ -71,36 +71,21 @@
 
     <macrodef name="closure-compile-native"  description="native closure compiler">
         <element name="extrapaths" optional="yes"/>
+        <element name="options" optional="yes"/>
         <attribute name="input.dir"/>
         <attribute name="flagfile" default="${ydn-base.dir}/flagfile.txt"/>
         <attribute name="base.dir" default="@{input.dir}" />
-        <attribute name="compilerjarfile" default="${closure-compiler.jar}"/>
         <attribute name="compilationlevel" default="ADVANCED_OPTIMIZATIONS"/>
         <attribute name="outputmode" default="compiled"/>
         <attribute name="input"/>
         <attribute name="output.fn"/>
         <sequential>
-            <jscomp compilationlevel="@{compilationlevel}" warning="VERBOSE"
-                    output="@{output.fn}"
-                    generateexports="true"
-                    managedependencies="true">
-                <externs dir="${closure-compiler.dir}/externs">
-                    <file name="browser.js"/>
-                </externs>
-                <path>
-                    <fileset dir="${closure-library.dir}/closure/goog">
-                        <include name="*.js"/>
-                        <depth max="7" min="1"/>
-                    </fileset>
-                </path>
-                <sources dir="@{input.dir}">
-                    <file name="@{input}"/>
-                </sources>
+            <java jar="${closure-compiler.jar}" fork='true'>
                 <extrapaths/>
-                <warning level="ERROR" group="accessControls"/>
-
-            </jscomp>
-            <echo>"@{output.fn}" generated.</echo>
+                <options/>
+                <arg line="--js @{input}"/>
+                <arg line="--js_output_file @{output.fn}"/>
+            </java>
         </sequential>
     </macrodef>
 
