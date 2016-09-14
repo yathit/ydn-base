@@ -2,9 +2,37 @@
  * @fileoverview About this file
  */
 
+goog.provide('ydn');
 goog.provide('ydn.base');
 goog.provide('ydn.time');
 goog.require('goog.log');
+
+
+/**
+ * @fileoverview Provide global properties.
+ *
+ *
+ */
+
+
+/**
+ * Panic level debug flag. All ydn class should check this debug and do full DEBUG
+ * as requested by this flag. However, goog.DEBUG will override this flag.
+ * Example usage:
+ *      ydn.Rpc.DEBUG = goog.DEBUG && (ydn.DEBUG || true);
+ * In the above example, the boolean variable 'true' indicate local debugging flag. It
+ * is overridden by ydn.DEBUG and goog.DEBUG flag.
+ *
+ * @define {boolean}
+ */
+ydn.DEBUG = false;
+
+
+/**
+ * @final
+ * @type {goog.debug.Logger}
+ */
+ydn.logger = goog.log.getLogger('ydn');
 
 
 /**
