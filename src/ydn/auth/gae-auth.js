@@ -258,7 +258,6 @@ ydn.auth.GaeAuth.prototype.doLogin_ = function() {
 /**
  * Start authenticate to Google.
  * Login.
- * @template T
  */
 ydn.auth.GaeAuth.prototype.auth = function() {
   this.log('auth');
