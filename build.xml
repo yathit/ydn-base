@@ -72,9 +72,7 @@
     <macrodef name="closure-compile-native"  description="native closure compiler">
         <element name="extrapaths" optional="yes"/>
         <element name="options" optional="yes"/>
-        <attribute name="input.dir"/>
         <attribute name="flagfile" default="${ydn-base.dir}/flagfile.txt"/>
-        <attribute name="base.dir" default="@{input.dir}" />
         <attribute name="compilationlevel" default="ADVANCED_OPTIMIZATIONS"/>
         <attribute name="outputmode" default="compiled"/>
         <attribute name="output.fn"/>
@@ -90,7 +88,6 @@
                 <arg line='--js !${closure-library.dir}/closure/goog/storage/mechanism/mechanismseparationtester.js'/>
                 <arg line='--js !${closure-library.dir}/closure/goog/storage/mechanism/mechanismsharingtester.js'/>
                 <arg line='--js !${closure-library.dir}/closure/goog/testing/jstdtestcaseadapter.js'/>
-
                 <arg line='--js ${closure-library.dir}/third_party/**.js'/>
                 <arg line='--js !${closure-library.dir}/third_party/**test.js'/>
                 <arg line='--externs ${ydn-base.dir}/externs/browser.js'/>
