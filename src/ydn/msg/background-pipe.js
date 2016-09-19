@@ -42,8 +42,10 @@ ydn.msg.BackgroundPipe.prototype.getWorker = function() {
   if (!this.worker_) {
     var iframe = document.createElement("IFRAME");
     iframe.setAttribute("src", this.fn_);
-    iframe.style.width = "40px";
-    iframe.style.height = "80px";
+    iframe.style.width = '1px';
+    iframe.style.height = '1px';
+    iframe.style.position = 'absolute';
+    iframe.style.marginTop = '-99px';
     iframe.id = 'yathit-background';
     document.body.appendChild(iframe);
     this.worker_ = iframe.contentWindow;
