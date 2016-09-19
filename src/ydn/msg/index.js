@@ -3,6 +3,7 @@
  */
 
 goog.provide('ydn.msg');
+goog.require('ydn.msg.BackgroundPipe');
 goog.require('ydn.msg.Pipe');
 goog.require('ydn.msg.WorkerPipe');
 
@@ -34,7 +35,7 @@ ydn.msg.initPipe = function(info_or_name) {
 
 
 /**
- * Initialize pipe.
+ * Initialize pipe in web worker.
  * @param {string} fn
  * @return {!ydn.msg.Pipe}
  */
@@ -42,6 +43,23 @@ ydn.msg.initWorkerPipe = function(fn) {
   goog.asserts.assert(!ydn.msg.main_, 'already initialize pipe.');
   ydn.msg.main_ = new ydn.msg.WorkerPipe('background', fn);
   return ydn.msg.main_;
+};
+
+
+/**
+ * Initialize pipe background iframe.
+ * @param {string} fn
+ * @return {!goog.async.Deferred}
+ */
+ydn.msg.initBackgroundPipe = function(fn) {
+  goog.asserts.assert(!ydn.msg.main_, 'already initialize pipe.');
+  ydn.msg.main_ = new ydn.msg.BackgroundPipe('background', fn);
+  ydn.msg.getChannel().send(ydn.crm.ch.Req.ECHO, 'ack');
+    var df = new goog.async.Deferred();
+  goog.events.listenOnce(ydn.msg.main_, ydn.crm.ch.BReq.BACKGROUND_READY, function(ev) {
+    df.callback();
+  });
+  return df;
 };
 
 
