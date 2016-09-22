@@ -112,7 +112,7 @@ ydn.client.JsonMockClient.prototype.addResource = function(mth, path, resp) {
 
 
 /**
- * Set a resource
+ * Set or remove a resource
  * @param {string} mth 'GET', 'POST'
  * @param {string} path
  * @param {ydn.client.JsonMockClient.RespObj} resp
@@ -124,7 +124,12 @@ ydn.client.JsonMockClient.prototype.setResource = function(mth, path, resp) {
     path: path
   });
   if (idx >= 0) {
-    this.resources[idx].resp = resp;
+    if (!resp) {
+      goog.array.removeAt(this.resources, idx);
+    } else {
+      this.resources[idx].resp = resp;
+    }
+
     return 0;
   }
   this.resources.push({
