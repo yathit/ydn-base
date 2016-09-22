@@ -73,7 +73,7 @@
         <element name="extrapaths" optional="yes"/>
         <element name="options" optional="yes"/>
         <attribute name="flagfile" default="${ydn-base.dir}/flagfile.txt"/>
-        <attribute name="compilationlevel" default="ADVANCED_OPTIMIZATIONS"/>
+        <attribute name="compilationlevel" default="ADVANCED"/>
         <attribute name="outputmode" default="compiled"/>
         <attribute name="output.fn"/>
         <sequential>
@@ -92,6 +92,7 @@
                 <arg line='--js !${closure-library.dir}/third_party/**test.js'/>
                 <arg line='--externs ${ydn-base.dir}/externs/browser.js'/>
                 <arg line="--js_output_file @{output.fn}"/>
+                <arg line="--compilation_level @{compilationlevel}"/>
             </java>
         </sequential>
     </macrodef>
