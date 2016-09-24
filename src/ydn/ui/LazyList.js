@@ -94,7 +94,7 @@ ydn.ui.LazyList.prototype.getModel = function() {
 /**
  * @define {boolean} debug flag.
  */
-ydn.ui.LazyList.DEBUG = false;
+ydn.ui.LazyList.DEBUG = true;
 
 /**
  * @const
@@ -330,7 +330,7 @@ ydn.ui.LazyList.createScroller_ = function(h) {
   var scroller = document.createElement('div');
   scroller.classList.add('ydn-lazy-list-scroller');
   scroller.style.opacity = 0;
-  scroller.style.position = 'absolute';
+  // scroller.style.position = 'absolute';
   scroller.style.top = '0';
   scroller.style.left = '0';
   scroller.style.width = '1px';
