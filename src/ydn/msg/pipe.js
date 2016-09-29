@@ -192,7 +192,7 @@ ydn.msg.Pipe.prototype.sendMsg = function(msgr) {
     var block = [ydn.crm.ch.Req.DNT_ADD, ydn.crm.ch.Req.DNT_REMOVE, ydn.crm.ch.Req.EXPORT_RECORD,
       ydn.crm.ch.Req.FEEDBACK, ydn.crm.ch.Req.GAPPS_NEW_CAL, ydn.crm.ch.Req.GDATA_UPDATE,
       ydn.crm.ch.Req.NEW_ENTRY, ydn.crm.ch.Req.REMOVE_SUGAR, ydn.crm.ch.Req.SYNC,
-      ydn.crm.ch.Req.SYNC_FOR,
+      ydn.crm.ch.Req.SYNC_FOR, ydn.crm.ch.SReq.NEW_RECORD, ydn.crm.ch.SReq.UPLOAD,
       ydn.crm.ch.SReq.DELETE_RECORD, ydn.crm.ch.SReq.IMPORT_GDATA, ydn.crm.ch.SReq.LINK,
       ydn.crm.ch.SReq.SET_REL, ydn.crm.ch.SReq.PUT_RECORD
     ];
