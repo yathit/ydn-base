@@ -35,6 +35,7 @@ goog.require('goog.ui.Component');
 goog.require('ydn.ui.ILazyListRenderer');
 goog.require('ydn.ui.LazyListModel');
 goog.require('ydn.ui.LazyListRenderer');
+goog.require('goog.userAgent.product');
 
 
 /**
@@ -194,7 +195,7 @@ ydn.ui.LazyList.prototype.reset = function() {
   var el = this.getElement();
 
   var visible_height;
-  if (goog.userAgent.SAFARI) {
+  if (goog.userAgent.product.SAFARI) {
     visible_height = el.parentElement.clientHeight;
     goog.style.setHeight(el, visible_height);
   } else {
