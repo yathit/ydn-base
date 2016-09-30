@@ -193,9 +193,12 @@ ydn.ui.LazyList.prototype.reset = function() {
   this.lastRepaintY_ = 0;
   var el = this.getElement();
 
-  var visible_height = el.parentElement.clientHeight;
+  var visible_height;
   if (goog.userAgent.SAFARI) {
+    visible_height = el.parentElement.clientHeight;
     goog.style.setHeight(el, visible_height);
+  } else {
+    visible_height = el.clientHeight;
   }
   this.screenItemsLen = Math.ceil(visible_height / this.renderer_.getHeight());
   // Cache 4 times the number of items that fit in the container viewport
