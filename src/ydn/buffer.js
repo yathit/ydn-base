@@ -58,6 +58,7 @@ goog.inherits(ydn.structs.Buffer, goog.structs.AvlTree);
 ydn.structs.Buffer.prototype.traverse = function(func, opt_startValue) {
   // If our tree is empty, return immediately
   if (!this.root_) {
+    func(null);
     return;
   }
 
@@ -79,6 +80,7 @@ ydn.structs.Buffer.prototype.traverse = function(func, opt_startValue) {
       return retNode; // If null, we'll stop traversing the tree
     });
     if (!startNode) {
+      func(null);
       return;
     }
   } else {
@@ -123,7 +125,7 @@ ydn.structs.Buffer.prototype.traverse = function(func, opt_startValue) {
 ydn.structs.Buffer.prototype.reverseTraverse = function(func, opt_startValue) {
   // If our tree is empty, return immediately
   if (!this.root_) {
-    func();
+    func(null);
     return;
   }
 
@@ -145,7 +147,7 @@ ydn.structs.Buffer.prototype.reverseTraverse = function(func, opt_startValue) {
       return retNode; // If null, we'll stop traversing the tree
     }, this));
     if (!startNode) {
-      func();
+      func(null);
       return;
     }
   } else {
