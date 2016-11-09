@@ -777,6 +777,11 @@ SugarCrm.Details.prototype.loginInfo = null;
  */
 SugarCrm.Details.prototype.credential = null;
 
+/**
+ * @type {Object} site configuration.
+ */
+SugarCrm.Details.prototype.config = null;
+
 
 /**
  * @type {Array<SugarCrm.AvailableModule>}
