@@ -123,6 +123,14 @@ ydn.ui.MessageDialog.prototype.onButtonClick = function(e) {
 
 
 /**
+ * @returns {Element}
+ */
+ydn.ui.MessageDialog.prototype.getDefaultButtonElement = function() {
+  return this.dialog.querySelector('.button-bar .default');
+};
+
+
+/**
  * Clean up reference.
  * @protected
  */
