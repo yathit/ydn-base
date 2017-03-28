@@ -116,6 +116,9 @@ ydn.client.SimpleOAuthClient.Request.prototype.execute = function(cb, opt_scope)
 
   this.parent.provider.getAuthToken().addCallbacks(function(token) {
     if (token) {
+      if (token['access_token']) { // this is not suppose to happen.
+        token = token['access_token'];
+      }
       this.insertHeader_(token);
       ydn.client.SimpleOAuthClient.Request.superClass_.execute.call(this, cb, opt_scope);
     } else {
