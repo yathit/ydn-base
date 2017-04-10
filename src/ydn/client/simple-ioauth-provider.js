@@ -20,8 +20,7 @@ ydn.client.ISimpleOAuthProvider = function() {};
 ydn.client.ISimpleOAuthProvider.prototype.getAuthToken = goog.abstractMethod;
 
 
-
 /**
  * @return {!goog.async.Deferred}
  */
-ydn.client.ISimpleOAuthProvider.prototype.removeToken = goog.abstractMethod;
+ydn.client.ISimpleOAuthProvider.prototype.revokeToken = goog.abstractMethod;

@@ -3,6 +3,7 @@
  */
 
 goog.require('ydn.async.Deferred');
+goog.require('ydn.msg');
 
 goog.exportSymbol('ydn.msg.Pipe', ydn.msg.Pipe);
 goog.exportSymbol('ydn.msg.initPipe', ydn.msg.initPipe);
