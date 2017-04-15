@@ -508,6 +508,12 @@ SugarCrm.LinkField.prototype.type = '';
 
 
 /**
+ * @type {string} relationship link_name
+ */
+SugarCrm.LinkField.prototype.relationship = '';
+
+
+/**
  * @type {string} Module name
  */
 SugarCrm.LinkField.prototype.module = '';
