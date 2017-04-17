@@ -117,6 +117,22 @@ ydn.ui.getTemplateById = function(id, opt_doc) {
 
 /**
  * Instead of creating a new tab, open like a dialog box.
+ * @param {string} url
+ * @param {number=} opt_w
+ * @param {number=} opt_h
+ */
+ydn.ui.openPageAsDialogFor = function(url, opt_w, opt_h) {
+  var w = opt_w || 600;
+  var h = opt_h || 400;
+  // dual monitor solution
+  var left = (window.innerWidth / 2) - (w / 2) + window.screenLeft;
+  var top = (window.innerWidth / 2) - (h / 2) + window.screenTop;
+  window.open(url, undefined, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+};
+
+
+/**
+ * Instead of creating a new tab, open like a dialog box.
  * @param {Event} e
  */
 ydn.ui.openPageAsDialog = function(e) {
@@ -131,11 +147,8 @@ ydn.ui.openPageAsDialog = function(e) {
   if (wh) {
     h = parseInt(wh, 10);
   }
-  // dual monitor solution
-  var left = (window.innerWidth / 2) - (w / 2) + window.screenLeft;
-  var top = (window.innerWidth / 2) - (h / 2) + window.screenTop;
   var url = e.target.href;
-  window.open(url, undefined, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+  ydn.ui.openPageAsDialogFor(url, w, h);
 };
 
 
