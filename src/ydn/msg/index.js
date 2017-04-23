@@ -73,3 +73,15 @@ ydn.msg.getMain = function() {
   }
   return ydn.msg.main_;
 };
+
+
+/**
+ * @param {ydn.msg.Group=} opt_group
+ * @param {string=} opt_name
+ * @return {!ydn.msg.Channel}
+ */
+ydn.msg.getChannel = function(opt_group, opt_name) {
+  return ydn.msg.getMain().getChannel(opt_group, opt_name);
+};
+
+

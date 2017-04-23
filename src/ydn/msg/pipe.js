@@ -340,16 +340,5 @@ ydn.msg.Channels = [ydn.msg.ChannelName.DEV, ydn.msg.ChannelName.CONTENT_SCRIPT,
   ydn.msg.ChannelName.POPUP, ydn.msg.ChannelName.OPTIONS, ydn.msg.ChannelName.SETUP];
 
 
-/**
- * @param {ydn.msg.Group=} opt_group
- * @param {string=} opt_name
- * @return {!ydn.msg.Channel}
- */
-ydn.msg.getChannel = function(opt_group, opt_name) {
-  return ydn.msg.getMain().getChannel(opt_group, opt_name);
-};
-
-
-
 
 
