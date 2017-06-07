@@ -26,6 +26,10 @@ ydn.ui.MessageDialog = function(title, message, buttons) {
    */
   this.handler = new goog.events.EventHandler(this);
   var dialog = document.createElement('dialog');
+  if (goog.global['dialogPolyfill']) {
+    console.info('registering dialog polyfill');
+    goog.global['dialogPolyfill']['registerDialog'](dialog);
+  }
   /**
    * @type {HTMLDialogElement}
    * @protected
