@@ -209,6 +209,26 @@ SugarCrm.RecordIdentifier.prototype._module = '';
 
 
 /**
+ * Id and modified.
+ * @constructor
+ */
+SugarCrm.RecordIdModified = function() {};
+
+
+/**
+ * @type {string}
+ */
+SugarCrm.RecordIdModified.prototype.id = '';
+
+
+/**
+ * @type {string} module name.
+ */
+SugarCrm.RecordIdModified.prototype.date_modified = '';
+
+
+
+/**
  * Id and _module.
  * @constructor
  * @extends {SugarCrm.RecordIdentifier}
@@ -782,6 +802,7 @@ SugarCrm.Details.prototype.loginInfo = null;
  * @type {?CrmApp.Credential}
  */
 SugarCrm.Details.prototype.credential = null;
+
 
 /**
  * @type {Object} site configuration.
