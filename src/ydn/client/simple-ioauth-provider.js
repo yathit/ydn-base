@@ -14,6 +14,9 @@ goog.provide('ydn.client.ISimpleOAuthProvider');
 ydn.client.ISimpleOAuthProvider = function() {};
 
 
+ydn.client.ISimpleOAuthProvider.prototype.isClientLogin
+
+
 /**
  * @return {!goog.async.Deferred}
  */
