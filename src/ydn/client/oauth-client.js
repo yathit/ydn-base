@@ -84,17 +84,16 @@ ydn.client.OAuthClient.DEBUG = false;
 
 /**
  * @const
- * @type {boolean}
+ * @type {string}
  */
-ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER = true;
+ydn.client.OAuthClient.MSG_NO_TOKEN = 'No access token';
 
 
 /**
  * @const
- * @type {ydn.client.HttpRespondData}
+ * @type {boolean}
  */
-ydn.client.OAuthClient.Request.ERR_RESP =
-    new ydn.client.HttpRespondData(0, null, null, 'No access token');
+ydn.client.OAuthClient.USE_AUTHORIZATION_HEADER = true;
 
 
 /**
@@ -151,7 +150,7 @@ ydn.client.OAuthClient.Request.prototype.execute = function(cb, opt_scope) {
       // goog.base(this, 'execute', cb, opt_scope);
     }, function(e) {
       this.parent.token = null;
-      cb.call(opt_scope, null, ydn.client.OAuthClient.Request.ERR_RESP);
+      cb.call(opt_scope, null, new ydn.client.HttpRespondData(0, null, null, ydn.client.OAuthClient.MSG_NO_TOKEN));
     }, this);
   }
 };
