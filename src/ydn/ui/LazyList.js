@@ -32,10 +32,11 @@
 goog.provide('ydn.ui.LazyList');
 goog.require('goog.async.Delay');
 goog.require('goog.ui.Component');
+goog.require('goog.userAgent.product');
 goog.require('ydn.ui.ILazyListRenderer');
 goog.require('ydn.ui.LazyListModel');
 goog.require('ydn.ui.LazyListRenderer');
-goog.require('goog.userAgent.product');
+
 
 
 /**
@@ -96,6 +97,7 @@ ydn.ui.LazyList.prototype.getModel = function() {
  * @define {boolean} debug flag.
  */
 ydn.ui.LazyList.DEBUG = false;
+
 
 /**
  * @const
@@ -173,7 +175,7 @@ ydn.ui.LazyList.prototype.enterDocument = function() {
  * Reset.
  */
 ydn.ui.LazyList.prototype.updated = function() {
-  if (this.getElement().childElementCount == 1) {
+  if (this.getElement().childElementCount === 1) {
     this.reset();
   } else {
     var h = this.renderer_.getHeight() * this.getModel().getCount();
@@ -216,6 +218,11 @@ ydn.ui.LazyList.prototype.reset = function() {
 };
 
 
+/**
+ * @param {number} i
+ * @return {Element}
+ * @protected
+ */
 ydn.ui.LazyList.prototype.createRow = function(i) {
   var itemHeight = this.renderer_.getHeight();
   var item = this.renderer_.render(this.getModel().getItemAt(i));
@@ -242,6 +249,7 @@ ydn.ui.LazyList.prototype.prev_first_ = 0;
  * @param {Element} node Parent node where we want to append the children chunk.
  * @param {number} from Starting position, i.e. first children index.
  * @return {void}
+ * @private
  */
 ydn.ui.LazyList.prototype.renderChunk_ = function(node, from) {
   var finalItem = from + this.cachedItemsLen;
