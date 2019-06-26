@@ -21,7 +21,7 @@
     <condition property="jsdoc.dir" value="${lib.dir}/jsdoc-toolkit"><os family="windows"/></condition>
     <condition property="jsdoc.dir" value="${user.home}/opt/jsdoc-toolkit"><os family="unix"/></condition>
     <condition property="gsutil" value="D:/opt/gsutil/gsutil"><os family="windows"/></condition>
-    <condition property="gsutil" value="${home.dir}/google-cloud-sdk/bin/gsutil"><os family="unix"/></condition>
+    <condition property="gsutil" value="gsutil"><os family="unix"/></condition>
     <condition property="sass.exe" value="C:\tools\ruby23\bin\sass.bat"><os family="windows"/></condition>
     <condition property="sass.exe" value="sass"><os family="unix"/></condition>
 
