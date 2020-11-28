@@ -658,6 +658,20 @@ SugarCrm.ModuleInfo.prototype.module_fields = [];
 SugarCrm.ModuleInfo.prototype.link_fields = {};
 
 
+/**
+ * Represents SugarCRM Module Layout meta data.
+ * @constructor
+ */
+SugarCrm.ModuleLayout = function() {};
+
+
+/**
+ * Represents SugarCRM localization string.
+ * @constructor
+ */
+SugarCrm.AppString = function() {};
+
+
 
 /**
  * Represents query format in channel.
@@ -820,6 +834,12 @@ SugarCrm.Details.prototype.availableModules = [];
  * @type {Array.<SugarCrm.ModuleInfo>}
  */
 SugarCrm.Details.prototype.modulesInfo = [];
+
+
+/**
+ * @type {Object.<SugarCrm.ModuleLayout>}
+ */
+SugarCrm.Details.prototype.modulesLayout = {};
 
 
 
