@@ -842,6 +842,12 @@ SugarCrm.Details.prototype.modulesInfo = [];
 SugarCrm.Details.prototype.modulesLayout = {};
 
 
+/**
+ * @type {Object.<SugarCrm.AppString>}
+ */
+SugarCrm.Details.prototype.appString = {};
+
+
 
 /**
  * Query result for GData contact to SugarCRM records.
