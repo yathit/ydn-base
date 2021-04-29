@@ -462,6 +462,12 @@ SugarCrm.ModuleField.prototype.calculated = false;
 /**
  * @type {string}
  */
+SugarCrm.ModuleField.prototype.default_value = '';
+
+
+/**
+ * @type {string}
+ */
 SugarCrm.ModuleField.prototype.group = '';
 
 
