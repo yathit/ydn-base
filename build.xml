@@ -256,6 +256,7 @@
             <move file="${temp.file}" tofile="@{output.fn}"/>
             <concat destfile="@{output.fn}" append="true">
                 ydn.json.POLY_FILL = true;
+                app = window.runInjApp();
             </concat>
             <echo>@{output.fn} generated.</echo>
         </sequential>
